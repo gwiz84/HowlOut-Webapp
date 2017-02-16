@@ -29,7 +29,7 @@
 </head>
 
 <body>
-
+<?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
 <div class="container hidden-xs hidden-sm">
     <div class="row" style="border:solid 0px black;height:200px;">
