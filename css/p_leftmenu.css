@@ -1,11 +1,13 @@
 a:link {
 	text-decoration: none;
 }
+
 a:hover {
 	color: #148f77;
 }
 
 .leftmenu {
+	padding-top: 20px;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 15px;
 	height: 100%;
@@ -20,3 +22,24 @@ a:hover {
 .leftmenuitem {
 	vertical-align: middle;
 	padding: 10px 5px 10px 5px;
+}
+
+.convicon {
+	font-size: 20px;
+}
+
+.icon1 {
+	color: green;
+}
+
+.icon2 {
+	color: yellow;
+}
+
+.icon3 {
+	color: red;
+}
+
+.icon4 {
+	color: purple;
+}
