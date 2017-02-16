@@ -14,3 +14,10 @@
 .top-logo {
     width:175px;
 }
+
+.top-menu-headertext {
+    color:  #148f77  ;
+    margin-left:-50px;
+    font-size:37px;
+    font-family: 'Varela Round', sans-serif;
+}
