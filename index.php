@@ -31,15 +31,15 @@
 <body>
 
 <!-- Main Content -->
-<div class="container hidden-xs">
-    <div class="row" style="border:solid 1px black;height:200px;">
+<div class="container hidden-xs hidden-sm">
+    <div class="row" style="border:solid 0px black;height:200px;">
        <?php include_once "p_topmenu.php"; ?>
     </div>
     <div class="row">
-        <div class="col-sm-2" style="border:solid 1px black;height:600px;">
+        <div class="col-sm-3" style="border:solid 0px black;height:600px;">
             <?php include_once "p_leftmenu.php"; ?>
         </div>
-        <div class="col-sm-10" style="border:solid 1px black;height:600px;">
+        <div class="col-sm-9" style="border:solid 0px black;height:600px;">
 <!--      PAGE CONTENT GOES HERE      -->
         </div>
     </div>
@@ -47,7 +47,7 @@
 </div>
 
 <!-- MOBILE WARNING BOX -->
-<div class="container hidden-sm hidden-md hidden-lg">
+<div class="container  hidden-md hidden-lg">
     <div class="row">
         <div class="col-xs-12">
             <h1>
@@ -64,32 +64,7 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-                <ul class="list-inline text-center">
-                    <li>
-                        <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                                </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                                </span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                                <span class="fa-stack fa-lg">
-                                    <i class="fa fa-circle fa-stack-2x"></i>
-                                    <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                </span>
-                        </a>
-                    </li>
-                </ul>
+
                 <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
             </div>
         </div>
