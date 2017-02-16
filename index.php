@@ -39,7 +39,7 @@
         <div class="col-sm-2" style="border:solid 0px black;height:600px;">
             <?php include_once "p_leftmenu.php"; ?>
         </div>
-        <div class="col-sm-9" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
+        <div class="col-sm-10" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
             <h3><i class="material-icons" style="color: #148f77 ;font-size:28px;vertical-align:middle;">event</i>&nbsp;&nbsp;Upcoming events</h3>
             <hr>
