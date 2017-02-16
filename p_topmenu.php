@@ -6,8 +6,12 @@
     </div>
 
     <div class="col-sm-8">
-        <span style="margin-left:70px;">Search&nbsp;&nbsp;</span>
+        <i class="material-icons" style="color: #148f77;vertical-align: middle;">search</i>
         <input class="top-menu-searchbar" type="text" placeholder="Quick search...">
+        <i class="material-icons" style="color: #148f77;vertical-align: middle;margin-left:20px;">notifications</i>
+        <span></span>
+        <i class="fa fa-cog" aria-hidden="true" style="color: #148f77;vertical-align: middle;margin-left:20px;"></i>
+
     </div>
 
 
