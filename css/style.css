@@ -1,0 +1,16 @@
+.top-menu {
+    paddin: 0px;
+    height:160px;
+
+}
+
+.top-menu-searchbar {
+    padding:7px;
+    height:55px;
+    width: 400px;
+    border-radius: 20px;
+}
+
+.top-logo {
+    width:175px;
+}
