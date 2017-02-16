@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-
+    <link rel="icon" href="img/howlout_icon_with_border.png">
     <title>HowlOut</title>
 
     <!-- Bootstrap Core CSS -->
@@ -39,9 +39,29 @@
         <div class="col-sm-2" style="border:solid 0px black;height:600px;">
             <?php include_once "p_leftmenu.php"; ?>
         </div>
-        <div class="col-sm-10" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
+        <div class="col-sm-10 col-lg-offset-1 col-lg-8" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
             <h3><i class="material-icons" style="color: #148f77 ;font-size:28px;vertical-align:middle;">event</i>&nbsp;&nbsp;Upcoming events</h3>
+            <hr>
+            <!--                THE EVENT BOX THING-->
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    
+                </div>
+            </div>
+            <!--                THE EVENT BOX THING-->
+            <br>
+            <a style="float:right;font-size:15px;cursor:pointer;">View all</a>
+
+            <h3><i class="fa fa-users" aria-hidden="true" style="color: #148f77 ;font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h3>
+            <hr>
+
+
+            <h3><i class="material-icons" style="color: #148f77 ;font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h3>
             <hr>
             <!--      PAGE CONTENT GOES HERE      -->
         </div>
