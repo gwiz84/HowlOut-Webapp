@@ -1,0 +1,22 @@
+a:link {
+	text-decoration: none;
+}
+a:hover {
+	color: #148f77;
+}
+
+.leftmenu {
+	font-family: 'Varela Round', sans-serif;
+	font-size: 15px;
+	height: 100%;
+	border-right: 2px solid #eeeeee;
+}
+
+.leftmenugroup {
+	font-size: 18px;
+	font-weight: bold;
+}
+
+.leftmenuitem {
+	vertical-align: middle;
+	padding: 10px 5px 10px 5px;
