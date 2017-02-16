@@ -1,7 +1,7 @@
 <link href="css/p_leftmenu.css" rel="stylesheet">
 <div class="leftmenu">
 	<div>
-		<a href="conversations.php"><i class="material-icons leftmenuitem">chat</i>Conversations</a>
+		<a href="conversations.php"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversations</a>
 		<!-- <i class="fa fa-comment-o leftmenuitem convicon"> -->
 	</div>
 	<br>
@@ -9,25 +9,25 @@
 		Events
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">event_note</i>My events</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">event_available</i>Discover events</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">event</i>Create event</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">event_busy</i>Event manager</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_red">event_busy</i>Event manager</a>
 	</div>
 	<br>
 	<div class="leftmenugroup">
 		Groups
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">group</i>My groups</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_orange">group</i>My groups</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem">group_add</i>Create group</a>
+		<a href="event.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
 	</div>
 </div>
