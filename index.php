@@ -31,10 +31,13 @@
 <body>
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
-<div class="container hidden-xs hidden-sm">
-    <div class="row" style="border:solid 0px black;height:200px;">
-       <?php include_once "p_topmenu.php"; ?>
+<div class="container-fluid hidden-xs hidden-sm" style="background-color: #e9f7ef ;margin-bottom:10px;">
+    <div class="" style="border:solid 0px black;height:200px;">
+        <?php include_once "p_topmenu.php"; ?>
     </div>
+</div>
+<div class="container hidden-xs hidden-sm">
+
     <div class="row">
         <div class="col-sm-2" style="border:solid 0px black;height:600px;">
             <?php include_once "p_leftmenu.php"; ?>
@@ -43,26 +46,126 @@
             <!--      PAGE CONTENT GOES HERE      -->
             <h3><i class="material-icons" style="color: #148f77 ;font-size:28px;vertical-align:middle;">event</i>&nbsp;&nbsp;Upcoming events</h3>
             <hr>
-            <!--                THE EVENT BOX THING-->
+            <!--                THE EVENT BOX START -->
             <div class="event-box">
-                <div class="innertop" style="background-image:url('img/building.jpg');">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
                     <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
                 </div>
 
                 <div class="innerbottom">
-                    
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
-            <!--                THE EVENT BOX THING-->
+            <!--                THE EVENT BOX END -->
             <br>
             <a style="float:right;font-size:15px;cursor:pointer;">View all</a>
 
             <h3><i class="fa fa-users" aria-hidden="true" style="color: #148f77 ;font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h3>
             <hr>
+<!--            GROUP CIRCLE ThING START-->
+            <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
 
-
+            </div>
+            <br>
+            <a style="float:right;font-size:15px;cursor:pointer;">View all</a>
+<!--             GROUP CIRLCE THING END -->
             <h3><i class="material-icons" style="color: #148f77 ;font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h3>
             <hr>
+<!--            BUNCH OF DEMO SUGGESTED EVENTS FOR SHOW BELOW HERE -->
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
+            <div class="event-box">
+                <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
+                    <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
+                </div>
+
+                <div class="innerbottom">
+                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                </div>
+            </div>
+            <br>
             <!--      PAGE CONTENT GOES HERE      -->
         </div>
     </div>
