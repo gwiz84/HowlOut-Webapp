@@ -44,7 +44,7 @@
         </div>
         <div class="col-sm-10 col-lg-offset-1 col-lg-8" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
-            <h3><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h3>
+            <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
             <hr>
             <!--                THE EVENT BOX START -->
             <div class="event-box">
@@ -61,18 +61,18 @@
             </div>
             <!--                THE EVENT BOX END -->
             <br>
-            <a style="float:right;font-size:15px;cursor:pointer;">View all</a>
+            <a style="float:right;font-size:14px;cursor:pointer;">View all</a>
 
-            <h3><i class="fa fa-users icon_orange" aria-hidden="true" style="font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h3>
+            <h4><i class="fa fa-users icon_orange" aria-hidden="true" style="font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h4>
             <hr>
 <!--            GROUP CIRCLE ThING START-->
             <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
 
             </div>
             <br>
-            <a style="float:right;font-size:15px;cursor:pointer;">View all</a>
+            <a style="float:right;font-size:14px;cursor:pointer;">View all</a>
 <!--             GROUP CIRLCE THING END -->
-            <h3><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h3>
+            <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
             <hr>
 <!--            BUNCH OF DEMO SUGGESTED EVENTS FOR SHOW BELOW HERE -->
             <div class="event-box">
