@@ -28,18 +28,26 @@ a:hover {
 	font-size: 20px;
 }
 
-.icon1 {
-	color: green;
+.icon_green {
+	color: #abebc6;
 }
 
-.icon2 {
-	color: yellow;
+.icon_yellow {
+	color: #f9e79f;
 }
 
-.icon3 {
-	color: red;
+.icon_purple {
+	color: #c39bd3;
 }
 
-.icon4 {
-	color: purple;
+.icon_red {
+	color: #e6b0aa;
+}
+
+.icon_blue {
+	color: #a9cce3;
+}
+
+.icon_orange {
+	color: #fad7a0;
 }
