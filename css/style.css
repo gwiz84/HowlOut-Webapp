@@ -139,7 +139,7 @@ a:hover {
 
 .textstroke {
     color: white;
-    -ms-text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+    -ms-text-shadow: -1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
     text-shadow:-1px -1px 0   #808b96    , 1px -1px 0   #808b96    , -1px 1px 0  #808b96 , 1px 1px 0  #808b96 ;
 }
 
