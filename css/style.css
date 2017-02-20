@@ -67,7 +67,6 @@ a:hover {
 
 .event-box:hover {
     border: solid 3px #73c6b6;
-    box-shadow: 0 0 15px #73c6b6;
 }
 
 .event-box:hover .innerbottom {
