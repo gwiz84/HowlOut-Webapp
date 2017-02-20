@@ -1,4 +1,3 @@
-
 <div class="container" style="padding:0;">
     <div class="top-menu">
 
@@ -11,9 +10,8 @@
         <div class="col-sm-5">
             <i class="material-icons" style="color: #148f77;vertical-align: middle;">search</i>
             <input class="top-menu-searchbar" type="text" placeholder="Quick search...">
-
-
         </div>
+
         <div class="col-sm-3" style="margin: 60px 0 0 0;">
             <i class="material-icons" style="color: #148f77;vertical-align: middle;margin-left:10px;cursor:pointer;">notifications</i>
             <span style="font-size:15px;margin-left:20px;">User McUserson</span>

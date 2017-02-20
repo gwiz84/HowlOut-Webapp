@@ -7,6 +7,7 @@ a:hover {
 }
 
 .leftmenu {
+	position: absolute;
 	padding-top: 20px;
 	font-family: 'Varela Round', sans-serif;
 	font-size: 15px;
