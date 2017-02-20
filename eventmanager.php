@@ -54,10 +54,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
                 <div class="innermenu">
 

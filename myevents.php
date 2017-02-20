@@ -73,7 +73,7 @@
                 <br>
                 <!--                THE EVENT BOX END -->
                 <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
+<!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
              
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
