@@ -9,7 +9,7 @@
 		Events
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
+		<a href="myevents.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
 	</div>
 	<div>
 		<a href="event.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>

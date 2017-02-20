@@ -29,12 +29,12 @@
 <body>
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
-<div class="container-fluid hidden-xs hidden-sm" style="background-color: #e9f7ef ;margin-bottom:10px;">
-    <div class="" style="border:solid 0px black;height:200px;">
+<div class="hidden-xs hidden-sm" style="background-color: #e9f7ef;position: fixed; width: 100%;z-index: 99;">
+    <div class="container" style="border:solid 0px black;height:200px; padding: 0;">
         <?php include_once "p_topmenu.php"; ?>
     </div>
 </div>
-<div class="container hidden-xs hidden-sm">
+<div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
 
     <div class="row">
         <div class="col-sm-2 left-menu-container">
@@ -51,17 +51,17 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <!--                THE EVENT BOX END -->
             <br>
             <a href="" style="float:right;font-size:14px;">View all</a>
 
-            <h4><i class="fa fa-users icon_orange" aria-hidden="true" style="font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h4>
+            <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
             <hr>
 <!--            GROUP CIRCLE ThING START-->
             <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
@@ -79,10 +79,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -92,10 +92,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -105,10 +105,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -118,10 +118,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -131,10 +131,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -144,10 +144,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -157,10 +157,10 @@
                 </div>
 
                 <div class="innerbottom">
-                    <i class="fa fa-paw btnTrackEvent" style="float:right;font-size:42px;cursor:pointer;"></i>
-                    <i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-users" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
+                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
                 </div>
             </div>
             <br>
@@ -179,9 +179,7 @@
             </h1>
         </div>
     </div>
-
 </div>
-
 
 <!-- Footer -->
 <footer>

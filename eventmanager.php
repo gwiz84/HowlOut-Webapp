@@ -31,7 +31,7 @@
 <body>
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
-<div class="container-fluid hidden-xs hidden-sm" style="background-color: #e9f7ef ;margin-bottom:10px;">
+<div class="container-fluid hidden-xs hidden-sm" style="background-color: #e9f7ef; margin-bottom: 10px;">
     <div class="" style="border:solid 0px black;height:200px;">
         <?php include_once "p_topmenu.php"; ?>
     </div>
@@ -39,10 +39,10 @@
 <div class="container hidden-xs hidden-sm">
 
     <div class="row">
-        <div class="col-sm-2" style="border:solid 0px black;height:600px;">
+        <div class="col-sm-2" style="border: solid 0px black; height: 600px;">
             <?php include_once "p_leftmenu.php"; ?>
         </div>
-        <div class="col-sm-10 col-lg-offset-1 col-lg-8" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
+        <div class="col-sm-10 col-lg-offset-1 col-lg-8" style="border: solid 0px black; height:100%; padding:0 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
             <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Event manager</h4>
             <hr>
