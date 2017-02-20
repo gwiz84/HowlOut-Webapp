@@ -59,7 +59,7 @@
             </div>
             <!--                THE EVENT BOX END -->
             <br>
-            <a style="float:right;font-size:14px;cursor:pointer;">View all</a>
+            <a href="" style="float:right;font-size:14px;">View all</a>
 
             <h4><i class="fa fa-users icon_orange" aria-hidden="true" style="font-size:26px;vertical-align:middle;"></i>&nbsp;&nbsp;My groups</h4>
             <hr>
@@ -68,7 +68,7 @@
 
             </div>
             <br>
-            <a style="float:right;font-size:14px;cursor:pointer;">View all</a>
+            <a href="" style="float:right;font-size:14px;">View all</a>
 <!--             GROUP CIRLCE THING END -->
             <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
             <hr>

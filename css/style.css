@@ -3,6 +3,14 @@ body {
     font-size: 14px;
 }
 
+a:link {
+    text-decoration: none;
+}
+
+a:hover {
+    color: #148f77;
+}
+
 .top-menu {
     height: 200px;
 }
@@ -20,7 +28,6 @@ body {
 }
 
 .top-menu-searchbar:hover {
-    
     background-color: white;
 }
 
@@ -43,8 +50,17 @@ body {
 .event-box {
     width: 100%;
     border-radius: 20px;
-    border: solid 1px #148f77;
+    border: solid 1px #bbbbbb;
     height: 150px;
+    transition: 0.5s;
+}
+
+.event-box:hover {
+    border: solid 1px #148f77;
+}
+
+.event-box:hover .innerbottom {
+    border-top: solid 1px #148f77;
 }
 
 .event-box > .innertop {
@@ -57,10 +73,11 @@ body {
 
 .event-box > .innerbottom {
     height: 90px;
-    border-top: solid 1px #148f77;
+    border-top: solid 1px #bbbbbb;
     border-bottom-left-radius: 20px;
     border-bottom-right-radius: 20px;
     padding: 10px 20px 10px 20px;
+    transition: 0.5s;
 }
 
 .event-box-edit {
