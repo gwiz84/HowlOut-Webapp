@@ -139,7 +139,7 @@ a:hover {
 .textstroke {
     color: white;
     -ms-text-shadow: -1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
-    text-shadow:-1px -1px 0   #808b96    , 1px -1px 0   #808b96    , -1px 1px 0  #808b96 , 1px 1px 0  #808b96 ;
+    text-shadow:-1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
 }
 
 .group-circle {
@@ -147,7 +147,7 @@ a:hover {
     height: 95px;
     border-radius: 60px;
     border: solid 1px #148f77;
-    cursor: pointer;
+    cursor: pointer;    
 }
 
 .icon_green {
