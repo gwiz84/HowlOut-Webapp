@@ -25,7 +25,7 @@
 		Groups
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_orange">group</i>My groups</a>
+		<a href="mygroups.php"><i class="material-icons leftmenuitem icon_orange">group</i>My groups</a>
 	</div>
 	<div>
 		<a href="event.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
