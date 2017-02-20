@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll;
+}
+
 body {
     font-family: 'Varela Round', sans-serif;
     font-size: 14px;
@@ -24,10 +28,16 @@ a:hover {
     font-size: 15px;
     outline: none;
     background-color: #f5f5f5;
-    transition: 0.5s;
+    box-shadow: 0 0 100px #82e0aa;
+    transition: 0.7s;
 }
 
 .top-menu-searchbar:hover {
+    background-color: white;
+    box-shadow: 0 0 100px #2ecc71;
+}
+
+.top-menu-searchbar:focus {
     background-color: white;
 }
 
@@ -44,7 +54,7 @@ a:hover {
 
 .left-menu-container {
     height: 600px;
-    padding: 0;
+    padding: 10px 0 0 20px;
 }
 
 .event-box {
@@ -57,6 +67,7 @@ a:hover {
 
 .event-box:hover {
     border: solid 3px #73c6b6;
+    box-shadow: 0 0 15px #73c6b6;
 }
 
 .event-box:hover .innerbottom {
