@@ -174,12 +174,10 @@ a:hover {
 /* CONVERSATIONS */
 
 .conv-header {
-    margin-top: 20px;
+    margin-top: 10px;
     margin-bottom: 10px;
     font-size: 20px;
-    /*text-align: center;*/
     background-image: url('../img/ic_chat_black_24px.svg');
-    /*background-color: #5dade2;*/
     background-size: 30px;
     background-position: left;
     background-repeat: no-repeat;
@@ -187,22 +185,25 @@ a:hover {
 }
 
 .conv-container {
-    padding: 5px;
-    border-bottom: solid 1px lightgrey;
+    padding: 5px 10px 0 50px;
+    position: relative;
+    overflow: auto;
+    overflow-y: scroll;
+    height: calc(100% - 350px);
 }
 
 .conv-message {
-    /*min-height: 50px;*/
     border-bottom: dotted 1px lightgrey;
-    padding: 10px 0 10px 10px;
+    padding: 10px 0 10px 8px;
     overflow: auto;
     transition: 0.5s;
     cursor: default;
+    border-left: solid 2px white;
 }
 
 .conv-message:hover {
-    /*border-bottom: dotted 1px black;*/
     background: #f9f9f9;
+    border-left: solid 2px #2ecc71;
 }
 
 .conv-circle {
@@ -212,6 +213,14 @@ a:hover {
     border: solid 1px #148f77;
     background-image: url('../img/howlout_icon.png');
     background-size: 100%;
+}
+
+.conv-input {
+    border-top: solid 1px lightgrey;
+    padding: 10px 0 10px 0;
+    overflow: auto;
+    /*bottom: 0;*/
+    /*position: fixed;*/
 }
 
 .mess-header {
@@ -224,11 +233,35 @@ a:hover {
 
 .mess-text {
     font-style: italic;
->>>>>>> 08ba4bade8e1b17a17d4bd28b1deb2bd6fffb25f
 }
 
 .mess-input {
     resize: none;
+    max-height: 100px;
+    border-radius: 8px;
+    transition: 0.5s;
+    box-shadow: 0 0 5px #ffffff;
+    outline: none;
+}
+
+.mess-input:hover, .mess-input:focus {
+    outline: none;
+    box-shadow: 0 0 5px #2ecc71;
+}
+
+.btn-mess-send {
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.btn-mess-send:hover, .btn-mess-send:focus {
+    background-color: #e9f7ef;
+    box-shadow: 0 0 2px #2ecc71;
+}
+
+.btn-mess-send:active {
+    /*background-color: yellow;*/
+    /*box-shadow: 0 0 12px #2ecc71;*/
 }
 
 .icon_green {

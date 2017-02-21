@@ -40,12 +40,12 @@
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container conv-middle-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
-
-                <div class="conv-header">Conversation with Benny, Kjeld
-                </div>
+                
                 <div class="conv-container col-sm-9">
+                    <div class="conv-header">Conversation with Benny, Kjeld
+                    </div>
 
                     <div class="conv-message">
                         <div class="conv-circle col-sm-1"></div>
@@ -87,17 +87,87 @@
                         </div>
                     </div>
 
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Kjeld</span><span class="mess-time">01-02-2017 14:36</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Det kan du ikke være bekendt! Jeg som altid hjælper dig med dine sindssyge planer, selvom det aldrig bliver til nogen millioner!
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:38</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Ja, det vil jeg sgu også nok sige, Egon.
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:41</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Alright, alright, jeg ta'r det tilbage.
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:43</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Det er så i orden... tak.
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Og skal vi SÅ komme i gang?
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Og skal vi SÅ komme i gang?
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Og skal vi SÅ komme i gang?
+                        </div>
+                    </div>
+
                     <div class="conv-input">
-                        <div class="col-sm-10">
-                            <textarea class="mess-input form-control"></textarea>
+                        <div class="col-sm-9">
+                            <textarea class="mess-input form-control" placeholder="Type your message here"></textarea>
                         </div>
                         <div class="col-sm-2">
-                            <button id="btn-mess-send" class="btn btn-sm">Send</button>
+                            <button id="" class="btn btn-xs btn-mess-send">Send</button>
                         </div>
                     </div>
 
                 </div>
-                <div class="conv_list col-sm-3" style="border:solid 1px red; height: 100%;">
+                <div class="conv_list col-sm-3" style="border:solid 1px red; height: 100%; overflow: auto;">
 
                 </div>
             </div>

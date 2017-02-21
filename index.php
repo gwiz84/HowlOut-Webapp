@@ -30,7 +30,7 @@
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
 <div class="hidden-xs hidden-sm top-menu-container">
-    <div class="container" style="border:solid 0px black;height:200px; padding: 0;">
+    <div class="container" style="border:solid 0px black; padding: 0;">
         <?php include_once "p_topmenu.php"; ?>
     </div>
 </div>
