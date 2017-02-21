@@ -42,33 +42,21 @@
         </div>
         <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
-            <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;z-index:10;position:relative;">
-            <h2 style="margin: -60px 0 50px 30px;z-index:13;position:relative;" class="textstroke">Event title</h2>
-            <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
-
+            <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">account_circle</i>&nbsp;&nbsp;About me</h4>
+            <hr>
             <div class="row">
                 <div class="col-md-6">
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <h4>Emma Stone</h4>
-                    <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Private
+                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;height:200px;width:200px;border-radius:200px;"></div>
+                  <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture">
                 </div>
                 <div class="col-md-6">
-                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;margin-right:20px;"></i>
-                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                    <h4 style="margin-top:25%;">Emma Stone</h4>
+                    <a class="btnChangePicture" style="margin-top:200px;cursor:pointer;">Change picture</a>
                 </div>
+            </div>
 
-            </div><br>
-            <h4>About this event</h4>
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-            <a href="" style="float:right;font-size:14px;">View more</a><br>
-            <br>
-            <div id="map" style="width:100%;height:250px;"></div>
-
-            <br>
-            <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
+            <br><br>
+            <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My friends</h4>
             <hr>
             <div class="row">
                 <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
@@ -78,19 +66,21 @@
                 <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
             </div>
 
-
             <br>
             <a href="" style="float:right;font-size:14px;">View all</a>
-            <br><br>
-            <h3 style="text-align:center;">Wall</h3>
-            <textarea class="wall-textarea"></textarea>
-            <button class="btn-sm btn-success" style="float:right;">Post comment</button>
-            <div class="row" style="margin: 50px 0 0 0;">
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
-                <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>
 
+            <h4 style="margin-top:50px;"><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
+            <hr>
+            <div class="row">
+                <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin:0 30px 0 30px;"></div>
+                <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin:0 30px 0 30px;"></div>
+                <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin:0 30px 0 30px;"></div>
+                <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin:0 30px 0 30px;"></div>
             </div>
 
+
+            <br>
+            <a href="" style="float:right;font-size:14px;margin-top:10px;">View all</a>
             <!--      PAGE CONTENT GOES HERE      -->
         </div>
     </div>
@@ -129,22 +119,11 @@
 
 <!-- Theme JavaScript -->
 <script src="scripts/clean-blog.min.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap">
-</script>
 
 <script>
-    function initMap() {
-        var uluru = {lat: 55.6761, lng: 12.5683};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
-        });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
+    $(".btnChangePicture").click(function() {
+       $(".fileChangePicture").click();
+    });
 </script>
 </body>
 

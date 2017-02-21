@@ -65,27 +65,30 @@
             <a href="" style="float:right;font-size:14px;">View all</a><br>
             <br>
             <h4><i class="material-icons icon_orange" style="font-size:28px;vertical-align:middle;">group</i>&nbsp;&nbsp;Group members</h4>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;">
+            <div class="row">
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;">
 
-            </div>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
+                </div>
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
-            </div>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
+                </div>
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
-            </div>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
+                </div>
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
-            </div>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
+                </div>
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
-            </div>
-            <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
+                </div>
+                <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
+                </div>
             </div>
-            <br>   <br>   <br>   <br>   <br>   <br>
+
+            <br>
             <a href="" style="float:right;font-size:14px;">View all</a>
-            <br><br>
+            <br>
             <h3 style="text-align:center;">Wall</h3>
             <textarea class="wall-textarea"></textarea>
             <button class="btn-sm btn-success" style="float:right;">Post comment</button>
