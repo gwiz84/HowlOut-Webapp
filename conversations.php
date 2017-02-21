@@ -42,20 +42,63 @@
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <div class="conv-container col-sm-9" style="border:solid 1px black;">
+
+                <div class="conv-header">Conversation with Benny, Kjeld
+                </div>
+                <div class="conv-container col-sm-9">
 
                     <div class="conv-message">
-                        <div class="conv-circle col-sm-1" style="background-image: url('img/howlout_icon.png');background-size:100%;"></div>
+                        <div class="conv-circle col-sm-1"></div>
                         <div class="mess-header col-sm-11">
-                            <span class="mess-author">Egon Olsen</span><span class="mess-time">01-02-2017 14:29</span>
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:29</span>
                         </div>
                         <div class="mess-text col-sm-11">
                             Hundehoveder og hængerøve! Hvor bli'r I af?
                         </div>
                     </div>
 
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:31</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Jeg sku' lige have brændstof på. Vi er på vej, skidegodt!
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Kjeld</span><span class="mess-time">01-02-2017 14:32</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Benny, kør lige ordentligt! Yvonne tilgiver mig aldrig hvis jeg dør!
+                        </div>
+                    </div>
+
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:34</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Årh, så hold dog kæft, dit pattebarn!
+                        </div>
+                    </div>
+
+                    <div class="conv-input">
+                        <div class="col-sm-10">
+                            <textarea class="mess-input form-control"></textarea>
+                        </div>
+                        <div class="col-sm-2">
+                            <button id="btn-mess-send" class="btn btn-sm">Send</button>
+                        </div>
+                    </div>
+
                 </div>
                 <div class="conv_list col-sm-3" style="border:solid 1px red; height: 100%;">
+
                 </div>
             </div>
         </div>

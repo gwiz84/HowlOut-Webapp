@@ -173,8 +173,36 @@ a:hover {
 }
 /* CONVERSATIONS */
 
+.conv-header {
+    margin-top: 20px;
+    margin-bottom: 10px;
+    font-size: 20px;
+    /*text-align: center;*/
+    background-image: url('../img/ic_chat_black_24px.svg');
+    /*background-color: #5dade2;*/
+    background-size: 30px;
+    background-position: left;
+    background-repeat: no-repeat;
+    padding-left: 35px;
+}
+
+.conv-container {
+    padding: 5px;
+    border-bottom: solid 1px lightgrey;
+}
+
 .conv-message {
-    padding: 10px;
+    /*min-height: 50px;*/
+    border-bottom: dotted 1px lightgrey;
+    padding: 10px 0 10px 10px;
+    overflow: auto;
+    transition: 0.5s;
+    cursor: default;
+}
+
+.conv-message:hover {
+    /*border-bottom: dotted 1px black;*/
+    background: #f9f9f9;
 }
 
 .conv-circle {
@@ -182,6 +210,8 @@ a:hover {
     height: 40px;
     border-radius: 20px;
     border: solid 1px #148f77;
+    background-image: url('../img/howlout_icon.png');
+    background-size: 100%;
 }
 
 .mess-header {
@@ -195,6 +225,10 @@ a:hover {
 .mess-text {
     font-style: italic;
 >>>>>>> 08ba4bade8e1b17a17d4bd28b1deb2bd6fffb25f
+}
+
+.mess-input {
+    resize: none;
 }
 
 .icon_green {
