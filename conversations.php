@@ -29,7 +29,7 @@
 <body>
     <?php include_once "_inserttoken.php"; ?>
     <!-- Main Content -->
-    <div class="hidden-xs hidden-sm" style="background-color: #e9f7ef;position: fixed; width: 100%;">
+    <div class="hidden-xs hidden-sm top-menu-container">
         <div class="container" style="border:solid 0px black;height:200px; padding: 0;">
             <?php include_once "p_topmenu.php"; ?>
         </div>
@@ -42,7 +42,21 @@
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+                <div class="conv-container col-sm-9" style="border:solid 1px black;">
 
+                    <div class="conv-message">
+                        <div class="conv-circle col-sm-1" style="background-image: url('img/howlout_icon.png');background-size:100%;"></div>
+                        <div class="mess-header col-sm-11">
+                            <span class="mess-author">Egon Olsen</span><span class="mess-time">01-02-2017 14:29</span>
+                        </div>
+                        <div class="mess-text col-sm-11">
+                            Hundehoveder og hængerøve! Hvor bli'r I af?
+                        </div>
+                    </div>
+
+                </div>
+                <div class="conv_list col-sm-3" style="border:solid 1px red; height: 100%;">
+                </div>
             </div>
         </div>
     </div>
