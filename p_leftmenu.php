@@ -12,13 +12,13 @@
 		<a href="myevents.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>
+		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
+		<a href="createevent.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_red">event_busy</i>Event manager</a>
+		<a href="eventmanager.php"><i class="material-icons leftmenuitem icon_red">event_busy</i>Event manager</a>
 	</div>
 	<br>
 	<div class="leftmenugroup">
@@ -28,6 +28,6 @@
 		<a href="mygroups.php"><i class="material-icons leftmenuitem icon_orange">group</i>My groups</a>
 	</div>
 	<div>
-		<a href="event.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
+		<a href="creategroup.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
 	</div>
 </div>
