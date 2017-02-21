@@ -45,14 +45,20 @@
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
                 <!--            GROUP CIRCLE THING START-->
-                <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
+                <div class="row">
+                    <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;">
 
-                </div>
-                <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
+                    </div>
+                    <div class="group-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
 
+                    </div>
                 </div>
+
                 <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
+                <div class="row">
+                    <a href="" style="float:right;font-size:14px;">View all</a>
+                </div>
+
                 <!--             GROUP CIRCLE THING END -->
 
 

@@ -157,6 +157,20 @@ a:hover {
     cursor: pointer;    
 }
 
+.member-circle {
+    width: 85px;
+    height: 85px;
+    border-radius: 60px;
+    border: solid 1px #148f77;
+    cursor: pointer;
+}
+
+.wall-textarea {
+    width: 100%;
+    height: 120px;
+    resize: none;
+    border: solid 1px grey;
+}
 /* CONVERSATIONS */
 
 .conv-header {
@@ -210,6 +224,7 @@ a:hover {
 
 .mess-text {
     font-style: italic;
+>>>>>>> 08ba4bade8e1b17a17d4bd28b1deb2bd6fffb25f
 }
 
 .mess-input {
