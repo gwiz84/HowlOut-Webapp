@@ -47,47 +47,47 @@
                     <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>This is some info about creating a group. What they are about and all that sort of thing.
                     <p>
                         <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">image</i>&nbsp;&nbsp;Image</h4>
-                        <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin: 0;">
-                        <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture">
+                        <div>
+                            <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin: 0;">
+                            <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+                            <input style="display: none;" id="imageInput" type="file">
+                        </div>
+                        
+                        <!-- <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture"> -->
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">group</i></span>
-                            <input type="text" class="form-control" placeholder="Title" aria-describedby="title-input">
+                            <input type="text" class="form-control cg-desc" placeholder="Title" aria-describedby="title-input">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="title-input"><i class="material-icons icon_blue" aria-hidden="true"style="font-size:20px;vertical-align:middle;">note</i></span>
-                            <textarea type="text" class="cg-desc form-control" placeholder="Description" aria-describedby="title-input"></textarea>
+                            <textarea type="text" class="form-control cg-desc" placeholder="Description" aria-describedby="title-input"></textarea>
                         </div>
 
 
                         <br>
-
+                        <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
+                        
+                        <label class="radio-inline active"><input type="radio" name="event-visib" checked="checked">Private</label>
+                        <label class="radio-inline"><input type="radio" name="event-visib">Public</label>
                         <br>
+                        <br>
+                        <button id="btn-creategroup" class="btn btn-ho">Create group</button>
+                    </div>
 
-                        <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;
-                        <div class="dropdown">
-                          <button class="btn btn-primary dropdown-toggle" type="button" data-toggle="dropdown">Private
-                              <span class="caret"></span></button>
-                              <ul class="dropdown-menu">
-                                  <li><a href="#">Private</a></li>
-                                  <li><a href="#">Public</a></li>
-                              </ul>
-                          </div> 
-                      </div>
+                    <br>
 
-                      <br>
+                    <br>
 
-                      <br>
+                    <!--      PAGE CONTENT GOES HERE      -->
+                </div>
+            </div>
 
-                      <!--      PAGE CONTENT GOES HERE      -->
-                  </div>
-              </div>
+        </div>
 
-          </div>
-
-          <!-- MOBILE WARNING BOX -->
-          <div class="container  hidden-md hidden-lg">
+        <!-- MOBILE WARNING BOX -->
+        <div class="container  hidden-md hidden-lg">
             <div class="row">
                 <div class="col-xs-12">
                     <h1>

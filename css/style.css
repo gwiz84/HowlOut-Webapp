@@ -91,6 +91,12 @@ a:hover {
     border-top: solid 1px #73c6b6;
 }
 
+.event-box:hover .textstroke {
+    color: white;
+    -ms-text-shadow: -px -1px 0 #222222, 1px -1px 0 #222222, -1px 1px 0 #222222, 1px 1px 0 #222222;
+    text-shadow:-1px -1px 0 #222222, 1px -1px 0 #222222, -1px 1px 0 #222222, 1px 1px 0 #222222;
+}
+
 .event-box > .innertop {
     height: 60px;
     border-top-left-radius: 17px;
@@ -158,6 +164,7 @@ a:hover {
     color: white;
     -ms-text-shadow: -1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
     text-shadow:-1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
+    transition: 0.5s;
 }
 
 .group-circle {
@@ -245,6 +252,7 @@ a:hover {
     /*overflow: auto;*/
     border-left: solid 1px lightgrey;
     padding: 0;
+    overflow-x: hidden;
 }
 
 .conv-list-item {
@@ -281,7 +289,6 @@ a:hover {
     color: #2ecc71;
 }
 
-
 .mess-header {
     font-weight: bold;
 }
@@ -307,20 +314,20 @@ a:hover {
     box-shadow: 0 0 5px #2ecc71;
 }
 
-.btn-mess-send {
+.btn-ho {
     transition: 0.5s;
     border-radius: 5px;
     outline: none !important;
 }
 
-.btn-mess-send:hover {
+.btn-ho:hover {
     background-color: #e9f7ef;
-    box-shadow: 0 0 5px #2ecc71;
+    box-shadow: 0 0 5px #2ecc71 inset;
 }
 
-.btn-mess-send:focus {
+.btn-ho:focus {
     background-color: #2ecc71;
-    box-shadow: 0 0 5px #e9f7ef;
+    box-shadow: 0 0 5px #e9f7ef inset;
 }
 
 /* CONVERSATIONS.PHP END */
@@ -329,7 +336,7 @@ a:hover {
 
 .cg-desc {
     resize: vertical;
-    height: 100px;
+    /*height: 100px;*/
     /*height: auto;*/
     /*border-radius: 8px;*/
     /*transition: 0.5s;*/
@@ -339,6 +346,19 @@ a:hover {
 
 .cg-desc:hover, .cg-desc:focus {
     box-shadow: 0 0 5px #2ecc71;
+}
+
+.btn-uploadimage {
+    color: lightgrey;
+    position: relative;
+    bottom: 53px;
+    right: 1px;
+    float: right;
+    transition: 0.5s;
+}
+
+.btn-uploadimage:hover {
+    color: white;
 }
 
 /* CREATEGROUP.PHP END */

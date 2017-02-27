@@ -40,10 +40,10 @@
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-sm-10 col-lg-offset-1 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 
-                <div class="conv-container col-sm-5">
+                <div class="conv-container col-sm-6">
                     <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld
                     </div>
                     <div class="conv-messages">
@@ -163,7 +163,7 @@
                             <textarea class="mess-input form-control" placeholder="Type your message here"></textarea>
                         </div>
                         <div class="col-sm-2">
-                            <button id="" class="btn btn-xs btn-mess-send">Send</button>
+                            <button id="" class="btn btn-xs btn-ho">Send</button>
                         </div>
                     </div>
 
