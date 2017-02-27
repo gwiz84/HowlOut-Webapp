@@ -40,37 +40,13 @@
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container eventContainer" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;My events</h4>
                 <hr>
                 <!--                THE EVENT BOX START -->
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
 
-                    <div class="innerbottom">
-                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
-                        <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                        <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                        <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                    </div>
-                </div>
-                <br>
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
 
-                    <div class="innerbottom">
-                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
-                        <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                        <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                        <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                    </div>
-                </div>
-                <br>
                 <!--                THE EVENT BOX END -->
                 <br>
 <!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
@@ -113,7 +89,71 @@
 
     <!-- Theme JavaScript -->
     <script src="scripts/clean-blog.min.js"></script>
+    <script>
 
+        var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds=10153817903667221';
+        var apiData = JSON.stringify({id:1});
+
+        $.ajax({
+            type: 'post',
+            url: '_apiRequest.php',
+            async: false,
+            data: {'apiLink' : apiLink, 'apiData' : apiData},
+            success: function (data) {
+                var jsonData = JSON.parse(data);
+
+
+                $.each(jsonData, function(i,ele) {
+                   $(".eventContainer").append('' +
+                       '<div class="event-box">'+
+                      ' <div class="innertop" style="background-image:url(\''+ele.ImageSource+'\');background-size:100%;">'+
+                      '  <span style="font-size:28px;color:white;" class="textstroke">'+ele.Title+'</span> '+
+                   ' </div>'+
+
+                    '<div class="innerbottom">'+
+                      '  <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>'+
+                      '  <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">'+ele.StartDate+'</span><br>'+
+                   ' <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">'+ele.AddressName+'</span><br>'+
+                   ' <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+ele.NumberOfAttendees+' / '+ele.MaxSize+'</span>'+
+                   ' </div>'+
+                   ' </div>'+
+                   '<br>');
+                });
+            },
+            error: function () {
+                alert("ajax failed");
+            }
+        });
+
+        // Gets the date and time in the format the api needs it in.
+        function getFormattedDateTime() {
+            var finalString = "";
+            finalString += new Date().getFullYear()+"-";
+
+            var monthCalc = (parseInt((new Date().getMonth()))+1) < 10 ? "0"+(parseInt((new Date().getMonth()))+1) : (parseInt((new Date().getMonth()))+1);
+
+            finalString += monthCalc+"-";
+
+            var dateCalc = (parseInt((new Date().getDate()))) < 10 ? "0"+(parseInt((new Date().getDate()))) : (parseInt((new Date().getDate())));
+
+            finalString += dateCalc+"T";
+
+            var hourCalc = (parseInt((new Date().getHours()))) < 10 ? "0"+(parseInt((new Date().getHours()))) : (parseInt((new Date().getHours())));
+
+            finalString += hourCalc+":";
+
+            var minCalc = (parseInt((new Date().getMinutes()))) < 10 ? "0"+(parseInt((new Date().getMinutes()))) : (parseInt((new Date().getMinutes())));
+
+            finalString += minCalc+":";
+
+            var secCalc = (parseInt((new Date().getSeconds()))) < 10 ? "0"+(parseInt((new Date().getSeconds()))) : (parseInt((new Date().getSeconds())));
+
+            finalString += secCalc+".0";
+
+            return finalString;
+        }
+
+    </script>
 </body>
 
 </html>

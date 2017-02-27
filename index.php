@@ -192,18 +192,17 @@
             </div>
         </div>
     </footer>
+
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="js/leftmenu.js"></script>
-
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-
     <!-- Theme JavaScript -->
     <script src="scripts/clean-blog.min.js"></script>
+
 <script>
-    var apiLink = 'https://api.howlout.net/event?id=1';
+    var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime=2017-02-27T13:30:00.84&profileIds=10153817903667221';
     var apiData = JSON.stringify({id:1});
 
     $.ajax({
@@ -212,7 +211,9 @@
         async: false,
         data: {'apiLink' : apiLink, 'apiData' : apiData},
         success: function (data) {
-            alert(data);
+            for (var i=0; i<data.length; i++) {
+
+            }
         },
         error: function () {
             alert("ajax failed");
