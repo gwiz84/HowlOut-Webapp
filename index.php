@@ -202,6 +202,23 @@
 
     <!-- Theme JavaScript -->
     <script src="scripts/clean-blog.min.js"></script>
+<script>
+    var apiLink = 'https://api.howlout.net/event?id=1';
+    var apiData = JSON.stringify({id:1});
+
+    $.ajax({
+        type: 'post',
+        url: '_apiRequest.php',
+        async: false,
+        data: {'apiLink' : apiLink, 'apiData' : apiData},
+        success: function (data) {
+            alert(data);
+        },
+        error: function () {
+            alert("ajax failed");
+        }
+    });
+</script>
 
 </body>
 
