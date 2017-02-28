@@ -81,6 +81,7 @@ a:hover {
     border: solid 3px #a3e4d7;
     height: 150px;
     transition: 0.5s;
+    cursor:pointer;
 }
 
 .event-box:hover {

@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -93,12 +94,12 @@
 
         var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds=10153817903667221';
         var apiData = JSON.stringify({id:1});
-
+        var token = $(".token").data("token");
         $.ajax({
             type: 'post',
             url: '_apiRequest.php',
             async: false,
-            data: {'apiLink' : apiLink, 'apiData' : apiData},
+            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
             success: function (data) {
                 var jsonData = JSON.parse(data);
 
