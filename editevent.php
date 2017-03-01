@@ -32,9 +32,13 @@
     <script src="js/timepicker.js"></script>
     <script>
         var dateToday = new Date();
-        $( function() {
+        $(function() {
 //            $( "#datepicker" ).datepicker();
-            $( ".datepicker" ).datetimepicker({minDate: dateToday,});
+            $( ".datepicker" ).datetimepicker({
+                minDate: dateToday,
+                minute: 0,
+                stepMinute: 30,
+            });
         } );
     </script>
 </head>
@@ -69,7 +73,7 @@
             <hr>
             <h4>Choose event duration</h4>
 
-             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>  <input type="text" class="datepicker form-control" style="width:40%;"><br> <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>  <input type="text" class="datepicker form-control" style="width:40%;">
+             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>  <input type="text" class="datepicker form-control cg-desc" style="width:40%;"><br> <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>  <input type="text" class="datepicker form-control cg-desc" style="width:40%;">
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
