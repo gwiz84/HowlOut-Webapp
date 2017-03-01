@@ -7,17 +7,24 @@ body {
     font-size: 14px;
 }
 
-/*textarea:focus, input:focus {   
+input[type="radio"] {
+    cursor: pointer;
+}
+
+/*
+textarea:focus, input:focus {   
     border-color: rgba(229, 103, 23, 0.8) !important;
     box-shadow: 0 1px 1px rgba(229, 103, 23, 0.075) inset, 0 0 8px rgba(229, 103, 23, 0.6) !important;
     outline: 0 none !important;
-    }*/
+}
+*/
 
-    .btn:active {
-      outline: none;
-  }
 
-  a:link {
+.btn:active {
+    outline: none;
+}
+
+a:link {
     text-decoration: none;
 }
 
@@ -337,16 +344,18 @@ a:hover {
 
 .cg-desc {
     resize: vertical;
-    /*height: 100px;*/
-    /*height: auto;*/
-    /*border-radius: 8px;*/
-    /*transition: 0.5s;*/
-    /*box-shadow: 0 0 5px #ffffff;*/
-    /*outline: none !important;*/
+    box-shadow: 0 0 5px #ffffff, 0 0 5px #ffffff inset;
+    outline: none !important;
+    transition: box-shadow 0.5s;
+    border-color: #cccccc !important;
 }
 
-.cg-desc:hover, .cg-desc:focus {
+.cg-desc:hover {
     box-shadow: 0 0 5px #2ecc71;
+}
+
+.cg-desc:focus {
+    box-shadow: 0 0 5px #ffffff, 0 0 5px #2ecc71 inset;
 }
 
 .btn-uploadimage {

@@ -42,7 +42,7 @@
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Create group</h4>
+                <h3><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Create group</h4>
                 <p>
                     <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>This is some info about creating a group. What they are about and all that sort of thing.
                     <p>
@@ -57,12 +57,12 @@
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">group</i></span>
-                            <input type="text" class="form-control cg-desc" placeholder="Title" aria-describedby="title-input">
+                            <input type="text" class="form-control cg-desc" placeholder="Group title" aria-describedby="title-input">
                         </div>
                         <br>
                         <div class="input-group">
                             <span class="input-group-addon" id="title-input"><i class="material-icons icon_blue" aria-hidden="true"style="font-size:20px;vertical-align:middle;">note</i></span>
-                            <textarea type="text" class="form-control cg-desc" placeholder="Description" aria-describedby="title-input"></textarea>
+                            <textarea type="text" class="form-control cg-desc" placeholder="Group description" aria-describedby="title-input"></textarea>
                         </div>
 
 
@@ -73,7 +73,7 @@
                         <label class="radio-inline"><input type="radio" name="event-visib">Public</label>
                         <br>
                         <br>
-                        <button id="btn-creategroup" class="btn btn-ho">Create group</button>
+                        <button id="btn-creategroup" class="btn btn-ho" style="float:right;">Create group</button>
                     </div>
 
                     <br>
