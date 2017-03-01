@@ -399,3 +399,11 @@ a:hover {
 .icon_peep {
     color: #f8c471;
 }
+
+.login-box {
+    border-radius: 20px;
+    background-color:#e9f7ef;
+    border:solid 2px mediumaquamarine;
+    height:450px;
+    padding:30px;
+}
