@@ -342,7 +342,7 @@ a:hover {
 
 /* CREATEGROUP.PHP START */
 
-.cg-desc {
+.ho-textinput {
     resize: vertical;
     box-shadow: 0 0 5px #ffffff, 0 0 5px #ffffff inset;
     outline: none !important;
@@ -350,11 +350,11 @@ a:hover {
     border-color: #cccccc !important;
 }
 
-.cg-desc:hover {
+.ho-textinput:hover {
     box-shadow: 0 0 5px #2ecc71;
 }
 
-.cg-desc:focus {
+.ho-textinput:focus {
     box-shadow: 0 0 5px #ffffff, 0 0 5px #2ecc71 inset;
 }
 

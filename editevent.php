@@ -63,26 +63,26 @@
             <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;"><br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
-                <input type="text" class="form-control cg-desc" placeholder="Event title" aria-describedby="title-input" style="z-index:1;">
+                <input type="text" class="form-control ho-textinput" placeholder="Event title" aria-describedby="title-input" style="z-index:1;">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="material-icons icon_blue" aria-hidden="true"style="font-size:20px;vertical-align:middle;">note</i></span>
-                <textarea type="text" class="form-control cg-desc" placeholder="Event description" aria-describedby="title-input" style="z-index:1;"></textarea>
+                <textarea type="text" class="form-control ho-textinput" placeholder="Event description" aria-describedby="title-input" style="z-index:1;"></textarea>
             </div>
             <hr>
             <h4>Choose event duration</h4>
 
-             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>  <input type="text" class="datepicker form-control cg-desc" style="width:40%;"><br> <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>  <input type="text" class="datepicker form-control cg-desc" style="width:40%;">
+             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>  <input type="text" class="datepicker form-control ho-textinput" style="width:40%;"><br> <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>  <input type="text" class="datepicker form-control ho-textinput" style="width:40%;">
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                <input type="text" class="form-control cg-desc" placeholder="Location" aria-describedby="title-input" style="z-index:1;">
+                <input type="text" class="form-control ho-textinput" placeholder="Location" aria-describedby="title-input" style="z-index:1;">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                <input type="number" class="form-control cg-desc" placeholder="Number of attendees" aria-describedby="title-input" style="z-index:1;">
+                <input type="number" class="form-control ho-textinput" placeholder="Number of attendees" aria-describedby="title-input" style="z-index:1;">
             </div>
             <br>
             <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
