@@ -28,6 +28,7 @@
 </head>
 
 <body>
+<script src="js/facebooksdk.js"></script>
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
 
@@ -81,9 +82,13 @@
 <!-- Bootstrap Core JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-
 <!-- Theme JavaScript -->
 <script src="scripts/clean-blog.min.js"></script>
+
+<script>
+FB.checkStatus();
+
+</script>
 
 </body>
 

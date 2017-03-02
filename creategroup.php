@@ -1,3 +1,7 @@
+<?php
+    session_start();
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -54,28 +58,28 @@
                         <input style="display: none;" id="imageInput" type="file">
                     </span>
                 </div>
-
+                <br>
                 <!-- <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture"> -->
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">group</i></span>
-                    <input type="text" class="form-control ho-textinput" placeholder="Group title" aria-describedby="title-input">
+                    <input type="text" class="form-control ho-textinput inputTitle" placeholder="Group title" aria-describedby="title-input">
                 </div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="desc-input"><i class="material-icons icon_blue" aria-hidden="true"style="font-size:20px;vertical-align:middle;">note</i></span>
-                    <textarea type="text" class="form-control ho-textinput" placeholder="Group description" aria-describedby="desc-input"></textarea>
+                    <textarea type="text" class="form-control ho-textinput inputDesc" placeholder="Group description" aria-describedby="desc-input"></textarea>
                 </div>
 
 
                 <br>
                 <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
 
-                <label class="radio-inline active"><input type="radio" name="event-visib" checked="checked">Private</label>
-                <label class="radio-inline"><input type="radio" name="event-visib">Public</label>
+                <label class="radio-inline active "><input class="radioPrivate" type="radio" name="event-visible" checked="checked">Private</label>
+                <label class="radio-inline "><input class="radioPublic" type="radio" name="event-visible">Public</label>
                 <br>
                 <br>
-                <button id="btn-creategroup" class="btn btn-ho" style="float:right;">Create group</button>
+                <button id="btn-creategroup" class="btn btn-ho btnCreate" style="float:right;">Create group</button>
             </div>
 
             <br>
@@ -120,7 +124,48 @@
 
 <!-- Theme JavaScript -->
 <script src="scripts/clean-blog.min.js"></script>
+<script>
 
+    // MANGLER BILLEDE UPLOAD FUNKTIONALITET OG REDIRECT EFTER CREATION!!!!!!!!!!!!!!!!!!!!!
+    // OG HVAD FANDEN ER EN "CLOSED" GROUP FFS
+
+    $(".btnCreate").click(function() {
+        var title = $(".inputTitle").val();
+        var description = $(".inputDesc").val();
+        var isPrivate = ($(".radioPrivate").is(":checked")) ? 2 : 0;
+
+        var apiLink = 'https://api.howlout.net/group';
+        var apiData = JSON.stringify({
+            "GroupId": 0,
+            "ProfileOwners": [
+                {
+                    "ProfileId": "10153817903667221"
+                }
+            ],
+            "Name": title,
+            "Description": description,
+            "ImageSource": "https://howloutstorage.blob.core.windows.net/howlout/10153817903667221.28-12-2016 23:44:46",
+            "Visibility": isPrivate
+        });
+        var token = $(".token").data("token");
+        $.ajax({
+            type: 'post',
+            url: '_apiRequestJSON.php',
+            async: false,
+            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+            success: function (data) {
+//            var jsonData = JSON.parse(data);
+
+                alert(data);
+            },
+            error: function () {
+                alert("ajax failed");
+            }
+        });
+    });
+
+
+</script>
 </body>
 
 </html>
