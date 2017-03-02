@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,125 +28,166 @@
 </head>
 
 <body>
-<?php include_once "_inserttoken.php"; ?>
-<!-- Main Content -->
-<div class="hidden-xs hidden-sm" style="background-color: #e9f7ef;position: fixed; width: 100%;z-index: 99;">
-    <div class="container" style="border:solid 0px black;height:200px; padding: 0;">
-        <?php include_once "p_topmenu.php"; ?>
-    </div>
-</div>
-<div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
-
-    <div class="row">
-        <div class="col-sm-2 left-menu-container">
-            <?php include_once "p_leftmenu.php"; ?>
-        </div>
-        <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
-            <!--      PAGE CONTENT GOES HERE      -->
-            <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;z-index:10;position:relative;">
-            <h2 style="margin: -60px 0 50px 30px;z-index:13;position:relative;" class="textstroke">Event title</h2>
-            <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
-
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <h4>Emma Stone</h4>
-                    <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Private
-                </div>
-                <div class="col-md-6">
-                    <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;margin-right:20px;"></i>
-                    <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                    <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                    <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                </div>
-
-            </div><br>
-            <h4>About this event</h4>
-            <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-                The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
-            <a href="" style="float:right;font-size:14px;">View more</a><br>
-            <br>
-            <div id="map" style="width:100%;height:250px;"></div>
-
-            <br>
-            <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
-            <hr>
-            <div class="row">
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-            </div>
-
-
-            <br>
-            <a href="" style="float:right;font-size:14px;">View all</a>
-            <br><br>
-            <h3 style="text-align:center;">Wall</h3>
-            <textarea class="wall-textarea"></textarea>
-            <button class="btn-sm btn-success" style="float:right;">Post comment</button>
-            <div class="row" style="margin: 50px 0 0 0;">
-                <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
-                <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>
-
-            </div>
-
-            <!--      PAGE CONTENT GOES HERE      -->
+    <?php include_once "_inserttoken.php"; ?>
+    <!-- Main Content -->
+    <div class="hidden-xs hidden-sm" style="background-color: #e9f7ef;position: fixed; width: 100%;z-index: 99;">
+        <div class="container" style="border:solid 0px black;height:200px; padding: 0;">
+            <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
+    <div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
 
-</div>
-
-<!-- MOBILE WARNING BOX -->
-<div class="container  hidden-md hidden-lg">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>
-                Please download the mobile app
-            </h1>
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+            <div class="col-sm-2 left-menu-container">
+                <?php include_once "p_leftmenu.php"; ?>
+            </div>
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
+                <!--      PAGE CONTENT GOES HERE      -->
+                <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;z-index:10;position:relative;">
+                <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;" class="textstroke">Event title</h2>
+                <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
 
-                <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
+                        <h4><span id="eventOwner">Event owner</span></h4>
+                        <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
+                    </div>
+                    <div class="col-md-6">
+                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;margin-right:20px;"></i>
+                        <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
+                        <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
+                        <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
+                    </div>
+                </div>
+                <br>
+                <h4>About this event</h4>
+                <p id="eventDescription">No Description</p>
+                    <a href="" style="float:right;font-size:14px;">View more</a><br>
+                    <br>
+                    <div id="map" style="width:100%;height:400px;"></div>
+
+                    <br>
+                    <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
+                    <hr>
+                    <div id="eventAttendees" class="row">
+                        No attendees
+                    </div>
+
+
+                    <br>
+                    <a href="" style="float:right;font-size:14px;">View all</a>
+                    <br><br>
+                    <h3 style="text-align:center;">Wall</h3>
+                    <textarea class="wall-textarea"></textarea>
+                    <button class="btn-sm btn-success" style="float:right;">Post comment</button>
+                    <div class="row" style="margin: 50px 0 0 0;">
+                        <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
+                        <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>q
+                    </div>
+
+                    <!--      PAGE CONTENT GOES HERE      -->
+                </div>
+            </div>
+
+        </div>
+
+        <!-- MOBILE WARNING BOX -->
+        <div class="container  hidden-md hidden-lg">
+            <div class="row">
+                <div class="col-xs-12">
+                    <h1>
+                        Please download the mobile app
+                    </h1>
+                </div>
             </div>
         </div>
-    </div>
-</footer>
-<!-- jQuery -->
-<script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-<script src="js/leftmenu.js"></script>
 
-<!-- Bootstrap Core JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+        <!-- Footer -->
+        <footer>
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                        <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+        <!-- jQuery -->
+        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+        <script src="js/leftmenu.js"></script>
+
+        <!-- Bootstrap Core JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-<!-- Theme JavaScript -->
-<script src="scripts/clean-blog.min.js"></script>
-<script async defer
-        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap">
-</script>
+        <!-- Theme JavaScript -->
+        <script src="scripts/clean-blog.min.js"></script>
+        
+    <script>
+        var eventLatitude = 55.675291;
+        var eventLongitude = 12.570202;
 
-<script>
-    function initMap() {
-        var uluru = {lat: 55.6761, lng: 12.5683};
-        var map = new google.maps.Map(document.getElementById('map'), {
-            zoom: 4,
-            center: uluru
+        $(function(){
+            var apiLink = 'https://api.howlout.net/event/event?id=25';
+            var apiData = JSON.stringify({id:1});
+            var token = $(".token").data("token");
+            $.ajax({
+                type: 'post',
+                url: '_apiViewEvent.php',
+                async: false,
+                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    alert(data);
+                    $("#eventTitle").html(jsonData.Title);
+                    $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
+                    $("#eventVisibility").html(jsonData.Visibility == 0 ? "Private" : "Public");
+                    $("#eventTime").html(Date.parse(jsonData.StartDate));
+                    $("#eventLocation").html(jsonData.AddressName);
+                    $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
+                    $("#eventDescription").html(jsonData.Description);
+                    eventLatitude = jsonData.Latitude;
+                    eventLongitude = jsonData.Longitude;
+                    updateMap();
+                    updateAttendees(jsonData.Attendees);
+                },
+                error: function () {
+                    alert("ajax failed");
+                }
+            });
         });
-        var marker = new google.maps.Marker({
-            position: uluru,
-            map: map
-        });
-    }
-</script>
+
+        function updateAttendees(attArray) {
+            if (attArray.length > 0) {
+                $("#eventAttendees").html("");
+
+                $.each(attArray, function(i,ele) {
+                   $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+               });
+            }
+        }
+        
+        // Gets the date and time in the format the api needs it in.
+        function getFormattedDateTime() {
+            return new Date().toISOString().substr(0, 19);
+        }
+
+        function updateMap() {
+            var loc = {lat: eventLatitude, lng: eventLongitude};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 12,
+                center: loc
+            });
+            var marker = new google.maps.Marker({
+                position: loc,
+                map: map
+            });
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
+
 </body>
 
 </html>
