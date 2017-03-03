@@ -96,38 +96,43 @@
             FB.AppEvents.logPageView();
 
             FB.getLoginStatus(function(response) {
-                FB.api('/me', function(response)
-                {
-                    var facebookId = response.id;
-                    var facebookName = response.name;
-                    var apiLink = 'https://api.howlout.net/profile?create=true';
-                    var apiData = JSON.stringify(
-                        {
-                            "ProfileId": facebookId,
-                            "Name": facebookName,
-                            "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
-                            "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
-                            "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
-                            "Description":"Test Description",
-                            "Age": 0
-                        }
-                    );
-                    var token = $(".token").data("token");
-                    $.ajax({
-                        type: 'post',
-                        url: '_apiRequestProfile.php',
-                        async: false,
-                        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-                        success: function (data) {
-                            var jsonData = JSON.parse(data);
-                            console.log(data);
+                if (response.status == "connected") {
+                    FB.api('/me', function(response)
+                    {
+                        var facebookId = response.id;
+                        var facebookName = response.name;
+                        var apiLink = 'https://api.howlout.net/profile?create=true';
+                        var apiData = JSON.stringify(
+                            {
+                                "ProfileId": facebookId,
+                                "Name": facebookName,
+                                "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
+                                "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
+                                "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
+                                "Description":"Test Description",
+                                "Age": 0
+                            }
+                        );
+                        var token = $(".token").data("token");
+                        $.ajax({
+                            type: 'post',
+                            url: '_apiRequestProfile.php',
+                            async: false,
+                            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                            success: function (data) {
+                                var jsonData = JSON.parse(data);
+                                console.log(data);
 
-                        },
-                        error: function () {
-                            alert("ajax failed");
-                        }
+                            },
+                            error: function () {
+                                alert("ajax failed");
+                            }
+                        });
                     });
-                });
+                } else {
+                    FB.login();
+                }
+
             });
 
 
