@@ -28,7 +28,7 @@
 </head>
 
 <body>
-<script src="js/facebooksdk.js"></script>
+
 <?php include_once "_inserttoken.php"; ?>
 <!-- Main Content -->
 
@@ -86,8 +86,60 @@
 <script src="scripts/clean-blog.min.js"></script>
 
 <script>
-FB.checkStatus();
+        window.fbAsyncInit = function() {
+            // facebook functions in here
+            FB.init({
+                appId      : '1897963557117405',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
 
+            FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response)
+                {
+                    var facebookId = response.id;
+                    var facebookName = response.name;
+                    var apiLink = 'https://api.howlout.net/profile?create=true';
+                    var apiData = JSON.stringify(
+                        {
+                            "ProfileId": facebookId,
+                            "Name": facebookName,
+                            "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
+                            "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
+                            "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
+                            "Description":"Test Description",
+                            "Age": 0
+                        }
+                    );
+                    var token = $(".token").data("token");
+                    $.ajax({
+                        type: 'post',
+                        url: '_apiRequestProfile.php',
+                        async: false,
+                        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                        success: function (data) {
+                            var jsonData = JSON.parse(data);
+                            console.log(data);
+
+                        },
+                        error: function () {
+                            alert("ajax failed");
+                        }
+                    });
+                });
+            });
+
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 </script>
 
 </body>

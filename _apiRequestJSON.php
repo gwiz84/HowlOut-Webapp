@@ -16,7 +16,7 @@ if ($token == $_SESSION['token']) {
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
-                'apiKey: z+XhFXu833xhhrwQ8Z9RxDrE6WvBER/DNzuQ90x0pdk=10153817903667221',
+                'apiKey: '.$_SESSION['apiKey'],
                 'Content-Length: ' . strlen($apiData))
         );
         $content = curl_exec($curl);

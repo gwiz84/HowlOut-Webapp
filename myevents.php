@@ -91,26 +91,57 @@
     <!-- Theme JavaScript -->
     <script src="scripts/clean-blog.min.js"></script>
     <script>
+        var facebookId = "";
+        window.fbAsyncInit = function() {
+            // facebook functions in here
+            FB.init({
+                appId      : '1897963557117405',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
 
-        var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds=10153817903667221';
-        var apiData = JSON.stringify({id:1});
-        var token = $(".token").data("token");
-        $.ajax({
-            type: 'post',
-            url: '_apiRequest.php',
-            async: false,
-            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-            success: function (data) {
-                var jsonData = JSON.parse(data);
+            FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response)
+                {
+                    facebookId = response.id;
 
-                $.each(jsonData, function(i,ele) {
-                    $(".eventContainer").append(makeEventElement(ele) + "<br>");
+                    var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                    var apiData = JSON.stringify({id:1});
+                    var token = $(".token").data("token");
+                    $.ajax({
+                        type: 'post',
+                        url: '_apiRequest.php',
+                        async: false,
+                        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                        success: function (data) {
+//                            var jsonData = JSON.parse(data);
+                            alert(data);
+//                            $.each(jsonData, function(i,ele) {
+//                                $(".eventContainer").append(makeEventElement(ele) + "<br>");
+//                            });
+                        },
+                        error: function () {
+                            alert("ajax failed");
+                        }
+                    });
                 });
-            },
-            error: function () {
-                alert("ajax failed");
-            }
-        });
+            });
+
+
+
+
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+
 
         $(".innertop").click(function() {
             var eventClicked = $(this).data("eventid");
