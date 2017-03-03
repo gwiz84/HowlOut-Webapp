@@ -41,7 +41,7 @@
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;z-index:10;position:relative;">
                 <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;" class="textstroke">Event title</h2>
@@ -63,68 +63,67 @@
                 <br>
                 <h4>About this event</h4>
                 <p id="eventDescription">No Description</p>
-                    <a href="" style="float:right;font-size:14px;">View more</a><br>
-                    <br>
-                    <div id="map" style="width:100%;height:400px;"></div>
+                <a href="" style="float:right;font-size:14px;">View more</a><br>
+                <br>
+                <div id="map" style="width:100%;height:400px;"></div>
 
-                    <br>
-                    <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
-                    <hr>
-                    <div id="eventAttendees" class="row">
-                        No attendees
-                    </div>
-
-
-                    <br>
-                    <a href="" style="float:right;font-size:14px;">View all</a>
-                    <br><br>
-                    <h3 style="text-align:center;">Wall</h3>
-                    <textarea class="wall-textarea"></textarea>
-                    <button class="btn-sm btn-success" style="float:right;">Post comment</button>
-                    <div class="row" style="margin: 50px 0 0 0;">
-                        <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
-                        <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>q
-                    </div>
-
-                    <!--      PAGE CONTENT GOES HERE      -->
+                <br>
+                <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
+                <hr>
+                <div id="eventAttendees" class="row">
+                    No attendees
                 </div>
-            </div>
 
+                <br>
+                <a href="" style="float:right;font-size:14px;">View all</a>
+                <br><br>
+                <h3 style="text-align:center;">Wall</h3>
+                <textarea class="wall-textarea"></textarea>
+                <button id="btnPostComment" class="btn btn-sm btn-ho" style="float:right;">Post comment</button>
+                <div class="row" style="margin: 50px 0 0 0;">
+                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
+                    <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>
+                </div>
+
+                <!--      PAGE CONTENT GOES HERE      -->
+            </div>
         </div>
 
-        <!-- MOBILE WARNING BOX -->
-        <div class="container  hidden-md hidden-lg">
+    </div>
+
+    <!-- MOBILE WARNING BOX -->
+    <div class="container  hidden-md hidden-lg">
+        <div class="row">
+            <div class="col-xs-12">
+                <h1>
+                    Please download the mobile app
+                </h1>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
             <div class="row">
-                <div class="col-xs-12">
-                    <h1>
-                        Please download the mobile app
-                    </h1>
+                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+
+                    <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
                 </div>
             </div>
         </div>
+    </footer>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="js/leftmenu.js"></script>
 
-        <!-- Footer -->
-        <footer>
-            <div class="container">
-                <div class="row">
-                    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-                        <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
-                    </div>
-                </div>
-            </div>
-        </footer>
-        <!-- jQuery -->
-        <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-        <script src="js/leftmenu.js"></script>
-
-        <!-- Bootstrap Core JavaScript -->
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
 
-        <!-- Theme JavaScript -->
-        <script src="scripts/clean-blog.min.js"></script>
-        
+    <!-- Theme JavaScript -->
+    <script src="scripts/clean-blog.min.js"></script>
+
     <script>
         var eventLatitude = 55.675291;
         var eventLongitude = 12.570202;
@@ -139,12 +138,14 @@
                 async: false,
                 data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                 success: function (data) {
+                    $(".main-content-container").removeClass("hidden");
                     var jsonData = JSON.parse(data);
-                    alert(data);
+                    var eventDate = new Date(Date.parse(jsonData.StartDate));
+                    // alert(data);
                     $("#eventTitle").html(jsonData.Title);
                     $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
                     $("#eventVisibility").html(jsonData.Visibility == 0 ? "Private" : "Public");
-                    $("#eventTime").html(Date.parse(jsonData.StartDate));
+                    $("#eventTime").html(eventDate);
                     $("#eventLocation").html(jsonData.AddressName);
                     $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
                     $("#eventDescription").html(jsonData.Description);
@@ -159,16 +160,21 @@
             });
         });
 
+        $("#btnPostComment").click(function() {
+
+
+        });
+
         function updateAttendees(attArray) {
             if (attArray.length > 0) {
                 $("#eventAttendees").html("");
 
                 $.each(attArray, function(i,ele) {
-                   $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-               });
+                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+                });
             }
         }
-        
+
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
             return new Date().toISOString().substr(0, 19);

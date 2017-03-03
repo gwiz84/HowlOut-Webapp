@@ -200,11 +200,11 @@ a:hover {
 /* CONVERSATIONS.PHP START */
 
 .conv-header {
-    padding: 0px 0px 0px 0px;
-    /*margin-right: 20px;*/
+    padding: 0;
     font-size: 20px;
     background-color: white;
     border-bottom: solid 1px lightgrey;
+    margin-right: 12px;
     height: 40px;
     z-index: 99;
 }
@@ -212,19 +212,18 @@ a:hover {
 .conv-container {
     padding: 5px 10px 0 50px;
     position: relative;
-    height: calc(100% - 280px);
+    height: calc(100% - 320px);
 }
 
 .conv-messages {
-    height: calc(100% - 45px);
+    height: calc(100% - 0px);
     overflow: auto;
-    /*overflow-y: scroll;*/
 }
 
 .conv-message {
     border-bottom: dotted 1px lightgrey;
     padding: 10px 0 10px 8px;
-    /*margin-right: 2px;*/
+    margin-right: 12px;
     overflow: auto;
     transition: 0.5s;
     cursor: default;
@@ -248,7 +247,8 @@ a:hover {
 .conv-input-container {
     border-top: solid 1px lightgrey;
     background-color: white;
-    padding: 10px 0 20px 0;
+    padding: 10px 0 10px 0;
+    margin-right: 12px;
     /*overflow: auto;*/
     /*bottom: 0;*/
     /*position: fixed;*/

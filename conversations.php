@@ -46,7 +46,7 @@
                 <div class="conv-container col-sm-6">
                     <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld
                     </div>
-                    <div class="conv-messages">
+                    <div id="conv-messages" class="conv-messages">
                         <div class="conv-message">
                             <div class="conv-circle col-sm-1"></div>
                             <div class="mess-header col-sm-11">
@@ -168,7 +168,7 @@
                     </div>
 
                 </div>
-                <div class="conv-list-container col-sm-2">
+                <div id="conv-list-container" class="conv-list-container col-sm-2">
                     <div class="conv-list-item">
                         <div class="conv-list-circle col-sm-1"></div>
                         <div class="mess-header">
@@ -279,6 +279,23 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="js/leftmenu.js"></script>
+    <script src="js/jquery.slimscroll.min.js"></script>
+    <script>
+        function addSlimScroll(element) {
+            element.slimscroll({
+                height: '100%',
+                railVisible: false,
+                color: '#2ecc71',
+                // railColor: '#2ecc71',
+                wheelStep: 4,
+                size: '6px'
+            });
+        }
+        addSlimScroll($("#conv-messages"));
+        addSlimScroll($("#conv-list-container"));
+
+
+    </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
