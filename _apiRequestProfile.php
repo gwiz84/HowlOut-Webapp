@@ -22,10 +22,9 @@ if ($token == $_SESSION['token']) {
         if (FALSE === $content)
             throw new Exception(curl_error($curl), curl_errno($curl));
 
+        $_SESSION['loggedIn'] = true;
         $_SESSION['apiKey'] = $content;
-        echo $_SESSION['apiKey'];
-
-
+        echo "success";
     } catch(Exception $e) {
 
         echo trigger_error(sprintf(

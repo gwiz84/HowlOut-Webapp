@@ -37,17 +37,9 @@
     <div class="row">
        <div class="col-md-offset-2 col-md-8 login-box">
            <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
-            <span style="margin-left:50px;font-size:20px;">Welcome, please log in below.</span>
-           <br><br><br>
-           <div class="input-group">
-               <span class="input-group-addon" id="title-input"><i class="fa fa-user " aria-hidden="true"style="font-size:20px;vertical-align:middle;color:green;"></i></span>
-               <input type="text" class="form-control cg-desc" placeholder="Input username" aria-describedby="title-input">
-           </div><br>
-           <div class="input-group">
-               <span class="input-group-addon" id="title-input"><i class="fa fa-lock icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-               <input type="text" class="form-control cg-desc" placeholder="Input password" aria-describedby="title-input">
-           </div><br><img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;" >
-           <button class="btn btn-default" style="float:right;">Log in</button>
+            <p style="margin-left:50px;font-size:20px;">Welcome, please log in using your facebook credentials below.</p>
+           <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
+           <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Log in</button>
        </div>
     </div>
 
@@ -86,6 +78,7 @@
 <script src="scripts/clean-blog.min.js"></script>
 
 <script>
+    $(".btnLogin").click(function() {
         window.fbAsyncInit = function() {
             // facebook functions in here
             FB.init({
@@ -120,9 +113,9 @@
                             async: false,
                             data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                             success: function (data) {
-                                var jsonData = JSON.parse(data);
-                                console.log(data);
-
+                                if (data == "success") {
+                                    window.location = "index.php";
+                                }
                             },
                             error: function () {
                                 alert("ajax failed");
@@ -145,6 +138,8 @@
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+    });
+
 </script>
 
 </body>

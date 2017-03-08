@@ -5,15 +5,16 @@ $apiLink = $_POST['apiLink'];
 
 $token = $_POST['token'];
 
+$temp = str_replace('"', '', $_SESSION['apiKey']);
+
 if ($token == $_SESSION['token']) {
     try {
-
         $curl = curl_init($apiLink);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'apiKey: '.$_SESSION['apiKey'])
+                "Content-Type: application/json",
+                "apiKey: ".$temp)
         );
         $content = curl_exec($curl);
         if (FALSE === $content)
