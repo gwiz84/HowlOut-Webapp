@@ -449,3 +449,14 @@ a:hover {
     height:450px;
     padding:30px;
 }
+
+.menuSettings {
+    width: 120px;
+    height:65px;
+    border:solid 1px #148f77;
+    background-color:white;
+    float:right;
+    margin-right:30px;
+    border-radius:5px;
+    padding:10px;
+}
