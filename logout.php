@@ -72,7 +72,36 @@
         data: { 'token' : token },
         success: function (data) {
             if (data == "success") {
-                window.location = "index.php";
+
+                window.fbAsyncInit = function() {
+                    // facebook functions in here
+                    FB.init({
+                        appId      : '1897963557117405',
+                        xfbml      : true,
+                        version    : 'v2.8'
+                    });
+                    FB.AppEvents.logPageView();
+
+                    FB.logout(function(response) {
+                        window.location = "index.php";
+                    });
+                };
+
+                (function(d, s, id){
+                    var js, fjs = d.getElementsByTagName(s)[0];
+                    if (d.getElementById(id)) {return;}
+                    js = d.createElement(s); js.id = id;
+                    js.src = "//connect.facebook.net/en_US/sdk.js";
+                    fjs.parentNode.insertBefore(js, fjs);
+                }(document, 'script', 'facebook-jssdk'));
+                    FB.getLoginStatus(function(response) {
+                        if (response && response.status === 'connected') {
+                            FB.logout(function(response) {
+                                document.location.reload();
+                            });
+                        }
+                    });
+
             }
         },
         error: function () {
