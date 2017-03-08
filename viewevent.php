@@ -80,15 +80,14 @@
                 <br><br>
 
                 <h3 style="text-align:center;">Wall</h3>
-                <div class="comment-container">
+                <div class="comment-input-container">
                     <textarea id="commentfield" class="ho-textinput ho-commentinput" maxlength="250"></textarea>
                     <span class="textcounter" id="textcounter"></span>
                 </div>
 
-                <button id="btnPostComment" class="btn btn-sm btn-ho disabled" style="float:right;">Post comment</button>
-                <div class="row" style="margin: 50px 0 0 0;">
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
-                    <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>
+                <button id="btnPostComment" class="btn btn-sm btn-ho" style="float:right;">Post comment</button>
+
+                <div id="comments-container" class="comments-container">
                 </div>
 
                 <!--      PAGE CONTENT GOES HERE      -->
@@ -120,7 +119,6 @@
         </div>
     </footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
-
     <?php include_once "p_loadScripts.html"; ?>
 
 
@@ -157,6 +155,7 @@
                     eventLongitude = jsonData.Longitude;
                     updateMap();
                     updateAttendees(jsonData.Attendees);
+                    updateComments(jsonData.Comments);
                 },
                 error: function () {
                     alert("ajax failed");
@@ -207,6 +206,14 @@
             }
         }
 
+        function updateComments(commArray) {
+            $.each(commArray, function(i, ele) {
+                var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
+                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin-left:30px;">'+
+                    '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
+            });
+        }
+
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
             return new Date().toISOString().substr(0, 19);
@@ -238,7 +245,7 @@
             });
         }
     </script>
-    
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
 
 </body>
 
