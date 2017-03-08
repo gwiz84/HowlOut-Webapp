@@ -91,7 +91,7 @@ include_once "_loginCheck.php";
         async: false,
         data: { 'token' : token },
         success: function (data) {
-            alert(data);
+            alert("sodifjsdf");
         },
         error: function () {
             alert("ajax failed");
