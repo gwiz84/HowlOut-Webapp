@@ -101,15 +101,9 @@ include_once "_loginCheck.php";
             </div>
         </div>
     </footer>
-    <!-- jQuery -->
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php include_once "p_loadScripts.html"; ?>
 
-
-    <!-- Theme JavaScript -->
-    <script src="scripts/clean-blog.min.js"></script>
 
 </body>
 

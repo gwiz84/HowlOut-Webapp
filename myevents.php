@@ -80,16 +80,9 @@
             </div>
         </div>
     </footer>
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
-    <script src="js/leftmenu.js"></script>
-    <script src="js/eventhandler.js"></script>
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <?php include_once "p_loadScripts.html"; ?>
 
-    <!-- Theme JavaScript -->
-    <script src="scripts/clean-blog.min.js"></script>
     <script>
         var facebookId = "";
         window.fbAsyncInit = function() {
@@ -115,11 +108,10 @@
                         async: false,
                         data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                         success: function (data) {
-//                            var jsonData = JSON.parse(data);
-                            alert(data);
-//                            $.each(jsonData, function(i,ele) {
-//                                $(".eventContainer").append(makeEventElement(ele) + "<br>");
-//                            });
+                            var jsonData = JSON.parse(data);
+                            $.each(jsonData, function(i,ele) {
+                                $(".eventContainer").append(makeEventElement(ele) + "<br>");
+                            });
                         },
                         error: function () {
                             alert("ajax failed");

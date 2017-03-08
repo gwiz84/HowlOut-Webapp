@@ -1,7 +1,5 @@
 <?php
-
-echo "lort";
-die();
+session_start();
 $token = $_POST['token'];
 if ($token == $_SESSION['token']) {
     unset($_SESSION['loggedIn']);
