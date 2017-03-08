@@ -70,16 +70,22 @@
                 <br>
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
                 <hr>
-                <div id="eventAttendees" class="row">
+
+                <div id="eventAttendees" class="row eventAttendees">
                     No attendees
                 </div>
-
                 <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
+                <span id="moreAttendees"><a href="" style="float:right;font-size:14px;">View all</a></span>
+
                 <br><br>
+
                 <h3 style="text-align:center;">Wall</h3>
-                <textarea class="wall-textarea"></textarea>
-                <button id="btnPostComment" class="btn btn-sm btn-ho" style="float:right;">Post comment</button>
+                <div class="comment-container">
+                    <textarea id="commentfield" class="ho-textinput ho-commentinput" maxlength="250"></textarea>
+                    <span class="textcounter" id="textcounter"></span>
+                </div>
+
+                <button id="btnPostComment" class="btn btn-sm btn-ho disabled" style="float:right;">Post comment</button>
                 <div class="row" style="margin: 50px 0 0 0;">
                     <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin-left:30px;"></div>
                     <div class="col-md-10"><span><i>21-12-2016 posted by EmmaRox</i></span> <p>Is there cheese?</p>  <hr></div>
@@ -113,6 +119,7 @@
             </div>
         </div>
     </footer>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="js/leftmenu.js"></script>
@@ -125,8 +132,12 @@
     <script src="scripts/clean-blog.min.js"></script>
 
     <script>
+        var maxCommentLength = 250;
+        var comment_length = 0;
         var eventLatitude = 55.675291;
         var eventLongitude = 12.570202;
+
+        $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
             var apiLink = 'https://api.howlout.net/event/event?id=25';
@@ -145,7 +156,7 @@
                     $("#eventTitle").html(jsonData.Title);
                     $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
                     $("#eventVisibility").html(jsonData.Visibility == 0 ? "Private" : "Public");
-                    $("#eventTime").html(eventDate);
+                    $("#eventTime").html(getDateFromISOString(eventDate));
                     $("#eventLocation").html(jsonData.AddressName);
                     $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
                     $("#eventDescription").html(jsonData.Description);
@@ -160,9 +171,25 @@
             });
         });
 
+        $("#commentfield").keyup(function() {
+            comment_length = $("#commentfield").val().length;
+            if (comment_length > 0) {
+                $("#btnPostComment").prop('disabled', false);
+            }
+            var text_remaining = maxCommentLength - comment_length;
+            
+            if (text_remaining == 0) {
+                $("#textcounter").css("color","red");
+            } else {
+                $("#textcounter").css("color", "#bbbbbb");
+            }
+            $("#textcounter").html(text_remaining + " remaining");
+        });
+
         $("#btnPostComment").click(function() {
-
-
+            if (($("#commentfield").val().length) > 0) {
+                alert("POST!");
+            }
         });
 
         function updateAttendees(attArray) {
@@ -172,12 +199,38 @@
                 $.each(attArray, function(i,ele) {
                     $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
                 });
+                $.each(attArray, function(i,ele) {
+                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+                });
+                $.each(attArray, function(i,ele) {
+                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+                });
+                $.each(attArray, function(i,ele) {
+                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+                });
+                $.each(attArray, function(i,ele) {
+                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
+                });
             }
         }
 
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
             return new Date().toISOString().substr(0, 19);
+        }
+
+        function getDateFromISOString(dateString) {
+            var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            var dDay = dateString.getDate();
+            var dMonth = dateString.getMonth();
+            var dYear = dateString.getYear() + 1900;
+            var dHours = dateString.getHours();
+            var dMinutes = dateString.getMinutes();
+            dHours = (dHours <= 9 ? ('0' + dHours) : dHours);
+            dMinutes = (dMinutes <= 9 ? ('0' + dMinutes) : dMinutes);
+            dMonth = months[dMonth];
+
+            return dMonth + " " + dDay + " " + dYear + " " + dHours + ":" + dMinutes;
         }
 
         function updateMap() {
@@ -192,7 +245,7 @@
             });
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
+    
 
 </body>
 
