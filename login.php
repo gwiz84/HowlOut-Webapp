@@ -118,6 +118,9 @@
                     });
                 } else {
                     FB.login(function(response) {
+                        if (response.authResponse) {
+                            top.location.href = 'index.php';
+                        }
                     });
                 }
 
