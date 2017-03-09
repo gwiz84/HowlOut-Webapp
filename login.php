@@ -117,7 +117,8 @@
                         });
                     });
                 } else {
-                    FB.login();
+                    FB.login(function(response) {
+                    });
                 }
 
             });

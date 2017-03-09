@@ -1,4 +1,6 @@
-<?php session_start(); ?>
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,6 +31,7 @@
 
 <body>
     <?php include_once "_inserttoken.php"; ?>
+    <?php include_once "_loginCheck.php"; ?>
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
         <div class="container" style="border:solid 0px black;height:200px; padding: 0;">

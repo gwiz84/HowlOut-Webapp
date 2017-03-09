@@ -1,15 +1,23 @@
-
 $(".menuSettings").hide();
 
-var menuSettingsOpen = false;
-$(".btnMenuSettings").click(function() {
-    if (menuSettingsOpen) {
-        $(".menuSettings").slideUp(150);
-        menuSettingsOpen = false;
-    } else {
-        $(".menuSettings").slideDown(150);
-        menuSettingsOpen = true;
-    }
+var hovering = false;
 
+$(".btnMenuSettings").hover(function(){
+    $(".menuSettings").slideDown(150);
+    hovering = true;
+    setTimeout(function() {
+        if (!hovering) {
+            $(".menuSettings").slideUp(150);
+            hovering = false;
+        }
+    }, 3000);
+}, function(){
+    hovering = false;
 });
 
+$(".menuSettings").hover(function(){
+    hovering = true;
+}, function(){
+    $(".menuSettings").slideUp(150);
+    hovering = false;
+});
