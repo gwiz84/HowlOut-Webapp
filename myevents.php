@@ -85,6 +85,7 @@ session_start();
     </footer>
 
     <?php include_once "p_loadScripts.html"; ?>
+    <script src="js/eventhandler.js"></script>
 
     <script>
         var facebookId = "";

@@ -39,33 +39,40 @@ session_start();
 
         var dateToday = new Date();
         $(function() {
-//            $( "#datepicker" ).datepicker();
+
             $( ".datepicker" ).datetimepicker({
+                dateFormat: 'yy-mm-dd',
                 minDate: dateToday,
                 minute: 0,
+                second: 0,
                 stepMinute: 15
             });
 
-            $('.datepicker').on("dp.change",function(e){
-                var selectedDate = $('.datepicker').find("input").val();
+            $('.datepicker').on("change",function(e){
+                chosenStart = $(this).val();
+                chosenStart = chosenStart.replace("/", "-");
+                chosenStart = chosenStart.replace("/", "-");
+                chosenStart = chosenStart.replace(" ","T")
+                chosenStart += ":00.00";
 
             });
 
+            $( ".datepicker2" ).datetimepicker({
+                dateFormat: 'yy-mm-dd',
+                minDate: dateToday,
+                minute: 0,
+                second: 0,
+                stepMinute: 15
+            });
 
+            $('.datepicker2').on("change",function(e){
+                chosenEnd = $(this).val();
+                chosenEnd = chosenEnd.replace("/", "-");
+                chosenEnd = chosenEnd.replace("/", "-");
+                chosenEnd = chosenEnd.replace(" ","T")
+                chosenEnd += ":00.00";
 
-//            $(".datepicker").on("change",function(){
-//                chosenStart = $(this).val();
-//            });
-
-//            $( ".datepicker2" ).datetimepicker({
-//                minDate: dateToday,
-//                minute: 0,
-//                stepMinute: 30,
-//            });
-//
-//            $(".datepicker2").on("change",function(){
-//                chosenEnd = $(this).val();
-//            });
+            });
         } );
     </script>
 </head>
@@ -79,6 +86,7 @@ session_start();
         <?php include_once "p_topmenu.php"; ?>
     </div>
 </div>
+<div class="fbid" data-fbid="<?php echo $_SESSION['facebookId'] ?>"></div>
 <div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
 
     <div class="row">
@@ -118,7 +126,7 @@ session_start();
             <br>
             <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
 
-            <label class="radio-inline active"><input type="radio" name="event-visib" checked="checked">Private</label>
+            <label class="radio-inline active "><input type="radio" name="event-visib" checked="checked" class="radioPrivate">Private</label>
             <label class="radio-inline"><input type="radio" name="event-visib">Public</label>
 
             <span style="margin-left:50px;">I am attending this event myself</span>&nbsp;&nbsp;<input type="checkbox" style="cursor:pointer;">
@@ -175,49 +183,52 @@ session_start();
         var title = $(".inputTitle").val();
         var description = $(".inputDescription").val();
         var address = $(".inputLocation").val();
-        var startDate = $(".inputStart").val();
-        var endDate = $(".inputEnd").val();
+        var startDate = chosenStart;
+        var endDate = chosenEnd;
         var maxSize = $(".inputAttendees").val();
-        chosenStart = $(".datepicker").data("DateTimePicker").date();
-        alert(chosenStart.toISOString());
-//        $.ajax({
-//            type: 'post',
-//            url: '_createEvent.php',
-//            async: false,
-//            data: {
-//                "token" : token,
-//                "EventId": 0,
-//                "ProfileOwners": [
-//                    {
-//                        "ProfileId": "10153817903667221"
-//                    }
-//                ],
-//                "ImageSource": "https://howloutstorage.blob.core.windows.net/howlout/10153817903667221.28-12-2016 23:44:46",
-//                "Title": title,
-//                "Latitude": 55.628435,
-//                "Longitude": 12.578776,
-//                "AddressName": address,
-//                "Description": description,
-//                "StartDate": "2016-12-01T13:30:00.84",
-//                "EndDate": "2016-12-02T13:30:00.84",
-//                "EventTypes": [
-//                    0
-//                ],
-//                "MinAge": 10,
-//                "MaxAge": 20,
-//                "MinSize": 5,
-//                "MaxSize": 10,
-//                "Visibility": 0
-//            },
-//            success: function (data) {
-//                if (data == "success") {
-//                    window.location = "index.php";
-//                }
-//            },
-//            error: function () {
-//                alert("ajax failed");
-//            }
-//        });
+        var isPrivate = ($(".radioPrivate").is(":checked")) ? 1 : 0;
+        var profileId = $(".fbid").data("fbid");
+        var apiLink = "https://api.howlout.net/event";
+        var apiData = JSON.stringify({
+            "EventId": eventId,
+            "ProfileOwners": [
+                {
+                    "ProfileId": profileId
+                }
+            ],
+            "ImageSource": "https://howloutstorage.blob.core.windows.net/howlout/10153817903667221.28-12-2016 23:44:46",
+            "Title": title,
+            "Latitude": 55.628435,
+            "Longitude": 12.578776,
+            "AddressName": address,
+            "Description": description,
+            "StartDate": startDate,
+            "EndDate": endDate,
+            "EventTypes": [
+                0
+            ],
+            "MinAge": 0,
+            "MaxAge": 200,
+            "MinSize": 1,
+            "MaxSize": maxSize,
+            "Visibility": isPrivate
+        });
+        var token = $(".token").data("token");
+
+//        console.log(title+" "+description+" "+address+" "+startDate+" "+endDate+" "+maxSize+" "+isPrivate+"    "+profileId);
+
+        $.ajax({
+            type: 'post',
+            url: '_apiRequestJSON.php',
+            async: false,
+            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+            success: function (data) {
+                alert(data);
+            },
+            error: function () {
+                alert("ajax failed");
+            }
+        });
     });
 
 </script>
