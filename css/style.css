@@ -314,12 +314,17 @@ a:hover {
     max-height: 100px;
     border-radius: 8px;
     transition: 0.5s;
-    box-shadow: 0 0 5px #ffffff;
+    box-shadow: 0 0 5px #ffffff, 0 0 5px #ffffff inset;
     outline: none !important;
+    border-color: #cccccc !important;
 }
 
-.mess-input:hover, .mess-input:focus {
+.mess-input:hover {
     box-shadow: 0 0 5px #2ecc71;
+}
+
+.mess-input:focus {
+    box-shadow: 0 0 5px #ffffff, 0 0 5px #2ecc71 inset;
 }
 
 .btn-ho {

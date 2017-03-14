@@ -282,7 +282,7 @@ session_start();
     </footer> -->
 
     <?php include_once "p_loadScripts.html"; ?>
-
+    <script src="js/jquery.slimscroll.min.js"></script>
     <script>
         function addSlimScroll(element) {
             element.slimscroll({
@@ -295,7 +295,7 @@ session_start();
             });
         }
         addSlimScroll($("#conv-messages"));
-        addSlimScroll($("#conv-list-container"));
+        // addSlimScroll($("#conv-list-container"));
 
 
     </script>

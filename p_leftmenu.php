@@ -15,7 +15,7 @@
 		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>
 	</div>
 	<div>
-		<a href="createevent.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
+		<a href="editevent.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
 	</div>
 	<div>
 		<a href="eventmanager.php"><i class="material-icons leftmenuitem icon_red">event_busy</i>Event manager</a>
