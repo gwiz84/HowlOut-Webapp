@@ -32,15 +32,40 @@ session_start();
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/timepicker.js"></script>
+    <script src="js/moment.js"></script>
     <script>
+        var chosenStart = "";
+        var chosenEnd = "";
+
         var dateToday = new Date();
         $(function() {
 //            $( "#datepicker" ).datepicker();
             $( ".datepicker" ).datetimepicker({
                 minDate: dateToday,
                 minute: 0,
-                stepMinute: 30,
+                stepMinute: 15
             });
+
+            $('.datepicker').on("dp.change",function(e){
+                var selectedDate = $('.datepicker').find("input").val();
+
+            });
+
+
+
+//            $(".datepicker").on("change",function(){
+//                chosenStart = $(this).val();
+//            });
+
+//            $( ".datepicker2" ).datetimepicker({
+//                minDate: dateToday,
+//                minute: 0,
+//                stepMinute: 30,
+//            });
+//
+//            $(".datepicker2").on("change",function(){
+//                chosenEnd = $(this).val();
+//            });
         } );
     </script>
 </head>
@@ -66,26 +91,29 @@ session_start();
             <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;"><br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
-                <input type="text" class="form-control ho-textinput" placeholder="Event title" aria-describedby="title-input" style="z-index:1;">
+                <input type="text" class="form-control ho-textinput inputTitle" placeholder="Event title" aria-describedby="title-input" style="z-index:1;">
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="material-icons icon_blue" aria-hidden="true"style="font-size:20px;vertical-align:middle;">note</i></span>
-                <textarea type="text" class="form-control ho-textinput" placeholder="Event description" aria-describedby="title-input" style="z-index:1;"></textarea>
+                <textarea type="text" class="form-control ho-textinput inputDescription" placeholder="Event description" aria-describedby="title-input" style="z-index:1;"></textarea>
             </div>
             <hr>
             <h4>Choose event duration</h4>
 
-             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>  <input type="text" class="datepicker form-control ho-textinput" style="width:40%;"><br> <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>  <input type="text" class="datepicker form-control ho-textinput" style="width:40%;">
+             <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>
+            <input type="text" class="datepicker form-control ho-textinput inputStart" style="width:40%;" readonly><br>
+            <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>
+            <input type="text" class="datepicker2 form-control ho-textinput inputEnd" style="width:40%;" readonly>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                <input type="text" class="form-control ho-textinput" placeholder="Location" aria-describedby="title-input" style="z-index:1;">
+                <input type="text" class="form-control ho-textinput inputLocation" placeholder="Location" aria-describedby="title-input" style="z-index:1;" >
             </div>
             <br>
             <div class="input-group">
                 <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                <input type="number" class="form-control ho-textinput" placeholder="Number of attendees" aria-describedby="title-input" style="z-index:1;">
+                <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Number of attendees" aria-describedby="title-input" style="z-index:1;" >
             </div>
             <br>
             <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
@@ -95,7 +123,7 @@ session_start();
 
             <span style="margin-left:50px;">I am attending this event myself</span>&nbsp;&nbsp;<input type="checkbox" style="cursor:pointer;">
             <br><br><br>
-            <button id="btn-creategroup" class="btn btn-ho" style="float:right;">Create event</button>
+            <button id="btn-creategroup" class="btn btn-ho btnCreate" style="float:right;">Create event</button>
 
         </div>
     </div>
@@ -125,10 +153,72 @@ session_start();
     </div>
 </footer>
 
-<?php include_once "p_loadScripts.html"; ?>
-
+<script src="js/leftmenu.js"></script>
+<script src="js/topmenu.js"></script>
+<script src="js/dawa-autocomplete.js"></script>
+<script src="scripts/clean-blog.min.js"></script>
 
 <script>
+    var token = $(".token").data("token");
+
+    $(function() {
+        $('.inputLocation').dawaautocomplete({
+            select: function(event, data) {
+                $('.inputLocation').text(data.tekst);
+            }
+        });
+    });
+
+    $(".btnCreate").click(function() {
+
+        var eventId = 0;
+        var title = $(".inputTitle").val();
+        var description = $(".inputDescription").val();
+        var address = $(".inputLocation").val();
+        var startDate = $(".inputStart").val();
+        var endDate = $(".inputEnd").val();
+        var maxSize = $(".inputAttendees").val();
+        chosenStart = $(".datepicker").data("DateTimePicker").date();
+        alert(chosenStart.toISOString());
+//        $.ajax({
+//            type: 'post',
+//            url: '_createEvent.php',
+//            async: false,
+//            data: {
+//                "token" : token,
+//                "EventId": 0,
+//                "ProfileOwners": [
+//                    {
+//                        "ProfileId": "10153817903667221"
+//                    }
+//                ],
+//                "ImageSource": "https://howloutstorage.blob.core.windows.net/howlout/10153817903667221.28-12-2016 23:44:46",
+//                "Title": title,
+//                "Latitude": 55.628435,
+//                "Longitude": 12.578776,
+//                "AddressName": address,
+//                "Description": description,
+//                "StartDate": "2016-12-01T13:30:00.84",
+//                "EndDate": "2016-12-02T13:30:00.84",
+//                "EventTypes": [
+//                    0
+//                ],
+//                "MinAge": 10,
+//                "MaxAge": 20,
+//                "MinSize": 5,
+//                "MaxSize": 10,
+//                "Visibility": 0
+//            },
+//            success: function (data) {
+//                if (data == "success") {
+//                    window.location = "index.php";
+//                }
+//            },
+//            error: function () {
+//                alert("ajax failed");
+//            }
+//        });
+    });
 
 </script>
 
