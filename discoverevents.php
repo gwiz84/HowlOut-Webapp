@@ -38,7 +38,7 @@ session_start();
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
@@ -46,7 +46,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h3><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover groups</h3>
+                <h3><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h3>
                 <br>
 
             <!--      PAGE CONTENT GOES HERE      -->

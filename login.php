@@ -29,24 +29,24 @@
 
 <body>
 
-<?php include_once "_inserttoken.php"; ?>
-<!-- Main Content -->
+    <?php include_once "_inserttoken.php"; ?>
+    <!-- Main Content -->
 
-<div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
 
-    <div class="row">
-       <div class="col-md-offset-2 col-md-8 login-box">
-           <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
-            <p style="margin-left:50px;font-size:20px;">Welcome, please log in using your facebook credentials below.</p>
-           <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
-           <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Log in</button>
-       </div>
-    </div>
+        <div class="row">
+         <div class="col-md-offset-2 col-md-8 login-box">
+             <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
+             <p style="margin-left:50px;font-size:20px;">Welcome, please log in using your facebook credentials below.</p>
+             <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
+             <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Log in</button>
+         </div>
+     </div>
 
-</div>
+ </div>
 
-<!-- MOBILE WARNING BOX -->
-<div class="container  hidden-md hidden-lg">
+ <!-- MOBILE WARNING BOX -->
+ <div class="container  hidden-md hidden-lg">
     <div class="row">
         <div class="col-xs-12">
             <h1>
@@ -90,15 +90,15 @@
                         var facebookName = response.name;
                         var apiLink = 'https://api.howlout.net/profile?create=true';
                         var apiData = JSON.stringify(
-                            {
-                                "ProfileId": facebookId,
-                                "Name": facebookName,
-                                "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
-                                "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
-                                "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
-                                "Description":"Test Description",
-                                "Age": 0
-                            }
+                        {
+                            "ProfileId": facebookId,
+                            "Name": facebookName,
+                            "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
+                            "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
+                            "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
+                            "Description":"Test Description",
+                            "Age": 0
+                        }
                         );
                         var token = $(".token").data("token");
                         $.ajax({
@@ -116,27 +116,27 @@
                             }
                         });
                     });
-                } else {
-                    FB.login(function(response) {
-                        if (response.authResponse) {
-                            top.location.href = 'index.php';
-                        }
-                    });
-                }
-
-            });
-
-
-        };
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
+} else {
+    FB.login(function(response) {
+        if (response.authResponse) {
+            top.location.href = 'index.php';
+        }
     });
+}
+
+});
+
+
+};
+
+(function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));
+});
 
 </script>
 

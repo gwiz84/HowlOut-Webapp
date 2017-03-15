@@ -11,7 +11,7 @@
         <input class="top-menu-searchbar" type="text" placeholder="Quick search...">
     </div>
 
-    <div class="col-sm-3" style="margin: 35px 0 0 0;">
+    <div class="col-sm-3" style="margin: 43px 0 0 0;">
         <i class="material-icons" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer;">notifications</i>
         <span style="font-size:15px;margin-left:20px;color: #dddddd;">User McUserson</span>
         <i class="fa fa-cog btnMenuSettings menuSettingsHover" aria-hidden="true" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer; font-size:20px;"></i>
