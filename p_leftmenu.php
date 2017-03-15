@@ -28,6 +28,6 @@
 		<a href="mygroups.php"><i class="material-icons leftmenuitem icon_orange">group</i>My groups</a>
 	</div>
 	<div>
-		<a href="creategroup.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
+		<a href="editgroup.php"><i class="material-icons leftmenuitem icon_green">group_add</i>Create group</a>
 	</div>
 </div>

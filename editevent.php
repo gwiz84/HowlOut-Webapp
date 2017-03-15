@@ -86,7 +86,7 @@ session_start();
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="fbid" data-fbid="<?php echo $_SESSION['facebookId'] ?>"></div>
+    <div class="fbid" data-fbid="<?php echo $_SESSION['facebookId'] ?>" style="display:none;"></div>
     <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
 
         <div class="row">

@@ -32,6 +32,7 @@ session_start();
 <body>
     <?php include_once "_inserttoken.php"; ?>
     <?php include_once "_loginCheck.php"; ?>
+    <div class="fbid" data-fbid="<?php echo $_SESSION['facebookId'] ?>" style="display:none;"></div>
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
         <div class="container" style="padding: 0;">
@@ -126,13 +127,13 @@ session_start();
         var title = $(".inputTitle").val();
         var description = $(".inputDesc").val();
         var isPrivate = ($(".radioPrivate").is(":checked")) ? 2 : 0;
-
+        var profileId = $(".fbid").data("fbid");
         var apiLink = 'https://api.howlout.net/group';
         var apiData = JSON.stringify({
             "GroupId": 0,
             "ProfileOwners": [
                 {
-                    "ProfileId": "10153817903667221"
+                    "ProfileId": profileId
                 }
             ],
             "Name": title,
@@ -148,7 +149,6 @@ session_start();
             data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
             success: function (data) {
 //            var jsonData = JSON.parse(data);
-
                 alert(data);
             },
             error: function () {

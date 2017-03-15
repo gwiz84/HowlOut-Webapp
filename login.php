@@ -37,9 +37,10 @@
         <div class="row">
          <div class="col-md-offset-2 col-md-8 login-box">
              <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
-             <p style="margin-left:50px;font-size:20px;">Welcome, please log in using your facebook credentials below.</p>
+             <p style="margin-left:50px;font-size:16px;" class="loggedIn">Welcome, you have been detected as <span class="userName"></span>.<br> Continue with this profile?</p>
+             <p style="margin-left:50px;font-size:16px;" class="loggedOut">Welcome, click the login button and sign in with your facebook profile through the popup.</p>
              <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
-             <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Log in</button>
+             <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Continue</button>
          </div>
      </div>
 
@@ -72,15 +73,50 @@
 
 
 <script>
+    $(".loggedIn").hide();
+    $(".loggedOut").hide();
+
+    window.fbAsyncInit = function() {
+        // facebook functions in here
+        FB.init({
+            appId      : '1897963557117405',
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+
+        FB.AppEvents.logPageView();
+
+        FB.getLoginStatus(function(response) {
+            if (response.status == "connected") {
+                $(".loggedIn").show(150);
+                FB.api('/me', function(response) {
+                   $(".userName").text(response.name);
+                });
+                $(".btnLogin").text("Continue");
+            } else {
+                $(".loggedOut").show(150);
+                $(".btnLogin").text("Log in");
+            }
+        });
+
+    };
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
     $(".btnLogin").click(function() {
-        window.fbAsyncInit = function() {
-            // facebook functions in here
-            FB.init({
-                appId      : '1897963557117405',
-                xfbml      : true,
-                version    : 'v2.8'
-            });
-            FB.AppEvents.logPageView();
+//        window.fbAsyncInit = function() {
+//            // facebook functions in here
+//            FB.init({
+//                appId      : '1897963557117405',
+//                xfbml      : true,
+//                version    : 'v2.8'
+//            });
+//            FB.AppEvents.logPageView();
 
             FB.getLoginStatus(function(response) {
                 if (response.status == "connected") {
@@ -116,27 +152,25 @@
                             }
                         });
                     });
-} else {
-    FB.login(function(response) {
-        if (response.authResponse) {
-            top.location.href = 'index.php';
-        }
+                } else {
+                    FB.login(function(response) {
+                        if (response.authResponse) {
+                            top.location.href = 'index.php';
+                        }
+                    });
+                }
+            });
+
+//        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
     });
-}
-
-});
-
-
-};
-
-(function(d, s, id){
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) {return;}
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/sdk.js";
-    fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
-});
 
 </script>
 
