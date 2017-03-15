@@ -5,6 +5,7 @@ html {
 body {
     font-family: 'Varela Round', sans-serif;
     font-size: 14px;
+    background-color:#FDFEFE;
 }
 
 input[type="radio"] {
@@ -83,43 +84,25 @@ a:hover {
 }
 
 .event-box {
-    width: 100%;
-    border-radius: 20px;
-    border: solid 3px #a3e4d7;
-    height: 150px;
-    transition: 0.5s;
-    cursor:pointer;
+    height: 330px;
+    padding: 5px;
+    text-align: center;
+    background-color: white;
+    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
 }
 
-.event-box:hover {
-    border: solid 3px #73c6b6;
-}
-
-.event-box:hover .innerbottom {
-    border-top: solid 1px #73c6b6;
-}
-
-.event-box:hover .textstroke {
-    color: white;
-    -ms-text-shadow: -px -1px 0 #222222, 1px -1px 0 #222222, -1px 1px 0 #222222, 1px 1px 0 #222222;
-    text-shadow:-1px -1px 0 #222222, 1px -1px 0 #222222, -1px 1px 0 #222222, 1px 1px 0 #222222;
-}
 
 .event-box > .innertop {
-    height: 60px;
-    border-top-left-radius: 17px;
-    border-top-right-radius: 17px;
+    height: 150px;
+    padding: 0;
     text-align: center;
-    padding-top: 10px;
 }
 
 .event-box > .innerbottom {
-    height: 90px;
-    border-top: solid 1px #a3e4d7;
-    border-bottom-left-radius: 20px;
-    border-bottom-right-radius: 20px;
-    padding: 10px 20px 10px 20px;
-    transition: 0.5s;
+   padding: 10px 0 0 0;
+    text-align:left;
 }
 
 .event-box-edit {

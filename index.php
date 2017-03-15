@@ -56,12 +56,29 @@ session_start();
                     </div>
 
                     <div class="innerbottom">
-                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
-                        <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                        <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                        <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                        <div class="col-xs-12 col-sm-6">
+                            <span><b>Title på event</b></span><br>
+                            <span >Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
+                                Så tag noget heroin og dø som den junkie du eeeeeer.</span>
+                        </div>
+                        <div class="col-xs-12 col-sm-6">
+                            <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
+                            <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
+                            <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
+                            <br><br><br><br>
+                            <div style="float:right;">
+                                <button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>
+                                <button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>
+                                <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
+                            </div>
+                        </div>
+<!--                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>-->
+
+
+
                     </div>
                 </div>
+
                 <!--                THE EVENT BOX END -->
                 <br>
                 <a href="" style="float:right;font-size:14px;">View all</a>
