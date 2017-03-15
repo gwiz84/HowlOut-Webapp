@@ -31,17 +31,17 @@ session_start();
 
 <body>
 
-<?php include_once "_inserttoken.php"; ?>
-<?php include_once "_loginCheck.php"; ?>
-<!-- Main Content -->
+    <?php include_once "_inserttoken.php"; ?>
+    <?php include_once "_loginCheck.php"; ?>
+    <!-- Main Content -->
 
-<div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
 
-  <h1>Logout page</h1>
-</div>
+      <h1>Logout page</h1>
+  </div>
 
-<!-- MOBILE WARNING BOX -->
-<div class="container  hidden-md hidden-lg">
+  <!-- MOBILE WARNING BOX -->
+  <div class="container  hidden-md hidden-lg">
     <div class="row">
         <div class="col-xs-12">
             <h1>

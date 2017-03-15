@@ -35,7 +35,7 @@
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
