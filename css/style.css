@@ -34,41 +34,44 @@ a:hover {
 }
 
 .top-menu-container {
-    background-color: #e9f7ef;
+    /*background-color: #e9f7ef;*/
+    background-color: #4f4f4f;
     position: fixed;
     width: 100%;
     z-index: 99;
 }
 
 .top-menu {
-    height: 200px;
+    height: 100px;
 }
 
 .top-menu-searchbar {
-    margin: 60px 0 0 0;
+    margin: 28px 0 0 0;
     padding: 7px;
     height: 40px;
     width: 90%;
     border-radius: 10px;
     font-size: 15px;
     outline: none !important;
+/*    background-color: #f5f5f5;
+    box-shadow: 0 0 100px #82e0aa;*/
     background-color: #f5f5f5;
-    box-shadow: 0 0 100px #82e0aa;
+    box-shadow: 0 0 100px #5f5f5f;
     transition: 0.7s;
 }
 
 .top-menu-searchbar:hover {
     background-color: white;
-    box-shadow: 0 0 100px #2ecc71;
+    box-shadow: 0 0 100px #8d8d8d;
 }
 
 .top-menu-searchbar:focus {
     background-color: white;
-    /*border: solid 2px #2ecc71;*/
+    border: solid 2px #2ecc71;
 }
 
 .top-logo {
-    width: 175px;
+    width: 85px;
 }
 
 .top-menu-headertext {
@@ -195,7 +198,7 @@ a:hover {
 .conv-container {
     padding: 5px 10px 0 50px;
     position: relative;
-    height: calc(100% - 320px);
+    height: calc(100% - 220px);
 }
 
 .conv-messages {
@@ -239,7 +242,7 @@ a:hover {
 }
 
 .conv-list-container {
-    height: calc(100% - 200px);
+    height: calc(100% - 100px);
     /*overflow: auto;*/
     border-left: solid 1px lightgrey;
     padding: 0;

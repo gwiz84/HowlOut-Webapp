@@ -35,11 +35,11 @@ session_start();
     <?php include_once "_loginCheck.php"; ?>
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
-        <div class="container" style="border:solid 0px black;padding: 0;">
+        <div class="container" style="padding: 0;">
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">

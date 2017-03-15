@@ -34,11 +34,11 @@ session_start();
     <?php include_once "_loginCheck.php"; ?>
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
-        <div class="container" style="border:solid 0px black;padding: 0;">
+        <div class="container" style="padding: 0;">
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 200px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
@@ -173,6 +173,36 @@ session_start();
 
                 </div>
                 <div id="conv-list-container" class="conv-list-container col-sm-2">
+                    <div class="conv-list-item">
+                        <div class="conv-list-circle col-sm-1"></div>
+                        <div class="mess-header">
+                            <span class="mess-author">Egon, Benny, Kjeld</span>
+                        </div>
+                        <div class="conv-list-text">
+                            Egon: Og skal vi SÅ komme i gang?
+                        </div>
+                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
+                    </div>
+                    <div class="conv-list-item">
+                        <div class="conv-list-circle col-sm-1"></div>
+                        <div class="mess-header">
+                            <span class="mess-author">Egon, Benny, Kjeld</span>
+                        </div>
+                        <div class="conv-list-text">
+                            Egon: Og skal vi SÅ komme i gang?
+                        </div>
+                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
+                    </div>
+                    <div class="conv-list-item">
+                        <div class="conv-list-circle col-sm-1"></div>
+                        <div class="mess-header">
+                            <span class="mess-author">Egon, Benny, Kjeld</span>
+                        </div>
+                        <div class="conv-list-text">
+                            Egon: Og skal vi SÅ komme i gang?
+                        </div>
+                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
+                    </div>
                     <div class="conv-list-item">
                         <div class="conv-list-circle col-sm-1"></div>
                         <div class="mess-header">
