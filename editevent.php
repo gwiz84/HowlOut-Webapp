@@ -196,7 +196,7 @@ session_start();
                     "ProfileId": profileId
                 }
                 ],
-                "ImageSource": "https://howloutstorage.blob.core.windows.net/howlout/10153817903667221.28-12-2016 23:44:46",
+                "ImageSource": "img/building.jpg",
                 "Title": title,
                 "Latitude": 55.628435,
                 "Longitude": 12.578776,
@@ -223,10 +223,11 @@ $.ajax({
     async: false,
     data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
     success: function (data) {
-        alert(data);
+        var id = JSON.parse(data).EventId;
+        window.location = "viewevent.php?id="+id;
     },
     error: function () {
-        alert("ajax failed");
+        alert("An unexpected error occurred. Please try again later.");
     }
 });
 });

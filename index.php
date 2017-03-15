@@ -54,14 +54,12 @@ session_start();
                     <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
                         <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
                     </div>
-
                     <div class="innerbottom">
                         <div class="col-xs-12 col-sm-6">
-                            <span><b>Title på event</b></span><br>
-                            <span >Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
-                                Så tag noget heroin og dø som den junkie du eeeeeer.</span>
+                            <span style="overflow: hidden;text-overflow: ellipsis;">Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
+                                Så tag noget heroin og dø som den junkie du eeeeeer.ssssssss ssssssssssssssssss ssssssssssss</span>
                         </div>
-                        <div class="col-xs-12 col-sm-6">
+                        <div class="col-xs-12 col-sm-6" >
                             <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
                             <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
@@ -72,10 +70,6 @@ session_start();
                                 <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
                             </div>
                         </div>
-<!--                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>-->
-
-
-
                     </div>
                 </div>
 
