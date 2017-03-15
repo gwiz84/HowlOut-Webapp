@@ -4,23 +4,25 @@
 
 // Takes an event object and returns the div containing the event data, ready to be displayed
 function makeEventElement(event) {
-    if (event.Description.length>330) {
+    var shortDesc = "";
+    if (event.Description.length > 330) {
         var beforeShort = event.Description;
-        var shortDesc = "";
-        for (var i=0; i<332; i++) {
-            if (i<330) {
+        for (var i = 0; i < 332; i++) {
+            if (i < 330) {
                 shortDesc += beforeShort.charAt(i);
             }
             else {
                 shortDesc += ".";
             }
         }
+    } else {
+        shortDesc = event.Description;
     }
+
     var startDate = getDateFromISOString(new Date(Date.parse(event.StartDate)));
 
-
     var eventDiv = '<div class="event-box">'+
-        '<div class="innertop" style="background-image:url(\''+event.ImageSource+'\');background-size:100%;" data-eventid="'+event.EventId+'">'+
+        '<div class="innertop" style="background-image:url(\''+event.ImageSource+'\');background-size:100%;">'+
         '<span style="font-size:28px;color:white;" class="textstroke">'+event.Title+'</span>'+
     '</div>'+
     '<div class="innerbottom" >'+
@@ -33,9 +35,9 @@ function makeEventElement(event) {
     '<i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / '+event.MaxSize+'</span>'+
         '<br><br><br><br>'+
         '<div style="float:right;">'+
-        '<button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>&nbsp;'+
-        '<button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>&nbsp;'+
-        '<button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>'+
+        '<button type="button" class="btn-sm btn-success btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>&nbsp;'+
+        '<button type="button" class="btn-sm btn-warning btn-followevent"><i class="fa fa-paw" style="font-size:18px;"></i></button>&nbsp;'+
+        '<button type="button" class="btn-sm btn-primary btn-viewevent" data-eventid="'+event.EventId+'"><span style="font-size:14px;">View</span></button>'+
         '</div>'+
         '</div>'+
         '</div>'+

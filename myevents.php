@@ -123,10 +123,6 @@ session_start();
                     });
                 });
             });
-
-
-
-
         };
 
         (function(d, s, id){
@@ -137,11 +133,9 @@ session_start();
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-
-
-        $(".innertop").click(function() {
-            var eventClicked = $(this).data("eventid");
-            alert(eventClicked);
+        $("body").on("click", ".btn-viewevent", function() {
+            var eventIdClicked = $(this).data("eventid");
+            window.location = "viewevent.php?id="+eventIdClicked;
         });
 
         $(".eventpaw").click(function() {
