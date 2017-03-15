@@ -1,4 +1,11 @@
-<?php session_start(); ?>
+<?php session_start();
+
+$eventId = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($eventId)) {
+    header('Location: '.'index.php');
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -72,7 +79,7 @@
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Attendees</h4>
                 <hr>
 
-                <div id="eventAttendees" class="row eventAttendees">
+                <div id="eventAttendees" class="eventAttendees">
                     No attendees
                 </div>
                 <br>
@@ -132,7 +139,7 @@
         $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
-            var apiLink = 'https://api.howlout.net/event/event?id=25';
+            var apiLink = 'https://api.howlout.net/event/event?id=<?php echo $eventId ?>';
             var apiData = JSON.stringify({id:1});
             var token = $(".token").data("token");
             $.ajax({
