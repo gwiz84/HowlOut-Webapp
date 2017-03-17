@@ -35,7 +35,7 @@ session_start();
     <?php include_once "_loginCheck.php"; ?>
     <!-- Main Content -->
 
-    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
       <h1>Logout page</h1>
   </div>

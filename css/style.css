@@ -36,17 +36,18 @@ a:hover {
 .top-menu-container {
     /*background-color: #e9f7ef;*/
     background-color: #4f4f4f;
-    position: fixed;
+    position: absolute;
     width: 100%;
     z-index: 99;
+    max-height: 100px;
 }
 
 .top-menu {
-    height: 124px;
+    height: 100px;
 }
 
 .top-menu-searchbar {
-    margin: 38px 0 0 0;
+    margin: 30px 0 0 0;
     padding: 7px;
     height: 40px;
     width: 90%;
@@ -72,7 +73,7 @@ a:hover {
 }
 
 .top-logo {
-    width: 105px;
+    width: 85px;
 }
 
 .top-menu-headertext {
@@ -96,7 +97,6 @@ a:hover {
     -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
     box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
 }
-
 
 .event-box > .innertop {
     height: 150px;
@@ -451,4 +451,5 @@ a:hover {
     border-radius: 5px;
     background-color: white;
     float: right;
+    z-index: 999;
 }

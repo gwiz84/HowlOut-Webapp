@@ -43,7 +43,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
@@ -140,18 +140,19 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
         $(function(){
             var apiLink = 'https://api.howlout.net/event/event?id=<?php echo $eventId ?>';
-            var apiData = JSON.stringify({id:1});
             var token = $(".token").data("token");
             $.ajax({
                 type: 'post',
-                url: '_apiViewEvent.php',
+                url: '_apiRequest.php',
                 async: false,
-                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
+                    if (Object.keys(data).length <= 0) {
+                        window.location = "index.php";
+                    }
+                    var jsonData = JSON.parse(data);                    
                     $(".main-content-container").removeClass("hidden");
-                    var jsonData = JSON.parse(data);
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
-                    // alert(data);
                     $("#eventTitle").html(jsonData.Title);
                     $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
                     $("#eventVisibility").html(jsonData.Visibility == 0 ? "Private" : "Public");
@@ -165,8 +166,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     updateAttendees(jsonData.Attendees);
                     updateComments(jsonData.Comments);
                 },
-                error: function () {
-                    alert("ajax failed");
+                error: function (data) {
+                    alert(data);
+                    // alert("ajax failed");
                 }
             });
         });
