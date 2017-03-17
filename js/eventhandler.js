@@ -30,9 +30,9 @@ function makeEventElement(event) {
         '<span style="">'+shortDesc+'</span>'+
     '</div>'+
     '<div class="col-xs-12 col-sm-6" >'+
-        '<i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">'+startDate+'</span><br>'+
+        '<i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventTime">'+startDate+'</span><br>'+
     '<i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">'+event.AddressName+'</span><br>'+
-    '<i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / '+event.MaxSize+'</span>'+
+    '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+'</span>'+
         '<br><br><br><br>'+
         '<div style="float:right;">'+
         '<button type="button" class="btn-sm btn-success btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>&nbsp;'+

@@ -14,7 +14,7 @@
     <div class="col-sm-3" style="margin: 38px 0 0 0;">
         <i class="material-icons" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer;">notifications</i>
         <span style="font-size:15px;margin-left:20px;color: #dddddd;">User McUserson</span>
-        <i class="fa fa-cog btnMenuSettings menuSettingsHover" aria-hidden="true" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer; font-size:20px;"></i>
+        <i class="fa fa-cog btnMenuSettings menuSettingsHover" aria-hidden="true" style="font-size: 20px;"></i>
     </div>
     
     <div class="menuSettings menuSettingsHover hidden">
