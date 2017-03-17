@@ -1,3 +1,10 @@
+<?php
+session_start();
+$eventId = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($eventId)) {
+    header('Location: '.'index.php');
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -43,12 +50,11 @@
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;">
-                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Private&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;18 members<br><br>
+                <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:200px;margin-bottom:5px;">
+               <h3 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;" class="txtTitle textstroke">Group name</h3>
+                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<br><br>
                 <h4>About this group</h4>
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
-
-                    The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.</p>
+                <p class="txtDescription"></p>
                     <a href="" style="float:right;font-size:14px;">View more</a><br>
                     <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
                     <div class="event-box">
@@ -66,25 +72,8 @@
                     <a href="" style="float:right;font-size:14px;">View all</a><br>
                     <br>
                     <h4><i class="material-icons icon_orange" style="font-size:28px;vertical-align:middle;">group</i>&nbsp;&nbsp;Group members</h4>
-                    <div class="row">
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;">
+                    <div class="row memberBox">
 
-                        </div>
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
-
-                        </div>
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
-
-                        </div>
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
-
-                        </div>
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
-
-                        </div>
-                        <div class="member-circle col-md-1" style="background-image: url('img/howlout_icon.png');background-size:100%;margin-left:30px;">
-
-                        </div>
                     </div>
 
                     <br>
@@ -130,7 +119,47 @@
 
         <?php include_once "p_loadScripts.html"; ?>
 
+<script>
 
+    var apiLink ="https://api.howlout.net/group/<?php echo $eventId; ?>";
+
+    var token = $(".token").data("token");
+
+    $.ajax({
+        type: 'post',
+        url: '_apiRequest.php',
+        async: false,
+        data: {'apiLink' : apiLink, 'token' : token},
+        success: function (dataraw) {
+            alert(dataraw);
+            var data = JSON.parse(dataraw);
+            var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
+            var title = data.Name;
+            var desc = data.Description;
+            var memberAmount = data.NumberOfMembers;
+            var imgSource = data.LargeImageSource;
+
+            $(".image").attr("src", imgSource);
+            $(".txtTitle").text(title);
+            $(".txtVisibility").text(isPrivate);
+            $(".txtMemberAmount").text(memberAmount);
+            $(".txtDescription").text(desc);
+
+            $.each(data.Members, function(i, ele) {
+
+                $(".memberBox").append('' +
+                    '<div class=" col-md-2" style="text-align:center;">'+
+                    '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
+                    '<p class="">'+ele.Name+'</p>'+
+                    '</div>');
+
+            });
+        },
+        error: function () {
+            alert("An unexpected error has sadly occurred.");
+        }
+    });
+</script>
     </body>
 
     </html>
