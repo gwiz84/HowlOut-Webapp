@@ -3,6 +3,7 @@ $(".menuSettings").hide();
 var hovering = false;
 
 $(".btnMenuSettings").hover(function(){
+    $(".menuSettings").removeClass("hidden");
     $(".menuSettings").slideDown(150);
     hovering = true;
     setTimeout(function() {

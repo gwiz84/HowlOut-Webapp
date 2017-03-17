@@ -17,9 +17,9 @@
         <i class="fa fa-cog btnMenuSettings menuSettingsHover" aria-hidden="true" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer; font-size:20px;"></i>
     </div>
     
-<div class="menuSettings menuSettingsHover">
-    <i class="fa fa-user" style="color:#27AE60;"></i>&nbsp;&nbsp;<a href="aboutme.php">My profile</a><br>
-    <i class="fa fa-lock" style="margin-top:5px;color:#F1C40F;"></i>&nbsp;&nbsp;<a href="logout.php">Log out</a>
-</div>
+    <div class="menuSettings menuSettingsHover hidden">
+        <i class="fa fa-user" style="color:#27AE60;"></i>&nbsp;&nbsp;<a href="aboutme.php">My profile</a><br>
+        <i class="fa fa-lock" style="margin-top:5px;color:#F1C40F;"></i>&nbsp;&nbsp;<a href="logout.php">Log out</a>
+    </div>
 
 </div>
