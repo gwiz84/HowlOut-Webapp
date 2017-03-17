@@ -32,7 +32,7 @@
     <?php include_once "_inserttoken.php"; ?>
     <!-- Main Content -->
 
-    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
         <div class="row">
          <div class="col-md-offset-2 col-md-8 login-box">
