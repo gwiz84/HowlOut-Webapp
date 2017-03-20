@@ -148,8 +148,8 @@ session_start();
             async: false,
             data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
             success: function (data) {
-//            var jsonData = JSON.parse(data);
-                alert(data);
+                var jsonData = JSON.parse(data);
+                window.location = "viewgroup.php?id="+jsonData.GroupId;
             },
             error: function () {
                 alert("ajax failed");

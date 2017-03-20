@@ -42,7 +42,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 124px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
@@ -131,7 +131,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         async: false,
         data: {'apiLink' : apiLink, 'token' : token},
         success: function (dataraw) {
-            alert(dataraw);
+//            alert(dataraw);
             var data = JSON.parse(dataraw);
             var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
             var title = data.Name;
