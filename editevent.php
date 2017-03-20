@@ -1,5 +1,11 @@
 <?php
 session_start();
+$titleaction = "Create";
+$buttonaction = "Create";
+if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+    $titleaction = "Edit";
+    $buttonaction = "Update";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -40,7 +46,7 @@ session_start();
         var dateToday = new Date();
         $(function() {
 
-            $( ".datepicker" ).datetimepicker({
+            $(".datepicker").datetimepicker({
                 dateFormat: 'yy-mm-dd',
                 minDate: dateToday,
                 minute: 0,
@@ -48,7 +54,7 @@ session_start();
                 stepMinute: 15
             });
 
-            $('.datepicker').on("change",function(e){
+            $(".datepicker").on("change",function(e){
                 chosenStart = $(this).val();
                 chosenStart = chosenStart.replace("/", "-");
                 chosenStart = chosenStart.replace("/", "-");
@@ -57,7 +63,7 @@ session_start();
 
             });
 
-            $( ".datepicker2" ).datetimepicker({
+            $(".datepicker2").datetimepicker({
                 dateFormat: 'yy-mm-dd',
                 minDate: dateToday,
                 minute: 0,
@@ -65,7 +71,7 @@ session_start();
                 stepMinute: 15
             });
 
-            $('.datepicker2').on("change",function(e){
+            $(".datepicker2").on("change",function(e){
                 chosenEnd = $(this).val();
                 chosenEnd = chosenEnd.replace("/", "-");
                 chosenEnd = chosenEnd.replace("/", "-");
@@ -95,7 +101,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h3 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i>Create/edit event</h3>
+                <h3 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event</h3>
                 <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;"><br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
@@ -110,9 +116,9 @@ session_start();
                 <h4>Choose event duration</h4>
 
                 <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>
-                <input type="text" class="datepicker form-control ho-textinput inputStart" style="width:40%;" readonly><br>
+                <input type="text" class="datepicker form-control ho-textinput inputStart" style="width:40%;" placeholder="Choose a start date and time" readonly><br>
                 <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>
-                <input type="text" class="datepicker2 form-control ho-textinput inputEnd" style="width:40%;" readonly>
+                <input type="text" class="datepicker2 form-control ho-textinput inputEnd" style="width:40%;" placeholder="Choose an end date and time"readonly>
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
@@ -120,8 +126,8 @@ session_start();
                 </div>
                 <br>
                 <div class="input-group">
-                    <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                    <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Number of attendees" aria-describedby="title-input" style="z-index:1;" >
+                    <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true" style="font-size:20px;vertical-align:middle;"></i></span>
+                    <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Maximum allowed number of attendees" aria-describedby="title-input" min="1" max="1000">
                 </div>
                 <br>
                 <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
@@ -131,7 +137,7 @@ session_start();
 
                 <span style="margin-left:50px;">I am attending this event myself</span>&nbsp;&nbsp;<input type="checkbox" style="cursor:pointer;">
                 <br><br><br>
-                <button id="btn-creategroup" class="btn btn-ho btnCreate" style="float:right;">Create event</button>
+                <button id="btn-creategroup" class="btn btn-ho btnCreate" style="float:right;"><?php echo $buttonaction ?> event</button>
 
             </div>
         </div>
@@ -139,43 +145,34 @@ session_start();
     </div>
 
     <!-- MOBILE WARNING BOX -->
-    <div class="container  hidden-md hidden-lg">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>
-                    Please download the mobile app
-                </h1>
-            </div>
-        </div>
-    </div>
+    <?php include_once "p_mobilewarning.html"; ?>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- FOOTER -->
+    <?php include_once "p_footer.html"; ?>
 
-                    <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <script src="js/leftmenu.js"></script>
-    <script src="js/topmenu.js"></script>
+    <?php include_once "p_loadScripts.html"; ?>
     <script src="js/dawa-autocomplete.js"></script>
-    <script src="scripts/clean-blog.min.js"></script>
 
     <script>
         var token = $(".token").data("token");
 
         $(function() {
-            $('.inputLocation').dawaautocomplete({
+            $(".inputLocation").dawaautocomplete({
                 select: function(event, data) {
                     $('.inputLocation').text(data.tekst);
                 }
             });
         });
+
+        $(".inputAttendees").keyup(function() {
+            var attendees = $(".inputAttendees").val();
+            if (attendees > 1000) {
+                $(".inputAttendees").val(1000);
+            } else if (attendees.length > 0 && attendees <= 0) {
+                $(".inputAttendees").val(1);
+            }
+        });
+
 
         $(".btnCreate").click(function() {
 
@@ -215,22 +212,20 @@ session_start();
             });
             var token = $(".token").data("token");
 
-//        console.log(title+" "+description+" "+address+" "+startDate+" "+endDate+" "+maxSize+" "+isPrivate+"    "+profileId);
-
-$.ajax({
-    type: 'post',
-    url: '_apiRequestJSON.php',
-    async: false,
-    data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-    success: function (data) {
-        var id = JSON.parse(data).EventId;
-        window.location = "viewevent.php?id="+id;
-    },
-    error: function () {
-        alert("An unexpected error occurred. Please try again later.");
-    }
-});
-});
+            $.ajax({
+                type: "post",
+                url: "_apiRequestJSON.php",
+                async: false,
+                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                success: function (data) {
+                    var id = JSON.parse(data).EventId;
+                    window.location = "viewevent.php?id="+id;
+                },
+                error: function () {
+                    alert("An unexpected error occurred. Please try again later.");
+                }
+            });
+        });
 
 </script>
 

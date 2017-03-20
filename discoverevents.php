@@ -49,36 +49,19 @@ session_start();
                 <h3><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h3>
                 <br>
 
-            <!--      PAGE CONTENT GOES HERE      -->
-        </div>
-    </div>
-
-</div>
-
-<!-- MOBILE WARNING BOX -->
-<div class="container  hidden-md hidden-lg">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>
-                Please download the mobile app
-            </h1>
-        </div>
-    </div>
-</div>
-
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-
-                <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
+                <!--      PAGE CONTENT GOES HERE      -->
             </div>
         </div>
-    </div>
-</footer>
 
-<?php include_once "p_loadScripts.html"; ?>
+    </div>
+
+    <!-- MOBILE WARNING BOX -->
+    <?php include_once "p_mobilewarning.html"; ?>
+
+    <!-- FOOTER -->
+    <?php include_once "p_footer.html"; ?>
+
+    <?php include_once "p_loadScripts.html"; ?>
 
 </body>
 

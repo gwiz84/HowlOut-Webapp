@@ -36,54 +36,36 @@ session_start();
     <!-- Main Content -->
 
     <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
-
-      <h1>Logout page</h1>
-  </div>
-
-  <!-- MOBILE WARNING BOX -->
-  <div class="container  hidden-md hidden-lg">
-    <div class="row">
-        <div class="col-xs-12">
-            <h1>
-                Please download the mobile app
-            </h1>
-        </div>
+        <h1>Logout page</h1>
     </div>
-</div>
 
-<!-- Footer -->
-<footer>
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- MOBILE WARNING BOX -->
+    <?php include_once "p_mobilewarning.html"; ?>
 
-                <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
-            </div>
-        </div>
-    </div>
-</footer>
+    <!-- FOOTER -->
+    <?php include_once "p_footer.html"; ?>
 
-<?php include_once "p_loadScripts.html"; ?>
+    <?php include_once "p_loadScripts.html"; ?>
 
 
-<script>
-    var token = $(".token").data("token");
-    $.ajax({
-        type: 'post',
-        url: '_logout.php',
-        async: false,
-        data: { 'token' : token },
-        success: function (data) {
-            if (data == "success") {
-                window.location = "index.php";
+    <script>
+        var token = $(".token").data("token");
+        $.ajax({
+            type: 'post',
+            url: '_logout.php',
+            async: false,
+            data: { 'token' : token },
+            success: function (data) {
+                if (data == "success") {
+                    window.location = "index.php";
+                }
+            },
+            error: function () {
+                alert("ajax failed");
             }
-        },
-        error: function () {
-            alert("ajax failed");
-        }
-    });
+        });
 
-</script>
+    </script>
 
 </body>
 

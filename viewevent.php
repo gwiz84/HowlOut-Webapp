@@ -105,30 +105,14 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     </div>
 
     <!-- MOBILE WARNING BOX -->
-    <div class="container  hidden-md hidden-lg">
-        <div class="row">
-            <div class="col-xs-12">
-                <h1>
-                    Please download the mobile app
-                </h1>
-            </div>
-        </div>
-    </div>
+    <?php include_once "p_mobilewarning.html"; ?>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <div class="row">
-                <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+    <!-- FOOTER -->
+    <?php include_once "p_footer.html"; ?>
 
-                    <p class="copyright text-muted">Copyright &copy; HowlOut 2017</p>
-                </div>
-            </div>
-        </div>
-    </footer>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
-    <?php include_once "p_loadScripts.html"; ?>
 
+    <?php include_once "p_loadScripts.html"; ?>
 
     <script>
         var maxCommentLength = 250;
@@ -139,11 +123,11 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
-            var apiLink = 'https://api.howlout.net/event/event?id=<?php echo $eventId ?>';
+            var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
             var token = $(".token").data("token");
             $.ajax({
-                type: 'post',
-                url: '_apiRequest.php',
+                type: "post",
+                url: "_apiRequest.php",
                 async: false,
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
