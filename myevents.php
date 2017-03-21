@@ -86,13 +86,12 @@ session_start();
                     facebookId = response.id;
 
                     var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
-                    var apiData = JSON.stringify({id:1});
                     var token = $(".token").data("token");
                     $.ajax({
                         type: 'post',
                         url: '_apiRequest.php',
                         async: false,
-                        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                        data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
                             $.each(jsonData, function(i,ele) {
@@ -120,8 +119,14 @@ session_start();
             window.location = "viewevent.php?id="+eventIdClicked;
         });
 
-        $(".eventpaw").click(function() {
-            alert("PAW!");
+        $("body").on("click", ".btn-shareevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
+            alert("SHARED!");
+        });
+
+        $("body").on("click", ".btn-followevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
+            alert("FOLLOWED!");
         });
 
         // Gets the date and time in the format the api needs it in.

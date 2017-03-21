@@ -1,11 +1,5 @@
 <?php
 session_start();
-$titleaction = "Create";
-$buttonaction = "Create";
-if (isset($_GET['id']) && is_numeric($_GET['id'])) {
-    $titleaction = "Edit";
-    $buttonaction = "Update";
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -86,6 +80,15 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
 <body>
     <?php include_once "_inserttoken.php"; ?>
     <?php include_once "_loginCheck.php"; ?>
+    <?php
+    $titleaction = "Create";
+    $buttonaction = "Create";
+    if (isset($_GET['id']) && is_numeric($_GET['id'])) {
+        $titleaction = "Edit";
+        $buttonaction = "Update";
+        echo '<div class="editid" style="display:none;" data-editid="'.$_GET['id'].'"></div>';
+    }
+    ?>
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
         <div class="container" style="padding: 0;">
@@ -127,15 +130,14 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true" style="font-size:20px;vertical-align:middle;"></i></span>
-                    <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Maximum allowed number of attendees" aria-describedby="title-input" min="1" max="1000">
+                    <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Maximum allowed number of attendees" aria-describedby="title-input" min="1" max="1000" style="z-index:1;">
                 </div>
                 <br>
                 <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
 
-                <label class="radio-inline active "><input type="radio" name="event-visib" checked="checked" class="radioPrivate">Private</label>
-                <label class="radio-inline"><input type="radio" name="event-visib">Public</label>
+                <label class="radio-inline active radioPrivate"><input type="radio" name="event-visib" checked="checked" class="radioPrivate">Private</label>
+                <label class="radio-inline"><input type="radio" name="event-visib" class="radioPublic">Public</label>
 
-                <span style="margin-left:50px;">I am attending this event myself</span>&nbsp;&nbsp;<input type="checkbox" style="cursor:pointer;">
                 <br><br><br>
                 <button id="btn-creategroup" class="btn btn-ho btnCreate" style="float:right;"><?php echo $buttonaction ?> event</button>
 
@@ -150,8 +152,10 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
     <!-- FOOTER -->
     <?php include_once "p_footer.html"; ?>
 
-    <?php include_once "p_loadScripts.html"; ?>
     <script src="js/dawa-autocomplete.js"></script>
+    <script src="js/leftmenu.js"></script>
+    <script src="js/topmenu.js"></script>
+    <script src="js/eventhandler.js"></script>
 
     <script>
         var token = $(".token").data("token");
@@ -164,6 +168,43 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             });
         });
 
+        if ($(".editid").data("editid") != null) {
+            var editid = $(".editid").data("editid");
+            var apiLink = "https://api.howlout.net/event/event?id="+editid;
+            var token = $(".token").data("token");
+            $.ajax({
+                type: "post",
+                url: "_apiRequest.php",
+                async: false,
+                data: {'apiLink' : apiLink, 'token' : token},
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    var startDate = convertDateString(jsonData.StartDate);
+                    var endDate = convertDateString(jsonData.EndDate);
+                    chosenStart = startDate;
+                    chosenEnd = endDate;
+                    $(".inputTitle").val(jsonData.Title);
+                    $(".inputDescription").val(jsonData.Description);
+                    if (jsonData.Visibility == 0) {
+                        $(".radioPublic").prop("checked", true);
+                    }
+                    $(".inputStart").val(startDate);
+                    $(".inputEnd").val(endDate);
+                    $(".inputLocation").val(jsonData.AddressName);
+                    $(".inputAttendees").val(jsonData.MaxSize);
+                },
+                error: function (data) {
+                    alert(data);
+                    // alert("ajax failed");
+                }
+            });
+        }
+
+        function convertDateString(date) {
+            convertedDate = date.replace("T", " ").substr(0, 16);
+            return convertedDate;
+        }
+
         $(".inputAttendees").keyup(function() {
             var attendees = $(".inputAttendees").val();
             if (attendees > 1000) {
@@ -173,10 +214,8 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             }
         });
 
-
         $(".btnCreate").click(function() {
-
-            var eventId = 0;
+            var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var title = $(".inputTitle").val();
             var description = $(".inputDescription").val();
             var address = $(".inputLocation").val();
@@ -227,7 +266,7 @@ if (isset($_GET['id']) && is_numeric($_GET['id'])) {
             });
         });
 
-</script>
+    </script>
 
 </body>
 

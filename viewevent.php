@@ -139,7 +139,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
                     $("#eventTitle").html(jsonData.Title);
                     $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
-                    $("#eventVisibility").html(jsonData.Visibility == 0 ? "Private" : "Public");
+                    $("#eventVisibility").html(jsonData.Visibility == 0 ? "Public" : "Private");
                     $("#eventTime").html(getDateFromISOString(eventDate));
                     $("#eventLocation").html(jsonData.AddressName);
                     $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);

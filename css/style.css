@@ -93,6 +93,13 @@ a:hover {
     padding: 5px;
     text-align: center;
     background-color: white;
+    transition: 0.5s;
+    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+}
+
+.event-box:hover {
     -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
     -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
     box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);

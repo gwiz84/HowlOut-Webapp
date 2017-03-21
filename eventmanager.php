@@ -44,29 +44,10 @@ session_start();
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8" style="border: solid 0px black; height:100%; padding:0 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 eventContainer" style="border: solid 0px black; height:100%; padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Event manager</h4>
                 <hr>
-                <!--                THE EVENT EDIT BOX START -->
-                <div class="event-box-edit">
-
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
-
-                    <div class="innerbottom">
-                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
-                        <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                        <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                        <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                    </div>
-                    <div class="innermenu">
-
-                        <i class="fa fa-pencil" aria-hidden="true" style="color:brown;"></i><span class="eventEdit" style="margin-left:10px;cursor:pointer;">Edit</span><br><br>
-                        <i class="fa fa-files-o" aria-hidden="true" style="color:#21618c;"></i><span class="eventDuplicate" style="margin-left:10px;cursor:pointer;">Duplicate</span><br><br>
-                        <i class="fa fa-times" aria-hidden="true" style="color: #c0392b ;"></i><span class="eventDelete" style="margin-left:14px;cursor:pointer;">Delete</span>
-                    </div>
 
                 </div>
                 <!--                THE EVENT EDIT BOX END -->
@@ -85,6 +66,99 @@ session_start();
 
     <?php include_once "p_loadScripts.html"; ?>
 
+    <script src="js/eventhandler.js"></script>
+    <script>
+        var facebookId = "";
+        window.fbAsyncInit = function() {
+            // facebook functions in here
+            FB.init({
+                appId      : '1897963557117405',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response)
+                {
+                    facebookId = response.id;
+
+                    var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                    var token = $(".token").data("token");
+                    $.ajax({
+                        type: 'post',
+                        url: '_apiRequest.php',
+                        async: false,
+                        data: {'apiLink' : apiLink, 'token' : token},
+                        success: function (data) {
+                            var jsonData = JSON.parse(data);
+                            $.each(jsonData, function(i,ele) {
+                                $(".eventContainer").append(makeEditEventElement(ele) + "<br>");
+                            });
+                        },
+                        error: function () {
+                            alert("ajax failed");
+                        }
+                    });
+                });
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        $("body").on("click", ".btn-editevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
+            window.location = "editevent.php?id="+eventIdClicked;
+        });
+
+        $("body").on("click", ".btn-duplicateevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
+            alert("SHARED!");
+        });
+
+        $("body").on("click", ".btn-deleteevent", function() {
+            var thisBox = $(this).parent().parent().parent().parent();
+            var eventIdClicked = $(this).parent().data("eventid");
+            var r = confirm("Are you sure you wish to delete this event?");
+            if (r == true) {
+                var apiLink = 'https://api.howlout.net/event/'+eventIdClicked;
+                var token = $(".token").data("token");
+                $.ajax({
+                    type: 'post',
+                    url: '_apiRequestDelete.php',
+                    async: false,
+                    data: {'apiLink' : apiLink, 'token' : token},
+                    success: function (data) {
+                        if (data) {
+                            thisBox.remove();
+                        } else {
+                            alert("An unexpected error occurred!");
+                        }
+                    },
+                    error: function () {
+                        alert("ajax failed");
+                    }
+                });
+            }
+        });
+
+        $("body").on("click", ".btn-viewevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
+            window.location = "viewevent.php?id="+eventIdClicked;
+        });
+
+        // Gets the date and time in the format the api needs it in.
+        function getFormattedDateTime() {
+            return new Date().toISOString().substr(0, 19);
+        }
+
+    </script>
 
 </body>
 
