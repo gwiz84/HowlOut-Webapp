@@ -52,7 +52,7 @@ session_start();
 
 
                 <!--                THE EVENT BOX END -->
-            
+
 <!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
              
                 <!--      PAGE CONTENT GOES HERE      -->
