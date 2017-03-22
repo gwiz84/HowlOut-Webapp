@@ -18,8 +18,8 @@
     </div>
     
     <div class="menuSettings menuSettingsHover hidden">
-        <i class="fa fa-user" style="color:#27AE60;"></i>&nbsp;&nbsp;<a href="aboutme.php">My profile</a><br>
-        <i class="fa fa-lock" style="margin-top:5px;color:#F1C40F;"></i>&nbsp;&nbsp;<a href="logout.php">Log out</a>
+        <i class="fa fa-user" style="color:#27AE60;"></i>&nbsp;&nbsp;<a href="aboutme.php" style="font-size:14px;">My profile</a><br>
+        <i class="fa fa-lock" style="margin-top:5px;color:#F1C40F;"></i>&nbsp;&nbsp;<a href="logout.php" style="font-size:14px;">Log out</a>
     </div>
 
 </div>
