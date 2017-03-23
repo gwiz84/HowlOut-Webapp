@@ -20,7 +20,7 @@ function makeEventElement(event) {
 
     var startDate = getDateFromISOString(new Date(Date.parse(event.StartDate)));
 
-    var eventDiv = '<div class="event-box">'+
+    var eventDiv = '<div class="event-box" data-eventid="'+event.EventId+'">'+
         '<div class="innertop" style="background-image:url(\''+event.ImageSource+'\');background-size:100%;">'+
         '<span style="font-size:28px;color:white;" class="textstroke">'+event.Title+'</span>'+
     '</div>'+
@@ -36,7 +36,7 @@ function makeEventElement(event) {
         '<div style="float:right;">'+
         '<button type="button" class="btn-sm btn-success btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>&nbsp;'+
         '<button type="button" class="btn-sm btn-warning btn-followevent"><i class="fa fa-paw" style="font-size:18px;"></i></button>&nbsp;'+
-        '<button type="button" class="btn-sm btn-primary btn-viewevent" data-eventid="'+event.EventId+'"><span style="font-size:14px;">View</span></button>'+
+        '<button type="button" class="btn-sm btn-primary btn-viewevent" ><span style="font-size:14px;">View</span></button>'+
         '</div>'+
         '</div>'+
         '</div>'+

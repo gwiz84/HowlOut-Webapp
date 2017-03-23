@@ -48,8 +48,9 @@ session_start();
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Create group</h4><hr>
-       
-                <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>This is some info about creating a group. What they are about and all that sort of thing.
+
+                <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>
+                If you have a small community and want to host events for a specific group of people, creating a group is the answer. This allows you to keep your events contained to members of the group, along with a small array of functionas to make your life easier when dealing with checklists, budgets or other such issues.
                 <br>
                 <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">image</i>&nbsp;&nbsp;Image</h4>
                 <div>

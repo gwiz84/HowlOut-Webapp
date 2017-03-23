@@ -93,6 +93,7 @@ session_start();
                         async: false,
                         data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
+                            console.log(data);
                             var jsonData = JSON.parse(data);
                             $.each(jsonData, function(i,ele) {
                                 $(".eventContainer").append(makeEventElement(ele) + "<br>");
@@ -115,7 +116,7 @@ session_start();
         }(document, 'script', 'facebook-jssdk'));
 
         $("body").on("click", ".btn-viewevent", function() {
-            var eventIdClicked = $(this).data("eventid");
+            var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
             window.location = "viewevent.php?id="+eventIdClicked;
         });
 
@@ -125,8 +126,29 @@ session_start();
         });
 
         $("body").on("click", ".btn-followevent", function() {
-            var eventIdClicked = $(this).parent().data("eventid");
-            alert("FOLLOWED!");
+            var thisButton = $(this);
+            var eventId = $(this).parent().parent().parent().parent().data("eventid");
+            var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/123?attend=true&join=false";
+            var apiData = JSON.stringify({
+                eventId: eventId,
+                profileId: 123,
+                attend: true,
+                join: false
+            });
+            var token = $(".token").data("token");
+            $.ajax({
+                type: 'post',
+                url: '_apiRequestPut.php',
+                async: false,
+                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                success: function (data) {
+                    thisButton.attr("disabled", true);
+                    thisButton.css("background-color", "grey");
+                },
+                error: function () {
+                    alert("ajax failed");
+                }
+            });
         });
 
         // Gets the date and time in the format the api needs it in.
