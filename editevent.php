@@ -155,6 +155,7 @@ session_start();
     <script src="js/dawa-autocomplete.js"></script>
     <script src="js/leftmenu.js"></script>
     <script src="js/topmenu.js"></script>
+    <script src="js/searchbar.js"></script>
     <script src="js/eventhandler.js"></script>
 
     <script>
