@@ -480,15 +480,25 @@ a:hover {
     color: white;
 }
 
-.searchContent {
-    width:450px;
-    height:600px;
-    overflow-x:hidden;
-    overflow-y: auto;
-    white-space: nowrap;
-    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    z-index:9999;
+@media only screen and (min-width : 992px) {
+    .searchContent {
+        width:450px;
+
+    }
 }
+
+@media only screen and (min-width : 1200px) {
+    .searchContent {
+        width:550px;
+        height:100%;
+        overflow-x:hidden;
+        overflow-y: auto;
+        white-space: nowrap;
+        -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+        -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+        box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+        z-index:9999;
+    }
+}
+
 
