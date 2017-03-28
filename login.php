@@ -129,7 +129,7 @@
                             type: 'post',
                             url: '_apiRequestProfile.php',
                             async: false,
-                            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token, 'name' : facebookName},
                             success: function (data) {
                                 if (data == "success") {
                                     window.location = "index.php";

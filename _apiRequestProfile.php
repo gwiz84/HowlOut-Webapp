@@ -4,6 +4,9 @@ session_start();
 $apiLink = $_POST['apiLink'];
 $apiData = $_POST['apiData'];
 $token = $_POST['token'];
+$name = $_POST['name'];
+
+$_SESSION['name'] = $name;
 $_SESSION['facebookId'] = json_decode($apiData)->ProfileId;
 
 
