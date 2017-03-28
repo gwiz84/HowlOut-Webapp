@@ -54,7 +54,7 @@ session_start();
                         <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture">
                     </div>
                     <div class="col-md-6">
-                        <h4 style="margin-top:25%;">Emma Stone</h4>
+                        <h4 style="margin-top:25%;"><?php echo $_SESSION['name']; ?></h4>
                         <a class="btnChangePicture" style="margin-top:200px;cursor:pointer;">Change picture</a>
                     </div>
                 </div>

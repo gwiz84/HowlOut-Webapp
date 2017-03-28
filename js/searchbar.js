@@ -10,7 +10,7 @@ $(".inputSearchBar").keyup(function (e) {
     clearTimeout(timeoutID);
     timeoutID = setTimeout(function() {
         searchEvent();
-    }, 700);
+    }, 600);
 });
 
 // function which searches through events in the api based on search terms.
@@ -59,11 +59,13 @@ function searchEvent() {
 // Function which closes the search result div when u click outside of it
 $(document).mouseup(function (e) {
     var container = $(".searchContent");
-
+    var searchBar = $(".inputSearchBar");
     if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0) // ... nor a descendant of the container
+        && container.has(e.target).length === 0 ) // ... nor a descendant of the container
     {
-        container.hide();
+        if (!container.is(searchBar)) {
+            container.hide();
+        }
     }
 });
 
@@ -73,8 +75,10 @@ $(document.body).on('click', '.resultLink', function () {
     window.location = "viewevent.php?id=" + eventId;
 });
 
-$(".inputSearchBar").mousedown(function () {
+// function
+$(".inputSearchBar").mouseup(function () {
     if (searchTerms.length>0) {
         $(".searchContent").slideDown(150);
     }
+
 });

@@ -37,13 +37,10 @@
         <div class="row">
            <div class="col-md-offset-2 col-md-8 login-box">
                <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
-               <p style="margin-left:50px;font-size:16px;" class="loggedIn">Welcome, you have been detected as <span class="userName"></span>.<br> Continue with this profile?
-               </p>
+               <p style="margin-left:50px;font-size:16px;" class="loggedIn">Welcome, you have been detected as <span class="userName"></span>.<br> Continue with this profile?</p>
                <p style="margin-left:50px;font-size:16px;" class="loggedOut">Welcome, click the login button and sign in with your facebook profile through the popup.</p>
-
                <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
-
-               <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;">Continue</button>
+               <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;"></button>
            </div>
        </div>
 
@@ -55,13 +52,16 @@
    <!-- FOOTER -->
    <?php include_once "p_footer.html"; ?>
 
-   <?php include_once "p_loadScripts.html"; ?>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="scripts/clean-blog.min.js"></script>
 
 
-<script>
+    <script>
     $(".loggedIn").hide();
-    $(".loggedOut").hide();
+    $(".btnLogin").html("Log in");
     var accesstoken = "";
+
 
     window.fbAsyncInit = function() {
         // facebook functions in here
@@ -75,19 +75,23 @@
 
         FB.getLoginStatus(function(response) {
             accesstoken = JSON.stringify(response.authResponse.accessToken);
+
             if (response.status == "connected") {
                 $(".loggedIn").show(150);
                 FB.api('/me', function(response) {
                    $(".userName").text(response.name);
                 });
-                $(".btnLogin").text("Continue");
+                $(".btnLogin").html("Continue");
+                $(".loggedOut").hide(150);
             } else {
                 $(".loggedOut").show(150);
-                $(".btnLogin").text("Log in");
+                $(".btnLogin").html("Log in");
+
             }
         });
 
     };
+
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) {return;}
