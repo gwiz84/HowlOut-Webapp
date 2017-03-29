@@ -73,6 +73,7 @@
     <?php include_once "p_footer.html"; ?>
 
     <?php include_once "p_loadScripts.html"; ?>
+    <script src="js/grouphandler.js"></script>
 
     <script>
         var facebookId = "";
@@ -91,25 +92,18 @@
                     facebookId = response.id;
 
                     var apiLink = 'https://api.howlout.net/profile/'+facebookId;
-                    var apiData = JSON.stringify(
-                        {
-                            ProfileId : facebookId
-                        }
-                    );
                     var token = $(".token").data("token");
+
+                    // ajax call to get groups via the api
                     $.ajax({
                         type: 'post',
                         url: '_apiRequest.php',
                         async: false,
-                        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
+                        data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
                             $.each(jsonData.Groups, function(i,ele) {
-                                $(".groupBox").append('' +
-                                    '<div class=" col-md-2" style="text-align:center;">'+
-                                    '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
-                                    '<p class="">'+ele.Name+'</p>'+
-                                    '</div>');
+                                $(".groupBox").append(makeGroupElement(ele));
                             });
                         },
                         error: function () {
@@ -128,9 +122,9 @@
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-        $("body").on("click", ".btn-viewevent", function() {
-            var eventIdClicked = $(this).data("eventid");
-            window.location = "viewevent.php?id="+eventIdClicked;
+        $("body").on("click", ".groupLink", function() {
+            var groupIdClicked = $(this).data("groupid");
+            window.location = "viewgroup.php?id="+groupIdClicked;
         });
 
 

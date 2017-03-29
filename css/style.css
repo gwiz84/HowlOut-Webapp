@@ -406,7 +406,8 @@ a:hover {
 /* VIEWEVENT.PHP END */
 
 .icon_green {
-    color: #48c9b0;
+    /*color: #48c9b0;*/
+    color:  #73c6b6;
 }
 
 .icon_yellow {
@@ -414,7 +415,8 @@ a:hover {
 }
 
 .icon_purple {
-    color: #af7ac5;
+    /*color: #af7ac5;*/
+    color:    #f0b27a  ;
 }
 
 .icon_red {
@@ -439,6 +441,10 @@ a:hover {
 
 .icon_peep {
     color: #f8c471;
+}
+
+.icon_lightblue {
+    color:   #4dd0e1;
 }
 
 .login-box {

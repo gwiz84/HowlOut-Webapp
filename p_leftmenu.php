@@ -1,7 +1,7 @@
 <link href="css/p_leftmenu.css" rel="stylesheet">
 <div class="leftmenu">
 	<div>
-		<a href="conversations.php"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversations</a>
+		<a href="conversations.php"><i class="material-icons leftmenuitem icon_lightblue">chat</i>Conversations</a>
 		<!-- <i class="fa fa-comment-o leftmenuitem convicon"> -->
 	</div>
 	<br>
@@ -12,7 +12,7 @@
 		<a href="myevents.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
 	</div>
 	<div>
-		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_yellow">event_available</i>Discover events</a>
+		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_blue" >pageview</i>Discover events</a>
 	</div>
 	<div>
 		<a href="editevent.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>

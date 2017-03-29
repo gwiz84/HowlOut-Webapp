@@ -86,6 +86,7 @@ session_start();
 
     <?php include_once "p_loadScripts.html"; ?>
     <script src="js/eventhandler.js"></script>
+    <script src="js/grouphandler.js"></script>
 <script>
 
     var facebookId = "";
@@ -121,10 +122,10 @@ session_start();
 
                         $.each(jsonData, function(i,ele) {
                             var startTime = Date.parse(ele.StartDate);
-                            console.log("Event title: "+ele.Title );
-                            console.log("Current time: "+currentTime );
-                            console.log("Event start time: "+startTime );
-                            console.log( (startTime-currentTime) );
+//                            console.log("Event title: "+ele.Title );
+//                            console.log("Current time: "+currentTime );
+//                            console.log("Event start time: "+startTime );
+//                            console.log( (startTime-currentTime) );
                             if ( (startTime-currentTime)>0) {
                                 if (lowest===null) {
                                     lowest = startTime - currentTime;
@@ -169,11 +170,7 @@ session_start();
                         var counter = 1;
                         $.each(jsonData.Groups, function(i,ele) {
                             if (counter<=6) {
-                                $(".groupBox").append('' +
-                                    '<div class=" col-md-2" style="text-align:center;">'+
-                                    '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
-                                    '<p class="">'+ele.Name+'</p>'+
-                                    '</div>');
+                                $(".groupBox").append(makeGroupElement(ele));
                                 counter++
                             }
                         });
@@ -207,10 +204,12 @@ session_start();
         return new Date().toISOString().substr(0, 19);
     }
 
-    function convertDateString(date) {
-        convertedDate = date.replace("T", " ").substr(0, 16);
-        return convertedDate;
-    }
+    // click function for group links
+    $("body").on("click", ".groupLink", function() {
+        var groupIdClicked = $(this).data("groupid");
+        window.location = "viewgroup.php?id="+groupIdClicked;
+    });
+
 </script>
 
 </body>
