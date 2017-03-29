@@ -3,8 +3,10 @@
 
     <div class="col-sm-3">
         <a href="index.php" style="cursor:pointer;text-decoration:none;">
-         <img class="top-logo" src="img/howlout_icon_with_border.png" style="cursor:pointer; padding-top: 7px;">
+         <img class="top-logo" src="img/howlout_icon3.png" style="cursor:pointer; padding-top: 7px;">&nbsp;
+            <span class="howloutLogoText" style="vertical-align: bottom;margin-left:-20px;">HowlOut</span>
         </a>
+    </>
     </div>
 
     <div class="col-sm-6 " style="">

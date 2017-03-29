@@ -73,7 +73,7 @@ a:hover {
 }
 
 .top-logo {
-    width: 85px;
+    width: 75px;
 }
 
 .top-menu-headertext {
@@ -460,17 +460,21 @@ a:hover {
     height: 65px;
     margin-right: 30px;
     padding: 10px;
-    border: solid 1px #4f4f4f;
+    border: solid 0px #4f4f4f;
     /*border-radius: 5px;*/
     background-color: whitesmoke;
     color: white;
     float: right;
     z-index: 999;
+    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
 }
 
 .menuSettings > a {
     color: black;
     font-size: 12px;
+
 }
 
 .btnMenuSettings {
@@ -501,6 +505,14 @@ a:hover {
         background-color:white;
         padding-bottom:3px;
     }
+    .howloutLogoText {
+        font-family: 'Paytone One', sans-serif;
+        font-size: 26px;
+        /*font-weight:bold;*/
+        color:#E8F8F5;
+        text-shadow: 2px 2px #000000;
+    }
+
 }
 
 @media only screen and (min-width : 1200px) {
@@ -517,6 +529,13 @@ a:hover {
         z-index:9999;
         background-color:white;
         padding-bottom:3px;
+    }
+    .howloutLogoText {
+        font-family: 'Paytone One', sans-serif;
+        font-size: 30px;
+        /*font-weight:bold;*/
+        color:#E8F8F5  ;
+        text-shadow: 2px 2px #000000;
     }
 }
 
@@ -553,3 +572,4 @@ a:hover {
     font-size: 16px;
 
 }
+

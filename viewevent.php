@@ -32,6 +32,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Nunito+Sans|Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 </head>
 
 <body>
