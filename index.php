@@ -57,7 +57,7 @@ session_start();
 
                 <!--                THE EVENT BOX END -->
                 <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
+                <a href="myevents.php" style="float:right;font-size:14px;">View all</a>
 
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
@@ -66,11 +66,11 @@ session_start();
                 <a href="mygroups.php" style="float:right;font-size:14px;">View all</a>
 
                 <!--             GROUPS END -->
-                <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;margin-top:10px;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
+                <h4 style=""><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
                 <hr>
                 <!--            BUNCH OF DEMO SUGGESTED EVENTS FOR SHOW BELOW HERE -->
-               <div class="eventBox">
-                   <h4>Coming soon...</h4>
+               <div class="suggestedEventBox">
+                   <h4 style="font-style:italic;">Coming soon...</h4>
                </div>
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
@@ -113,14 +113,32 @@ session_start();
                     async: false,
                     data: {'apiLink' : apiLink, 'token' : token},
                     success: function (data) {
-                        console.log(data);
                         var jsonData = JSON.parse(data);
-                        var eventToShow = null;
-                        var currentTime = new Date();
-                        $.each(jsonData, function(i,ele) {
 
+                        var eventToShow = null;
+                        var currentTime = new Date().getTime();
+                        var lowest = null;
+
+                        $.each(jsonData, function(i,ele) {
+                            var startTime = Date.parse(ele.StartDate);
+                            console.log("Event title: "+ele.Title );
+                            console.log("Current time: "+currentTime );
+                            console.log("Event start time: "+startTime );
+                            console.log( (startTime-currentTime) );
+                            if ( (startTime-currentTime)>0) {
+                                if (lowest===null) {
+                                    lowest = startTime - currentTime;
+                                    eventToShow = ele;
+                                } else {
+                                    if ( (startTime-currentTime) < lowest) {
+                                        lowest = startTime - currentTime;
+                                        eventToShow = ele;
+                                    }
+                                }
+                            }
                         });
-                        $(".eventBox").append(makeEventElement(ele) + "<br>");
+                        $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
+
                     },
                     error: function () {
                         alert("ajax failed");
@@ -128,6 +146,7 @@ session_start();
                 });
             });
         });
+
 
         // Get groups
         FB.getLoginStatus(function(response) {
@@ -186,6 +205,11 @@ session_start();
     // Gets the date and time in the format the api needs it in.
     function getFormattedDateTime() {
         return new Date().toISOString().substr(0, 19);
+    }
+
+    function convertDateString(date) {
+        convertedDate = date.replace("T", " ").substr(0, 16);
+        return convertedDate;
     }
 </script>
 

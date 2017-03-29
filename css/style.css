@@ -518,3 +518,32 @@ a:hover {
     background-color: #EAECEE;
 }
 
+.howlout-button {
+    height: 35px;
+    min-width: 50px;
+    max-width: 100px;
+    border-radius: 0;
+    background-color:  #eaecee ;
+    font-size: 16px;
+
+}
+
+.howlout-button:hover {
+    height: 35px;
+    min-width: 50px;
+    max-width: 100px;
+    border-radius: 0;
+    background-color:  #d0ece7;
+    font-size: 16px;
+
+}
+
+.howlout-button:active {
+    height: 35px;
+    min-width: 50px;
+    max-width: 100px;
+    border-radius: 0;
+    background-color:  #eaecee;
+    font-size: 16px;
+
+}

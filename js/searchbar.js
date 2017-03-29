@@ -102,6 +102,7 @@ $(document).mouseup(function (e) {
     {
         if (!container.is(searchBar)) {
             container.hide();
+            $(".inputSearchBar").val("");
         }
     }
 });
