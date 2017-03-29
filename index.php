@@ -51,27 +51,8 @@ session_start();
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
                 <hr>
                 <!--                THE EVENT BOX START -->
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
-                    <div class="innerbottom">
-                        <div class="col-xs-12 col-sm-6">
-                            <span style="overflow: hidden;text-overflow: ellipsis;">Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
-                                Så tag noget heroin og dø som den junkie du eeeeeer.ssssssss ssssssssssssssssss ssssssssssss</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" >
-                            <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                            <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                            <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                            <br><br><br><br>
-                            <div style="float:right;">
-                                <button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
-                            </div>
-                        </div>
-                    </div>
+                <div class="eventBox">
+
                 </div>
 
                 <!--                THE EVENT BOX END -->
@@ -80,82 +61,17 @@ session_start();
 
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
-                <!--            GROUP CIRCLE ThING START-->
-                <div class="group-circle" style="background-image: url('img/howlout_icon.png');background-size:100%;">
+                <!--            GROUPS START  -->
+                <div class="groupBox"></div>
+                <a href="mygroups.php" style="float:right;font-size:14px;">View all</a>
 
-                </div>
-                <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
-                <!--             GROUP CIRLCE THING END -->
-                <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
+                <!--             GROUPS END -->
+                <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;margin-top:10px;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
                 <hr>
                 <!--            BUNCH OF DEMO SUGGESTED EVENTS FOR SHOW BELOW HERE -->
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
-                    <div class="innerbottom">
-                        <div class="col-xs-12 col-sm-6">
-                            <span style="overflow: hidden;text-overflow: ellipsis;">Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
-                                Så tag noget heroin og dø som den junkie du eeeeeer.ssssssss ssssssssssssssssss ssssssssssss</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" >
-                            <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                            <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                            <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                            <br><br><br><br>
-                            <div style="float:right;">
-                                <button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
-                    <div class="innerbottom">
-                        <div class="col-xs-12 col-sm-6">
-                            <span style="overflow: hidden;text-overflow: ellipsis;">Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
-                                Så tag noget heroin og dø som den junkie du eeeeeer.ssssssss ssssssssssssssssss ssssssssssss</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" >
-                            <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                            <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                            <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                            <br><br><br><br>
-                            <div style="float:right;">
-                                <button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div><br>
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
-                    <div class="innerbottom">
-                        <div class="col-xs-12 col-sm-6">
-                            <span style="overflow: hidden;text-overflow: ellipsis;">Dette er en beskrivelse af en event som jeg har lavet. Nu vil jeg danse under månens lyyyyyyyyys om natten. Hvis denne beskrivelse ikke er god nok til dig.
-                                Så tag noget heroin og dø som den junkie du eeeeeer.ssssssss ssssssssssssssssss ssssssssssss</span>
-                        </div>
-                        <div class="col-xs-12 col-sm-6" >
-                            <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                            <i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                            <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                            <br><br><br><br>
-                            <div style="float:right;">
-                                <button type="button" class="btn-sm btn-success"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-warning"><i class="fa fa-paw" style="font-size:18px;"></i></button>
-                                <button type="button" class="btn-sm btn-primary"><span style="font-size:14px;">View</span></button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+               <div class="eventBox">
+                   <h4>Coming soon...</h4>
+               </div>
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
         </div>
@@ -169,27 +85,108 @@ session_start();
     <?php include_once "p_footer.html"; ?>
 
     <?php include_once "p_loadScripts.html"; ?>
-
+    <script src="js/eventhandler.js"></script>
 <script>
-    var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime=2017-02-27T13:30:00.84&profileIds=10153817903667221';
-    var apiData = JSON.stringify({id:1});
 
-    $.ajax({
-        type: 'post',
-        url: '_apiRequest.php',
-        async: false,
-        data: {'apiLink' : apiLink, 'apiData' : apiData},
-        success: function (data) {
-            for (var i=0; i<data.length; i++) {
+    var facebookId = "";
 
-            }
-        },
-        error: function () {
-            alert("ajax failed");
-        }
+    window.fbAsyncInit = function() {
+        // facebook functions in here
+        FB.init({
+            appId      : '1897963557117405',
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+
+        // Get next relevant event
+        FB.getLoginStatus(function(response) {
+            FB.api('/me', function(response)
+            {
+                facebookId = response.id;
+
+                var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=false&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                var token = $(".token").data("token");
+                $.ajax({
+                    type: 'post',
+                    url: '_apiRequest.php',
+                    async: false,
+                    data: {'apiLink' : apiLink, 'token' : token},
+                    success: function (data) {
+                        console.log(data);
+                        var jsonData = JSON.parse(data);
+                        var eventToShow = null;
+                        var currentTime = new Date();
+                        $.each(jsonData, function(i,ele) {
+
+                        });
+                        $(".eventBox").append(makeEventElement(ele) + "<br>");
+                    },
+                    error: function () {
+                        alert("ajax failed");
+                    }
+                });
+            });
+        });
+
+        // Get groups
+        FB.getLoginStatus(function(response) {
+            FB.api('/me', function(response)
+            {
+                var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
+                var apiData = JSON.stringify(
+                    {
+                        ProfileId : facebookId
+                    }
+                );
+                var token = $(".token").data("token");
+                $.ajax({
+                    type: 'post',
+                    url: '_apiRequest.php',
+                    async: false,
+                    data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
+                    success: function (data) {
+                        var jsonData = JSON.parse(data);
+                        var counter = 1;
+                        $.each(jsonData.Groups, function(i,ele) {
+                            if (counter<=6) {
+                                $(".groupBox").append('' +
+                                    '<div class=" col-md-2" style="text-align:center;">'+
+                                    '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
+                                    '<p class="">'+ele.Name+'</p>'+
+                                    '</div>');
+                                counter++
+                            }
+                        });
+                    },
+                    error: function () {
+                        alert("ajax failed");
+                    }
+                });
+            });
+        });
+
+    };
+
+
+
+    (function(d, s, id){
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) {return;}
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/en_US/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+    $("body").on("click", ".btn-viewevent", function() {
+        var eventIdClicked = $(this).data("eventid");
+        window.location = "viewevent.php?id="+eventIdClicked;
     });
 
-
+    // Gets the date and time in the format the api needs it in.
+    function getFormattedDateTime() {
+        return new Date().toISOString().substr(0, 19);
+    }
 </script>
 
 </body>
