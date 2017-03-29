@@ -66,7 +66,7 @@ session_start();
                 <a href="mygroups.php" style="float:right;font-size:14px;">View all</a>
 
                 <!--             GROUPS END -->
-                <h4 style=""><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
+                <h4><i class="material-icons icon_blue" style="font-size:28px;vertical-align:middle;">pageview</i>&nbsp;&nbsp;Suggested events</h4>
                 <hr>
                 <!--            BUNCH OF DEMO SUGGESTED EVENTS FOR SHOW BELOW HERE -->
                <div class="suggestedEventBox">
