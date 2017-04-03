@@ -128,6 +128,7 @@ session_start();
                     <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
                     <input id="address" type="text" class="form-control ho-textinput inputLocation" placeholder="Location" aria-describedby="title-input" style="z-index:1;" >
                 </div>
+                <br>
                 <div id="map" style="height: 400px;"></div>
                 <br>
                 <div class="input-group">
@@ -164,25 +165,30 @@ session_start();
         var token = $(".token").data("token");
         var map;
         var geocoder;
-        var eventLat;
-        var eventLng;
+        var eventLat = 55.675637;
+        var eventLng = 12.569544;
+        var addressSelected = false;
 
         $(function() {
             $(".inputLocation").dawaautocomplete({
                 select: function(event, data) {
                     $('.inputLocation').text(data.tekst);
-                   geocodeAddress(geocoder, map);
+                    geocodeAddress(geocoder, map);
+                    addressSelected = true;
                 },
             });
         });
 
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 55.675291, lng: 12.570202 },
-                zoom: 15
+                center: { lat: 55.675637, lng: 12.569544 },
+                zoom: 12,
+
             });
             geocoder = new google.maps.Geocoder();
-            geocodeAddress(geocoder, map);
+            if (addressSelected) {
+                geocodeAddress(geocoder, map);
+            }
         }
         
         function geocodeAddress(geocoder, resultsMap) {
@@ -196,6 +202,7 @@ session_start();
                     });
                     eventLat = results[0].geometry.location.lat();
                     eventLng = results[0].geometry.location.lng();
+                    // console.log(eventLat + ", " + eventLng);
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -203,6 +210,7 @@ session_start();
         }
 
         if ($(".editid").data("editid") != null) {
+            addressSelected = true;
             var editid = $(".editid").data("editid");
             var apiLink = "https://api.howlout.net/event/event?id="+editid;
             var token = $(".token").data("token");
@@ -268,8 +276,8 @@ session_start();
                 ],
                 "ImageSource": "img/building.jpg",
                 "Title": title,
-                "Latitude": 55.628435,
-                "Longitude": 12.578776,
+                // "Latitude": 55.675637,
+                // "Longitude": 12.569544,
                 "Latitude": eventLat,
                 "Longitude": eventLng,
                 "AddressName": address,

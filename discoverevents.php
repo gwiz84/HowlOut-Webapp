@@ -54,7 +54,7 @@ session_start();
                 <div id="map" style="height: 400px;"></div>
                 <br>
 
-                <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events nearby:</h4>
+                <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events nearby</h4>
                 <div class="eventContainer"></div>
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>

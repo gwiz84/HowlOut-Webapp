@@ -45,10 +45,10 @@ session_start();
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 
-                <div class="conv-container col-sm-6">
+                <div class="conv-container col-sm-9">
                     <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld
                     </div>
                     <div id="conv-messages" class="conv-messages">
@@ -173,7 +173,7 @@ session_start();
                     </div>
 
                 </div>
-                <div id="conv-list-container" class="conv-list-container col-sm-2">
+                <div id="conv-list-container" class="conv-list-container col-sm-3">
                     <div class="conv-list-item">
                         <div class="conv-list-circle col-sm-1"></div>
                         <div class="mess-header">
