@@ -51,7 +51,7 @@ session_start();
                 <hr>
 
                 </div>
-                <!--                THE EVENT EDIT BOX END -->
+                <!--      THE EVENT EDIT BOX END -->
 
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>

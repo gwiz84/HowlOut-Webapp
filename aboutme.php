@@ -102,8 +102,8 @@ session_start();
 
     <script>
         $(".btnChangePicture").click(function() {
-         $(".fileChangePicture").click();
-     });
+            $(".fileChangePicture").click();
+        });
     </script>
 </body>
 

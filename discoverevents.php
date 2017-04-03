@@ -154,6 +154,11 @@ session_start();
                 }
             });
         }
+
+        $("body").on("click", ".btn-viewevent", function() {
+            var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
+            window.location = "viewevent.php?id="+eventIdClicked;
+        });
     
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>

@@ -146,7 +146,7 @@ a:hover {
 .event-box-edit > .innermenu {
     height: 150px;
     width: 20%;
-    overflow:hidden;
+    overflow: hidden;
     border-left: solid 1px #148f77;
     border-top-right-radius: 20px;
     border-bottom-right-radius: 20px;
@@ -160,6 +160,10 @@ a:hover {
 
 .eventpaw:hover {
     color: brown;
+}
+
+.eventLocation {
+
 }
 
 .textstroke {

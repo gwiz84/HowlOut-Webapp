@@ -165,10 +165,12 @@ session_start();
         var token = $(".token").data("token");
         var map;
         var geocoder;
+        var markersArray = [];
         var eventLat = 55.675637;
         var eventLng = 12.569544;
         var addressSelected = false;
 
+        // Activates the DAWA autocomplete feature on the ".inputLocation" field
         $(function() {
             $(".inputLocation").dawaautocomplete({
                 select: function(event, data) {
@@ -179,11 +181,11 @@ session_start();
             });
         });
 
+        // Initializes the map display, centered on Rådhuspladsen in Copenhagen by default
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675637, lng: 12.569544 },
                 zoom: 12,
-
             });
             geocoder = new google.maps.Geocoder();
             if (addressSelected) {
@@ -191,15 +193,20 @@ session_start();
             }
         }
         
+        // "Translates" the selected address into latitude and longitude using Google's geocoding functions
+        // Centers the map on the location provided, and stores the latitude and longitude values in the
+        // 'eventLat' and 'eventLng' variables for later use
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function(results, status) {
                 if (status === 'OK') {
-                      resultsMap.setCenter(results[0].geometry.location);
-                      var marker = new google.maps.Marker({
-                          map: resultsMap,
-                          position: results[0].geometry.location
+                    clearMarkers();
+                    resultsMap.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: resultsMap,
+                        position: results[0].geometry.location
                     });
+                    markersArray.push(marker);
                     eventLat = results[0].geometry.location.lat();
                     eventLng = results[0].geometry.location.lng();
                     // console.log(eventLat + ", " + eventLng);
@@ -209,6 +216,21 @@ session_start();
             });
         }
 
+        // Deletes all markers in the array by removing references to them
+        function clearMarkers() {
+            if (markersArray) {
+                for (i in markersArray) {
+                    markersArray[i].setMap(null);
+                }
+                markersArray.length = 0;
+            }
+        }
+
+        // If the 'editid' data variable is set on the ".editid" div, an event id has been passed
+        // using the "?id=" GET parameter. Try getting the event from the API. If no event is found with
+        // the provided id, return to index.php.
+        // When the event has been loaded, check if the currently logged in user is one of the owners of the event,
+        // i.e. has the right to edit it at all. Otherwise, return to index.php.
         if ($(".editid").data("editid") != null) {
             addressSelected = true;
             var editid = $(".editid").data("editid");
@@ -221,19 +243,31 @@ session_start();
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
-                    var startDate = convertDateString(jsonData.StartDate);
-                    var endDate = convertDateString(jsonData.EndDate);
-                    chosenStart = startDate;
-                    chosenEnd = endDate;
-                    $(".inputTitle").val(jsonData.Title);
-                    $(".inputDescription").val(jsonData.Description);
-                    if (jsonData.Visibility == 0) {
-                        $(".radioPublic").prop("checked", true);
+                    var fbid = $(".fbid").data("fbid");
+                    var ownersArray = jsonData.ProfileOwners;
+                    var isOwner = false;
+                    $.each(ownersArray, function(i, ele) {
+                        if (fbid == ele.ProfileId) {
+                            isOwner = true;
+                        }
+                    });
+                    if (!isOwner) {
+                        window.location = "index.php";
+                    } else {
+                        var startDate = convertDateString(jsonData.StartDate);
+                        var endDate = convertDateString(jsonData.EndDate);
+                        chosenStart = startDate;
+                        chosenEnd = endDate;
+                        $(".inputTitle").val(jsonData.Title);
+                        $(".inputDescription").val(jsonData.Description);
+                        if (jsonData.Visibility == 0) {
+                            $(".radioPublic").prop("checked", true);
+                        }
+                        $(".inputStart").val(startDate);
+                        $(".inputEnd").val(endDate);
+                        $(".inputLocation").val(jsonData.AddressName);
+                        $(".inputAttendees").val(jsonData.MaxSize);
                     }
-                    $(".inputStart").val(startDate);
-                    $(".inputEnd").val(endDate);
-                    $(".inputLocation").val(jsonData.AddressName);
-                    $(".inputAttendees").val(jsonData.MaxSize);
                 },
                 error: function (data) {
                     // alert(data);
