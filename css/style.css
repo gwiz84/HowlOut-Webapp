@@ -162,10 +162,6 @@ a:hover {
     color: brown;
 }
 
-.eventLocation {
-
-}
-
 .textstroke {
     color: white;
     -ms-text-shadow: -1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
@@ -259,6 +255,7 @@ a:hover {
     border-left: solid 1px lightgrey;
     padding: 0;
     overflow-x: hidden;
+    width: 220px;
 }
 
 .conv-list-item {
@@ -305,6 +302,8 @@ a:hover {
 
 .mess-text {
     font-style: italic;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .mess-input {

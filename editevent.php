@@ -185,6 +185,7 @@ session_start();
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675637, lng: 12.569544 },
+                mapTypeControl: false,
                 zoom: 12,
             });
             geocoder = new google.maps.Geocoder();

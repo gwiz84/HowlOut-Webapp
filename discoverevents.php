@@ -47,10 +47,11 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h4>
+                <h4><i class="material-icons leftmenuitem icon_blue" style="font-size:26px;vertical-align:middle;" >pageview</i>&nbsp;&nbsp;Discover events</h4>
+                <!-- <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h4> -->
                 <hr>
 
-                <h4><i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;Your location</h4>
+                <h4><i class="fa fa-map-marker icon_loc" aria-hidden="true" style="font-size:28px;vertical-align:middle;"></i>&nbsp;&nbsp;Your location</h4>
                 <div id="map" style="height: 400px;"></div>
                 <br>
 
@@ -71,25 +72,32 @@ session_start();
     <?php include_once "p_loadScripts.html"; ?>
     <script src="js/eventhandler.js"></script>
     <script>
-        var pos;
+        var userPos;
         var map;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675291, lng: 12.570202 },
+                mapTypeControl: false,
                 zoom: 12
             });
             var infoWindow = new google.maps.InfoWindow({map: map});
+            var centerControlDiv = document.createElement('div');
+            var centerControl = new CenterControl(centerControlDiv, map);
+
+            centerControlDiv.index = 1;
+            map.controls[google.maps.ControlPosition.RIGHT].push(centerControlDiv);
+
 
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    pos = {
+                    userPos = {
                         lat: position.coords.latitude,
                         lng: position.coords.longitude
                     };
-                    infoWindow.setPosition(pos);
+                    infoWindow.setPosition(userPos);
                     infoWindow.setContent('You are here');
-                    map.setCenter(pos);
+                    map.setCenter(userPos);
                     getNearbyEvents();
                 }, function() {
                     handleLocationError(true, infoWindow, map.getCenter());
@@ -107,6 +115,38 @@ session_start();
               'Error: Your browser doesn\'t support geolocation.');
         }
 
+        function CenterControl(controlDiv, map) {
+
+            // Set CSS for the control border.
+            var controlUI = document.createElement('div');
+            controlUI.style.backgroundColor = '#fff';
+            controlUI.style.border = '2px solid #fff';
+            controlUI.style.borderRadius = '3px';
+            controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+            controlUI.style.cursor = 'pointer';
+            controlUI.style.marginBottom = '22px';
+            controlUI.style.textAlign = 'center';
+            controlUI.title = 'Click to recenter on your location';
+            controlDiv.appendChild(controlUI);
+
+            // Set CSS for the control interior.
+            var controlText = document.createElement('div');
+            controlText.style.color = 'rgb(25,25,25)';
+            controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+            controlText.style.fontSize = '14px';
+            controlText.style.lineHeight = '25px';
+            controlText.style.paddingLeft = '5px';
+            controlText.style.paddingRight = '5px';
+            controlText.innerHTML = 'Center on my location';
+            controlUI.appendChild(controlText);
+
+            // Setup the click event listeners: simply set the map to Chicago.
+            controlUI.addEventListener('click', function() {
+                map.setCenter(userPos);
+            });
+        }
+
+
         // Adds a marker to the map.
         function addMarker(location, map, label) {
             var marker = new google.maps.Marker({
@@ -121,12 +161,13 @@ session_start();
                 // map.setZoom(16);
                 map.setCenter(marker.getPosition());
             });
+            marker.setAnimation(google.maps.Animation.DROP);
 
         }
 
         function getNearbyEvents() {
-            var userLat = pos.lat;
-            var userLng = pos.lng;
+            var userLat = userPos.lat;
+            var userLng = userPos.lng;
             var today = new Date();
             var isoString = today.toISOString();
             var apiLink = "https://api.howlout.net/event/search?userLat=" + userLat + "&userLong=" + userLng + "&currentTime=" + isoString;
@@ -140,7 +181,7 @@ session_start();
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
-                    $.each(jsonData, function(i,ele) {
+                    $.each(jsonData, function(i, ele) {
                         $(".eventContainer").append(makeEventElement(ele) + "<br>");
                         var eventPos = {
                             lat: ele.Latitude,

@@ -45,7 +45,7 @@ session_start();
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-sm-9 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 
                 <div class="conv-container col-sm-9">
@@ -301,9 +301,9 @@ session_start();
     <script src="js/jquery.slimscroll.min.js"></script>
     
     <script>
-        function addSlimScroll(element) {
+        function addSlimScroll(element, height) {
             element.slimscroll({
-                height: '100%',
+                height: height,
                 railVisible: false,
                 color: '#2ecc71',
                 // railColor: '#2ecc71',
@@ -311,8 +311,8 @@ session_start();
                 size: '6px'
             });
         }
-        addSlimScroll($("#conv-messages"));
-        // addSlimScroll($("#conv-list-container"));
+        addSlimScroll($("#conv-messages"), "100%");
+        addSlimScroll($("#conv-list-container"), "90%");
 
 
     </script>
