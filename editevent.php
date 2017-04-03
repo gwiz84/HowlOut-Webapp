@@ -126,8 +126,9 @@ session_start();
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="fa fa-map-marker icon_red" aria-hidden="true"style="font-size:20px;vertical-align:middle;"></i></span>
-                    <input type="text" class="form-control ho-textinput inputLocation" placeholder="Location" aria-describedby="title-input" style="z-index:1;" >
+                    <input id="address" type="text" class="form-control ho-textinput inputLocation" placeholder="Location" aria-describedby="title-input" style="z-index:1;" >
                 </div>
+                <div id="map" style="height: 400px;"></div>
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true" style="font-size:20px;vertical-align:middle;"></i></span>
@@ -161,14 +162,45 @@ session_start();
 
     <script>
         var token = $(".token").data("token");
+        var map;
+        var geocoder;
+        var eventLat;
+        var eventLng;
 
         $(function() {
             $(".inputLocation").dawaautocomplete({
                 select: function(event, data) {
                     $('.inputLocation').text(data.tekst);
-                }
+                   geocodeAddress(geocoder, map);
+                },
             });
         });
+
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 55.675291, lng: 12.570202 },
+                zoom: 15
+            });
+            geocoder = new google.maps.Geocoder();
+            geocodeAddress(geocoder, map);
+        }
+        
+        function geocodeAddress(geocoder, resultsMap) {
+            var address = document.getElementById('address').value;
+            geocoder.geocode({'address': address}, function(results, status) {
+                if (status === 'OK') {
+                      resultsMap.setCenter(results[0].geometry.location);
+                      var marker = new google.maps.Marker({
+                          map: resultsMap,
+                          position: results[0].geometry.location
+                    });
+                    eventLat = results[0].geometry.location.lat();
+                    eventLng = results[0].geometry.location.lng();
+                } else {
+                    alert('Geocode was not successful for the following reason: ' + status);
+                }
+            });
+        }
 
         if ($(".editid").data("editid") != null) {
             var editid = $(".editid").data("editid");
@@ -196,8 +228,8 @@ session_start();
                     $(".inputAttendees").val(jsonData.MaxSize);
                 },
                 error: function (data) {
-                    alert(data);
-                    // alert("ajax failed");
+                    // alert(data);
+                    alert("ajax failed");
                 }
             });
         }
@@ -238,6 +270,8 @@ session_start();
                 "Title": title,
                 "Latitude": 55.628435,
                 "Longitude": 12.578776,
+                "Latitude": eventLat,
+                "Longitude": eventLng,
                 "AddressName": address,
                 "Description": description,
                 "StartDate": startDate,
@@ -269,6 +303,7 @@ session_start();
         });
 
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>
 
 </body>
 

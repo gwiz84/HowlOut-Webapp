@@ -120,7 +120,7 @@ session_start();
 
         $("body").on("click", ".btn-duplicateevent", function() {
             var eventIdClicked = $(this).parent().data("eventid");
-            alert("SHARED!");
+            alert("DUPLICATE!");
         });
 
         $("body").on("click", ".btn-deleteevent", function() {

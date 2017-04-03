@@ -94,7 +94,7 @@ session_start();
                         async: false,
                         data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
-                            console.log(data);
+                            // console.log(data);
                             var jsonData = JSON.parse(data);
                             $.each(jsonData, function(i,ele) {
                                 $(".eventContainer").append(makeEventElement(ele) + "<br>");

@@ -492,24 +492,24 @@ a:hover {
 
 @media only screen and (min-width : 992px) {
     .searchContent {
-        width:450px;
-        height:100%;
+        width: 450px;
+        height: 100%;
         /*max-height: 500px;*/
-        overflow-x:hidden;
+        overflow-x: hidden;
         overflow-y: auto;
         white-space: nowrap;
         -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
         -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
         box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-        z-index:9999;
-        background-color:white;
-        padding-bottom:3px;
+        z-index: 9999;
+        background-color: white;
+        padding-bottom: 3px;
     }
     .howloutLogoText {
         font-family: 'Paytone One', sans-serif;
         font-size: 26px;
         /*font-weight:bold;*/
-        color:#E8F8F5;
+        color: #E8F8F5;
         text-shadow: 2px 2px #000000;
     }
 
@@ -517,24 +517,24 @@ a:hover {
 
 @media only screen and (min-width : 1200px) {
     .searchContent {
-        width:550px;
-        height:100%;
+        width: 550px;
+        height: 100%;
         /*max-height: 500px;*/
-        overflow-x:hidden;
+        overflow-x: hidden;
         overflow-y: auto;
         white-space: nowrap;
         -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
         -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
         box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-        z-index:9999;
-        background-color:white;
-        padding-bottom:3px;
+        z-index: 9999;
+        background-color: white;
+        padding-bottom: 3px;
     }
     .howloutLogoText {
         font-family: 'Paytone One', sans-serif;
         font-size: 30px;
         /*font-weight:bold;*/
-        color:#E8F8F5  ;
+        color:#E8F8F5;
         text-shadow: 2px 2px #000000;
     }
 }
@@ -548,9 +548,8 @@ a:hover {
     min-width: 50px;
     max-width: 100px;
     border-radius: 0;
-    background-color:  #eaecee ;
+    background-color: #eaecee ;
     font-size: 16px;
-
 }
 
 .howlout-button:hover {
@@ -558,9 +557,8 @@ a:hover {
     min-width: 50px;
     max-width: 100px;
     border-radius: 0;
-    background-color:  #d0ece7;
+    background-color: #d0ece7;
     font-size: 16px;
-
 }
 
 .howlout-button:active {
@@ -568,8 +566,7 @@ a:hover {
     min-width: 50px;
     max-width: 100px;
     border-radius: 0;
-    background-color:  #eaecee;
+    background-color: #eaecee;
     font-size: 16px;
-
 }
 

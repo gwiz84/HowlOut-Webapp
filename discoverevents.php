@@ -50,6 +50,12 @@ session_start();
                 <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h4>
                 <hr>
 
+                <h4><i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;Your location</h4>
+                <div id="map" style="height: 400px;"></div>
+                <br>
+
+                <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events nearby:</h4>
+                <div class="eventContainer"></div>
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
         </div>
@@ -63,6 +69,94 @@ session_start();
     <?php include_once "p_footer.html"; ?>
 
     <?php include_once "p_loadScripts.html"; ?>
+    <script src="js/eventhandler.js"></script>
+    <script>
+        var pos;
+        var map;
+        function initMap() {
+            map = new google.maps.Map(document.getElementById('map'), {
+                center: { lat: 55.675291, lng: 12.570202 },
+                zoom: 12
+            });
+            var infoWindow = new google.maps.InfoWindow({map: map});
+
+            // Try HTML5 geolocation.
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(function(position) {
+                    pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    infoWindow.setPosition(pos);
+                    infoWindow.setContent('You are here');
+                    map.setCenter(pos);
+                    getNearbyEvents();
+                }, function() {
+                    handleLocationError(true, infoWindow, map.getCenter());
+                });
+            } else {
+                // Browser doesn't support Geolocation
+                handleLocationError(false, infoWindow, map.getCenter());
+            }
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+            infoWindow.setPosition(pos);
+            infoWindow.setContent(browserHasGeolocation ?
+              'Error: The Geolocation service failed.' :
+              'Error: Your browser doesn\'t support geolocation.');
+        }
+
+        // Adds a marker to the map.
+        function addMarker(location, map, label) {
+            var marker = new google.maps.Marker({
+                position: location,
+                // label: label,
+                title: label,
+                map: map
+            });
+
+            // When event pin is clicked
+            marker.addListener('click', function() {
+                // map.setZoom(16);
+                map.setCenter(marker.getPosition());
+            });
+
+        }
+
+        function getNearbyEvents() {
+            var userLat = pos.lat;
+            var userLng = pos.lng;
+            var today = new Date();
+            var isoString = today.toISOString();
+            var apiLink = "https://api.howlout.net/event/search?userLat=" + userLat + "&userLong=" + userLng + "&currentTime=" + isoString;
+     
+            var token = $(".token").data("token");
+
+            $.ajax({
+                type: 'post',
+                url: '_apiRequest.php',
+                async: false,
+                data: {'apiLink' : apiLink, 'token' : token},
+                success: function (data) {
+                    var jsonData = JSON.parse(data);
+                    $.each(jsonData, function(i,ele) {
+                        $(".eventContainer").append(makeEventElement(ele) + "<br>");
+                        var eventPos = {
+                            lat: ele.Latitude,
+                            lng: ele.Longitude
+                        };
+                        addMarker(eventPos, map, ele.Title);
+                    });
+                },
+                error: function () {
+                    alert("ajax failed");
+                }
+            });
+        }
+    
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>
 
 </body>
 
