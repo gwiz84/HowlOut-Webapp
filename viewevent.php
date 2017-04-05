@@ -1,10 +1,9 @@
-<?php session_start();
-
+<?php
+session_start();
 $eventId = $_GET['id'];
 if (!isset($_GET['id']) || !is_numeric($eventId)) {
     header('Location: '.'index.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
