@@ -1,7 +1,7 @@
 <?php
 session_start();
-$eventId = $_GET['id'];
-if (!isset($_GET['id']) || !is_numeric($eventId)) {
+$groupId = $_GET['id'];
+if (!isset($_GET['id']) || !is_numeric($groupId)) {
     header('Location: '.'index.php');
 }
 ?>
@@ -49,26 +49,18 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;" >
                 <!--      PAGE CONTENT GOES HERE      -->
                 <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:200px;margin-bottom:5px;">
                 <h3 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;" class="txtTitle textstroke">Group name</h3>
-                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<br><br>
+                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<div class="createEventHolder" style="float:right;"></div>
+                <br><br>
                 <h4>About this group</h4>
                 <p class="txtDescription"></p>
                 <a href="" style="float:right;font-size:14px;">View more</a><br>
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
-                <div class="event-box">
-                    <div class="innertop" style="background-image:url('img/building.jpg');background-size:100%;">
-                        <span style="font-size:28px;color:white;" class="textstroke">Orgy event</span>
-                    </div>
+                <div class="eventBox">
 
-                    <div class="innerbottom">
-                        <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;"></i>
-                        <i class="fa fa-clock-o icon_time" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventTime">18:00</span><br>
-                        <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">Nørregade 22, 1450 København K.</span><br>
-                        <i class="fa fa-user icon_peep" aria-hidden="true"></i>&nbsp;&nbsp;<span class="eventSignedUp">20 / 24</span>
-                    </div>
                 </div><br>
                 <a href="" style="float:right;font-size:14px;">View all</a><br>
                 <br>
@@ -102,12 +94,15 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     <?php include_once "p_footer.html"; ?>
 
     <?php include_once "p_loadScripts.html"; ?>
-
+    <script src="js/eventhandler.js"></script>
     <script>
+        var groupId = <?php echo $groupId; ?>;
 
-        var apiLink ="https://api.howlout.net/group/<?php echo $eventId; ?>";
+        var apiLink ="https://api.howlout.net/group/"+groupId;
 
         var token = $(".token").data("token");
+
+        var facebookId = <?php echo $_SESSION['facebookId']; ?>;
 
         $.ajax({
             type: 'post',
@@ -115,7 +110,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             async: false,
             data: {'apiLink' : apiLink, 'token' : token},
             success: function (dataraw) {
-    //            alert(dataraw);
+                //            alert(dataraw);
                 var data = JSON.parse(dataraw);
                 var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
                 var title = data.Name;
@@ -129,8 +124,18 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 $(".txtMemberAmount").text(memberAmount);
                 $(".txtDescription").text(desc);
 
-                $.each(data.Members, function(i, ele) {
+                //check if user is profileowner and make create event button if is
+                $.each(data.ProfileOwners, function(i, ele) {
+                    if (ele.ProfileId==facebookId) {
+                        // append button that goes to create event via this group
+                        $(".createEventHolder").append('<button class="howlout-button btnCreateEvent">Create event</button>');
+                    }
 
+                });
+
+                // add data to page
+                $.each(data.Members, function(i, ele) {
+                    $(".memberBox").data("groupid");
                     $(".memberBox").append('' +
                         '<div class=" col-md-2" style="text-align:center;">'+
                         '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
@@ -143,6 +148,56 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 alert("An unexpected error has sadly occurred.");
             }
         });
+
+        // CLICK function for create event through group button
+        $("body").on("click", ".btnCreateEvent", function() {
+            // Redirect to create event with group id instead of profile id
+            window.location = "editevent.php?groupid="+groupId;
+        });
+
+        // NEXT UPCOMING EVENT SKAL TESTES NÅR GROUP CREATE EVENT VIRKER
+        var now = new Date();
+        apiLink = "https://api.howlout.net/event/eventsFromGroupIds?CurrentTime="+now.toISOString()+"&groupIds="+groupId;
+        var token = $(".token").data("token");
+        $.ajax({
+            type: 'post',
+            url: '_apiRequest.php',
+            async: false,
+            data: {'apiLink' : apiLink, 'token' : token},
+            success: function (data) {
+                var jsonData = JSON.parse(data);
+//                alert(data);
+                var eventToShow = null;
+                var currentTime = new Date().getTime();
+                var lowest = null;
+
+                $.each(jsonData, function(i,ele) {
+                    var startTime = Date.parse(ele.StartDate);
+//                            console.log("Event title: "+ele.Title );
+//                            console.log("Current time: "+currentTime );
+//                            console.log("Event start time: "+startTime );
+//                            console.log( (startTime-currentTime) );
+                    if ( (startTime-currentTime)>0) {
+                        if (lowest===null) {
+                            lowest = startTime - currentTime;
+                            eventToShow = ele;
+                        } else {
+                            if ( (startTime-currentTime) < lowest) {
+                                lowest = startTime - currentTime;
+                                eventToShow = ele;
+                            }
+                        }
+                    }
+                });
+                if (eventToShow!=null) {
+                    $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
+                }
+            },
+            error: function () {
+                alert("An unexpected error has sadly occurred.");
+            }
+        });
+
     </script>
 </body>
 
