@@ -88,6 +88,8 @@ session_start();
         $titleaction = "Edit";
         $buttonaction = "Update";
         echo '<div class="editid" style="display:none;" data-editid="'.$_GET['id'].'"></div>';
+    } else if (isset($_GET['groupid'])) {
+        echo '<div class="groupid" style="display:none;" data-groupid="'.$_GET['groupid'].'"></div>';
     }
     ?>
     <!-- Main Content -->
@@ -244,6 +246,7 @@ session_start();
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
+                    alert(jsonData.GroupOwner);
                     var fbid = $(".fbid").data("fbid");
                     var ownersArray = jsonData.ProfileOwners;
                     var isOwner = false;
@@ -302,32 +305,62 @@ session_start();
             var isPrivate = ($(".radioPrivate").is(":checked")) ? 1 : 0;
             var profileId = $(".fbid").data("fbid");
             var apiLink = "https://api.howlout.net/event";
-            var apiData = JSON.stringify({
-                "EventId": eventId,
-                "ProfileOwners": [
-                {
-                    "ProfileId": profileId
-                }
-                ],
-                "ImageSource": "img/building.jpg",
-                "Title": title,
-                // "Latitude": 55.675637,
-                // "Longitude": 12.569544,
-                "Latitude": eventLat,
-                "Longitude": eventLng,
-                "AddressName": address,
-                "Description": description,
-                "StartDate": startDate,
-                "EndDate": endDate,
-                "EventTypes": [
-                0
-                ],
-                "MinAge": 0,
-                "MaxAge": 200,
-                "MinSize": 1,
-                "MaxSize": maxSize,
-                "Visibility": isPrivate
-            });
+            var groupId = $(".groupid").data("groupid");
+            var apiData;
+            if (groupId>0) {
+                apiData = JSON.stringify({
+                    "EventId": eventId,
+                    "GroupOwner": {
+                            "GroupId": groupId
+                    },
+                    "ImageSource": "img/building.jpg",
+                    "Title": title,
+                    // "Latitude": 55.675637,
+                    // "Longitude": 12.569544,
+                    "Latitude": eventLat,
+                    "Longitude": eventLng,
+                    "AddressName": address,
+                    "Description": description,
+                    "StartDate": startDate,
+                    "EndDate": endDate,
+                    "EventTypes": [
+                        0
+                    ],
+                    "MinAge": 0,
+                    "MaxAge": 200,
+                    "MinSize": 1,
+                    "MaxSize": maxSize,
+                    "Visibility": isPrivate
+                });
+            } else {
+                apiData = JSON.stringify({
+                    "EventId": eventId,
+                    "ProfileOwners": [
+                        {
+                            "ProfileId": profileId
+                        }
+                    ],
+                    "ImageSource": "img/building.jpg",
+                    "Title": title,
+                    // "Latitude": 55.675637,
+                    // "Longitude": 12.569544,
+                    "Latitude": eventLat,
+                    "Longitude": eventLng,
+                    "AddressName": address,
+                    "Description": description,
+                    "StartDate": startDate,
+                    "EndDate": endDate,
+                    "EventTypes": [
+                        0
+                    ],
+                    "MinAge": 0,
+                    "MaxAge": 200,
+                    "MinSize": 1,
+                    "MaxSize": maxSize,
+                    "Visibility": isPrivate
+                });
+            }
+
             var token = $(".token").data("token");
 
             $.ajax({

@@ -49,11 +49,12 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
+            <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;" >
                 <!--      PAGE CONTENT GOES HERE      -->
                 <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:200px;margin-bottom:5px;">
                 <h3 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;" class="txtTitle textstroke">Group name</h3>
-                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<br><br>
+                <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<div class="createEventHolder" style="float:right;"></div>
+                <br><br>
                 <h4>About this group</h4>
                 <p class="txtDescription"></p>
                 <a href="" style="float:right;font-size:14px;">View more</a><br>
@@ -101,13 +102,15 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
         var token = $(".token").data("token");
 
+        var facebookId = <?php echo $_SESSION['facebookId']; ?>;
+
         $.ajax({
             type: 'post',
             url: '_apiRequest.php',
             async: false,
             data: {'apiLink' : apiLink, 'token' : token},
             success: function (dataraw) {
-    //            alert(dataraw);
+                //            alert(dataraw);
                 var data = JSON.parse(dataraw);
                 var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
                 var title = data.Name;
@@ -121,6 +124,16 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 $(".txtMemberAmount").text(memberAmount);
                 $(".txtDescription").text(desc);
 
+                //check if user is profileowner and make create event button if is
+                $.each(data.ProfileOwners, function(i, ele) {
+                    if (ele.ProfileId==facebookId) {
+                        // append button that goes to create event via this group
+                        $(".createEventHolder").append('<button class="howlout-button btnCreateEvent">Create event</button>');
+                    }
+
+                });
+
+                // add data to page
                 $.each(data.Members, function(i, ele) {
                     $(".memberBox").data("groupid");
                     $(".memberBox").append('' +
@@ -136,7 +149,13 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             }
         });
 
+        // CLICK function for create event through group button
+        $("body").on("click", ".btnCreateEvent", function() {
+            // Redirect to create event with group id instead of profile id
+            window.location = "editevent.php?groupid="+groupId;
+        });
 
+        // NEXT UPCOMING EVENT SKAL TESTES NÅR GROUP CREATE EVENT VIRKER
         var now = new Date();
         apiLink = "https://api.howlout.net/event/eventsFromGroupIds?CurrentTime="+now.toISOString()+"&groupIds="+groupId;
         var token = $(".token").data("token");
@@ -147,7 +166,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             data: {'apiLink' : apiLink, 'token' : token},
             success: function (data) {
                 var jsonData = JSON.parse(data);
-                alert(data);
+//                alert(data);
                 var eventToShow = null;
                 var currentTime = new Date().getTime();
                 var lowest = null;
