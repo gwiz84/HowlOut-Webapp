@@ -99,7 +99,7 @@ session_start();
         </div>
     </div>
     <div class="fbid" data-fbid="<?php echo $_SESSION['facebookId'] ?>" style="display:none;"></div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 120px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
