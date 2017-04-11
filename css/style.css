@@ -5,7 +5,7 @@ html {
 body {
     font-family: 'Questrial', sans-serif;
     font-size: 14px;
-    background-color:#FDFEFE;
+    background-color:#F2FFFE;
 }
 
 input[type="radio"] {
@@ -496,7 +496,8 @@ a:hover {
 @media only screen and (min-width : 992px) {
     .searchContent {
         width: 450px;
-        height: 100%;
+        min-height: 350px;
+        max-height: 700px;
         /*max-height: 500px;*/
         overflow-x: hidden;
         overflow-y: auto;
@@ -521,7 +522,8 @@ a:hover {
 @media only screen and (min-width : 1200px) {
     .searchContent {
         width: 550px;
-        height: 100%;
+        min-height: 350px;
+        max-height: 700px;
         /*max-height: 500px;*/
         overflow-x: hidden;
         overflow-y: auto;

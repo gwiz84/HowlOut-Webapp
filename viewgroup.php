@@ -43,7 +43,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 120px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">

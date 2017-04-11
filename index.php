@@ -35,13 +35,14 @@ session_start();
 <body>
     <?php include_once "_inserttoken.php"; ?>
     <?php include_once "_loginCheck.php"; ?>
+
     <!-- Main Content -->
     <div class="hidden-xs hidden-sm top-menu-container">
         <div class="container" style="padding: 0;">
             <?php include_once "p_topmenu.php"; ?>
         </div>
     </div>
-    <div class="container hidden-xs hidden-sm" style="padding-top: 100px;">
+    <div class="container hidden-xs hidden-sm" style="padding-top: 120px;">
 
         <div class="row">
             <div class="col-sm-2 left-menu-container">
@@ -49,6 +50,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
                 <hr>
                 <!--                THE EVENT BOX START -->
