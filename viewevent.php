@@ -134,7 +134,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     if (Object.keys(data).length <= 0) {
                         window.location = "index.php";
                     }
-                    console.log(data);
+                    // console.log(data);
                     var jsonData = JSON.parse(data);                    
                     $(".main-content-container").removeClass("hidden");
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
@@ -145,6 +145,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     $("#eventLocation").html(jsonData.AddressName);
                     $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
                     $("#eventDescription").html(jsonData.Description);
+                    $(".img-responsive").attr("src", jsonData.ImageSource);
                     eventLatitude = jsonData.Latitude;
                     eventLongitude = jsonData.Longitude;
                     updateMap();

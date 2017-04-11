@@ -108,12 +108,11 @@ session_start();
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <h4 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event</h4><hr>
-                <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;background-image: url('img/building.jpg');">
+                <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
                 <span>
                     <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
                     <input style="display: none;" id="imageInput" type="file">
                 </span>
-                <button id="btnUpload">Upload</button>
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
@@ -269,7 +268,7 @@ session_start();
                         var endDate = convertDateString(jsonData.EndDate);
                         chosenStart = startDate;
                         chosenEnd = endDate;
-                        $(".image").css("background-image", jsonData.ImageSource);
+                        $(".image").css("background-image", "url('" + jsonData.ImageSource + "')");
                         $(".inputTitle").val(jsonData.Title);
                         $(".inputDescription").val(jsonData.Description);
                         if (jsonData.Visibility == 0) {
@@ -286,6 +285,8 @@ session_start();
                     alert("ajax failed");
                 }
             });
+        } else {
+            $(".image").css("background-image", "url('img/building.jpg')");
         }
 
         function convertDateString(date) {
