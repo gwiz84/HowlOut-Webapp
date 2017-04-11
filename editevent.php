@@ -107,7 +107,12 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event</h4><hr>
+                <h4 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event<?php
+                    if (isset($_GET['groupid'])) {
+                         echo " - for group";
+                    }
+                    ?>
+                    </h4><hr>
                 <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
                 <span>
                     <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
@@ -176,7 +181,7 @@ session_start();
         var eventLat = 55.675637;
         var eventLng = 12.569544;
         var addressSelected = false;
-        var image = "image";
+        var image = null;
 
         // Activates the DAWA autocomplete feature on the ".inputLocation" field
         $(function() {
@@ -306,9 +311,9 @@ session_start();
         $(".btnCreate").click(function() {
             var fbid = $(".fbid").data("fbid");
             var imgSrc = "img/building.jpg";
-            var succ = uploadImage(image, fbid);
-            if (succ != "false") {
-                imgSrc = succ;
+            var newImage = uploadImage(image, fbid);
+            if (newImage != "false") {
+                imgSrc = newImage;
             }
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var title = $(".inputTitle").val();
@@ -393,7 +398,7 @@ session_start();
             });
         });
 
-        function readURL(input) {
+        function loadImageFromFile(input) {
             if (input.files && input.files[0]) {
                 var reader = new FileReader();
 
@@ -408,7 +413,7 @@ session_start();
 
         function uploadImage(newImage, fbid) {
             var message = "false";
-            if (newImage != "image") {
+            if (newImage != null) {
                 $.ajax({
                     type: "post",
                     url: "_apiPictureUpload.php",
@@ -426,12 +431,12 @@ session_start();
 
         $("#btnUpload").click(function() {
             var fbid = $(".fbid").data("fbid");
-            var succ = uploadImage(image, fbid);
+            var succ = uploadImage(newImage, fbid);
             alert(succ);
         });
 
         $("#imageInput").change(function(){
-            readURL(this);
+            loadImageFromFile(this);
         });
 
     </script>

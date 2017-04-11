@@ -110,7 +110,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     <!-- FOOTER -->
     <?php include_once "p_footer.html"; ?>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
+    <!-- // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script> -->
 
     <?php include_once "p_loadScripts.html"; ?>
 
