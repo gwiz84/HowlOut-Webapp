@@ -188,6 +188,7 @@ session_start();
                             lng: ele.Longitude
                         };
                         addMarker(eventPos, map, ele.Title);
+                        console.log(ele.ImageSource);
                     });
                 },
                 error: function () {

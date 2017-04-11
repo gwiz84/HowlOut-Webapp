@@ -7,4 +7,4 @@ if ($token == $_SESSION['token']) {
     unset($_SESSION['facebookId']);
     echo "success";
 }
-
+?>

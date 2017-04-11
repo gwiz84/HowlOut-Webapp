@@ -108,7 +108,13 @@ session_start();
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <h4 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event</h4><hr>
-                <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;"><br>
+                <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;background-image: url('img/building.jpg');">
+                <span>
+                    <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
+                    <input style="display: none;" id="imageInput" type="file">
+                </span>
+                <button id="btnUpload">Upload</button>
+                <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
                     <input type="text" class="form-control ho-textinput inputTitle" placeholder="Event title" aria-describedby="title-input" style="z-index:1;">
@@ -171,6 +177,7 @@ session_start();
         var eventLat = 55.675637;
         var eventLng = 12.569544;
         var addressSelected = false;
+        var image = "image";
 
         // Activates the DAWA autocomplete feature on the ".inputLocation" field
         $(function() {
@@ -246,7 +253,7 @@ session_start();
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
-                    alert(jsonData.GroupOwner);
+                    // alert(jsonData.GroupOwner);
                     var fbid = $(".fbid").data("fbid");
                     var ownersArray = jsonData.ProfileOwners;
                     var isOwner = false;
@@ -262,6 +269,7 @@ session_start();
                         var endDate = convertDateString(jsonData.EndDate);
                         chosenStart = startDate;
                         chosenEnd = endDate;
+                        $(".image").css("background-image", jsonData.ImageSource);
                         $(".inputTitle").val(jsonData.Title);
                         $(".inputDescription").val(jsonData.Description);
                         if (jsonData.Visibility == 0) {
@@ -295,6 +303,12 @@ session_start();
         });
 
         $(".btnCreate").click(function() {
+            var fbid = $(".fbid").data("fbid");
+            var imgSrc = "img/building.jpg";
+            var succ = uploadImage(image, fbid);
+            if (succ != "false") {
+                imgSrc = succ;
+            }
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var title = $(".inputTitle").val();
             var description = $(".inputDescription").val();
@@ -307,13 +321,13 @@ session_start();
             var apiLink = "https://api.howlout.net/event";
             var groupId = $(".groupid").data("groupid");
             var apiData;
-            if (groupId>0) {
+            if (groupId > 0) {
                 apiData = JSON.stringify({
                     "EventId": eventId,
                     "GroupOwner": {
                             "GroupId": groupId
                     },
-                    "ImageSource": "img/building.jpg",
+                    "ImageSource": imgSrc,
                     "Title": title,
                     // "Latitude": 55.675637,
                     // "Longitude": 12.569544,
@@ -340,7 +354,7 @@ session_start();
                             "ProfileId": profileId
                         }
                     ],
-                    "ImageSource": "img/building.jpg",
+                    "ImageSource": imgSrc,
                     "Title": title,
                     // "Latitude": 55.675637,
                     // "Longitude": 12.569544,
@@ -376,6 +390,47 @@ session_start();
                     alert("An unexpected error occurred. Please try again later.");
                 }
             });
+        });
+
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    image = e.target.result;
+                    $(".image").css("background-image", "url("+image+")");
+                };
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function uploadImage(newImage, fbid) {
+            var message = "false";
+            if (newImage != "image") {
+                $.ajax({
+                    type: "post",
+                    url: "_apiPictureUpload.php",
+                    async: false,
+                    data: { 'newImage' : image, 'fbid': fbid },
+                    success: function (data) {
+                        message = JSON.parse(data).imgPath;
+                    },
+                    error: function () {
+                    }
+                });
+            }
+            return message;
+        }
+
+        $("#btnUpload").click(function() {
+            var fbid = $(".fbid").data("fbid");
+            var succ = uploadImage(image, fbid);
+            alert(succ);
+        });
+
+        $("#imageInput").change(function(){
+            readURL(this);
         });
 
     </script>

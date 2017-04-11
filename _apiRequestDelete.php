@@ -32,3 +32,4 @@ if ($token == $_SESSION['token']) {
 
     }
 }
+?>
