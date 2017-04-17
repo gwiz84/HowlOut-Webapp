@@ -56,8 +56,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<div class="createEventHolder" style="float:right;"></div>
                 <br><br>
                 <h4>About this group</h4>
-                <p class="txtDescription"></p>
-                <a href="" style="float:right;font-size:14px;">View more</a><br>
+                <p id="groupDescription">No Description</p>
+                <p id="groupDescriptionLong"></p>
+                <a class="btnShowHideDesc" style="float:right;font-size:14px;cursor:pointer;">Show description</a><br>
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
                 <div class="eventBox">
 
@@ -123,7 +124,19 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 $(".txtVisibility").text(isPrivate);
                 $(".txtMemberAmount").text(memberAmount);
                 $(".txtDescription").text(desc);
-
+                if (desc.length>300) {
+                    var shortDesc = "";
+                    for (var i=0;i<298; i++) {
+                        shortDesc += desc[i];
+                    }
+                    shortDesc = shortDesc+"..";
+                    $("#groupDescription").html(shortDesc);
+                    $("#groupDescriptionLong").html(desc);
+                    $("#groupDescriptionLong").hide();
+                } else {
+                    $("#groupDescription").html(desc);
+                    $(".btnShowHideDesc").hide();
+                }
                 //check if user is profileowner and make create event button if is
                 $.each(data.ProfileOwners, function(i, ele) {
                     if (ele.ProfileId==facebookId) {
@@ -146,6 +159,21 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             },
             error: function () {
                 alert("An unexpected error has sadly occurred.");
+            }
+        });
+
+        var descOpen = false;
+        $("body").on("click", ".btnShowHideDesc", function() {
+            if (descOpen) {
+                $("#groupDescription").show(50);
+                $("#groupDescriptionLong").hide();
+                $(".btnShowHideDesc").text("Show description");
+                descOpen = false;
+            } else {
+                $("#groupDescription").hide();
+                $("#groupDescriptionLong").show(100);
+                $(".btnShowHideDesc").text("Hide description");
+                descOpen = true;
             }
         });
 

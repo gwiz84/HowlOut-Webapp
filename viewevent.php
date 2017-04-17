@@ -71,7 +71,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 <br>
                 <h4>About this event</h4>
                 <p id="eventDescription">No Description</p>
-                <a href="" style="float:right;font-size:14px;">View more</a><br>
+                <p id="eventDescriptionLong"></p>
+                <a class="btnShowHideDesc" style="float:right;font-size:14px;cursor:pointer;">Show description</a><br>
                 <br>
                 <div id="map" style="width:100%;height:400px;"></div>
 
@@ -120,6 +121,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var eventLatitude = 55.675291;
         var eventLongitude = 12.570202;
 
+
         $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
@@ -144,7 +146,19 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     $("#eventTime").html(getDateFromISOString(eventDate));
                     $("#eventLocation").html(jsonData.AddressName);
                     $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
-                    $("#eventDescription").html(jsonData.Description);
+                    if (jsonData.Description.length>300) {
+                        var shortDesc = "";
+                        for (var i=0;i<298; i++) {
+                            shortDesc += jsonData.Description[i];
+                        }
+                        shortDesc = shortDesc+"..";
+                        $("#eventDescription").html(shortDesc);
+                        $("#eventDescriptionLong").html(jsonData.Description);
+                        $("#eventDescriptionLong").hide();
+                    } else {
+                        $("#eventDescription").html(jsonData.Description);
+                        $(".btnShowHideDesc").hide();
+                    }
                     $(".img-responsive").attr("src", jsonData.ImageSource);
                     eventLatitude = jsonData.Latitude;
                     eventLongitude = jsonData.Longitude;
@@ -157,6 +171,21 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     // alert("ajax failed");
                 }
             });
+        });
+
+        var descOpen = false;
+        $("body").on("click", ".btnShowHideDesc", function() {
+            if (descOpen) {
+                $("#eventDescription").show(50);
+                $("#eventDescriptionLong").hide();
+                $(".btnShowHideDesc").text("Show description");
+                descOpen = false;
+            } else {
+                $("#eventDescription").hide();
+                $("#eventDescriptionLong").show(100);
+                $(".btnShowHideDesc").text("Hide description");
+                descOpen = true;
+            }
         });
 
         $("#commentfield").keyup(function() {
