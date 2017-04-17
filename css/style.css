@@ -20,7 +20,9 @@ textarea:focus, input:focus {
 }
 */
 
-
+.darken {
+background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5));
+}
 .btn:active {
     outline: none;
 }
@@ -164,8 +166,8 @@ a:hover {
 
 .textstroke {
     color: white;
-    -ms-text-shadow: -1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
-    text-shadow:-1px -1px 0 #808b96, 1px -1px 0 #808b96, -1px 1px 0 #808b96, 1px 1px 0 #808b96;
+    -ms-text-shadow: -1px -1px 0 #17202A, 1px -1px 0 #17202A, -1px 1px 0 #17202A, 1px 1px 0 #17202A;
+    text-shadow:-1px -1px 0 #17202A, 1px -1px 0 #17202A, -1px 1px 0 #17202A, 1px 1px 0 #17202A;
     transition: 0.5s;
 }
 

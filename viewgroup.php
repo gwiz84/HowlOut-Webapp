@@ -51,8 +51,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;" >
                 <!--      PAGE CONTENT GOES HERE      -->
-                <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:200px;margin-bottom:5px;">
-                <h3 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;" class="txtTitle textstroke">Group name</h3>
+
+                <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:300px;margin-bottom:5px;opacity:0.9;">
+                <h2 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;font-weight:bold;" class="txtTitle textstroke">Group name</h2>
                 <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<div class="createEventHolder" style="float:right;"></div>
                 <br><br>
                 <h4>About this group</h4>

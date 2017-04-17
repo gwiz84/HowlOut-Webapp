@@ -113,6 +113,10 @@ session_start();
                     }
                     ?>
                     </h4><hr>
+                <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>
+                Creating an event allows you to either host is a public or private type, depending on your needs. If you are hosting an event you want everyone to be able to find, chose the public type. If you are organizing a private event and want to invite specific members, choose the private type.
+                <br>
+                <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">image</i>&nbsp;&nbsp;Image</h4>
                 <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
                 <span>
                     <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>

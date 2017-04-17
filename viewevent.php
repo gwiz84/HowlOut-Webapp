@@ -51,8 +51,11 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <img src="img/building.jpg" class="img-responsive" style="width:100%;height:200px;margin-bottom:5px;z-index:10;position:relative;">
-                <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;" class="textstroke">Event title</h2>
+
+                    <img src="img/building.jpg" class="img-responsive darken" style="width:100%;height:300px;margin-bottom:5px;z-index:10;position:relative;opacity:0.9;">
+
+
+                <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;font-weight:bold;" class="textstroke">Event title</h2>
                 <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
 
                 <div class="row">
@@ -160,6 +163,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                         $(".btnShowHideDesc").hide();
                     }
                     $(".img-responsive").attr("src", jsonData.ImageSource);
+
                     eventLatitude = jsonData.Latitude;
                     eventLongitude = jsonData.Longitude;
                     updateMap();
