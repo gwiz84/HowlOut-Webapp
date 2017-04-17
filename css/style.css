@@ -498,8 +498,7 @@ a:hover {
 @media only screen and (min-width : 992px) {
     .searchContent {
         width: 450px;
-        min-height: 350px;
-        max-height: 700px;
+        height:100%;
         /*max-height: 500px;*/
         overflow-x: hidden;
         overflow-y: auto;
@@ -524,8 +523,7 @@ a:hover {
 @media only screen and (min-width : 1200px) {
     .searchContent {
         width: 550px;
-        min-height: 350px;
-        max-height: 700px;
+        height:100%;
         /*max-height: 500px;*/
         overflow-x: hidden;
         overflow-y: auto;
