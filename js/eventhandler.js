@@ -34,9 +34,9 @@ function makeEventElement(event) {
     '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+'</span>'+
         '<br><br><br><br>'+
         '<div style="float:right;">'+
-        '<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:18px;"></i></button>&nbsp;'+
-        '<button type="button" class="howlout-button btn-followevent"><i class="fa fa-paw" style="font-size:18px;"></i></button>&nbsp;'+
-        '<button type="button" class="howlout-button btn-viewevent" ><span style="font-size:14px;">View</span></button>'+
+        '<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:20px;"></i></button>&nbsp;'+
+        '<button type="button" class="howlout-button btn-followevent"><i class="fa fa-paw" style="font-size:20px;"></i></button>&nbsp;'+
+        '<button type="button" class="howlout-button btn-viewevent" ><span style="font-size:20px;"><i class="fa fa-eye" aria-hidden="true"></i></span></button>'+
         '</div>'+
         '</div>'+
         '</div>'+
@@ -78,10 +78,10 @@ function makeEditEventElement(event) {
                     '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+'</span>'+
                     '<br><br><br><br>'+
                     '<div style="float:right;" data-eventid="'+event.EventId+'" data-eventtitle="'+event.Title+'">'+
-                        '<button type="button" class="howlout-button btn-editevent">Edit</button>&nbsp;'+
-                        '<button type="button" class="howlout-button btn-duplicateevent">Duplicate</button>&nbsp;'+
-                        '<button type="button" class="howlout-button btn-deleteevent">Delete</span></button>&nbsp;'+
-                        '<button type="button" class="howlout-button btn-viewevent">View</span></button>'+
+                        '<button type="button" class="howlout-button btn-editevent"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>&nbsp;'+
+                        '<button type="button" class="howlout-button btn-duplicateevent"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;Duplicate</button>&nbsp;'+
+                        '<button type="button" class="howlout-button btn-deleteevent"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Delete</span></button>&nbsp;'+
+                        '<button type="button" class="howlout-button btn-viewevent"><i class="fa fa-eye" aria-hidden="true"></i>&nbsp;&nbsp;View</span></button>'+
                     '</div>'+
                 '</div>'+
             '</div>'+

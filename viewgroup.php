@@ -142,7 +142,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 $.each(data.ProfileOwners, function(i, ele) {
                     if (ele.ProfileId==facebookId) {
                         // append button that goes to create event via this group
-                        $(".createEventHolder").append('<button class="howlout-button btnCreateEvent">Create event</button>');
+                        $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
                     }
 
                 });
@@ -227,6 +227,10 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             }
         });
 
+        $("body").on("click", ".btn-viewevent", function() {
+            var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
+            window.location = "viewevent.php?id="+eventIdClicked;
+        });
     </script>
 </body>
 

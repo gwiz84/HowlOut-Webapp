@@ -1,5 +1,6 @@
 html {
     overflow-y: scroll;
+    font-family: 'Questrial', sans-serif;
 }
 
 body {
@@ -12,6 +13,9 @@ input[type="radio"] {
     cursor: pointer;
 }
 
+button {
+    font-family: 'Questrial', sans-serif;
+}
 /*
 textarea:focus, input:focus {   
     border-color: rgba(229, 103, 23, 0.8) !important;
@@ -415,6 +419,10 @@ a:hover {
     color:  #73c6b6;
 }
 
+.icon_darkgreen {
+    /*color: #48c9b0;*/
+    color:  #70ADAC;
+}
 .icon_yellow {
     color: #f4d03f;
 }
@@ -451,7 +459,9 @@ a:hover {
 .icon_lightblue {
     color:   #4dd0e1;
 }
-
+.icon_darkpurple {
+ color:#B693CD;
+}
 .login-box {
     border-radius: 20px;
     background-color: #e9f7ef;
@@ -549,29 +559,25 @@ a:hover {
 }
 
 .howlout-button {
-    height: 35px;
+    height: 40px;
     min-width: 50px;
-    max-width: 100px;
+    max-width: 150px;
     border-radius: 0;
-    background-color: #eaecee ;
+    background-color: transparent ;
     font-size: 14px;
+    padding:5px 10px 5px 10px;
+    border-radius: 5px;
+    border: solid 0px white;
 }
 
 .howlout-button:hover {
-    height: 35px;
-    min-width: 50px;
-    max-width: 100px;
-    border-radius: 0;
     background-color: #d0ece7;
-    font-size: 14px;
 }
 
 .howlout-button:active {
-    height: 35px;
-    min-width: 50px;
-    max-width: 100px;
-    border-radius: 0;
-    background-color: #eaecee;
-    font-size: 14px;
+
 }
 
+.btn-sm {
+    font-size:15px;
+}

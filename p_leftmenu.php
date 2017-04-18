@@ -15,10 +15,10 @@
 		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_blue" >pageview</i>Discover events</a>
 	</div>
 	<div>
-		<a href="editevent.php"><i class="material-icons leftmenuitem icon_green">event</i>Create event</a>
+        <a href="editevent.php"><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style="font-size:20px;margin-left:8px;"></i><span style="margin-left:7px;">Create event</span></a>
 	</div>
 	<div>
-		<a href="eventmanager.php"><i class="material-icons leftmenuitem icon_red">event_busy</i>Event manager</a>
+		<a href="eventmanager.php"><i class="material-icons leftmenuitem icon_darkpurple">event_available</i>Event manager</a>
 	</div>
 	<br>
 	<div class="leftmenugroup">

@@ -49,7 +49,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 eventContainer" style="border: solid 0px black; height:100%; padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Event manager</h4>
+                <h4><i class="material-icons leftmenuitem icon_darkpurple">event_available</i>&nbsp;&nbsp;Event manager</h4>
                 <hr>
 
                 </div>

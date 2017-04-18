@@ -107,7 +107,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4 style="position:relative;" class=""><i class="material-icons leftmenuitem icon_purple">event_note</i><?php echo $titleaction ?> event<?php
+                <h4 style="position:relative;" class=""><i class="fa fa-calendar-plus-o icon_green" aria-hidden="true" style="font-size:20px;"></i><span style="margin-left:9px;"><?php echo $titleaction ?> event<?php
                     if (isset($_GET['groupid'])) {
                          echo " - for group";
                     }

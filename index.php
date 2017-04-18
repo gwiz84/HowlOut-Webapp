@@ -214,6 +214,11 @@ session_start();
         window.location = "viewgroup.php?id="+groupIdClicked;
     });
 
+    $("body").on("click", ".btn-viewevent", function() {
+        var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
+        window.location = "viewevent.php?id="+eventIdClicked;
+    });
+
 </script>
 
 </body>
