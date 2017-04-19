@@ -63,12 +63,9 @@ session_start();
                 <br><br>
                 <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My friends</h4>
                 <hr>
-                <div class="row">
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
-                    <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
+                <div class="friendsBox row">
+
+
                 </div>
 
                 <br>
@@ -107,7 +104,7 @@ session_start();
         window.fbAsyncInit = function() {
             // facebook functions in here
             FB.init({
-                appId      : '1897963557117405',
+                appId      : '651141215029165',
                 xfbml      : true,
                 version    : 'v2.8'
             });
@@ -119,6 +116,18 @@ session_start();
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
+
+                    FB.api('/me/friends', function(response) {
+                        $.each(response.data, function(i,ele) {
+                            var name = ele.name;
+                            var imgPath ="https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
+                            $(".friendsBox").append('<div class="col-md-3"><div class="member-circle " style="background-image: url(\''+imgPath+'\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">'+name+'</p></div>');
+
+                        });
+                    });
+
+
+
                     var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
                     var apiData = JSON.stringify(
                         {
@@ -133,10 +142,10 @@ session_start();
                         data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
-                            console.log(data);
+
                             var counter = 1;
                             $.each(jsonData.Groups, function(i,ele) {
-                                console.log(ele);
+
                                 if (counter<=6) {
                                     $(".groupBox").append(makeGroupElement(ele));
                                     counter++
@@ -151,6 +160,8 @@ session_start();
             });
 
         };
+
+
 
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];

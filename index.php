@@ -98,7 +98,7 @@ session_start();
     window.fbAsyncInit = function() {
         // facebook functions in here
         FB.init({
-            appId      : '1897963557117405',
+            appId      : '651141215029165',
             xfbml      : true,
             version    : 'v2.8'
         });
