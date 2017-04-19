@@ -113,21 +113,22 @@ session_start();
 
             // Get groups
             FB.getLoginStatus(function(response) {
+
+                FB.api('/me/friends', function(response) {
+                    var counter = 1;
+                    $.each(response.data, function(i,ele) {
+                        if (counter<=4) {
+                            var name = ele.name;
+                            var imgPath = "https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
+                            $(".friendsBox").append('<div class="col-md-3"><div class="member-circle " style="background-image: url(\'' + imgPath + '\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">' + name + '</p></div>');
+                        }
+                        counter++;
+                    });
+                });
+
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
-
-                    FB.api('/me/friends', function(response) {
-                        $.each(response.data, function(i,ele) {
-                            var name = ele.name;
-                            var imgPath ="https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
-                            $(".friendsBox").append('<div class="col-md-3"><div class="member-circle " style="background-image: url(\''+imgPath+'\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">'+name+'</p></div>');
-
-                        });
-                    });
-
-
-
                     var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
                     var apiData = JSON.stringify(
                         {
@@ -142,10 +143,9 @@ session_start();
                         data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
-
+                            console.log(data);
                             var counter = 1;
                             $.each(jsonData.Groups, function(i,ele) {
-
                                 if (counter<=6) {
                                     $(".groupBox").append(makeGroupElement(ele));
                                     counter++
@@ -157,6 +157,10 @@ session_start();
                         }
                     });
                 });
+
+
+
+
             });
 
         };
