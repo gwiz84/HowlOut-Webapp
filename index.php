@@ -54,18 +54,18 @@ session_start();
                 <h4><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Upcoming events</h4>
                 <hr>
                 <!--                THE EVENT BOX START -->
-                <div class="eventBox">
+                <div class="eventBox row">
 
                 </div>
 
                 <!--                THE EVENT BOX END -->
                 <br>
-                <a href="myevents.php" style="float:right;font-size:14px;">View all</a>
+                <a href="myevents.php" style="float:right;font-size:14px;" class="btnViewAllEvents">View all</a>
 
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
                 <!--            GROUPS START  -->
-                <div class="groupBox"></div>
+                <div class="groupBox row"></div>
                 <a href="mygroups.php" style="float:right;font-size:14px;">View all</a>
 
                 <!--             GROUPS END -->
@@ -123,26 +123,31 @@ session_start();
                         var eventToShow = null;
                         var currentTime = new Date().getTime();
                         var lowest = null;
-
-                        $.each(jsonData, function(i,ele) {
-                            var startTime = Date.parse(ele.StartDate);
+                        if (jsonData.length<1) {
+                            $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
+                            $(".btnViewAllEvents").hide();
+                        } else {
+                            $.each(jsonData, function(i,ele) {
+                                var startTime = Date.parse(ele.StartDate);
 //                            console.log("Event title: "+ele.Title );
 //                            console.log("Current time: "+currentTime );
 //                            console.log("Event start time: "+startTime );
 //                            console.log( (startTime-currentTime) );
-                            if ( (startTime-currentTime)>0) {
-                                if (lowest===null) {
-                                    lowest = startTime - currentTime;
-                                    eventToShow = ele;
-                                } else {
-                                    if ( (startTime-currentTime) < lowest) {
+                                if ( (startTime-currentTime)>0) {
+                                    if (lowest===null) {
                                         lowest = startTime - currentTime;
                                         eventToShow = ele;
+                                    } else {
+                                        if ( (startTime-currentTime) < lowest) {
+                                            lowest = startTime - currentTime;
+                                            eventToShow = ele;
+                                        }
                                     }
                                 }
-                            }
-                        });
-                        $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
+                            });
+                            $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
+                        }
+
 
                     },
                     error: function () {
@@ -171,13 +176,18 @@ session_start();
                     data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
                     success: function (data) {
                         var jsonData = JSON.parse(data);
-                        var counter = 1;
-                        $.each(jsonData.Groups, function(i,ele) {
-                            if (counter<=6) {
-                                $(".groupBox").append(makeGroupElement(ele));
-                                counter++
-                            }
-                        });
+                        if (jsonData.length<1) {
+                            $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
+                            $(".btnViewAllGroups").hide();
+                        } else {
+                            var counter = 1;
+                            $.each(jsonData.Groups, function(i,ele) {
+                                if (counter<=6) {
+                                    $(".groupBox").append(makeGroupElement(ele));
+                                    counter++
+                                }
+                            });
+                        }
                     },
                     error: function () {
                         alert("ajax failed");

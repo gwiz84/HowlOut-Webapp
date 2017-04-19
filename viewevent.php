@@ -180,13 +180,13 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var descOpen = false;
         $("body").on("click", ".btnShowHideDesc", function() {
             if (descOpen) {
-                $("#eventDescription").show(50);
+                $("#eventDescription").show(0);
                 $("#eventDescriptionLong").hide();
                 $(".btnShowHideDesc").text("Show description");
                 descOpen = false;
             } else {
                 $("#eventDescription").hide();
-                $("#eventDescriptionLong").show(100);
+                $("#eventDescriptionLong").show(0);
                 $(".btnShowHideDesc").text("Hide description");
                 descOpen = true;
             }

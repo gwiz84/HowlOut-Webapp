@@ -17,7 +17,7 @@ $(".inputSearchBar").keyup(function (e) {
 function searchEvent() {
 
     searchTerms = $(".inputSearchBar").val();
-    console.log("Search: "+searchTerms);
+
     if (searchTerms.length > 0) {
         var today = new Date();
         var isoString = today.toISOString();

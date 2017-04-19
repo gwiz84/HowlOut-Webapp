@@ -51,12 +51,12 @@ session_start();
                 <hr>
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;height:200px;width:200px;border-radius:200px;"></div>
+                        <div class="member-circle col-md-1 myImage" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;height:200px;width:200px;border-radius:200px;"></div>
                         <input type="file" style="margin:0 0 0 30px;display:none;" class="fileChangePicture">
                     </div>
                     <div class="col-md-6">
                         <h4 style="margin-top:25%;"><?php echo $_SESSION['name']; ?></h4>
-                        <a class="btnChangePicture" style="margin-top:200px;cursor:pointer;">Change picture</a>
+<!--                        <a class="btnChangePicture" style="margin-top:200px;cursor:pointer;">Change picture</a>-->
                     </div>
                 </div>
 
@@ -69,16 +69,13 @@ session_start();
                 </div>
 
                 <br>
-                <a href="" style="float:right;font-size:14px;">View all</a>
+                <a href="friends.php" style="float:right;font-size:14px;">View all</a>
 
                 <h4 style="margin-top:50px;"><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
-                <div class="groupBox">
+                <div class="groupBox row">
 
                 </div>
-
-
-                <br>
                 <a href="mygroups.php" style="float:right;font-size:14px;">View all</a>
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
@@ -113,6 +110,10 @@ session_start();
 
             // Get groups
             FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response) {
+                    var imgPath = "https://graph.facebook.com/v2.5/" + response.id + "/picture?height=300&width=300";
+                    $(".myImage").css("background-image","url('"+imgPath+"')");
+                });
 
                 FB.api('/me/friends', function(response) {
                     var counter = 1;
@@ -165,8 +166,6 @@ session_start();
 
         };
 
-
-
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
@@ -174,6 +173,11 @@ session_start();
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+        $("body").on("click", ".groupLink", function() {
+            var groupIdClicked = $(this).data("groupid");
+            window.location = "viewgroup.php?id="+groupIdClicked;
+        });
     </script>
 </body>
 

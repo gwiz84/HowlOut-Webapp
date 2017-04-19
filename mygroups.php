@@ -103,9 +103,14 @@
                         data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
-                            $.each(jsonData.Groups, function(i,ele) {
-                                $(".groupBox").append(makeGroupElement(ele));
-                            });
+                            if (jsonData.length<1) {
+                                $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
+                            } else {
+                                $.each(jsonData.Groups, function(i,ele) {
+                                    $(".groupBox").append(makeGroupElement(ele));
+                                });
+                            }
+
                         },
                         error: function () {
                             alert("ajax failed");

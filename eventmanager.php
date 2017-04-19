@@ -96,9 +96,14 @@ session_start();
                         data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
                             var jsonData = JSON.parse(data);
-                            $.each(jsonData, function(i,ele) {
-                                $(".eventContainer").append(makeEditEventElement(ele) + "<br>");
-                            });
+                            if (jsonData.length<1) {
+                                $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
+                            } else {
+                                $.each(jsonData, function(i,ele) {
+                                    $(".eventContainer").append(makeEditEventElement(ele) + "<br>");
+                                });
+                            }
+
                         },
                         error: function () {
                             alert("ajax failed");
