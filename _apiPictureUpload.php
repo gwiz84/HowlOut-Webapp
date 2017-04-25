@@ -13,7 +13,7 @@ $blobRestProxy = ServicesBuilder::getInstance()->createBlobService($connectionSt
 $container = "howlout";
 $finalpath = "https://howloutstorage.blob.core.windows.net/howlout/";
 
-$newfile = $_POST['newImage'];
+$newfile = $_POST['newImage']; // base64 encoded
 
 $content = fopen($newfile, "r");
 
@@ -23,17 +23,26 @@ $date = new DateTime();
 $current = $date->format('d-m-Y H:i:s');
 $blob_name = $fbid . "." . $current;
 
-try {
+$MAXIMUM_FILESIZE = 6 * 1024 * 1024;
+
+$imgdata = file_get_contents($newfile);
+$filesize = strlen($imgdata);
+$filetype = exif_imagetype($newfile);
+if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
+	echo '{"status": "ERROR", "errormessage": "Not an image file"}';
+} else {
+	try {
     //Upload blob
-    $fullpath = $finalpath . $blob_name;
-    $blobRestProxy->createBlockBlob($container, $blob_name, $content);
-    echo '{"status": "OK", "imgPath": "' . $fullpath .'"}';
-}
-catch(ServiceException $e){
+		$fullpath = $finalpath . $blob_name;
+		$blobRestProxy->createBlockBlob($container, $blob_name, $content);
+		echo '{"status": "OK", "imgPath": "' . $fullpath .'"}';
+	}
+	catch(ServiceException $e){
     // Handle exception based on error codes and messages.
     // Error codes and messages are here:
     // http://msdn.microsoft.com/library/azure/dd179439.aspx
-    $code = $e->getCode();
-    $error_message = $e->getMessage();
-    echo $code.": ".$error_message."<br />";
+		$code = $e->getCode();
+		$error_message = $e->getMessage();
+		echo $code.": ".$error_message."<br />";
+	}	
 }

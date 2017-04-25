@@ -20,8 +20,11 @@ session_start();
     <!-- Theme CSS -->
     <link href="css/clean-blog.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <link href="css/timepicker.css" rel="stylesheet">
+    <link href="css/croppie.css" rel="stylesheet">
+    <link href="css/jquery-confirm.css" rel="stylesheet" type="text/css">
+
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
@@ -30,10 +33,12 @@ session_start();
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Nunito+Sans|Questrial" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
+
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/timepicker.js"></script>
     <script src="js/moment.js"></script>
+    <script src="js/jquery-confirm.js"></script>
     <script>
         var chosenStart = "";
         var chosenEnd = "";
@@ -107,20 +112,21 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                <h4 style="position:relative;" class=""><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style="font-size:20px;"></i><span style="margin-left:9px;"><?php echo $titleaction ?> event<?php
+                <h4 style="position:relative;" class=""><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style="font-size:26px;"></i><span style="font-size:26px; margin-left:9px;"><?php echo $titleaction . ' event';
                     if (isset($_GET['groupid'])) {
                          echo " - for group";
                     }
                     ?>
                     </h4><hr>
                 <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>
-                Creating an event allows you to either host is a public or private type, depending on your needs. If you are hosting an event you want everyone to be able to find, chose the public type. If you are organizing a private event and want to invite specific members, choose the private type.
+                Creating an event allows you to either host it is a public or private type, depending on your needs. If you are hosting an event you want everyone to be able to find, chose the public type. If you are organizing a private event and want to invite specific members only, choose the private type.
                 <br>
                 <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">image</i>&nbsp;&nbsp;Image</h4>
-                <img class="image img-responsive" style="width:100%;height:200px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
+                <img id="bannerImg" class="image img-responsive" style="width:740px;height:300px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
+                <!-- <div id="croppieImg" src="img/building.jpg" class="" style="border:solid 1px darkgrey;width:740px; height: 300px;"></div> -->
                 <span>
                     <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
-                    <input style="display: none;" id="imageInput" type="file">
+                    <button style="display: none;" id="imageInput" type="file"></button>
                 </span>
                 <br>
                 <div class="input-group">
@@ -151,6 +157,7 @@ session_start();
                     <span class="input-group-addon" id="title-input"><i class=" fa fa-user icon_peep icon_yellow" aria-hidden="true" style="font-size:20px;vertical-align:middle;"></i></span>
                     <input type="number" class="form-control ho-textinput inputAttendees" placeholder="Maximum allowed number of attendees" aria-describedby="title-input" min="1" max="1000" style="z-index:1;">
                 </div>
+
                 <br>
                 <h4><i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;Visibility</h4>
 
@@ -172,10 +179,11 @@ session_start();
     <?php include_once "p_footer.html"; ?>
 
     <script src="js/dawa-autocomplete.js"></script>
-    <script src="js/leftmenu.js"></script>
     <script src="js/topmenu.js"></script>
     <script src="js/searchbar.js"></script>
     <script src="js/eventhandler.js"></script>
+    <script src="js/imagehandler.js"></script>
+    <script src="js/croppie.min.js"></script>
 
     <script>
         var token = $(".token").data("token");
@@ -185,7 +193,21 @@ session_start();
         var eventLat = 55.675637;
         var eventLng = 12.569544;
         var addressSelected = false;
-        var image = null;
+        var orgImage = "";
+        var imageCropped = null;
+
+        // var croppieDiv = $('#croppieImg').croppie({
+        //     viewport: { width: 740, height: 300 },
+        //     // boundary: { width: 800, height: 300 },
+        //     showZoomer: false,
+        //     enableOrientation: true,
+        //     // enableZoom: false,
+        //     enforceBoundary: true
+        // });
+
+        // croppieDiv.croppie('bind', {
+        //     url: 'img/building.jpg',
+        // });
 
         // Activates the DAWA autocomplete feature on the ".inputLocation" field
         $(function() {
@@ -227,7 +249,6 @@ session_start();
                     markersArray.push(marker);
                     eventLat = results[0].geometry.location.lat();
                     eventLng = results[0].geometry.location.lng();
-                    // console.log(eventLat + ", " + eventLng);
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -255,13 +276,13 @@ session_start();
             var apiLink = "https://api.howlout.net/event/event?id="+editid;
             var token = $(".token").data("token");
             $.ajax({
-                type: "post",
+                type: "POST",
                 url: "_apiRequest.php",
                 async: false,
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
-                    // alert(jsonData.GroupOwner);
+                    console.log(jsonData);
                     var fbid = $(".fbid").data("fbid");
                     var ownersArray = jsonData.ProfileOwners;
                     var isOwner = false;
@@ -277,7 +298,8 @@ session_start();
                         var endDate = convertDateString(jsonData.EndDate);
                         chosenStart = startDate;
                         chosenEnd = endDate;
-                        $(".image").css("background-image", "url('" + jsonData.ImageSource + "')");
+                        orgImage = jsonData.ImageSource;
+                        $("#bannerImg").css("background-image", "url('" + orgImage + "')");
                         $(".inputTitle").val(jsonData.Title);
                         $(".inputDescription").val(jsonData.Description);
                         if (jsonData.Visibility == 0) {
@@ -290,12 +312,11 @@ session_start();
                     }
                 },
                 error: function (data) {
-                    // alert(data);
                     alert("ajax failed");
                 }
             });
         } else {
-            $(".image").css("background-image", "url('img/building.jpg')");
+            $("#bannerImg").css("background-image", "url('img/building.jpg')"); 
         }
 
         function convertDateString(date) {
@@ -313,13 +334,71 @@ session_start();
         });
 
         $(".btnCreate").click(function() {
-            var fbid = $(".fbid").data("fbid");
-            var imgSrc = "img/building.jpg";
-            var newImage = uploadImage(image, fbid);
-            if (newImage != "false") {
-                imgSrc = newImage;
-            }
+            // $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
+            var fbid = $(".fbid").data("fbid");
+            var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
+            var newImage = "";
+            if (imageCropped != null) {
+                uploadImage(imageCropped, fbid).done(function (data) {
+                    data = JSON.parse(data);
+                    if (data.status == "OK") {
+                        imgSrc = data.imgPath;
+                        saveEvent(eventId, imgSrc);
+                    } else {
+                        console.log("ERROR");
+                        $.alert({
+                            type: "red",
+                            title: "ERROR!",
+                            content: data.errormessage
+                        });
+                    }
+                });
+
+            } else {
+                saveEvent(eventId, imgSrc);
+            }
+        });
+
+        // $(".btnCreate").click(function() {
+        //     // $(this).prop("disabled", "disabled");
+        //     var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
+        //     var fbid = $(".fbid").data("fbid");
+        //     var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
+        //     var uploaded = false;
+        //     var newImage = "";
+        //     if ($("#imageInput")[0].files[0] != null) {
+        //         var imgToUp = null;
+        //         croppieDiv.croppie('result', 'base64').then(function(croppedImage) {
+        //             imgToUp = croppedImage;
+        //             uploadImage(imgToUp, fbid).done(function (data) {
+        //                 data = JSON.parse(data);
+        //                 console.log(data);
+        //                 if (data.status == "OK") {
+        //                     imgSrc = data.imgPath;
+        //                     saveEvent(eventId, imgSrc);
+        //                 } else {
+
+        //                 }
+        //             });
+        //         });
+        //     } else {
+        //         saveEvent(eventId, imgSrc);
+        //     }
+        // });
+
+        // $("#imageInput").change(function(){
+        //     var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
+        //     if (JSONresponse.status == "ERROR") {
+        //         $.alert({
+        //             type: "red",
+        //             title: "ERROR!",
+        //             content: JSONresponse.message
+        //         });
+        //     }
+        // });
+
+        function saveEvent(eventId, imgSrc) {
             var title = $(".inputTitle").val();
             var description = $(".inputDescription").val();
             var address = $(".inputLocation").val();
@@ -335,7 +414,7 @@ session_start();
                 apiData = JSON.stringify({
                     "EventId": eventId,
                     "GroupOwner": {
-                            "GroupId": groupId
+                        "GroupId": groupId
                     },
                     "ImageSource": imgSrc,
                     "Title": title,
@@ -348,7 +427,7 @@ session_start();
                     "StartDate": startDate,
                     "EndDate": endDate,
                     "EventTypes": [
-                        0
+                    0
                     ],
                     "MinAge": 0,
                     "MaxAge": 200,
@@ -360,9 +439,9 @@ session_start();
                 apiData = JSON.stringify({
                     "EventId": eventId,
                     "ProfileOwners": [
-                        {
-                            "ProfileId": profileId
-                        }
+                    {
+                        "ProfileId": profileId
+                    }
                     ],
                     "ImageSource": imgSrc,
                     "Title": title,
@@ -375,7 +454,7 @@ session_start();
                     "StartDate": startDate,
                     "EndDate": endDate,
                     "EventTypes": [
-                        0
+                    0
                     ],
                     "MinAge": 0,
                     "MaxAge": 200,
@@ -384,64 +463,83 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-
             var token = $(".token").data("token");
 
             $.ajax({
-                type: "post",
+                type: "POST",
                 url: "_apiRequestJSON.php",
                 async: false,
                 data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                 success: function (data) {
                     var id = JSON.parse(data).EventId;
-                    window.location = "viewevent.php?id="+id;
-                },
-                error: function () {
-                    alert("An unexpected error occurred. Please try again later.");
-                }
-            });
-        });
-
-        function loadImageFromFile(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    image = e.target.result;
-                    $(".image").css("background-image", "url("+image+")");
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        function uploadImage(newImage, fbid) {
-            var message = "false";
-            if (newImage != null) {
-                $.ajax({
-                    type: "post",
-                    url: "_apiPictureUpload.php",
-                    async: false,
-                    data: { 'newImage' : image, 'fbid': fbid },
-                    success: function (data) {
-                        message = JSON.parse(data).imgPath;
+                        window.location = "viewevent.php?id="+id;
                     },
                     error: function () {
+                        alert("An unexpected error occurred. Please try again later.");
                     }
                 });
-            }
-            return message;
         }
 
-        $("#btnUpload").click(function() {
-            var fbid = $(".fbid").data("fbid");
-            var succ = uploadImage(newImage, fbid);
-            alert(succ);
+        $("#selectImageBtn").click(function() {
+            createUploadModal($("#bannerImg"));
         });
 
-        $("#imageInput").change(function(){
-            loadImageFromFile(this);
-        });
+        function createUploadModal(divForCroppedImg) {
+            return $.confirm({
+                title: 'Upload and crop new image',
+                content: imgUpContent(),
+                boxWidth: '770px',
+                useBootstrap: false,
+                closeIcon: true,
+                onContentReady: function() {
+                    var self = this;
+                    var croppieDiv = this.$content.find('#croppieimg').croppie({
+                        viewport: { width: 740, height: 300 },
+                        // boundary: { width: 800, height: 300 },
+                        showZoomer: false,
+                        enableOrientation: true,
+                        // enableZoom: false,
+                        enforceBoundary: true
+                    });
+                    this.$content.find("#imageInput").change(function(){
+                        var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
+                        if (JSONresponse.status == "ERROR") {
+                            $.alert({
+                                type: "red",
+                                title: "ERROR!",
+                                content: JSONresponse.message
+                            });
+                        }
+                    });
+                    this.$content.find("#btnCrop").click(function(){
+                        croppieDiv.croppie('result', 'base64').then(function(croppedImage) {
+                            $("#newImg").attr('src', croppedImage);
+                            imageCropped = croppedImage;
+                        });
+                    });
+
+                },
+                buttons: {
+                    cancel: function() {
+                        imageCropped = null;
+                    },
+                    done: {
+                        btnClass: 'btn-green',
+                        action: function() {
+                            if (imageCropped != null) {
+                                divForCroppedImg.attr('src', imageCropped);    
+                            }
+                        }
+                    }
+                }
+            });
+        }
+
+        function imgUpContent() {
+            return '<div><div id="croppieimg" style="width:740px;height:300px;border:solid 1px darkgrey;"></div>'+
+            '<span><input id="imageInput" type="file"></span><br><button id="btnCrop" class="btn btn-red">Crop</button><br><br><br>'+
+            '<img id="newImg" style="width:740px;height:300px;border:solid 1px darkgrey;">';
+        }
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>
