@@ -347,7 +347,9 @@ session_start();
             var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
             var newImage = "";
             if (imageCropped != null) {
+                console.log("FØR");
                 uploadImage(imageCropped, fbid).done(function (data) {
+                    console.log(data);
                     data = JSON.parse(data);
                     if (data.status == "OK") {
                         imgSrc = data.imgPath;
