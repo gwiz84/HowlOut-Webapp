@@ -24,7 +24,7 @@ session_start();
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href='https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.css" rel="stylesheet" type="text/css">
+    <link href="css/jquery-confirm.css" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Nunito+Sans|Questrial" rel="stylesheet">
@@ -70,7 +70,7 @@ session_start();
     <?php include_once "p_loadScripts.html"; ?>
 
     <script src="js/eventhandler.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-confirm/3.2.0/jquery-confirm.min.js"></script>
+    <script src="js/jquery-confirm.js"></script>
     <script>
         var facebookId = "";
         window.fbAsyncInit = function() {
@@ -90,7 +90,7 @@ session_start();
                     var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
                     var token = $(".token").data("token");
                     $.ajax({
-                        type: 'post',
+                        type: 'POST',
                         url: '_apiRequest.php',
                         async: false,
                         data: {'apiLink' : apiLink, 'token' : token},
@@ -131,8 +131,10 @@ session_start();
             alert("DUPLICATE!");
         });
 
-        $("body").on("click", ".btn-deleteevent", function() {
+		$("body").on("click", ".btn-deleteevent", function() {
+            var eventIdClicked = $(this).parent().data("eventid");
             var eventTitle = $(this).parent().data("eventtitle");
+            var thisBox = $(this).parent().parent().parent().parent();
             $.confirm({
                 title: 'Delete "' + eventTitle + '"',
                 content: 'Are you sure you wish to delete this event?',
@@ -145,7 +147,26 @@ session_start();
                     yes: {
                         text: 'Yes',
                         action: function() {
-                            $.alert("Confirmed");
+                            var apiLink = "https://api.howlout.net/event/"+eventIdClicked;
+                            var token = $(".token").data("token");
+                            $.ajax({
+                                type: 'POST',
+                                url: '_apiRequestDelete.php',
+                                async: false,
+                                data: {'apiLink' : apiLink, 'token' : token},
+                                success: function (data) {
+                                    if (data) {
+                                        thisBox.remove();
+                                        $.alert('Event deleted');
+                                    } else {
+                                        alert('An unexpected error occurred!');
+                                    }
+                                },
+                                error: function () {
+                                    alert("ajax failed");
+                                }
+                            });
+                            
                         }
                     },
                     no: {
@@ -153,30 +174,6 @@ session_start();
                     }
                 }
             });
-
-            // var thisBox = $(this).parent().parent().parent().parent();
-            // var eventIdClicked = $(this).parent().data("eventid");
-            // var r = confirm("Are you sure you wish to delete this event?");
-            // if (r == true) {
-            //     var apiLink = 'https://api.howlout.net/event/'+eventIdClicked;
-            //     var token = $(".token").data("token");
-            //     $.ajax({
-            //         type: 'post',
-            //         url: '_apiRequestDelete.php',
-            //         async: false,
-            //         data: {'apiLink' : apiLink, 'token' : token},
-            //         success: function (data) {
-            //             if (data) {
-            //                 thisBox.remove();
-            //             } else {
-            //                 alert("An unexpected error occurred!");
-            //             }
-            //         },
-            //         error: function () {
-            //             alert("ajax failed");
-            //         }
-            //     });
-            // }
         });
 
         $("body").on("click", ".btn-viewevent", function() {
