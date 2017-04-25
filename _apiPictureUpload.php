@@ -43,6 +43,7 @@ if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
     // http://msdn.microsoft.com/library/azure/dd179439.aspx
 		$code = $e->getCode();
 		$error_message = $e->getMessage();
-		echo $code.": ".$error_message."<br />";
+		echo '{"status": "ERROR", "errormessage": ".$error_message."}';
+		// echo $code.": ".$error_message."<br />";
 	}	
 }

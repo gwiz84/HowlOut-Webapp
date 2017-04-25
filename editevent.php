@@ -316,7 +316,7 @@ session_start();
         } else {
             $("#bannerImg").css("background-image", "url('img/building.jpg')"); 
         }
-        var enVariabel = ")#)#";
+
         function convertDateString(date) {
             convertedDate = date.replace("T", " ").substr(0, 16);
             return convertedDate;
