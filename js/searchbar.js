@@ -38,7 +38,7 @@ function searchEvent() {
                     $.each(jsonObject, function (i, ele) {
                         $(".searchContent").append(''+
                             '<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-eventid="' + ele.EventId + '" class="resultLink resultLinkHover">' +
-                            '<img src="' + ele.SmallImageSource + '" style="max-height:40px;">' +
+                            '<img src="' + ele.ImageSource + '" style="width:50px;">' +
                             '<span style="font-size:18px;margin-left: 10px;">' + ele.Title + '</span>' +
                             '</div>'
                         );

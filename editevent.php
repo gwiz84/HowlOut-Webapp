@@ -46,34 +46,33 @@ session_start();
                 minDate: dateToday,
                 minute: 0,
                 second: 0,
-                stepMinute: 15
+                stepMinute: 15,
+                onSelect: function(dateStr)
+                {
+                    chosenStart = $(this).val();
+                    chosenStart = chosenStart.replace("/", "-");
+                    chosenStart = chosenStart.replace("/", "-");
+                    chosenStart = chosenStart.replace(" ","T")
+                    chosenStart += ":00.00";
+                    var newMinDate = new Date(Date.parse(chosenStart));
+                    $(".datepicker2").datetimepicker({
+                        dateFormat: 'yy-mm-dd',
+                        minDate: newMinDate,
+                        minute: 0,
+                        second: 0,
+                        stepMinute: 15,
+                        onSelect: function(dateStr)
+                        {
+                            chosenEnd = $(this).val();
+                            chosenEnd = chosenEnd.replace("/", "-");
+                            chosenEnd = chosenEnd.replace("/", "-");
+                            chosenEnd = chosenEnd.replace(" ","T")
+                            chosenEnd += ":00.00";
+                        }
+                    });
+                }
             });
 
-            $(".datepicker").on("change",function(e){
-                chosenStart = $(this).val();
-                chosenStart = chosenStart.replace("/", "-");
-                chosenStart = chosenStart.replace("/", "-");
-                chosenStart = chosenStart.replace(" ","T")
-                chosenStart += ":00.00";
-
-            });
-
-            $(".datepicker2").datetimepicker({
-                dateFormat: 'yy-mm-dd',
-                minDate: dateToday,
-                minute: 0,
-                second: 0,
-                stepMinute: 15
-            });
-
-            $(".datepicker2").on("change",function(e){
-                chosenEnd = $(this).val();
-                chosenEnd = chosenEnd.replace("/", "-");
-                chosenEnd = chosenEnd.replace("/", "-");
-                chosenEnd = chosenEnd.replace(" ","T")
-                chosenEnd += ":00.00";
-
-            });
         } );
 </script>
 </head>
