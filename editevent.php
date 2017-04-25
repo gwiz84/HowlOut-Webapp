@@ -46,6 +46,7 @@ session_start();
         var dateToday = new Date();
         $(function() {
 
+            var firstPick = true;
             $(".datepicker").datetimepicker({
                 dateFormat: 'yy-mm-dd',
                 minDate: dateToday,
@@ -60,23 +61,31 @@ session_start();
                     chosenStart = chosenStart.replace(" ","T")
                     chosenStart += ":00.00";
                     var newMinDate = new Date(Date.parse(chosenStart));
-                    $(".datepicker2").datetimepicker({
-                        dateFormat: 'yy-mm-dd',
-                        minDate: newMinDate,
-                        minute: 0,
-                        second: 0,
-                        stepMinute: 15,
-                        onSelect: function(dateStr)
-                        {
-                            chosenEnd = $(this).val();
-                            chosenEnd = chosenEnd.replace("/", "-");
-                            chosenEnd = chosenEnd.replace("/", "-");
-                            chosenEnd = chosenEnd.replace(" ","T")
-                            chosenEnd += ":00.00";
-                        }
-                    });
+                    if (firstPick) {
+                        $(".datepicker2").datetimepicker({
+                            dateFormat: 'yy-mm-dd',
+                            minDate: newMinDate,
+                            minute: 0,
+                            second: 0,
+                            stepMinute: 15,
+                            onSelect: function(dateStr)
+                            {
+                                chosenEnd = $(this).val();
+                                chosenEnd = chosenEnd.replace("/", "-");
+                                chosenEnd = chosenEnd.replace("/", "-");
+                                chosenEnd = chosenEnd.replace(" ","T")
+                                chosenEnd += ":00.00";
+                            }
+                        });
+                        firstPick = false;
+                    } else {
+                        $('.datepicker2').datepicker('option', 'minDate', newMinDate);
+                    }
+
                 }
             });
+
+
 
         } );
 </script>
