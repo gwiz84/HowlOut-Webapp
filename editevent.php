@@ -281,7 +281,6 @@ session_start();
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
                     var jsonData = JSON.parse(data);
-                    console.log(jsonData);
                     var fbid = $(".fbid").data("fbid");
                     var ownersArray = jsonData.ProfileOwners;
                     var isOwner = false;
