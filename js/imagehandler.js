@@ -26,6 +26,8 @@ function loadImageFromFile(imageToLoad, croppieElement) {
 						return '{"status": "ERROR", "message": "Not an image file"}';
 					}
 				});
+				
+				// element.css("background-image", "url("+image+")");
 			};
 
 			reader.readAsDataURL(imageToLoad.files[0]);
@@ -53,6 +55,8 @@ function uploadImage(newImage, fbid) {
 			async: false,
 			data: { 'newImage' : newImage, 'fbid': fbid },
 		});
+	} else {
+		console.log("HEJ!");
 	}
 }
 
