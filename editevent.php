@@ -334,7 +334,7 @@ session_start();
         });
 
         $(".btnCreate").click(function() {
-            // $(this).prop("disabled", "disabled");
+            $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var fbid = $(".fbid").data("fbid");
             var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
@@ -359,44 +359,6 @@ session_start();
                 saveEvent(eventId, imgSrc);
             }
         });
-
-        // $(".btnCreate").click(function() {
-        //     // $(this).prop("disabled", "disabled");
-        //     var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
-        //     var fbid = $(".fbid").data("fbid");
-        //     var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
-        //     var uploaded = false;
-        //     var newImage = "";
-        //     if ($("#imageInput")[0].files[0] != null) {
-        //         var imgToUp = null;
-        //         croppieDiv.croppie('result', 'base64').then(function(croppedImage) {
-        //             imgToUp = croppedImage;
-        //             uploadImage(imgToUp, fbid).done(function (data) {
-        //                 data = JSON.parse(data);
-        //                 console.log(data);
-        //                 if (data.status == "OK") {
-        //                     imgSrc = data.imgPath;
-        //                     saveEvent(eventId, imgSrc);
-        //                 } else {
-
-        //                 }
-        //             });
-        //         });
-        //     } else {
-        //         saveEvent(eventId, imgSrc);
-        //     }
-        // });
-
-        // $("#imageInput").change(function(){
-        //     var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
-        //     if (JSONresponse.status == "ERROR") {
-        //         $.alert({
-        //             type: "red",
-        //             title: "ERROR!",
-        //             content: JSONresponse.message
-        //         });
-        //     }
-        // });
 
         function saveEvent(eventId, imgSrc) {
             var title = $(".inputTitle").val();

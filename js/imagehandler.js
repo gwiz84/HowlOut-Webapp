@@ -26,8 +26,6 @@ function loadImageFromFile(imageToLoad, croppieElement) {
 						return '{"status": "ERROR", "message": "Not an image file"}';
 					}
 				});
-				
-				// element.css("background-image", "url("+image+")");
 			};
 
 			reader.readAsDataURL(imageToLoad.files[0]);
@@ -48,28 +46,14 @@ function isFileAnImage(url, callback) {
 // If the upload succeeds, the returned "message" contains the remote path to the uploaded image (imgPath).
 // Otherwise, "message"/this function returns "false"
 function uploadImage(newImage, fbid) {
-	// var message = "false";
 	if (newImage != null) {
 		return $.ajax({
 			type: "POST",
 			url: "_apiPictureUpload.php",
 			async: false,
 			data: { 'newImage' : newImage, 'fbid': fbid },
-			// success: function (data) {
-			// 	message = JSON.parse(data);
-			// 	console.log("success");
-			// 	console.log(message.status);
-			// },
-			// // error: function () {
-			// // },
-			// done: function(data) {
-			// 	message = JSON.parse(data);
-			// 	// return message;
-			// 	console.log("NU!");
-			// }
 		});
 	}
-	// return message;
 }
 
 function isFileTypeImage(file) {
