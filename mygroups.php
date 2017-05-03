@@ -110,7 +110,6 @@
                                     $(".groupBox").append(makeGroupElement(ele));
                                 });
                             }
-
                         },
                         error: function () {
                             alert("ajax failed");

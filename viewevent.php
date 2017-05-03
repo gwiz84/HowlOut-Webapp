@@ -83,7 +83,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 <hr>
 
                 <div id="eventAttendees" class="eventAttendees">
-                    No attendees
+
                 </div>
                 <br>
                 <span id="moreAttendees"><a href="" style="float:right;font-size:14px;">View all</a></span>
@@ -124,6 +124,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var eventLongitude = 12.570202;
         var token = $(".token").data("token");
 
+        var attendees = "";
+
         $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
@@ -138,8 +140,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     if (Object.keys(data).length <= 0) {
                         window.location = "index.php";
                     }
-                    // console.log(data);
-                    var jsonData = JSON.parse(data);                    
+
+                    var jsonData = JSON.parse(data);
+                    updateAttendees(JSON.stringify(jsonData.Attendees));
                     $(".main-content-container").removeClass("hidden");
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
                     $("#eventTitle").html(jsonData.Title);
@@ -191,6 +194,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             }
         });
 
+
+        // Detect max character lenth etc. for comment field
         $("#commentfield").keyup(function() {
             comment_length = $("#commentfield").val().length;
             if (comment_length > 0) {
@@ -206,6 +211,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             $("#textcounter").html(text_remaining + " remaining");
         });
 
+
+        // Post comment on wall
         $("#btnPostComment").click(function() {
             if (($("#commentfield").val().length) > 0) {
                 $(function(){
@@ -222,7 +229,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                         async: false,
                         data: {'apiLink' : apiLink, 'apiData' : jsonData, 'token' : token},
                         success: function (data) {
-                            console.log(data);
+                            updateComments(data);
                         },
                         error: function (data) {
                             alert(data);
@@ -233,62 +240,55 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             }
         });
 
-
-        function updateComments(data) {
-            $(function(){
-                var currentDate = new Date().toISOString();
-                var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
-                $.ajax({
-                    type: "post",
-                    url: "_apiRequest.php",
-                    async: false,
-                    data: {'apiLink' : apiLink, 'token' : token},
-                    success: function (data) {
-                        console.log(data);
-                    },
-                    error: function (data) {
-                        alert(data);
-                        // alert("ajax failed");
-                    }
-                });
+        // Get comments as page is loaded
+        $(function(){
+            var currentDate = new Date().toISOString();
+            var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
+            $.ajax({
+                type: "post",
+                url: "_apiRequest.php",
+                async: false,
+                data: {'apiLink' : apiLink, 'token' : token},
+                success: function (data) {
+                    console.log(data);
+                    updateComments(data);
+                },
+                error: function (data) {
+                     alert("An unknown error has occured, please check your internet connection.");
+                }
             });
-        }
+        });
 
-
-        function updateAttendees(attArray) {
-            if (attArray.length > 0) {
-                $("#eventAttendees").html("");
-
-                $.each(attArray, function(i,ele) {
-                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-                });
-                $.each(attArray, function(i,ele) {
-                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-                });
-                $.each(attArray, function(i,ele) {
-                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-                });
-                $.each(attArray, function(i,ele) {
-                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-                });
-                $.each(attArray, function(i,ele) {
-                    $("#eventAttendees").append('<div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 30px;">');
-                });
-            }
-        }
-
-        function updateComments(commArray) {
-            $.each(commArray, function(i, ele) {
+        // updates the comment on the page with json data provided as a parameter
+        function updateComments(jsonData) {
+            var data = JSON.parse(jsonData);
+            $("#comments-container").empty();
+            $.each(data, function(i, ele) {
                 var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin-left:30px;">'+
+                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
                     '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
             });
+        }
+
+        // update attendees on the page with json data as parameter
+        function updateAttendees(jsonData) {
+            var data = JSON.parse(jsonData);
+            $(".eventAttendees").empty();
+            if (data.length>0) {
+                $.each(data, function(i, ele) {
+                    $(".eventAttendees").append('');
+                });
+            } else {
+                $(".eventAttendees").append('<p>No attendees</p>');
+                $("#moreAttendees").hide();
+            }
         }
 
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
             return new Date().toISOString().substr(0, 19);
         }
+
 
         function getDateFromISOString(dateString) {
             var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];

@@ -184,7 +184,7 @@ session_start();
                             $.each(jsonData.Groups, function(i,ele) {
                                 if (counter<=6) {
                                     $(".groupBox").append(makeGroupElement(ele));
-                                    counter++
+                                    counter++;
                                 }
                             });
                         }
