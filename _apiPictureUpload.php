@@ -39,14 +39,23 @@ if ($im !== false) {
 	// ob_end_clean();
     // imagedestroy($im);
     // $org_img = imagecreatefrompng($im);
-    list($width, $height) = getimagesize($newfile);
-    $image_m = imagecreatetruecolor(494, 200);
+    $width_s = 247;
+    $width_m = 494;
+    $height_s = 100;
+    $height_m = 200;
+    list($width_org, $height_org) = getimagesize($newfile);
+    $image_m = imagecreatetruecolor($width_m, $height_m);
+    $image_s = imagecreatetruecolor($width_s, $height_s);
     // $image_s = imagecreatetruecolor($new_width, $new_height);
-    imagecopyresampled($image_m, $im, 0, 0, 0, 0, 494, 200, $width, $height);
+    imagecopyresampled($image_m, $im, 0, 0, 0, 0, $width_m, $height_m, $width_org, $height_org);
+    imagecopyresampled($image_s, $im, 0, 0, 0, 0, $width_s, $height_s, $width_org, $height_org);
 	// $image = imagecreatefrompng($filename);
     ob_start();
     imagepng($image_m);
     $image_med = ob_get_clean();
+    ob_start();
+    imagepng($image_s);
+    $image_small = ob_get_clean();
     // $image_med = base64_encode($image_med);
     // ob_end_clean();
 }
@@ -60,9 +69,16 @@ if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
 } else {
 	try {
     //Upload blob
-		$fullpath = $finalpath . $blob_name;
-		$blobRestProxy->createBlockBlob($container, $blob_name, $image_med);
-		echo '{"status": "OK", "imgPath": "' . $fullpath .'"}';
+        $name_small = $blob_name . '.small';
+        $name_medium = $blob_name . '.medium';
+        $name_large = $blob_name . '.large';
+        $path_s = $finalpath . $name_small;
+        $path_m = $finalpath . $name_medium;
+        $path_l = $finalpath . $name_large;
+        $blobRestProxy->createBlockBlob($container, $name_small, $image_small);
+        $blobRestProxy->createBlockBlob($container, $name_medium, $image_med);
+		$blobRestProxy->createBlockBlob($container, $name_large, $image_large);
+		echo '{"status": "OK", "imgPath_l": "' . $path_l .'", "imgPath_m": "' . $path_m .'", "imgPath_s": "' . $path_s .'"}';
 	}
 	catch(ServiceException $e){
     // Handle exception based on error codes and messages.

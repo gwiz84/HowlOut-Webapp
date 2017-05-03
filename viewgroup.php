@@ -143,26 +143,39 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             $(".txtVisibility").text(isPrivate);
             $(".txtMemberAmount").text(memberAmount);
             $(".txtDescription").text(desc);
-            if (desc.length > 300) {
-                var shortDesc = "";
-                for (var i = 0; i < 298; i++) {
-                    shortDesc += desc[i];
-                }
-                shortDesc = shortDesc + "..";
-                $("#groupDescription").html(shortDesc);
-                $("#groupDescriptionLong").html(desc);
-                $("#groupDescriptionLong").hide();
-            } else {
-                $("#groupDescription").html(desc);
-                $(".btnShowHideDesc").hide();
-            }
+
             //check if user is profileowner and make create event button if is
             $.each(data.ProfileOwners, function (i, ele) {
                 if (ele.ProfileId == facebookId) {
                     // append button that goes to create event via this group
                     $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
                 }
+                var data = JSON.parse(dataraw);
+                console.log(data);
+                var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
+                var title = data.Name;
+                var desc = data.Description;
+                var memberAmount = data.NumberOfMembers;
+                var imgSource = data.LargeImageSource;
 
+                $(".image").attr("src", imgSource);
+                $("#groupTitle").text(title);
+                $(".txtVisibility").text(isPrivate);
+                $(".txtMemberAmount").text(memberAmount);
+                $(".txtDescription").text(desc);
+                if (desc.length>300) {
+                    var shortDesc = "";
+                    for (var i = 0; i < 298; i++) {
+                        shortDesc += desc[i];
+                    }
+                    shortDesc = shortDesc+"..";
+                    $("#groupDescription").html(shortDesc);
+                    $("#groupDescriptionLong").html(desc);
+                    $("#groupDescriptionLong").hide();
+                } else {
+                    $("#groupDescription").html(desc);
+                    $(".btnShowHideDesc").hide();
+                }
             });
 
             if (data.Members.length<1) {
