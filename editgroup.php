@@ -120,7 +120,9 @@ session_start();
 
 <script>
     var token = $(".token").data("token");
-    var orgImage = "";
+    var orgImageS = "";
+    var orgImageM = "";
+    var orgImageL = "";
     var imageCropped = null;
 
     // MANGLER BILLEDE UPLOAD FUNKTIONALITET OG REDIRECT EFTER CREATION!!!!!!!!!!!!!!!!!!!!!
@@ -140,7 +142,6 @@ session_start();
             async: false,
             data: {'apiLink' : apiLink, 'token' : token},
             success: function (data) {
-                // console.log(data);
                 var jsonData = JSON.parse(data);
                 var fbid = $(".fbid").data("fbid");
                 var ownersArray = jsonData.ProfileOwners;
@@ -153,8 +154,10 @@ session_start();
                 if (!isOwner) {
                     window.location = "index.php";
                 } else {
-                    orgImage = jsonData.ImageSource;
-                    $("#bannerImg").css("background-image", "url('" + orgImage + "')");
+                    orgImageS = jsonData.SmallImageSource;
+                    orgImageM = jsonData.ImageSource;
+                    orgImageL = jsonData.LargeImageSource;
+                    $("#bannerImg").css("background-image", "url('" + orgImageL + "')");
                     $(".inputTitle").val(jsonData.Name);
                     $(".inputDesc").val(jsonData.Description);
                     if (jsonData.Visibility == 0) {
@@ -174,16 +177,18 @@ session_start();
     $(".btnCreate").click(function() {
         var groupId = ($(".groupid").data("groupid") != null) ? parseInt($(".groupid").data("groupid")) : 0;
         var fbid = $(".fbid").data("fbid");
-        var imgSrc = (groupId != null) ? orgImage : "img/building.jpg";
+        var imgSrcS = (groupId != null) ? orgImageS : "img/building.jpg";
+        var imgSrcM = (groupId != null) ? orgImageM : "img/building.jpg";
+        var imgSrcL = (groupId != null) ? orgImageL : "img/building.jpg";
         var newImage = "";
         if (imageCropped != null) {
             uploadImage(imageCropped, fbid).done(function (data) {
-                // console.log(data);
                 data = JSON.parse(data);
-                // console.log(data);
                 if (data.status == "OK") {
-                    imgSrc = data.imgPath;
-                    saveGroup(groupId, imgSrc);
+                    imgSrcS = data.imgPath_s;
+                    imgSrcM = data.imgPath_m;
+                    imgSrcL = data.imgPath_l;
+                    saveGroup(groupId, imgSrcS, imgSrcM, imgSrcL);
                 } else {
                     console.log("ERROR");
                     $.alert({
@@ -195,11 +200,11 @@ session_start();
             });
 
         } else {
-            // saveGroup(groupId, imgSrc);
+            saveGroup(groupId, imgSrcS, imgSrcM, imgSrcL);
         }
     });
 
-    function saveGroup(groupId, imgSrc) {
+    function saveGroup(groupId, imgSrcS, imgSrcM, imgSrcL) {
         var title = $(".inputTitle").val();
         var description = $(".inputDesc").val();
         var isPrivate = ($(".radioPrivate").is(":checked")) ? 2 : 0;
@@ -214,7 +219,9 @@ session_start();
             ],
             "Name": title,
             "Description": description,
-            "LargeImageSource": imgSrc,
+            "SmallImageSource": imgSrcS,
+            "ImageSource": imgSrcM,
+            "LargeImageSource": imgSrcL,
             "Visibility": isPrivate
         });
         var token = $(".token").data("token");
@@ -236,9 +243,6 @@ session_start();
     $("#selectImageBtn").click(function() {
         createUploadModal($("#bannerImg"));
     });
-
-
-
 
 </script>
 </body>

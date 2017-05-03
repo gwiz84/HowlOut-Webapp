@@ -338,7 +338,7 @@ session_start();
                 uploadImage(imageCropped, fbid).done(function (data) {
                     data = JSON.parse(data);
                     if (data.status == "OK") {
-                        imgSrc = data.imgPath;
+                        imgSrc = data.imgPath_l;
                         saveEvent(eventId, imgSrc);
                     } else {
                         console.log("ERROR");

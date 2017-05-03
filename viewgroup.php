@@ -117,6 +117,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                     window.location = "index.php";
                 }
                 var data = JSON.parse(dataraw);
+                console.log(data);
                 var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
                 var title = data.Name;
                 var desc = data.Description;
