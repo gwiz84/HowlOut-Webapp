@@ -20,7 +20,7 @@ session_start();
     <!-- Theme CSS -->
     <link href="css/clean-blog.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
-    <link href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
+    <link href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" rel="stylesheet">
     <link href="css/timepicker.css" rel="stylesheet">
     <link href="css/croppie.css" rel="stylesheet">
     <link href="css/jquery-confirm.css" rel="stylesheet" type="text/css">
@@ -45,7 +45,6 @@ session_start();
 
         var dateToday = new Date();
         $(function() {
-
             var firstPick = true;
             $(".datepicker").datetimepicker({
                 dateFormat: 'yy-mm-dd',
@@ -81,13 +80,9 @@ session_start();
                     } else {
                         $('.datepicker2').datepicker('option', 'minDate', newMinDate);
                     }
-
                 }
             });
-
-
-
-        } );
+        });
 </script>
 </head>
 
@@ -125,17 +120,22 @@ session_start();
                          echo " - for group";
                     }
                     ?>
-                    </h4><hr>
+                    </h4>
+                    <hr>
                 <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>
                 Creating an event allows you to either host it is a public or private type, depending on your needs. If you are hosting an event you want everyone to be able to find, chose the public type. If you are organizing a private event and want to invite specific members only, choose the private type.
                 <br>
                 <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">image</i>&nbsp;&nbsp;Image</h4>
-                <img id="bannerImg" class="image img-responsive" style="width:740px;height:300px;margin-bottom:5px;position:relative;background-size:cover;background-repeat:no-repeat;text-align:center;">
-                <!-- <div id="croppieImg" src="img/building.jpg" class="" style="border:solid 1px darkgrey;width:740px; height: 300px;"></div> -->
-                <span>
+                <div id="bannerContainer" style="width:740px;height:300px;">
+                    <span id="bannerOverlay" class="bannerOverlay">
+                        <div id="selectImageBtn" class="btn btn-showmodal">Choose banner image</div>
+                    </span>
+                    <img id="bannerImg" class="image img-banner">
+                </div>
+                <!-- <span>
                     <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
                     <button style="display: none;" id="imageInput" type="file"></button>
-                </span>
+                </span> -->
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
@@ -204,19 +204,6 @@ session_start();
         var orgImage = "";
         var imageCropped = null;
 
-        // var croppieDiv = $('#croppieImg').croppie({
-        //     viewport: { width: 740, height: 300 },
-        //     // boundary: { width: 800, height: 300 },
-        //     showZoomer: false,
-        //     enableOrientation: true,
-        //     // enableZoom: false,
-        //     enforceBoundary: true
-        // });
-
-        // croppieDiv.croppie('bind', {
-        //     url: 'img/building.jpg',
-        // });
-
         // Activates the DAWA autocomplete feature on the ".inputLocation" field
         $(function() {
             $(".inputLocation").dawaautocomplete({
@@ -282,7 +269,6 @@ session_start();
             addressSelected = true;
             var editid = $(".editid").data("editid");
             var apiLink = "https://api.howlout.net/event/event?id="+editid;
-            var token = $(".token").data("token");
             $.ajax({
                 type: "POST",
                 url: "_apiRequest.php",
@@ -341,16 +327,16 @@ session_start();
         });
 
         $(".btnCreate").click(function() {
-            $(this).prop("disabled", "disabled");
+            // $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var fbid = $(".fbid").data("fbid");
             var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
             var newImage = "";
             if (imageCropped != null) {
-                console.log("FØR");
                 uploadImage(imageCropped, fbid).done(function (data) {
-                    console.log(data);
+                    // console.log(data);
                     data = JSON.parse(data);
+                    // console.log(data);
                     if (data.status == "OK") {
                         imgSrc = data.imgPath;
                         saveEvent(eventId, imgSrc);
@@ -434,83 +420,30 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-            var token = $(".token").data("token");
-
+            console.log("apiData: " + apiData);
             $.ajax({
                 type: "POST",
                 url: "_apiRequestJSON.php",
                 async: false,
                 data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-                success: function (data) {
+                success: function(data) {
+                    console.log("data: " + data);
                     var id = JSON.parse(data).EventId;
-                        window.location = "viewevent.php?id="+id;
-                    },
-                    error: function () {
-                        alert("An unexpected error occurred. Please try again later.");
-                    }
-                });
+                    // window.location = "viewevent.php?id="+id;
+                },
+                error: function () {
+                    alert("An unexpected error occurred. Please try again later.");
+                }
+            });
         }
 
         $("#selectImageBtn").click(function() {
             createUploadModal($("#bannerImg"));
         });
 
-        function createUploadModal(divForCroppedImg) {
-            return $.confirm({
-                title: 'Upload and crop new image',
-                content: imgUpContent(),
-                boxWidth: '770px',
-                useBootstrap: false,
-                closeIcon: true,
-                onContentReady: function() {
-                    var self = this;
-                    var croppieDiv = this.$content.find('#croppieimg').croppie({
-                        viewport: { width: 740, height: 300 },
-                        // boundary: { width: 800, height: 300 },
-                        showZoomer: false,
-                        enableOrientation: true,
-                        // enableZoom: false,
-                        enforceBoundary: true
-                    });
-                    this.$content.find("#imageInput").change(function(){
-                        var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
-                        if (JSONresponse.status == "ERROR") {
-                            $.alert({
-                                type: "red",
-                                title: "ERROR!",
-                                content: JSONresponse.message
-                            });
-                        }
-                    });
-                    this.$content.find("#btnCrop").click(function(){
-                        croppieDiv.croppie('result', 'base64').then(function(croppedImage) {
-                            $("#newImg").attr('src', croppedImage);
-                            imageCropped = croppedImage;
-                        });
-                    });
+        
 
-                },
-                buttons: {
-                    cancel: function() {
-                        imageCropped = null;
-                    },
-                    done: {
-                        btnClass: 'btn-green',
-                        action: function() {
-                            if (imageCropped != null) {
-                                divForCroppedImg.attr('src', imageCropped);    
-                            }
-                        }
-                    }
-                }
-            });
-        }
 
-        function imgUpContent() {
-            return '<div><div id="croppieimg" style="width:740px;height:300px;border:solid 1px darkgrey;"></div>'+
-            '<span><input id="imageInput" type="file"></span><br><button id="btnCrop" class="btn btn-red">Crop</button><br><br><br>'+
-            '<img id="newImg" style="width:740px;height:300px;border:solid 1px darkgrey;">';
-        }
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>

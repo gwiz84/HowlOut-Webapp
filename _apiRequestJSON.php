@@ -9,7 +9,6 @@ $temp = str_replace('"', '', $_SESSION['apiKey']);
 
 if ($token == $_SESSION['token']) {
     try {
-
         $curl = curl_init($apiLink);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
@@ -25,6 +24,7 @@ if ($token == $_SESSION['token']) {
             throw new Exception(curl_error($curl), curl_errno($curl));
 
         echo $content;
+        // echo 'SUCCESS! Token: '.$token.', Session-token: '.$_SESSION['token'];
 
     } catch(Exception $e) {
 
@@ -34,5 +34,7 @@ if ($token == $_SESSION['token']) {
             E_USER_ERROR);
 
     }
+} else {
+    echo 'FAILURE! Token: '.$token.', Session-token: '.$_SESSION['token'];
 }
 ?>

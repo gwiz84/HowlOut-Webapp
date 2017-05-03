@@ -67,3 +67,64 @@ function isFileTypeImage(file) {
 	}
 	return false;
 }
+
+function createUploadModal(divForCroppedImg) {
+	return $.confirm({
+		title: 'Upload and crop new image',
+		content: imgUpContent(),
+		boxWidth: '770px',
+		useBootstrap: false,
+		closeIcon: true,
+		onContentReady: function() {
+			var self = this;
+			var croppieDiv = this.$content.find('#croppieimg').croppie({
+				viewport: { width: 740, height: 300 },
+                        // boundary: { width: 800, height: 300 },
+                        showZoomer: false,
+                        enableOrientation: true,
+                        // enableZoom: false,
+                        enforceBoundary: true
+                    });
+			this.$content.find("#imageInput").change(function(){
+				var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
+				if (JSONresponse.status == "ERROR") {
+					$.alert({
+						type: "red",
+						title: "ERROR!",
+						content: JSONresponse.message
+					});
+				}
+			});
+			this.$content.find("#btnCrop").click(function(){
+				croppieDiv.croppie('result', {
+					type: 'base64',
+					size: { width: 740 }
+				}).then(function(croppedImage) {
+					$("#newImg").attr('src', croppedImage);
+					imageCropped = croppedImage;
+				});
+			});
+
+
+		},
+		buttons: {
+			cancel: function() {
+				imageCropped = null;
+			},
+			done: {
+				btnClass: 'btn-green',
+				action: function() {
+					if (imageCropped != null) {
+						divForCroppedImg.attr('src', imageCropped);    
+					}
+				}
+			}
+		}
+	});
+}
+
+function imgUpContent() {
+	return '<div><div id="croppieimg" style="width:740px;height:300px;border:solid 1px darkgrey;"></div>'+
+	'<span><input id="imageInput" type="file" accept="image/*"></span><br><button id="btnCrop" class="btn btn-red">Crop</button><br><br><br>'+
+	'<img id="newImg" style="width:740px;height:300px;border:solid 1px darkgrey;">';
+}
