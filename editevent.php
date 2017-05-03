@@ -132,10 +132,6 @@ session_start();
                     </span>
                     <img id="bannerImg" class="image img-banner">
                 </div>
-                <!-- <span>
-                    <label id="selectImageBtn" class="btn btn-uploadimage" for="imageInput"><i class="fa fa-picture-o fa-2x" aria-hidden="true"></i></label>
-                    <button style="display: none;" id="imageInput" type="file"></button>
-                </span> -->
                 <br>
                 <div class="input-group">
                     <span class="input-group-addon" id="title-input"><i class="material-icons icon_yellow" aria-hidden="true"style="font-size:20px;vertical-align:middle;">add</i></span>
@@ -204,7 +200,7 @@ session_start();
         var orgImage = "";
         var imageCropped = null;
 
-        // Activates the DAWA autocomplete feature on the ".inputLocation" field
+        // Activates the DAWA autocomplete feature on the ".inputLocation" field.
         $(function() {
             $(".inputLocation").dawaautocomplete({
                 select: function(event, data) {
@@ -215,7 +211,7 @@ session_start();
             });
         });
 
-        // Initializes the map display, centered on Rådhuspladsen in Copenhagen by default
+        // Initializes the map display, centered on Rådhuspladsen in Copenhagen by default.
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675637, lng: 12.569544 },
@@ -230,7 +226,7 @@ session_start();
         
         // "Translates" the selected address into latitude and longitude using Google's geocoding functions
         // Centers the map on the location provided, and stores the latitude and longitude values in the
-        // 'eventLat' and 'eventLng' variables for later use
+        // 'eventLat' and 'eventLng' variables for later use.
         function geocodeAddress(geocoder, resultsMap) {
             var address = document.getElementById('address').value;
             geocoder.geocode({'address': address}, function(results, status) {
@@ -250,7 +246,7 @@ session_start();
             });
         }
 
-        // Deletes all markers in the array by removing references to them
+        // Deletes all markers in the array by removing references to them.
         function clearMarkers() {
             if (markersArray) {
                 for (i in markersArray) {
@@ -312,11 +308,13 @@ session_start();
             $("#bannerImg").css("background-image", "url('img/building.jpg')"); 
         }
 
+        // Converts the date-string 'date' to a format understandable by the datepicker plugin.
         function convertDateString(date) {
             convertedDate = date.replace("T", " ").substr(0, 16);
             return convertedDate;
         }
 
+        // When the user enters number for Maxinum number of attendees, change it if it falls below 1 or above 1000.
         $(".inputAttendees").keyup(function() {
             var attendees = $(".inputAttendees").val();
             if (attendees > 1000) {
@@ -326,6 +324,10 @@ session_start();
             }
         });
 
+        // Clicking on the "Create event"/"Update event" button first checks if a new image has been selected (imageCropped != null)
+        // If a new image has been selected, upload it to the server using the 'uploadImage' function (imagehandler.js). When the upload
+        // has finished, put the returned URL to the picture in the variable imgSrc and then run the 'saveEvent' function, saving or
+        // updating the event.
         $(".btnCreate").click(function() {
             // $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
@@ -334,9 +336,7 @@ session_start();
             var newImage = "";
             if (imageCropped != null) {
                 uploadImage(imageCropped, fbid).done(function (data) {
-                    // console.log(data);
                     data = JSON.parse(data);
-                    // console.log(data);
                     if (data.status == "OK") {
                         imgSrc = data.imgPath;
                         saveEvent(eventId, imgSrc);
@@ -355,6 +355,9 @@ session_start();
             }
         });
 
+        // Saves the event. Puts the required data from the inputfields into variables, which are then stored as JSON in 'apiData'
+        // Finally, the API calls the backend, sending 'apiData' and getting the ID of the saved event back. Then the user is redirected
+        // to the viewevent page using the returned ID.
         function saveEvent(eventId, imgSrc) {
             var title = $(".inputTitle").val();
             var description = $(".inputDescription").val();
@@ -437,13 +440,11 @@ session_start();
             });
         }
 
+        // When the user clicks the "Choose banner image" button, the picture upload modal is displayed using the 'createUploadModal'
+        // function (imagehandler.js) and passing the ID of the div where the returned cropped image should be displayed.
         $("#selectImageBtn").click(function() {
             createUploadModal($("#bannerImg"));
         });
-
-        
-
-
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>

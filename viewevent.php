@@ -139,7 +139,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                         window.location = "index.php";
                     }
                     // console.log(data);
-                    var jsonData = JSON.parse(data);                    
+                    var jsonData = JSON.parse(data);
+                    console.log(jsonData);            
                     $(".main-content-container").removeClass("hidden");
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
                     $("#eventTitle").html(jsonData.Title);
