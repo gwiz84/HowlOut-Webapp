@@ -233,7 +233,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             }
         });
 
-<<<<<<< HEAD
+
         function updateComments(data) {
             $(function(){
                 var currentDate = new Date().toISOString();
@@ -254,9 +254,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             });
         }
 
-=======
-        // TEMPORARY FUNCTION
->>>>>>> 6c060acdc1be57d6018707575cc3c6cd0f2cc541
+
         function updateAttendees(attArray) {
             if (attArray.length > 0) {
                 $("#eventAttendees").html("");
