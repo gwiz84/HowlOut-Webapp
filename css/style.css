@@ -36,7 +36,7 @@ textarea:focus, input:focus {
 */
 
 .darken {
-background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),rgba(0, 0, 0, 0.5));
 }
 .btn:active {
     outline: none;
@@ -71,11 +71,11 @@ a:hover {
     border-radius: 10px;
     font-size: 15px;
     outline: none !important;
-/*    background-color: #f5f5f5;
-    box-shadow: 0 0 100px #82e0aa;*/
     background-color: #e5e5e5;
-    /*box-shadow: 0 0 100px #5f5f5f;*/
     transition: 0.7s;
+    /*background-color: #f5f5f5;*/
+    /*box-shadow: 0 0 100px #82e0aa;*/
+    /*box-shadow: 0 0 100px #5f5f5f;*/
 }
 
 .top-menu-searchbar:hover {
@@ -129,8 +129,8 @@ a:hover {
 }
 
 .event-box > .innerbottom {
-   padding: 10px 0 0 0;
-    text-align:left;
+ padding: 10px 0 0 0;
+ text-align:left;
 }
 
 .event-box-edit {
@@ -425,6 +425,54 @@ a:hover {
 
 /* VIEWEVENT.PHP END */
 
+/* EDITEVENT.PHP START */
+
+.bannerOverlay {
+    width: 740px;
+    height: 300px;
+    position: absolute;
+    z-index: 20;
+    background: rgba(0,0,0,0);
+    text-align: center;
+    transition: 0.5s;
+}
+
+.bannerOverlay:hover {
+    background: rgba(0,0,0,0.7);
+}
+
+.bannerOverlay:hover > .btn-showmodal {
+    background: rgba(46,204,113,1);
+    color: rgba(240,240,240,1);
+}
+
+.btn-showmodal {
+    top: 50%;
+    transform: translateY(-50%);
+    position: relative;
+    background: rgba(0,0,0,0);
+    color: rgba(0,0,0,0);
+    transition: 0.5s;
+    border-radius: 5px;
+}
+
+.btn-showmodal:hover {
+    background: rgba(46,204,113,0.95);
+    color: rgba(140,140,140,1);
+}
+
+.img-banner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-size: cover;
+    background-repeat: no-repeat;
+    text-align: center;
+    z-index: 10;
+}
+
+/* EDITEVENT.PHP END */
+
 .icon_green {
     /*color: #48c9b0;*/
     color:  #73c6b6;
@@ -470,9 +518,11 @@ a:hover {
 .icon_lightblue {
     color:   #4dd0e1;
 }
+
 .icon_darkpurple {
- color:#B693CD;
+   color:#B693CD;
 }
+
 .login-box {
     border-radius: 20px;
     background-color: #e9f7ef;
@@ -500,7 +550,6 @@ a:hover {
 .menuSettings > a {
     color: black;
     font-size: 12px;
-
 }
 
 .btnMenuSettings {

@@ -53,7 +53,8 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 <!--      PAGE CONTENT GOES HERE      -->
 
                 <img src="img/building.jpg" class="img-responsive image" style="width:100%;height:300px;margin-bottom:5px;opacity:0.9;">
-                <h2 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;font-weight:bold;" class="txtTitle textstroke">Group name</h2>
+                <!-- <h2 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;font-weight:bold;" class="txtTitle textstroke">Group name</h2> -->
+                <h2 id="groupTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;font-weight:bold;" class="textstroke">Group title</h2>
                 <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members<div class="createEventHolder" style="float:right;"></div>
                 <br><br>
                 <h4>About this group</h4>
@@ -112,7 +113,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             async: false,
             data: {'apiLink' : apiLink, 'token' : token},
             success: function (dataraw) {
-                //            alert(dataraw);
+                if (Object.keys(dataraw).length <= 0) {
+                    window.location = "index.php";
+                }
                 var data = JSON.parse(dataraw);
                 var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
                 var title = data.Name;
@@ -121,13 +124,13 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 var imgSource = data.LargeImageSource;
 
                 $(".image").attr("src", imgSource);
-                $(".txtTitle").text(title);
+                $("#groupTitle").text(title);
                 $(".txtVisibility").text(isPrivate);
                 $(".txtMemberAmount").text(memberAmount);
                 $(".txtDescription").text(desc);
                 if (desc.length>300) {
                     var shortDesc = "";
-                    for (var i=0;i<298; i++) {
+                    for (var i = 0; i < 298; i++) {
                         shortDesc += desc[i];
                     }
                     shortDesc = shortDesc+"..";
