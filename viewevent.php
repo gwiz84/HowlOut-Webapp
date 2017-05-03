@@ -123,13 +123,13 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var comment_length = 0;
         var eventLatitude = 55.675291;
         var eventLongitude = 12.570202;
-
+        var token = $(".token").data("token");
 
         $("#textcounter").html(maxCommentLength + " remaining");
 
         $(function(){
             var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
-            var token = $(".token").data("token");
+
             $.ajax({
                 type: "post",
                 url: "_apiRequest.php",
@@ -209,9 +209,50 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
         $("#btnPostComment").click(function() {
             if (($("#commentfield").val().length) > 0) {
-                alert("POST!");
+                $(function(){
+                    var commentToPost = $("#commentfield").val();
+                    var currentDate = new Date().toISOString();
+                    var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
+                    var jsonData = JSON.stringify({
+                        "Content" : commentToPost,
+                        "DateAndTime" : currentDate
+                    });
+                    $.ajax({
+                        type: "post",
+                        url: "_apiRequestJSON.php",
+                        async: false,
+                        data: {'apiLink' : apiLink, 'apiData' : jsonData, 'token' : token},
+                        success: function (data) {
+                            console.log(data);
+                        },
+                        error: function (data) {
+                            alert(data);
+                            // alert("ajax failed");
+                        }
+                    });
+                });
             }
         });
+
+        function updateComments(data) {
+            $(function(){
+                var currentDate = new Date().toISOString();
+                var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
+                $.ajax({
+                    type: "post",
+                    url: "_apiRequest.php",
+                    async: false,
+                    data: {'apiLink' : apiLink, 'token' : token},
+                    success: function (data) {
+                        console.log(data);
+                    },
+                    error: function (data) {
+                        alert(data);
+                        // alert("ajax failed");
+                    }
+                });
+            });
+        }
 
         function updateAttendees(attArray) {
             if (attArray.length > 0) {

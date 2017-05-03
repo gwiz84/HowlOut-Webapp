@@ -184,7 +184,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             window.location = "editevent.php?groupid="+groupId;
         });
 
-        // NEXT UPCOMING EVENT SKAL TESTES NÅR GROUP CREATE EVENT VIRKER
+        // NEXT UPCOMING EVENT
         var now = new Date();
         apiLink = "https://api.howlout.net/event/eventsFromGroupIds?CurrentTime="+now.toISOString()+"&groupIds="+groupId;
         var token = $(".token").data("token");
