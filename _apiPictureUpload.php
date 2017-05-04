@@ -32,13 +32,6 @@ $image_small = null;
 
 $im = imagecreatefromstring($image_large);
 if ($im !== false) {
-    // header('Content-Type: image/png');
-    // ob_start();
-	// imagepng($im);
-	// $imagelrg = ob_get_contents();
-	// ob_end_clean();
-    // imagedestroy($im);
-    // $org_img = imagecreatefrompng($im);
     $width_s = 247;
     $width_m = 494;
     $height_s = 100;
@@ -46,18 +39,14 @@ if ($im !== false) {
     list($width_org, $height_org) = getimagesize($newfile);
     $image_m = imagecreatetruecolor($width_m, $height_m);
     $image_s = imagecreatetruecolor($width_s, $height_s);
-    // $image_s = imagecreatetruecolor($new_width, $new_height);
     imagecopyresampled($image_m, $im, 0, 0, 0, 0, $width_m, $height_m, $width_org, $height_org);
     imagecopyresampled($image_s, $im, 0, 0, 0, 0, $width_s, $height_s, $width_org, $height_org);
-	// $image = imagecreatefrompng($filename);
     ob_start();
     imagepng($image_m);
     $image_med = ob_get_clean();
     ob_start();
     imagepng($image_s);
     $image_small = ob_get_clean();
-    // $image_med = base64_encode($image_med);
-    // ob_end_clean();
 }
 
 

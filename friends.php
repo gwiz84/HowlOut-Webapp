@@ -52,7 +52,6 @@ session_start();
             <hr>
             <div class="friendsBox row">
 
-
             </div>
         </div>
     </div>
@@ -85,7 +84,7 @@ session_start();
             FB.api('/me/friends', function(response) {
                 var counter = 1;
                 $.each(response.data, function(i,ele) {
-                    if (counter<=4) {
+                    if (counter <= 4) {
                         var name = ele.name;
                         var imgPath = "https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
                         $(".friendsBox").append('<div class="col-md-3 friendItem" data-name="'+name+'"><div class="member-circle " style="background-image: url(\'' + imgPath + '\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">' + name + '</p></div>');
@@ -106,6 +105,7 @@ session_start();
 
     var searchTerms = "";
     var timeoutID = null;
+
     // Keyup function for friends search bar
     $(".friendsSearchBar").keyup(function() {
         clearTimeout(timeoutID);
@@ -119,14 +119,14 @@ session_start();
     function searchInFriends() {
         var friendsSearchWords = $(".friendsSearchBar").val().toLowerCase();
 
-            $(".friendItem").each(function(i, ele) {
-                var stringToSearch = $(this).data("name").toLowerCase();
+        $(".friendItem").each(function(i, ele) {
+            var stringToSearch = $(this).data("name").toLowerCase();
             if (stringToSearch.indexOf(friendsSearchWords) != -1) {
                 $(this).show(150);
             } else {
                 $(this).hide(150);
             }
-            });
+        });
     }
 
 

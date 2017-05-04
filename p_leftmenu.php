@@ -12,7 +12,7 @@
 		<a href="myevents.php"><i class="material-icons leftmenuitem icon_purple">event_note</i>My events</a>
 	</div>
 	<div>
-		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_blue" >pageview</i>Discover events</a>
+		<a href="discoverevents.php"><i class="material-icons leftmenuitem icon_blue">pageview</i>Discover events</a>
 	</div>
 	<div>
         <a href="editevent.php"><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style="font-size:20px;margin-left:8px;"></i><span style="margin-left:7px;">Create event</span></a>

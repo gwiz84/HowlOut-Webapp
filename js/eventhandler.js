@@ -17,7 +17,7 @@ function makeEventElement(event) {
     } else {
         shortDesc = event.Description;
     }
-
+    
     var startDate = getDateFromISOString(new Date(Date.parse(event.StartDate)));
 
     var eventDiv = '<div class="event-box" data-eventid="'+event.EventId+'">'+

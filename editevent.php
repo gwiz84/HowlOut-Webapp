@@ -146,7 +146,7 @@ session_start();
                 <h4>Choose event duration</h4>
 
                 <i class="material-icons icon_green">date_range</i> <span style="vertical-align: 30%;">Event start</span>
-                <input type="text" class="datepicker form-control ho-textinput inputStart" style="width:40%;" placeholder="Choose a start date and time" readonly><br>
+                <input type="text" class="datepicker form-control ho-textinput inputStart" style="width:40%;z-index:40;" placeholder="Choose a start date and time" readonly><br>
                 <i class="material-icons icon_red">date_range</i> <span style="vertical-align: 30%;">Event end</span>
                 <input type="text" class="datepicker2 form-control ho-textinput inputEnd" style="width:40%;" placeholder="Choose an end date and time"readonly>
                 <br>
@@ -423,7 +423,7 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-            console.log("apiData: " + apiData);
+            // console.log("apiData: " + apiData);
             $.ajax({
                 type: "POST",
                 url: "_apiRequestJSON.php",
@@ -431,7 +431,7 @@ session_start();
                 data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                 success: function(data) {
                     var id = JSON.parse(data).EventId;
-                    window.location = "viewevent.php?id="+id;
+                    // window.location = "viewevent.php?id="+id;
                 },
                 error: function () {
                     alert("An unexpected error occurred. Please try again later.");

@@ -94,7 +94,6 @@ session_start();
                         async: false,
                         data: {'apiLink' : apiLink, 'token' : token},
                         success: function (data) {
-                            // console.log(data);
                             var jsonData = JSON.parse(data);
                             if (jsonData.length<1) {
                                 $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');

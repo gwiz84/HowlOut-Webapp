@@ -174,8 +174,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     eventLatitude = jsonData.Latitude;
                     eventLongitude = jsonData.Longitude;
                     updateMap();
+                    console.log(jsonData);
                     // updateAttendees(jsonData.Attendees);
-                    // updateComments(jsonData.Comments);
+                    updateComments(jsonData.Comments);
                 },
                 error: function (data) {
                     alert(data);
@@ -255,7 +256,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 async: false,
                 data: {'apiLink' : apiLink, 'token' : token},
                 success: function (data) {
-                    console.log(data);
+                    // console.log(data);
                     updateComments(data);
                 },
                 error: function (data) {
@@ -264,18 +265,20 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             });
         });
 
-        // updates the comment on the page with json data provided as a parameter
+        // Updates the comment on the page with JSON data provided as a parameter
         function updateComments(jsonData) {
-            var data = JSON.parse(jsonData);
-            $("#comments-container").empty();
-            $.each(data, function(i, ele) {
-                var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
-                    '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
-            });
+            // if (jsonData != null) {
+            //     var data = JSON.parse(jsonData);
+            //     $("#comments-container").empty();
+            //     $.each(data, function(i, ele) {
+            //         var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
+            //         $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
+            //             '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
+            //     });
+            // }  
         }
 
-        // update attendees on the page with json data as parameter
+        // Update attendees on the page with json data as parameter
         function updateAttendees(jsonData) {
             var data = JSON.parse(jsonData);
             $(".eventAttendees").empty();
@@ -294,7 +297,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             return new Date().toISOString().substr(0, 19);
         }
 
-
+        // Convert an ISO-formatted date/time string to a more easily readable format
         function getDateFromISOString(dateString) {
             var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
             var dDay = dateString.getDate();

@@ -96,25 +96,17 @@
                     var token = $(".token").data("token");
 
                     // ajax call to get groups via the api
-                    $.ajax({
-                        type: 'post',
-                        url: '_apiRequest.php',
-                        async: false,
-                        data: {'apiLink' : apiLink, 'token' : token},
-                        success: function (data) {
-                            var jsonData = JSON.parse(data);
-                            if (jsonData.length<1) {
-                                $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
-                            } else {
-                                $.each(jsonData.Groups, function(i,ele) {
-                                    $(".groupBox").append(makeGroupElement(ele));
-                                });
-                            }
-                        },
-                        error: function () {
-                            alert("ajax failed");
+                    runAjax(apiLink, token).done(function(data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.length<1) {
+                            $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
+                        } else {
+                            $.each(jsonData.Groups, function(i,ele) {
+                                $(".groupBox").append(makeGroupElement(ele));
+                            });
                         }
                     });
+                    
                 });
             });
         };
@@ -132,6 +124,14 @@
             window.location = "viewgroup.php?id="+groupIdClicked;
         });
 
+        function runAjax(apiLink, token) {
+            return $.ajax({
+                type: 'post',
+                url: '_apiRequest.php',
+                async: true,
+                data: {'apiLink' : apiLink, 'token' : token},
+            });
+        }
 
     </script>
 </body>

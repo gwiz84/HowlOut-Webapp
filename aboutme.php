@@ -158,12 +158,7 @@ session_start();
                         }
                     });
                 });
-
-
-
-
             });
-
         };
 
         (function(d, s, id){

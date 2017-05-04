@@ -7,11 +7,10 @@ var maxImageSize = 6000000;
 // If succesful, the image is stored in "image" (base64 encoded)
 function loadImageFromFile(imageToLoad, croppieElement) {
 	if (imageToLoad.files && imageToLoad.files[0]) {
-
-		if (imageToLoad.files[0].size > maxImageSize) {
-			return '{"status": "ERROR", "message": "File is too big<br>Maximum filesize: ' + maxImageSize + ' bytes"}';
-		} else if (!isFileTypeImage(imageToLoad)) {
+		if (!isFileTypeImage(imageToLoad)) {
 			return '{"status": "ERROR", "message": "Not an image file"}';
+		} else if (imageToLoad.files[0].size > maxImageSize) {
+			return '{"status": "ERROR", "message": "File is too big<br>Maximum filesize: ' + maxImageSize + ' bytes"}';
 		} else {
 			var reader = new FileReader();
 
@@ -68,6 +67,8 @@ function isFileTypeImage(file) {
 	return false;
 }
 
+// Creates and displays a picture upload modal 
+// 'divForCroppedImg' is the div which should be used for the finished, cropped image
 function createUploadModal(divForCroppedImg) {
 	return $.confirm({
 		title: 'Upload and crop new image',

@@ -53,8 +53,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         <div class="col-sm-2 left-menu-container">
             <?php include_once "p_leftmenu.php"; ?>
         </div>
-        <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container"
-             style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
+        <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
 
             <img src="img/building.jpg" class="img-responsive image"
@@ -118,85 +117,82 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     var token = $(".token").data("token");
 
     var facebookId = <?php echo $_SESSION['facebookId']; ?>;
+    
+    function runAjax(apiLink, token) {
+        return $.ajax({
+            type: 'post',
+            url: '_apiRequest.php',
+            async: true,
+            data: {'apiLink' : apiLink, 'token' : token},
+        });
+    }
 
-    // Get group
-    $.ajax({
-        type: 'POST',
-        url: '_apiRequest.php',
-        async: false,
-        data: {'apiLink': apiLink, 'token': token},
-        success: function (dataraw) {
-            if (Object.keys(dataraw).length <= 0) {
-                window.location = "index.php";
+    runAjax(apiLink, token).done(function(data) {
+        if (Object.keys(data).length <= 0) {
+            window.location = "index.php";
+        }
+        $(".main-content-container").removeClass("hidden");
+        var data = JSON.parse(data);
+        updateComments(JSON.stringify(data.Comments));
+        var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
+        var title = data.Name;
+        var desc = data.Description;
+        var memberAmount = data.NumberOfMembers;
+        var imgSource = data.LargeImageSource;
+
+        $(".image").attr("src", imgSource);
+        $("#groupTitle").text(title);
+        $(".txtVisibility").text(isPrivate);
+        $(".txtMemberAmount").text(memberAmount);
+        $(".txtDescription").text(desc);
+
+        // Check if user is groupowner and make Create Event button if is
+        $.each(data.ProfileOwners, function (i, ele) {
+            if (ele.ProfileId == facebookId) {
+                // Append button that goes to Create Event via this group
+                $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
             }
-            // console.log(dataraw);
-            var data = JSON.parse(dataraw);
-            updateComments(JSON.stringify(data.Comments));
-            var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
-            var title = data.Name;
-            var desc = data.Description;
-            var memberAmount = data.NumberOfMembers;
-            var imgSource = data.LargeImageSource;
+        });
+        var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
+        var title = data.Name;
+        var desc = data.Description;
+        var memberAmount = data.NumberOfMembers;
+        var imgSource = data.LargeImageSource;
 
-            $(".image").attr("src", imgSource);
-            $("#groupTitle").text(title);
-            $(".txtVisibility").text(isPrivate);
-            $(".txtMemberAmount").text(memberAmount);
-            $(".txtDescription").text(desc);
+        $(".image").attr("src", imgSource);
+        $("#groupTitle").text(title);
+        $(".txtVisibility").text(isPrivate);
+        $(".txtMemberAmount").text(memberAmount);
+        $(".txtDescription").text(desc);
+        if (desc.length > 300) {
+            var shortDesc = "";
+            for (var i = 0; i < 298; i++) {
+                shortDesc += desc[i];
+            }
+            shortDesc += "..    .";
+            $("#groupDescription").html(shortDesc);
+            $("#groupDescriptionLong").html(desc);
+            $("#groupDescriptionLong").hide();
+        } else {
+            $("#groupDescription").html(desc);
+            $(".btnShowHideDesc").hide();
+        }
 
-            //check if user is profileowner and make create event button if is
-            $.each(data.ProfileOwners, function (i, ele) {
-                if (ele.ProfileId == facebookId) {
-                    // append button that goes to create event via this group
-                    $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
-                }
-                var data = JSON.parse(dataraw);
-                var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
-                var title = data.Name;
-                var desc = data.Description;
-                var memberAmount = data.NumberOfMembers;
-                var imgSource = data.LargeImageSource;
-
-                $(".image").attr("src", imgSource);
-                $("#groupTitle").text(title);
-                $(".txtVisibility").text(isPrivate);
-                $(".txtMemberAmount").text(memberAmount);
-                $(".txtDescription").text(desc);
-                if (desc.length>300) {
-                    var shortDesc = "";
-                    for (var i = 0; i < 298; i++) {
-                        shortDesc += desc[i];
-                    }
-                    shortDesc = shortDesc+"..";
-                    $("#groupDescription").html(shortDesc);
-                    $("#groupDescriptionLong").html(desc);
-                    $("#groupDescriptionLong").hide();
-                } else {
-                    $("#groupDescription").html(desc);
-                    $(".btnShowHideDesc").hide();
-                }
+        if (data.Members.length < 1) {
+            $(".memberBox").append('<h5 style="font-style:italic;margin-left:30px;">No members found</h5>');
+            $(".btnViewAllMembers").hide();
+        } else {
+            $.each(data.Members, function (i, ele) {
+                $(".memberBox").data("groupid");
+                $(".memberBox").append('' +
+                    '<div class=" col-md-2" style="text-align:center;">' +
+                    '<img src="' + ele.SmallImageSource + '" class="member-circle"><br>' +
+                    '<p class="">' + ele.Name + '</p>' +
+                    '</div>');
             });
-
-            if (data.Members.length<1) {
-                $(".memberBox").append('<h5 style="font-style:italic;margin-left:30px;">No members found</h5>');
-                $(".btnViewAllMembers").hide();
-            } else {
-                $.each(data.Members, function (i, ele) {
-                    $(".memberBox").data("groupid");
-                    $(".memberBox").append('' +
-                        '<div class=" col-md-2" style="text-align:center;">' +
-                        '<img src="' + ele.SmallImageSource + '" class="member-circle"><br>' +
-                        '<p class="">' + ele.Name + '</p>' +
-                        '</div>');
-
-                });
-            }
-
-        },
-        error: function () {
-            alert("An unexpected error has sadly occurred.");
         }
     });
+
 
 
     // description open/close
@@ -224,45 +220,30 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     // NEXT UPCOMING EVENT
     var now = new Date();
     apiLink = "https://api.howlout.net/event/eventsFromGroupIds?CurrentTime=" + now.toISOString() + "&groupIds=" + groupId;
-    var token = $(".token").data("token");
-    $.ajax({
-        type: 'post',
-        url: '_apiRequest.php',
-        async: false,
-        data: {'apiLink': apiLink, 'token': token},
-        success: function (data) {
-            var jsonData = JSON.parse(data);
-//                alert(data);
-            var eventToShow = null;
-            var currentTime = new Date().getTime();
-            var lowest = null;
-            if (jsonData.length<1) {
-                $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
-                $(".btnViewAllEvents").hide();
-            } else {
-                $.each(jsonData, function (i, ele) {
-                    var startTime = Date.parse(ele.StartDate);
-//                            console.log("Event title: "+ele.Title );
-//                            console.log("Current time: "+currentTime );
-//                            console.log("Event start time: "+startTime );
-//                            console.log( (startTime-currentTime) );
-                    if ((startTime - currentTime) > 0) {
-                        if (lowest === null) {
+    runAjax(apiLink, token).done(function(data) {
+        var jsonData = JSON.parse(data);
+        var eventToShow = null;
+        var currentTime = new Date().getTime();
+        var lowest = null;
+        if (jsonData.length<1) {
+            $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
+            $(".btnViewAllEvents").hide();
+        } else {
+            $.each(jsonData, function (i, ele) {
+                var startTime = Date.parse(ele.StartDate);
+                if ((startTime - currentTime) > 0) {
+                    if (lowest === null) {
+                        lowest = startTime - currentTime;
+                        eventToShow = ele;
+                    } else {
+                        if ((startTime - currentTime) < lowest) {
                             lowest = startTime - currentTime;
                             eventToShow = ele;
-                        } else {
-                            if ((startTime - currentTime) < lowest) {
-                                lowest = startTime - currentTime;
-                                eventToShow = ele;
-                            }
                         }
                     }
-                });
-                $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
-            }
-        },
-        error: function () {
-            alert("An unexpected error has sadly occurred.");
+                }
+            });
+            $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
         }
     });
 
