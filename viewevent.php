@@ -175,7 +175,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     eventLongitude = jsonData.Longitude;
                     updateMap();
                     console.log(jsonData);
-                    // updateAttendees(jsonData.Attendees);
+                    updateAttendees(jsonData.Attendees);
                     updateComments(jsonData.Comments);
                 },
                 error: function (data) {
@@ -267,28 +267,32 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
         // Updates the comment on the page with JSON data provided as a parameter
         function updateComments(jsonData) {
-            // if (jsonData != null) {
-            //     var data = JSON.parse(jsonData);
-            //     $("#comments-container").empty();
-            //     $.each(data, function(i, ele) {
-            //         var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-            //         $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
-            //             '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
-            //     });
-            // }  
+            if (jsonData.length >= 2) {
+                console.log(jsonData);
+                var data = JSON.parse(jsonData);
+                console.log(data);
+                $("#comments-container").empty();
+                $.each(data, function(i, ele) {
+                    var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
+                    $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
+                        '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
+                });
+            }  
         }
 
         // Update attendees on the page with json data as parameter
         function updateAttendees(jsonData) {
-            var data = JSON.parse(jsonData);
-            $(".eventAttendees").empty();
-            if (data.length>0) {
-                $.each(data, function(i, ele) {
-                    $(".eventAttendees").append('');
-                });
-            } else {
-                $(".eventAttendees").append('<p>No attendees</p>');
-                $("#moreAttendees").hide();
+            if (jsonData.length >= 2) {
+                var data = JSON.parse(jsonData);
+                $(".eventAttendees").empty();
+                if (data.length>0) {
+                    $.each(data, function(i, ele) {
+                        $(".eventAttendees").append('');
+                    });
+                } else {
+                    $(".eventAttendees").append('<p>No attendees</p>');
+                    $("#moreAttendees").hide();
+                }
             }
         }
 
