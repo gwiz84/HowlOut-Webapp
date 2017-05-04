@@ -56,7 +56,7 @@ function uploadImage(newImage, fbid) {
 			data: { 'newImage' : newImage, 'fbid': fbid },
 		});
 	} else {
-		console.log("HEJ!");
+		console.log("ERROR: uploadImage!");
 	}
 }
 

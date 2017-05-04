@@ -132,7 +132,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
 
             $.ajax({
-                type: "post",
+                type: "POST",
                 url: "_apiRequest.php",
                 async: false,
                 data: {'apiLink' : apiLink, 'token' : token},
@@ -140,15 +140,18 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     if (Object.keys(data).length <= 0) {
                         window.location = "index.php";
                     }
-
-
                     var jsonData = JSON.parse(data);
                     updateAttendees(JSON.stringify(jsonData.Attendees));
-
                     $(".main-content-container").removeClass("hidden");
                     var eventDate = new Date(Date.parse(jsonData.StartDate));
                     $("#eventTitle").html(jsonData.Title);
-                    $("#eventOwner").html(jsonData.ProfileOwners[0].Name);
+                    var eventOwner;
+                    if (jsonData.ProfileOwners != null) {
+                        eventOwner = jsonData.ProfileOwners[0].Name;
+                    } else {
+                        eventOwner = jsonData.GroupOwner.Name;
+                    }
+                    $("#eventOwner").html(eventOwner);
                     $("#eventVisibility").html(jsonData.Visibility == 0 ? "Public" : "Private");
                     $("#eventTime").html(getDateFromISOString(eventDate));
                     $("#eventLocation").html(jsonData.AddressName);
@@ -171,8 +174,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     eventLatitude = jsonData.Latitude;
                     eventLongitude = jsonData.Longitude;
                     updateMap();
-                    updateAttendees(jsonData.Attendees);
-                    updateComments(jsonData.Comments);
+                    // updateAttendees(jsonData.Attendees);
+                    // updateComments(jsonData.Comments);
                 },
                 error: function (data) {
                     alert(data);

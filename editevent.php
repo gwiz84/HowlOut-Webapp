@@ -430,9 +430,8 @@ session_start();
                 async: false,
                 data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
                 success: function(data) {
-                    console.log("data: " + data);
                     var id = JSON.parse(data).EventId;
-                    // window.location = "viewevent.php?id="+id;
+                    window.location = "viewevent.php?id="+id;
                 },
                 error: function () {
                     alert("An unexpected error occurred. Please try again later.");

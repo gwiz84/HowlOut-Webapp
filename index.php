@@ -119,7 +119,7 @@ session_start();
                     data: {'apiLink' : apiLink, 'token' : token},
                     success: function (data) {
                         var jsonData = JSON.parse(data);
-
+                        console.log(data);
                         var eventToShow = null;
                         var currentTime = new Date().getTime();
                         var lowest = null;
@@ -159,42 +159,42 @@ session_start();
 
 
         // Get groups
-        FB.getLoginStatus(function(response) {
-            FB.api('/me', function(response)
-            {
-                var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
-                var apiData = JSON.stringify(
-                    {
-                        ProfileId : facebookId
-                    }
-                );
-                var token = $(".token").data("token");
-                $.ajax({
-                    type: 'post',
-                    url: '_apiRequest.php',
-                    async: false,
-                    data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
-                    success: function (data) {
-                        var jsonData = JSON.parse(data);
-                        if (jsonData.length<1) {
-                            $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
-                            $(".btnViewAllGroups").hide();
-                        } else {
-                            var counter = 1;
-                            $.each(jsonData.Groups, function(i,ele) {
-                                if (counter<=6) {
-                                    $(".groupBox").append(makeGroupElement(ele));
-                                    counter++;
-                                }
-                            });
-                        }
-                    },
-                    error: function () {
-                        alert("ajax failed");
-                    }
-                });
-            });
-        });
+        // FB.getLoginStatus(function(response) {
+        //     FB.api('/me', function(response)
+        //     {
+        //         var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
+        //         var apiData = JSON.stringify(
+        //             {
+        //                 ProfileId : facebookId
+        //             }
+        //         );
+        //         var token = $(".token").data("token");
+        //         $.ajax({
+        //             type: 'post',
+        //             url: '_apiRequest.php',
+        //             async: false,
+        //             data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
+        //             success: function (data) {
+        //                 var jsonData = JSON.parse(data);
+        //                 if (jsonData.length<1) {
+        //                     $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
+        //                     $(".btnViewAllGroups").hide();
+        //                 } else {
+        //                     var counter = 1;
+        //                     $.each(jsonData.Groups, function(i,ele) {
+        //                         if (counter<=6) {
+        //                             $(".groupBox").append(makeGroupElement(ele));
+        //                             counter++;
+        //                         }
+        //                     });
+        //                 }
+        //             },
+        //             error: function () {
+        //                 alert("ajax failed");
+        //             }
+        //         });
+        //     });
+        // });
 
     };
 

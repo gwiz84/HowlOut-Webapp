@@ -121,7 +121,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
     // Get group
     $.ajax({
-        type: 'post',
+        type: 'POST',
         url: '_apiRequest.php',
         async: false,
         data: {'apiLink': apiLink, 'token': token},
@@ -129,9 +129,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             if (Object.keys(dataraw).length <= 0) {
                 window.location = "index.php";
             }
-            console.log(dataraw);
+            // console.log(dataraw);
             var data = JSON.parse(dataraw);
-            updateComments(JSON.stringify(data.Comments))
+            updateComments(JSON.stringify(data.Comments));
             var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
             var title = data.Name;
             var desc = data.Description;
@@ -151,7 +151,6 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                     $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
                 }
                 var data = JSON.parse(dataraw);
-                console.log(data);
                 var isPrivate = (data.Visibility==0) ? "Public" : "Private" ;
                 var title = data.Name;
                 var desc = data.Description;
