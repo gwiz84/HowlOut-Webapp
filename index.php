@@ -123,7 +123,7 @@ session_start();
                         var eventToShow = null;
                         var currentTime = new Date().getTime();
                         var lowest = null;
-                        if (jsonData.length<1) {
+                        if (jsonData.length < 1) {
                             $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
                             $(".btnViewAllEvents").hide();
                         } else {
@@ -147,8 +147,6 @@ session_start();
                             });
                             $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
                         }
-
-
                     },
                     error: function () {
                         alert("ajax failed");

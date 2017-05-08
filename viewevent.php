@@ -52,14 +52,14 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <div class="eventTopPart">
-                    <img src="img/building.jpg" class="img-responsive darken" style="width:100%;height:300px;margin-bottom:5px;z-index:10;position:relative;opacity:0.9;">
+                    <img id="bannerImg" src="img/building.jpg" class="img-responsive darken" style="width:100%;height:300px;margin-bottom:5px;z-index:10;position:relative;opacity:0.9;">
 
                     <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;font-weight:bold;" class="textstroke">Event title</h2>
                     <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
 
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:100%;margin:0 30px 0 30px;"></div>
+                            <div id="ownerImg" class="member-circle col-md-1" style="background-image: url('img/profiledemo.jpg');background-size:40px; background-size: cover;margin:0 30px 0 30px;"></div>
                             <h4><span id="eventOwner">Event owner</span></h4>
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
@@ -119,6 +119,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
     <?php include_once "p_loadScripts.html"; ?>
 
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
     <script>
         var maxCommentLength = 250;
         var comment_length = 0;
@@ -130,60 +131,72 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
         $("#textcounter").html(maxCommentLength + " remaining");
 
+        function runAjax(apiLink, token) {
+            return $.ajax({
+                type: 'post',
+                url: '_apiRequest.php',
+                async: true,
+                data: {'apiLink' : apiLink, 'token' : token}
+            });
+        }
+
+        function runAjaxJSON(apiLink, apiData, token) {
+            return $.ajax({
+                type: "post",
+                url: "_apiRequestJSON.php",
+                async: false,
+                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token}
+            });
+        }
+
         $(function(){
             var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
 
-            $.ajax({
-                type: "POST",
-                url: "_apiRequest.php",
-                async: false,
-                data: {'apiLink' : apiLink, 'token' : token},
-                success: function (data) {
-                    if (Object.keys(data).length <= 0) {
-                        window.location = "index.php";
-                    }
-                    var jsonData = JSON.parse(data);
-                    updateAttendees(JSON.stringify(jsonData.Attendees));
-                    $(".main-content-container").removeClass("hidden");
-                    var eventDate = new Date(Date.parse(jsonData.StartDate));
-                    $("#eventTitle").html(jsonData.Title);
-                    var eventOwner;
-                    if (jsonData.ProfileOwners != null) {
-                        eventOwner = jsonData.ProfileOwners[0].Name;
-                    } else {
-                        eventOwner = jsonData.GroupOwner.Name;
-                    }
-                    $("#eventOwner").html(eventOwner);
-                    $("#eventVisibility").html(jsonData.Visibility == 0 ? "Public" : "Private");
-                    $("#eventTime").html(getDateFromISOString(eventDate));
-                    $("#eventLocation").html(jsonData.AddressName);
-                    $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
-                    if (jsonData.Description.length>300) {
-                        var shortDesc = "";
-                        for (var i=0;i<298; i++) {
-                            shortDesc += jsonData.Description[i];
-                        }
-                        shortDesc = shortDesc+"..";
-                        $("#eventDescription").html(shortDesc);
-                        $("#eventDescriptionLong").html(jsonData.Description);
-                        $("#eventDescriptionLong").hide();
-                    } else {
-                        $("#eventDescription").html(jsonData.Description);
-                        $(".btnShowHideDesc").hide();
-                    }
-                    $(".img-responsive").attr("src", jsonData.ImageSource);
-
-                    eventLatitude = jsonData.Latitude;
-                    eventLongitude = jsonData.Longitude;
-                    updateMap();
-                    console.log(jsonData);
-                    updateAttendees(jsonData.Attendees);
-                    updateComments(jsonData.Comments);
-                },
-                error: function (data) {
-                    alert(data);
-                    // alert("ajax failed");
+            runAjax(apiLink, token).done(function(data) {
+                if (Object.keys(data).length <= 0) {
+                    window.location = "index.php";
                 }
+                var jsonData = JSON.parse(data);
+                // console.log(data);
+                showAttendees(JSON.stringify(jsonData.Attendees));
+                var eventDate = new Date(Date.parse(jsonData.StartDate));
+                $("#eventTitle").html(jsonData.Title);
+                console.log(jsonData);
+                var eventOwner;
+                var eventOwnerImg;
+                if (jsonData.ProfileOwners != null) {
+                    eventOwner = jsonData.ProfileOwners[0].Name;
+                    eventOwnerImg = jsonData.ProfileOwners[0].ImageSource;
+                } else {
+                    eventOwner = jsonData.GroupOwner.Name;
+                    eventOwnerImg = jsonData.GroupOwner.SmallImageSource;
+                }
+                $("#eventOwner").html(eventOwner);
+                $("#ownerImg").css("background-image", "url('" + eventOwnerImg + "')");
+                $("#eventVisibility").html(jsonData.Visibility == 0 ? "Public" : "Private");
+                $("#eventTime").html(getDateFromISOString(eventDate));
+                $("#eventLocation").html(jsonData.AddressName);
+                $("#eventSignedUp").html(jsonData.NumberOfAttendees + ' / ' + jsonData.MaxSize);
+                if (jsonData.Description.length > 300) {
+                    var shortDesc = "";
+                    for (var i = 0; i < 298; i++) {
+                        shortDesc += jsonData.Description[i];
+                    }
+                    shortDesc = shortDesc+"...";
+                    $("#eventDescription").html(shortDesc);
+                    $("#eventDescriptionLong").html(jsonData.Description);
+                    $("#eventDescriptionLong").hide();
+                } else {
+                    $("#eventDescription").html(jsonData.Description);
+                    $(".btnShowHideDesc").hide();
+                }
+                $("#bannerImg").attr("src", jsonData.ImageSource);
+                $(".main-content-container").removeClass("hidden");
+                eventLatitude = jsonData.Latitude;
+                eventLongitude = jsonData.Longitude;
+                updateMap();
+                showAttendees(jsonData.Attendees);
+                showComments(jsonData.Comments);
             });
         });
 
@@ -202,7 +215,6 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             }
         });
 
-
         // Detect max character lenth etc. for comment field
         $("#commentfield").keyup(function() {
             comment_length = $("#commentfield").val().length;
@@ -219,71 +231,35 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             $("#textcounter").html(text_remaining + " remaining");
         });
 
-
         // Post comment on wall
         $("#btnPostComment").click(function() {
             if (($("#commentfield").val().length) > 0) {
-                $(function(){
-                    var commentToPost = $("#commentfield").val();
-                    var currentDate = new Date().toISOString();
-                    var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
-                    var jsonData = JSON.stringify({
-                        "Content" : commentToPost,
-                        "DateAndTime" : currentDate
-                    });
-                    $.ajax({
-                        type: "post",
-                        url: "_apiRequestJSON.php",
-                        async: false,
-                        data: {'apiLink' : apiLink, 'apiData' : jsonData, 'token' : token},
-                        success: function (data) {
-                            updateComments(data);
-                        },
-                        error: function (data) {
-                            alert(data);
-                            // alert("ajax failed");
-                        }
-                    });
+                var commentToPost = $("#commentfield").val();
+                var currentDate = new Date().toISOString();
+                var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
+                var jsonData = JSON.stringify({
+                    "Content" : commentToPost,
+                    "DateAndTime" : currentDate
+                });
+                runAjaxJSON(apiLink, jsonData, token).done(function(data) {
+                    showComments(JSON.parse(data));
                 });
             }
         });
 
-        // Get comments as page is loaded
-        $(function(){
-            var currentDate = new Date().toISOString();
-            var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
-            $.ajax({
-                type: "post",
-                url: "_apiRequest.php",
-                async: false,
-                data: {'apiLink' : apiLink, 'token' : token},
-                success: function (data) {
-                    // console.log(data);
-                    updateComments(data);
-                },
-                error: function (data) {
-                     alert("An unknown error has occured, please check your internet connection.");
-                }
-            });
-        });
-
         // Updates the comment on the page with JSON data provided as a parameter
-        function updateComments(jsonData) {
-            if (jsonData.length >= 2) {
-                console.log(jsonData);
-                var data = JSON.parse(jsonData);
-                console.log(data);
-                $("#comments-container").empty();
-                $.each(data, function(i, ele) {
-                    var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-                    $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
-                        '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
-                });
-            }  
+        function showComments(jsonData) {
+            $("#comments-container").empty();
+            $.each(jsonData, function(i, ele) {
+                var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
+                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
+                    '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
+            });
         }
 
         // Update attendees on the page with json data as parameter
-        function updateAttendees(jsonData) {
+        function showAttendees(jsonData) {
+            // console.log(jsonData);  
             if (jsonData.length >= 2) {
                 var data = JSON.parse(jsonData);
                 $(".eventAttendees").empty();
@@ -330,7 +306,6 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             });
         }
     </script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
 
 </body>
 
