@@ -51,9 +51,9 @@ session_start();
     <script>
         var token = $(".token").data("token");
         $.ajax({
-            type: 'post',
+            type: 'POST',
             url: '_logout.php',
-            async: false,
+            async: true,
             data: { 'token' : token },
             success: function (data) {
                 if (data == "success") {

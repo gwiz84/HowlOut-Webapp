@@ -12,8 +12,6 @@ window.fbAsyncInit = function() {
             window.location = "login.php";
         }
     });
-
-
 };
 
 (function(d, s, id){

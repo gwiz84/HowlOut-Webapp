@@ -44,24 +44,23 @@
            </div>
        </div>
 
-   </div>
+    </div>
 
-   <!-- MOBILE WARNING BOX -->
-   <?php include_once "p_mobilewarning.html"; ?>
+    <!-- MOBILE WARNING BOX -->
+    <?php include_once "p_mobilewarning.html"; ?>
 
-   <!-- FOOTER -->
-   <?php include_once "p_footer.html"; ?>
+    <!-- FOOTER -->
+    <?php include_once "p_footer.html"; ?>
 
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="scripts/clean-blog.min.js"></script>
-
+    <script src="js/ajaxhandler.js"></script>
 
     <script>
     $(".loggedIn").hide();
     $(".btnLogin").html("Log in");
     var accesstoken = "";
-
 
     window.fbAsyncInit = function() {
         // facebook functions in here
@@ -101,55 +100,41 @@
     }(document, 'script', 'facebook-jssdk'));
 
     $(".btnLogin").click(function() {
-
-
-            FB.getLoginStatus(function(response) {
-                if (response.status == "connected") {
-                    FB.api('/me', function(response)
+        FB.getLoginStatus(function(response) {
+            if (response.status == "connected") {
+                FB.api('/me', function(response) {
+                    var facebookId = response.id;
+                    var facebookName = response.name;
+                    var apiLink = 'https://api.howlout.net/profile?create=true';
+                    var apiData = JSON.stringify(
                     {
-                        var facebookId = response.id;
-                        var facebookName = response.name;
-                        var apiLink = 'https://api.howlout.net/profile?create=true';
-                        var apiData = JSON.stringify(
-                        {
-                            "ProfileId": facebookId,
-                            "Name": facebookName,
-                            "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
-                            "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
-                            "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
-                            "Description":"Test Description",
-                            "Age": 0
+                        "ProfileId": facebookId,
+                        "Name": facebookName,
+                        "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
+                        "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
+                        "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
+                        "Description":"Test Description",
+                        "Age": 0
+                    }
+                    );
+                    var token = $(".token").data("token");
+                    runAjax(apiLink, token).done(function(data) {
+                        if (data == "success") {
+                            window.location = "index.php";
                         }
-                        );
-                        var token = $(".token").data("token");
-                        $.ajax({
-                            type: 'post',
-                            url: '_apiRequestProfile.php',
-                            async: false,
-                            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token, 'name' : facebookName},
-                            success: function (data) {
-                                if (data == "success") {
-                                    window.location = "index.php";
-                                }
-                            },
-                            error: function () {
-                                alert("ajax failed");
-                            }
-                        });
                     });
-                } else {
-                    FB.login(function(response) {
-                        if (response.authResponse) {
-                            top.location.href = 'index.php';
-                        }
-                    },{
-                        scope: 'manage_pages,publish_pages,user_friends',
-                            return_scopes: true
-                    });
-                }
-            });
-
-//        };
+                });
+            } else {
+                FB.login(function(response) {
+                    if (response.authResponse) {
+                        top.location.href = 'index.php';
+                    }
+                },{
+                    scope: 'manage_pages,publish_pages,user_friends',
+                        return_scopes: true
+                });
+            }
+        });
 
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];

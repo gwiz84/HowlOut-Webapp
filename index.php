@@ -106,97 +106,58 @@ session_start();
 
         // Get next relevant event
         FB.getLoginStatus(function(response) {
-            FB.api('/me', function(response)
-            {
+            FB.api('/me', function(response) {
                 facebookId = response.id;
 
-                var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=false&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
                 var token = $(".token").data("token");
-                $.ajax({
-                    type: 'post',
-                    url: '_apiRequest.php',
-                    async: false,
-                    data: {'apiLink' : apiLink, 'token' : token},
-                    success: function (data) {
-                        var jsonData = JSON.parse(data);
-                        console.log(data);
-                        var eventToShow = null;
-                        var currentTime = new Date().getTime();
-                        var lowest = null;
-                        if (jsonData.length < 1) {
-                            $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
-                            $(".btnViewAllEvents").hide();
-                        } else {
-                            $.each(jsonData, function(i,ele) {
-                                var startTime = Date.parse(ele.StartDate);
-//                            console.log("Event title: "+ele.Title );
-//                            console.log("Current time: "+currentTime );
-//                            console.log("Event start time: "+startTime );
-//                            console.log( (startTime-currentTime) );
-                                if ( (startTime-currentTime)>0) {
-                                    if (lowest===null) {
+                runAjax(apiLink, token).done(function(data) {
+                    var jsonData = JSON.parse(data);
+                    var eventToShow = null;
+                    var currentTime = new Date().getTime();
+                    var lowest = null;
+                    if (jsonData.length < 1) {
+                        $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
+                        $(".btnViewAllEvents").hide();
+                    } else {
+                        $.each(jsonData, function(i,ele) {
+                            var startTime = Date.parse(ele.StartDate);
+
+                            if ( (startTime-currentTime)>0) {
+                                if (lowest===null) {
+                                    lowest = startTime - currentTime;
+                                    eventToShow = ele;
+                                } else {
+                                    if ( (startTime-currentTime) < lowest) {
                                         lowest = startTime - currentTime;
                                         eventToShow = ele;
-                                    } else {
-                                        if ( (startTime-currentTime) < lowest) {
-                                            lowest = startTime - currentTime;
-                                            eventToShow = ele;
-                                        }
                                     }
                                 }
-                            });
-                            $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
-                        }
-                    },
-                    error: function () {
-                        alert("ajax failed");
+                            }
+                        });
+                        $(".eventBox").append(makeEventElement(eventToShow) + "<br>");
                     }
                 });
-            });
-        });
-
-
-        // Get groups
-        FB.getLoginStatus(function(response) {
-            FB.api('/me', function(response)
-            {
-                var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
-                var apiData = JSON.stringify(
-                    {
-                        ProfileId : facebookId
-                    }
-                );
-                var token = $(".token").data("token");
-                $.ajax({
-                    type: 'post',
-                    url: '_apiRequest.php',
-                    async: false,
-                    data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
-                    success: function (data) {
-                        var jsonData = JSON.parse(data);
-                        if (jsonData.length<1) {
-                            $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
-                            $(".btnViewAllGroups").hide();
-                        } else {
-                            var counter = 1;
-                            $.each(jsonData.Groups, function(i,ele) {
-                                if (counter<=6) {
-                                    $(".groupBox").append(makeGroupElement(ele));
-                                    counter++;
-                                }
-                            });
-                        }
-                    },
-                    error: function () {
-                        alert("ajax failed");
+                runAjax(apiLink2, token).done(function(data) {
+                    var jsonData = JSON.parse(data);
+                    if (jsonData.length < 1) {
+                        $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
+                        $(".btnViewAllGroups").hide();
+                    } else {
+                        var counter = 1;
+                        $.each(jsonData.Groups, function(i,ele) {
+                            if (counter<=6) {
+                                $(".groupBox").append(makeGroupElement(ele));
+                                counter++;
+                            }
+                        });
                     }
                 });
+
             });
         });
-
     };
-
-
 
     (function(d, s, id){
         var js, fjs = d.getElementsByTagName(s)[0];

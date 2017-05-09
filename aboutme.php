@@ -137,25 +137,16 @@ session_start();
                         }
                     );
                     var token = $(".token").data("token");
-                    $.ajax({
-                        type: 'post',
-                        url: '_apiRequest.php',
-                        async: false,
-                        data: {'apiLink' : apiLink2, 'apiData' : apiData, 'token' : token},
-                        success: function (data) {
-                            var jsonData = JSON.parse(data);
-                            console.log(data);
-                            var counter = 1;
-                            $.each(jsonData.Groups, function(i,ele) {
-                                if (counter<=6) {
-                                    $(".groupBox").append(makeGroupElement(ele));
-                                    counter++
-                                }
-                            });
-                        },
-                        error: function () {
-                            alert("ajax failed");
-                        }
+                    runAjax(apiLink2, token).done(function(data) {
+                        var jsonData = JSON.parse(data);
+                        // console.log(data);
+                        var counter = 1;
+                        $.each(jsonData.Groups, function(i,ele) {
+                            if (counter<=6) {
+                                $(".groupBox").append(makeGroupElement(ele));
+                                counter++
+                            }
+                        });
                     });
                 });
             });

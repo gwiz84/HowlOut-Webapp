@@ -54,8 +54,8 @@ session_start();
 
                 <!--                THE EVENT BOX END -->
 
-<!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
-             
+                <!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
+
                 <!--      PAGE CONTENT GOES HERE      -->
             </div>
         </div>
@@ -88,25 +88,16 @@ session_start();
 
                     var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
                     var token = $(".token").data("token");
-                    $.ajax({
-                        type: 'post',
-                        url: '_apiRequest.php',
-                        async: false,
-                        data: {'apiLink' : apiLink, 'token' : token},
-                        success: function (data) {
-                            var jsonData = JSON.parse(data);
-                            if (jsonData.length<1) {
-                                $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
-                            } else {
-                                $.each(jsonData, function(i,ele) {
-                                    $(".eventContainer").append(makeEventElement(ele) + "<br>");
-                                });
-                            }
-
-                        },
-                        error: function () {
-                            alert("ajax failed");
+                    runAjax(apiLink, token).done(function(data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.length<1) {
+                            $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
+                        } else {
+                            $.each(jsonData, function(i,ele) {
+                                $(".eventContainer").append(makeEventElement(ele) + "<br>");
+                            });
                         }
+                        
                     });
                 });
             });
@@ -141,18 +132,9 @@ session_start();
                 join: false
             });
             var token = $(".token").data("token");
-            $.ajax({
-                type: 'post',
-                url: '_apiRequestPut.php',
-                async: false,
-                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-                success: function (data) {
-                    thisButton.attr("disabled", true);
-                    thisButton.css("background-color", "grey");
-                },
-                error: function () {
-                    alert("ajax failed");
-                }
+            runAjaxPut(apiData, apiLink, token).done(function() {
+                thisButton.attr("disabled", true);
+                thisButton.css("background-color", "grey");
             });
         });
 

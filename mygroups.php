@@ -124,15 +124,6 @@
             window.location = "viewgroup.php?id="+groupIdClicked;
         });
 
-        function runAjax(apiLink, token) {
-            return $.ajax({
-                type: 'post',
-                url: '_apiRequest.php',
-                async: true,
-                data: {'apiLink' : apiLink, 'token' : token},
-            });
-        }
-
     </script>
 </body>
 

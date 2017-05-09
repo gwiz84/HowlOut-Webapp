@@ -115,41 +115,20 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     <!-- FOOTER -->
     <?php include_once "p_footer.html"; ?>
 
-    <!-- // <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script> -->
-
     <?php include_once "p_loadScripts.html"; ?>
-
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
+    
     <script>
         var maxCommentLength = 250;
         var comment_length = 0;
         var eventLatitude = 55.675291;
         var eventLongitude = 12.570202;
         var token = $(".token").data("token");
-
+        var descOpen = false;
         var attendees = "";
 
-        $("#textcounter").html(maxCommentLength + " remaining");
-
-        function runAjax(apiLink, token) {
-            return $.ajax({
-                type: 'post',
-                url: '_apiRequest.php',
-                async: true,
-                data: {'apiLink' : apiLink, 'token' : token}
-            });
-        }
-
-        function runAjaxJSON(apiLink, apiData, token) {
-            return $.ajax({
-                type: "post",
-                url: "_apiRequestJSON.php",
-                async: false,
-                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token}
-            });
-        }
-
+        // Request the event from the server and fill out the fields
         $(function(){
+            $("#textcounter").html(maxCommentLength + " remaining");
             var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
 
             runAjax(apiLink, token).done(function(data) {
@@ -157,13 +136,11 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     window.location = "index.php";
                 }
                 var jsonData = JSON.parse(data);
-                // console.log(data);
                 showAttendees(JSON.stringify(jsonData.Attendees));
                 var eventDate = new Date(Date.parse(jsonData.StartDate));
-                $("#eventTitle").html(jsonData.Title);
-                console.log(jsonData);
                 var eventOwner;
                 var eventOwnerImg;
+                $("#eventTitle").html(jsonData.Title);
                 if (jsonData.ProfileOwners != null) {
                     eventOwner = jsonData.ProfileOwners[0].Name;
                     eventOwnerImg = jsonData.ProfileOwners[0].ImageSource;
@@ -182,7 +159,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     for (var i = 0; i < 298; i++) {
                         shortDesc += jsonData.Description[i];
                     }
-                    shortDesc = shortDesc+"...";
+                    shortDesc = shortDesc + "...";
                     $("#eventDescription").html(shortDesc);
                     $("#eventDescriptionLong").html(jsonData.Description);
                     $("#eventDescriptionLong").hide();
@@ -199,8 +176,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 showComments(jsonData.Comments);
             });
         });
-
-        var descOpen = false;
+        
         $("body").on("click", ".btnShowHideDesc", function() {
             if (descOpen) {
                 $("#eventDescription").show(0);
@@ -218,7 +194,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         // Detect max character lenth etc. for comment field
         $("#commentfield").keyup(function() {
             comment_length = $("#commentfield").val().length;
-            if (comment_length > 0) {
+            if (comment_length > 1) {
                 $("#btnPostComment").prop('disabled', false);
             }
             var text_remaining = maxCommentLength - comment_length;
@@ -252,14 +228,13 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             $("#comments-container").empty();
             $.each(jsonData, function(i, ele) {
                 var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-                $("#comments-container").append('<div class="row" style="margin: 10px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
+                $("#comments-container").append('<div class="row" style="margin: 1px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
                     '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
             });
         }
 
         // Update attendees on the page with json data as parameter
         function showAttendees(jsonData) {
-            // console.log(jsonData);  
             if (jsonData.length >= 2) {
                 var data = JSON.parse(jsonData);
                 $(".eventAttendees").empty();
@@ -305,7 +280,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 map: map
             });
         }
+
     </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
 
 </body>
 

@@ -115,6 +115,7 @@ session_start();
     
     <script src="js/topmenu.js"></script>
     <script src="js/searchbar.js"></script>
+    <script src="js/ajaxhandler.js"></script>
     <script src="js/imagehandler.js"></script>
     <script src="js/croppie.min.js"></script>
 
@@ -136,37 +137,28 @@ session_start();
     if ($(".groupid").data("groupid") != null) {
         var editid = $(".groupid").data("groupid");
         var apiLink = "https://api.howlout.net/group/"+editid;
-        $.ajax({
-            type: "POST",
-            url: "_apiRequest.php",
-            async: false,
-            data: {'apiLink' : apiLink, 'token' : token},
-            success: function (data) {
-                var jsonData = JSON.parse(data);
-                var fbid = $(".fbid").data("fbid");
-                var ownersArray = jsonData.ProfileOwners;
-                var isOwner = false;
-                $.each(ownersArray, function(i, ele) {
-                    if (fbid == ele.ProfileId) {
-                        isOwner = true;
-                    }
-                });
-                if (!isOwner) {
-                    window.location = "index.php";
-                } else {
-                    orgImageS = jsonData.SmallImageSource;
-                    orgImageM = jsonData.ImageSource;
-                    orgImageL = jsonData.LargeImageSource;
-                    $("#bannerImg").css("background-image", "url('" + orgImageL + "')");
-                    $(".inputTitle").val(jsonData.Name);
-                    $(".inputDesc").val(jsonData.Description);
-                    if (jsonData.Visibility == 0) {
-                        $(".radioPublic").prop("checked", true);
-                    }
+        runAjax(apiLink, token).done(function(data) {
+            var jsonData = JSON.parse(data);
+            var fbid = $(".fbid").data("fbid");
+            var ownersArray = jsonData.ProfileOwners;
+            var isOwner = false;
+            $.each(ownersArray, function(i, ele) {
+                if (fbid == ele.ProfileId) {
+                    isOwner = true;
                 }
-            },
-            error: function (data) {
-                alert("ajax failed");
+            });
+            if (!isOwner) {
+                window.location = "index.php";
+            } else {
+                orgImageS = jsonData.SmallImageSource;
+                orgImageM = jsonData.ImageSource;
+                orgImageL = jsonData.LargeImageSource;
+                $("#bannerImg").css("background-image", "url('" + orgImageL + "')");
+                $(".inputTitle").val(jsonData.Name);
+                $(".inputDesc").val(jsonData.Description);
+                if (jsonData.Visibility == 0) {
+                    $(".radioPublic").prop("checked", true);
+                }
             }
         });
     } else {
@@ -190,7 +182,6 @@ session_start();
                     imgSrcL = data.imgPath_l;
                     saveGroup(groupId, imgSrcS, imgSrcM, imgSrcL);
                 } else {
-                    console.log("ERROR");
                     $.alert({
                         type: "red",
                         title: "ERROR!",
@@ -225,18 +216,10 @@ session_start();
             "Visibility": isPrivate
         });
         var token = $(".token").data("token");
-        $.ajax({
-            type: 'post',
-            url: '_apiRequestJSON.php',
-            async: false,
-            data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-            success: function (data) {
-                var id = JSON.parse(data).GroupId;
-                window.location = "viewgroup.php?id="+id;
-            },
-            error: function () {
-                alert("ajax failed");
-            }
+
+        runAjaxJSON(apiLink, apiData, token).done(function(data) {
+            var id = JSON.parse(data).GroupId;
+            window.location = "viewgroup.php?id="+id;
         });
     }
 

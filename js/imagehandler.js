@@ -1,4 +1,3 @@
-// Variable to store the image in
 var image = null;
 var maxImageSize = 6000000;
 
@@ -25,8 +24,6 @@ function loadImageFromFile(imageToLoad, croppieElement) {
 						return '{"status": "ERROR", "message": "Not an image file"}';
 					}
 				});
-				
-				// element.css("background-image", "url("+image+")");
 			};
 
 			reader.readAsDataURL(imageToLoad.files[0]);
@@ -34,18 +31,9 @@ function loadImageFromFile(imageToLoad, croppieElement) {
 		}
 	}
 }
-// http://stackoverflow.com/questions/18299806/how-to-check-file-mime-type-with-javascript-before-upload
 
-function isFileAnImage(url, callback) {
-    var img = new Image();
-    img.onload = function() { callback(true); };
-    img.onerror = function() { callback(false); };
-    img.src = url;
-}
 
 // Tries uploading picture file "newImage" using the Facebook ID "fbid"
-// If the upload succeeds, the returned "message" contains the remote path to the uploaded image (imgPath).
-// Otherwise, "message"/this function returns "false"
 function uploadImage(newImage, fbid) {
 	if (newImage != null) {
 		return $.ajax({
@@ -57,6 +45,13 @@ function uploadImage(newImage, fbid) {
 	} else {
 		console.log("ERROR: uploadImage!");
 	}
+}
+
+function isFileAnImage(url, callback) {
+    var img = new Image();
+    img.onload = function() { callback(true); };
+    img.onerror = function() { callback(false); };
+    img.src = url;
 }
 
 function isFileTypeImage(file) {
@@ -80,12 +75,10 @@ function createUploadModal(divForCroppedImg) {
 			var self = this;
 			var croppieDiv = this.$content.find('#croppieimg').croppie({
 				viewport: { width: 740, height: 300 },
-                        // boundary: { width: 800, height: 300 },
-                        showZoomer: false,
-                        enableOrientation: true,
-                        // enableZoom: false,
-                        enforceBoundary: true
-                    });
+				showZoomer: false,
+				enableOrientation: true,
+				enforceBoundary: true
+			});
 			this.$content.find("#imageInput").change(function(){
 				var JSONresponse = JSON.parse(loadImageFromFile(this, croppieDiv));
 				if (JSONresponse.status == "ERROR") {
@@ -105,8 +98,6 @@ function createUploadModal(divForCroppedImg) {
 					imageCropped = croppedImage;
 				});
 			});
-
-
 		},
 		buttons: {
 			cancel: function() {
@@ -124,6 +115,7 @@ function createUploadModal(divForCroppedImg) {
 	});
 }
 
+// Returns the html for the picture upload modal
 function imgUpContent() {
 	return '<div><div id="croppieimg" style="width:740px;height:300px;border:solid 1px darkgrey;"></div>'+
 	'<span><input id="imageInput" type="file" accept="image/*"></span><br><button id="btnCrop" class="btn btn-red">Crop</button><br><br><br>'+

@@ -185,6 +185,7 @@ session_start();
     <script src="js/dawa-autocomplete.js"></script>
     <script src="js/topmenu.js"></script>
     <script src="js/searchbar.js"></script>
+    <script src="js/ajaxhandler.js"></script>
     <script src="js/eventhandler.js"></script>
     <script src="js/imagehandler.js"></script>
     <script src="js/croppie.min.js"></script>
@@ -265,43 +266,34 @@ session_start();
             addressSelected = true;
             var editid = $(".editid").data("editid");
             var apiLink = "https://api.howlout.net/event/event?id="+editid;
-            $.ajax({
-                type: "POST",
-                url: "_apiRequest.php",
-                async: false,
-                data: {'apiLink' : apiLink, 'token' : token},
-                success: function (data) {
-                    var jsonData = JSON.parse(data);
-                    var fbid = $(".fbid").data("fbid");
-                    var ownersArray = jsonData.ProfileOwners;
-                    var isOwner = false;
-                    $.each(ownersArray, function(i, ele) {
-                        if (fbid == ele.ProfileId) {
-                            isOwner = true;
-                        }
-                    });
-                    if (!isOwner) {
-                        window.location = "index.php";
-                    } else {
-                        var startDate = convertDateString(jsonData.StartDate);
-                        var endDate = convertDateString(jsonData.EndDate);
-                        chosenStart = startDate;
-                        chosenEnd = endDate;
-                        orgImage = jsonData.ImageSource;
-                        $("#bannerImg").css("background-image", "url('" + orgImage + "')");
-                        $(".inputTitle").val(jsonData.Title);
-                        $(".inputDescription").val(jsonData.Description);
-                        if (jsonData.Visibility == 0) {
-                            $(".radioPublic").prop("checked", true);
-                        }
-                        $(".inputStart").val(startDate);
-                        $(".inputEnd").val(endDate);
-                        $(".inputLocation").val(jsonData.AddressName);
-                        $(".inputAttendees").val(jsonData.MaxSize);
+            runAjax(apiLink, token).done(function(data) {
+                var jsonData = JSON.parse(data);
+                var fbid = $(".fbid").data("fbid");
+                var ownersArray = jsonData.ProfileOwners;
+                var isOwner = false;
+                $.each(ownersArray, function(i, ele) {
+                    if (fbid == ele.ProfileId) {
+                        isOwner = true;
                     }
-                },
-                error: function (data) {
-                    alert("ajax failed");
+                });
+                if (!isOwner) {
+                    window.location = "index.php";
+                } else {
+                    var startDate = convertDateString(jsonData.StartDate);
+                    var endDate = convertDateString(jsonData.EndDate);
+                    chosenStart = startDate;
+                    chosenEnd = endDate;
+                    orgImage = jsonData.ImageSource;
+                    $("#bannerImg").css("background-image", "url('" + orgImage + "')");
+                    $(".inputTitle").val(jsonData.Title);
+                    $(".inputDescription").val(jsonData.Description);
+                    if (jsonData.Visibility == 0) {
+                        $(".radioPublic").prop("checked", true);
+                    }
+                    $(".inputStart").val(startDate);
+                    $(".inputEnd").val(endDate);
+                    $(".inputLocation").val(jsonData.AddressName);
+                    $(".inputAttendees").val(jsonData.MaxSize);
                 }
             });
         } else {
@@ -341,7 +333,6 @@ session_start();
                         imgSrc = data.imgPath_l;
                         saveEvent(eventId, imgSrc);
                     } else {
-                        console.log("ERROR");
                         $.alert({
                             type: "red",
                             title: "ERROR!",
@@ -423,19 +414,10 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-            // console.log("apiData: " + apiData);
-            $.ajax({
-                type: "POST",
-                url: "_apiRequestJSON.php",
-                async: false,
-                data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token},
-                success: function(data) {
-                    var id = JSON.parse(data).EventId;
-                    // window.location = "viewevent.php?id="+id;
-                },
-                error: function () {
-                    alert("An unexpected error occurred. Please try again later.");
-                }
+
+            runAjaxJSON(apiLink, apiData, token).done(function(data) {
+                var id = JSON.parse(data).EventId;
+                // window.location = "viewevent.php?id="+id;
             });
         }
 

@@ -118,15 +118,6 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
     var facebookId = <?php echo $_SESSION['facebookId']; ?>;
     
-    function runAjax(apiLink, token) {
-        return $.ajax({
-            type: 'post',
-            url: '_apiRequest.php',
-            async: true,
-            data: {'apiLink' : apiLink, 'token' : token},
-        });
-    }
-
     runAjax(apiLink, token).done(function(data) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
@@ -193,9 +184,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         }
     });
 
-
-
-    // description open/close
+    // Description open/close
     var descOpen = false;
     $("body").on("click", ".btnShowHideDesc", function () {
         if (descOpen) {
@@ -211,7 +200,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         }
     });
 
-    // CLICK function for create event through group button
+    // Click function for create event through group button
     $("body").on("click", ".btnCreateEvent", function () {
         // Redirect to create event with group id instead of profile id
         window.location = "editevent.php?groupid=" + groupId;
@@ -225,7 +214,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         var eventToShow = null;
         var currentTime = new Date().getTime();
         var lowest = null;
-        if (jsonData.length<1) {
+        if (jsonData.length < 1) {
             $(".eventBox").append('<h5 style="font-style:italic;margin-left:20px;">No upcoming events found</h5>');
             $(".btnViewAllEvents").hide();
         } else {
@@ -273,18 +262,8 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 "Content": commentToPost,
                 "DateAndTime": currentDate
             });
-            $.ajax({
-                type: "post",
-                url: "_apiRequestJSON.php",
-                async: false,
-                data: {'apiLink': apiLink, 'apiData': jsonData, 'token': token},
-                success: function (data) {
-                    updateComments(data);
-                },
-                error: function (data) {
-                    alert(data);
-                    // alert("ajax failed");
-                }
+            runAjaxJSON(apiLink, jsonData, token).done(function(data) {
+                updateComments(data);
             });
         }
     });

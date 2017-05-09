@@ -89,24 +89,14 @@ session_start();
 
                     var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
                     var token = $(".token").data("token");
-                    $.ajax({
-                        type: 'POST',
-                        url: '_apiRequest.php',
-                        async: false,
-                        data: {'apiLink' : apiLink, 'token' : token},
-                        success: function (data) {
-                            var jsonData = JSON.parse(data);
-                            if (jsonData.length<1) {
-                                $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
-                            } else {
-                                $.each(jsonData, function(i,ele) {
-                                    $(".eventContainer").append(makeEditEventElement(ele) + "<br>");
-                                });
-                            }
-
-                        },
-                        error: function () {
-                            alert("ajax failed");
+                    runAjax(apiLink, token).done(function(data) {
+                        var jsonData = JSON.parse(data);
+                        if (jsonData.length<1) {
+                            $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
+                        } else {
+                            $.each(jsonData, function(i,ele) {
+                                $(".eventContainer").append(makeEditEventElement(ele) + "<br>");
+                            });
                         }
                     });
                 });
@@ -149,23 +139,25 @@ session_start();
                         action: function() {
                             var apiLink = "https://api.howlout.net/event/"+eventIdClicked;
                             var token = $(".token").data("token");
-                            $.ajax({
-                                type: 'POST',
-                                url: '_apiRequestDelete.php',
-                                async: false,
-                                data: {'apiLink' : apiLink, 'token' : token},
-                                success: function (data) {
-                                    if (data) {
-                                        thisBox.remove();
-                                        $.alert('Event deleted');
-                                    } else {
-                                        alert('An unexpected error occurred!');
-                                    }
-                                },
-                                error: function () {
-                                    alert("ajax failed");
+                            runAjaxDeleteEvent(apiLink, token).done(function(data) {
+                                if (data) {
+                                    thisBox.remove();
+                                    $.alert('Event deleted');
+                                } else {
+                                    alert('An unexpected error occurred!');
                                 }
                             });
+                            // $.ajax({
+                            //     type: 'POST',
+                            //     url: '_apiRequestDelete.php',
+                            //     async: false,
+                            //     data: {'apiLink' : apiLink, 'token' : token},
+                            //     success: function (data) {
+                            //     },
+                            //     error: function () {
+                            //         alert("ajax failed");
+                            //     }
+                            // });
                             
                         }
                     },

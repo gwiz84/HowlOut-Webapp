@@ -25,12 +25,17 @@ $blob_name = $fbid . "." . $current;
 
 $MAXIMUM_FILESIZE = 6 * 1024 * 1024;
 
+// Strip the base64 header from '$newfile'
 $image_large = substr($newfile, 22);
+// Decode the base64 string now stored in '$image_large'
 $image_large = base64_decode($image_large);
+// Initialize variables for medium and small images
 $image_med = null;
 $image_small = null;
 
+// Create a new variable '$im' by converting the string '$image_large'
 $im = imagecreatefromstring($image_large);
+// If the above operation succeeds, meaning '$im' is an actual image, proceed with resizing
 if ($im !== false) {
     $width_s = 247;
     $width_m = 494;
@@ -49,10 +54,13 @@ if ($im !== false) {
     $image_small = ob_get_clean();
 }
 
-
 $imgdata = file_get_contents($newfile);
 $filesize = strlen($imgdata);
 $filetype = exif_imagetype($newfile);
+
+// NEEDS EDITING
+// If the upload succeeds, the returned "message" contains the remote path to the uploaded image (imgPath).
+// Otherwise, "message"/this function returns "false"
 if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
 	echo '{"status": "ERROR", "errormessage": "Not an image file"}';
 } else {
@@ -75,8 +83,8 @@ if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
     // http://msdn.microsoft.com/library/azure/dd179439.aspx
 		$code = $e->getCode();
 		$error_message = $e->getMessage();
-		// echo '{"status": "ERROR", "errormessage": ".$error_message."}';
-		echo $code.": ".$error_message."<br />";
+		echo '{"status": "ERROR", "errormessage": ".$error_message."}';
+		// echo $code.": ".$error_message."<br />"; // Standard response
 	}	
 }
 ?>

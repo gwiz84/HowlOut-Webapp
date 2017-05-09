@@ -174,26 +174,16 @@ session_start();
      
             var token = $(".token").data("token");
 
-            $.ajax({
-                type: 'post',
-                url: '_apiRequest.php',
-                async: false,
-                data: {'apiLink' : apiLink, 'token' : token},
-                success: function (data) {
-                    var jsonData = JSON.parse(data);
-                    $.each(jsonData, function(i, ele) {
-                        $(".eventContainer").append(makeEventElement(ele) + "<br>");
-                        var eventPos = {
-                            lat: ele.Latitude,
-                            lng: ele.Longitude
-                        };
-                        addMarker(eventPos, map, ele.Title);
-                        console.log(ele.ImageSource);
-                    });
-                },
-                error: function () {
-                    alert("ajax failed");
-                }
+            runAjax(apiLink, token).done(function(data) {
+                var jsonData = JSON.parse(data);
+                $.each(jsonData, function(i, ele) {
+                    $(".eventContainer").append(makeEventElement(ele) + "<br>");
+                    var eventPos = {
+                        lat: ele.Latitude,
+                        lng: ele.Longitude
+                    };
+                    addMarker(eventPos, map, ele.Title);
+                });
             });
         }
 
