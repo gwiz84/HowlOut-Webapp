@@ -126,10 +126,9 @@ session_start();
     var orgImageL = "";
     var imageCropped = null;
 
-    // MANGLER BILLEDE UPLOAD FUNKTIONALITET OG REDIRECT EFTER CREATION!!!!!!!!!!!!!!!!!!!!!
-    // OG HVAD FANDEN ER EN "CLOSED" GROUP FFS
+    // HVAD ER EN "CLOSED" GROUP?
 
-    // If the 'editid' data variable is set on the ".editid" div, a group id has been passed
+    // If the 'groupid' data variable is set on the ".groupid" div, a group id has been passed
     // using the "?id=" GET parameter. Try getting the group from the API. If no group is found with
     // the provided id, return to index.php.
     // When the group has been loaded, check if the currently logged in user is one of the owners of the group,

@@ -96,7 +96,7 @@ function makeEditEventElement(event) {
 }
 
 function makeAttendeeElement(element) {
-    var attendeeElement = '<div class="col-md-3 friendItem" data-name="'+element.name+'"><div class="member-circle " style="background-image: url(\'' + element.ImageSource + '\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">' + element.name + '</p></div>'
+    var attendeeElement = '<div class="col-md-3" data-name="'+element.name+'"><div class="member-circle" style="background-image: url(\'' + element.ImageSource + '\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">' + element.name + '</p></div>'
     return attendeeElement;
 }
 

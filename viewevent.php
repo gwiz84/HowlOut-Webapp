@@ -229,7 +229,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             $("#comments-container").empty();
             $.each(jsonData, function(i, ele) {
                 var date = getDateFromISOString(new Date(Date.parse(ele.DateAndTime)));
-                $("#comments-container").append('<div class="row" style="margin: 1px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100px;margin-left:30px;">'+
+                $("#comments-container").append('<div class="row" style="margin: 1px 0 0 0;"><div class="member-circle col-md-1" style="background-image: url('+ele.ImageSource+');background-size:100%;margin:0 30px 0 0;">'+
                     '</div><div class="col-md-10"><span><i>'+date+'</i></span><p>'+ele.Content+'</p><hr></div></div>');
             });
         }

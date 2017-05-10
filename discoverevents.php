@@ -195,7 +195,7 @@ session_start();
         $("body").on("click", ".btn-followevent", function() {
             var thisButton = $(this);
             var eventId = $(this).parent().parent().parent().parent().data("eventid");
-            var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/"+facebookId+"?attend=true&join=false";
+            var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/"+facebookId+"?attend=true&join=true";
             var apiData = JSON.stringify({
                 // "eventId": eventId,
                 // "profileId": facebookId,
