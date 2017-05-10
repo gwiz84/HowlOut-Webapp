@@ -9,7 +9,6 @@ $temp = str_replace('"', '', $_SESSION['apiKey']);
 
 if ($token == $_SESSION['token']) {
     try {
-
         $curl = curl_init($apiLink);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "PUT");
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
@@ -22,13 +21,12 @@ if ($token == $_SESSION['token']) {
                 'Content-Length: ' . strlen($apiData))
         );
         $content = curl_exec($curl);
-        if (FALSE === $content)
+        if ($content === FALSE)
             throw new Exception(curl_error($curl), curl_errno($curl));
 
         echo $content;
 
     } catch(Exception $e) {
-
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',
             $e->getCode(), $e->getMessage()),

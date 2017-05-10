@@ -20,7 +20,7 @@ if ($token == $_SESSION['token']) {
                 'Content-Length: ' . strlen($apiData))
         );
         $content = curl_exec($curl);
-        if (FALSE === $content)
+        if ($content === FALSE)
             throw new Exception(curl_error($curl), curl_errno($curl));
 
         echo $content;

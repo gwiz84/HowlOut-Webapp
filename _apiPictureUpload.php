@@ -36,6 +36,7 @@ $image_small = null;
 // Create a new variable '$im' by converting the string '$image_large'
 $im = imagecreatefromstring($image_large);
 // If the above operation succeeds, meaning '$im' is an actual image, proceed with resizing
+// Creates two new images, medium ($image_med) and small ($image_small)
 if ($im !== false) {
     $width_s = 247;
     $width_m = 494;
@@ -58,9 +59,10 @@ $imgdata = file_get_contents($newfile);
 $filesize = strlen($imgdata);
 $filetype = exif_imagetype($newfile);
 
-// NEEDS EDITING
-// If the upload succeeds, the returned "message" contains the remote path to the uploaded image (imgPath).
-// Otherwise, "message"/this function returns "false"
+// Check if the filetype is either GIF, JPEG or PNG and if getimagesizefromstring returns true
+// If not, return an errormessage
+// If the upload succeeds, the returned JSON-formatted string contains the remote path to the uploaded images
+// If the upload fails, return the error message received from the server
 if (!($filetype >= 1 && $filetype <= 3) && !getimagesizefromstring($imgdata)) {
 	echo '{"status": "ERROR", "errormessage": "Not an image file"}';
 } else {
