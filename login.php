@@ -118,7 +118,7 @@
                     }
                     );
                     var token = $(".token").data("token");
-                    runAjax(apiLink, token).done(function(data) {
+                    runAjaxRequestProfile(apiLink, apiData, token, facebookName).done(function(data) {
                         if (data == "success") {
                             window.location = "index.php";
                         }

@@ -33,3 +33,12 @@ function runAjaxPut(apiLink, apiData, token) {
         data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token}
     });
 }
+
+function runAjaxRequestProfile(apiLink, apiData, token, facebookName) {
+    return $.ajax({
+        type: "POST",
+        url: "_apiRequestProfile.php",
+        async: true,
+        data: {'apiLink' : apiLink, 'apiData' : apiData, 'token' : token, 'name' : facebookName}
+    });
+}
