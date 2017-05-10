@@ -20,19 +20,16 @@ if ($token == $_SESSION['token']) {
                 'Content-Length: ' . strlen($apiData))
         );
         $content = curl_exec($curl);
-        if (FALSE === $content)
+        if ($content === FALSE)
             throw new Exception(curl_error($curl), curl_errno($curl));
 
         echo $content;
         // echo 'SUCCESS! Token: '.$token.', Session-token: '.$_SESSION['token'];
-
     } catch(Exception $e) {
-
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',
             $e->getCode(), $e->getMessage()),
             E_USER_ERROR);
-
     }
 } else {
     echo 'FAILURE! Token: '.$token.', Session-token: '.$_SESSION['token'];

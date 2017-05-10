@@ -74,6 +74,7 @@ session_start();
     <script>
         var userPos;
         var map;
+        var facebookId = <?php echo $_SESSION['facebookId']; ?>;
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675291, lng: 12.570202 },
@@ -86,7 +87,6 @@ session_start();
 
             centerControlDiv.index = 1;
             map.controls[google.maps.ControlPosition.RIGHT].push(centerControlDiv);
-
 
             // Try HTML5 geolocation.
             if (navigator.geolocation) {
@@ -190,6 +190,24 @@ session_start();
         $("body").on("click", ".btn-viewevent", function() {
             var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
             window.location = "viewevent.php?id="+eventIdClicked;
+        });
+
+        $("body").on("click", ".btn-followevent", function() {
+            var thisButton = $(this);
+            var eventId = $(this).parent().parent().parent().parent().data("eventid");
+            var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/"+facebookId+"?attend=true&join=false";
+            var apiData = JSON.stringify({
+                // "eventId": eventId,
+                // "profileId": facebookId,
+                // "attend": false,
+                // "join": false
+            });
+            var token = $(".token").data("token");
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+                // thisButton.attr("disabled", true);
+                // thisButton.css("background-color", "grey");
+            });
         });
     
     </script>

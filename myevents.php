@@ -51,7 +51,6 @@ session_start();
                 <hr>
                 <!--                THE EVENT BOX START -->
 
-
                 <!--                THE EVENT BOX END -->
 
                 <!--                <a href="" style="float:right;font-size:14px;">View all</a>-->
@@ -117,7 +116,7 @@ session_start();
         });
 
         $("body").on("click", ".btn-shareevent", function() {
-            var eventIdClicked = $(this).parent().data("eventid");
+            var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
             alert("SHARED!");
         });
 
@@ -126,15 +125,16 @@ session_start();
             var eventId = $(this).parent().parent().parent().parent().data("eventid");
             var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/123?attend=true&join=false";
             var apiData = JSON.stringify({
-                eventId: eventId,
-                profileId: 123,
-                attend: true,
-                join: false
+                "eventId": eventId,
+                "profileId": facebookId,
+                "attend": true,
+                "join": false
             });
             var token = $(".token").data("token");
-            runAjaxPut(apiData, apiLink, token).done(function() {
-                thisButton.attr("disabled", true);
-                thisButton.css("background-color", "grey");
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+                // thisButton.attr("disabled", true);
+                // thisButton.css("background-color", "grey");
             });
         });
 
