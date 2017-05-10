@@ -369,8 +369,6 @@ session_start();
                     },
                     "ImageSource": imgSrc,
                     "Title": title,
-                    // "Latitude": 55.675637,
-                    // "Longitude": 12.569544,
                     "Latitude": eventLat,
                     "Longitude": eventLng,
                     "AddressName": address,
@@ -396,8 +394,6 @@ session_start();
                     ],
                     "ImageSource": imgSrc,
                     "Title": title,
-                    // "Latitude": 55.675637,
-                    // "Longitude": 12.569544,
                     "Latitude": eventLat,
                     "Longitude": eventLng,
                     "AddressName": address,
@@ -417,7 +413,7 @@ session_start();
 
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var id = JSON.parse(data).EventId;
-                // window.location = "viewevent.php?id="+id;
+                window.location = "viewevent.php?id="+id;
             });
         }
 

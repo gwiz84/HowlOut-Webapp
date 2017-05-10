@@ -15,7 +15,6 @@ $container = "howlout";
 $fbid = "10155099965673493";
 
 $file_to_delete = $_POST['imageUrl'];
-// $file_to_delete = "10155099965673493.11-04-2017 14:29:48";
 
 try {
     $blobRestProxy->deleteBlob($container, $file_to_delete);

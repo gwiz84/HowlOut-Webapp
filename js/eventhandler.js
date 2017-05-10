@@ -17,6 +17,12 @@ function makeEventElement(event) {
     } else {
         shortDesc = event.Description;
     }
+    var event2 = JSON.stringify(event);
+
+    var numFollowers = 0;
+    // $.each(followersArray, function(i, ele) {
+    //     numFollowers++;
+    // });
     
     var startDate = getDateFromISOString(new Date(Date.parse(event.StartDate)));
 
@@ -31,7 +37,7 @@ function makeEventElement(event) {
     '<div class="col-xs-12 col-sm-6" >'+
         '<i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventTime">'+startDate+'</span><br>'+
     '<i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">'+event.AddressName+'</span><br>'+
-    '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+'</span>'+
+    '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+' ('+numFollowers+' following)</span>'+
         '<br><br><br><br>'+
         '<div style="float:right;">'+
         '<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:20px;"></i></button>&nbsp;'+
@@ -89,6 +95,12 @@ function makeEditEventElement(event) {
     return editEventDiv;
 }
 
+function makeAttendeeElement(element) {
+    var attendeeElement = '<div class="col-md-3 friendItem" data-name="'+element.name+'"><div class="member-circle " style="background-image: url(\'' + element.ImageSource + '\');background-size:100%;margin:0 30px 0 30px;"></div><p style="text-align:center;">' + element.name + '</p></div>'
+    return attendeeElement;
+}
+
+// Convert an ISO-formatted date/time string to a more easily readable format
 function getDateFromISOString(dateString) {
     var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var dDay = dateString.getDate();

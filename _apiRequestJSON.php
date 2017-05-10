@@ -25,14 +25,11 @@ if ($token == $_SESSION['token']) {
 
         echo $content;
         // echo 'SUCCESS! Token: '.$token.', Session-token: '.$_SESSION['token'];
-
     } catch(Exception $e) {
-
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',
             $e->getCode(), $e->getMessage()),
             E_USER_ERROR);
-
     }
 } else {
     echo 'FAILURE! Token: '.$token.', Session-token: '.$_SESSION['token'];

@@ -116,6 +116,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
     <?php include_once "p_footer.html"; ?>
 
     <?php include_once "p_loadScripts.html"; ?>
+    <script src="js/eventhandler.js"></script>
     
     <script>
         var maxCommentLength = 250;
@@ -136,7 +137,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     window.location = "index.php";
                 }
                 var jsonData = JSON.parse(data);
-                showAttendees(JSON.stringify(jsonData.Attendees));
+                
                 var eventDate = new Date(Date.parse(jsonData.StartDate));
                 var eventOwner;
                 var eventOwnerImg;
@@ -235,38 +236,19 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
 
         // Update attendees on the page with json data as parameter
         function showAttendees(jsonData) {
-            if (jsonData.length >= 2) {
-                var data = JSON.parse(jsonData);
-                $(".eventAttendees").empty();
-                if (data.length>0) {
-                    $.each(data, function(i, ele) {
-                        $(".eventAttendees").append('');
-                    });
-                } else {
-                    $(".eventAttendees").append('<p>No attendees</p>');
-                    $("#moreAttendees").hide();
-                }
+            if (jsonData.length > 0) {
+                $.each(jsonData, function(i, ele) {
+                    $(".eventAttendees").append(makeAttendeeElement(ele));
+                }); 
+            } else {
+                $(".eventAttendees").append('<p>No attendees</p>');
+                $("#moreAttendees").hide();
             }
         }
 
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
             return new Date().toISOString().substr(0, 19);
-        }
-
-        // Convert an ISO-formatted date/time string to a more easily readable format
-        function getDateFromISOString(dateString) {
-            var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-            var dDay = dateString.getDate();
-            var dMonth = dateString.getMonth();
-            var dYear = dateString.getYear() + 1900;
-            var dHours = dateString.getHours();
-            var dMinutes = dateString.getMinutes();
-            dHours = (dHours <= 9 ? ('0' + dHours) : dHours);
-            dMinutes = (dMinutes <= 9 ? ('0' + dMinutes) : dMinutes);
-            dMonth = months[dMonth];
-
-            return dMonth + " " + dDay + " " + dYear + " " + dHours + ":" + dMinutes;
         }
 
         function updateMap() {

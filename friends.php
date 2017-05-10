@@ -47,7 +47,7 @@ session_start();
         </div>
         <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
-            <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My friends <input type="text" class="friendsSearchBar" style="float:right;border-radius:4px;padding:5px;margin-left:10px;font-size:15px;" placeholder="Search in friends"><i class="material-icons" style="color: #000000;vertical-align: middle;float:right;">search</i></h4>
+            <h4><i class="material-icons icon_green" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My friends <input type="text" class="friendsSearchBar ho-textinput" style="float:right;border-radius:4px;padding:5px;margin-left:10px;font-size:15px;" placeholder="Search in friends"><i class="material-icons" style="color: #000000;vertical-align: middle;float:right;">search</i></h4>
 
             <hr>
             <div class="friendsBox row">
@@ -114,7 +114,6 @@ session_start();
         }, 600);
     });
 
-
     // Search function which searches in all your own friends
     function searchInFriends() {
         var friendsSearchWords = $(".friendsSearchBar").val().toLowerCase();
@@ -128,7 +127,6 @@ session_start();
             }
         });
     }
-
 
 </script>
 

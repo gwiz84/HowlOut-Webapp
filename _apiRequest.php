@@ -22,12 +22,10 @@ if ($token == $_SESSION['token']) {
         echo $content;
 
     } catch(Exception $e) {
-
         trigger_error(sprintf(
             'Curl failed with error #%d: %s',
             $e->getCode(), $e->getMessage()),
             E_USER_ERROR);
-
     }
 }
 ?>
