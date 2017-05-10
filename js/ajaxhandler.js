@@ -7,6 +7,7 @@ function runAjax(apiLink, token) {
     });
 }
 
+
 function runAjaxJSON(apiLink, apiData, token) {
     return $.ajax({
         type: "POST",

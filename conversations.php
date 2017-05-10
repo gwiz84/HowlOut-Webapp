@@ -47,10 +47,14 @@ session_start();
             </div>
             <div class="col-sm-9 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
-                
-                <div class="conv-container col-sm-9">
-                    <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld
+
+<!--                Main conversation window -->
+                <div class="conv-container col-md-8 col-md-offset-2 col-lg-offset-0 col-lg-8">
+                    <button id="" class="btn btn-xs btn-ho btnNewConversation" style="margin-bottom:5px;">New conversation</button>
+                    <div class="col-xs-12 chooseFriendsDiv"><h1>Select friends</h1>
+                        <button id="" class=" btnStartConvo" style="margin-bottom:5px;">Start with selected</button>
                     </div>
+                    <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>
                     <div id="conv-messages" class="conv-messages">
                         <div class="conv-message">
                             <div class="conv-circle col-sm-1"></div>
@@ -61,7 +65,6 @@ session_start();
                                 Hundehoveder og hængerøve! Hvor bli'r I af?
                             </div>
                         </div>
-
                         <div class="conv-message">
                             <div class="conv-circle col-sm-1"></div>
                             <div class="mess-header col-sm-11">
@@ -71,98 +74,7 @@ session_start();
                                 Jeg sku' lige have brændstof på. Vi er på vej, skidegodt!
                             </div>
                         </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Kjeld</span><span class="mess-time">01-02-2017 14:32</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Benny, kør lige ordentligt! Yvonne tilgiver mig aldrig hvis jeg dør!
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:34</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Årh, så hold dog kæft, dit pattebarn!
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Kjeld</span><span class="mess-time">01-02-2017 14:36</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Det kan du ikke være bekendt! Jeg som altid hjælper dig med dine sindssyge planer, selvom det aldrig bliver til nogen millioner!
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:38</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Ja, det vil jeg sgu også nok sige, Egon.
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:41</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Alright, alright, jeg ta'r det tilbage.
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:43</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Det er så i orden... tak.
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Og skal vi SÅ komme i gang?
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Og skal vi SÅ komme i gang?
-                            </div>
-                        </div>
-
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:44</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Og skal vi SÅ komme i gang?
-                            </div>
-                        </div>
                     </div>
-
                     <div class="conv-input-container">
                         <div class="col-sm-9">
                             <textarea class="mess-input form-control" placeholder="Type your message here"></textarea>
@@ -171,109 +83,9 @@ session_start();
                             <button id="" class="btn btn-xs btn-ho">Send</button>
                         </div>
                     </div>
-
                 </div>
-                <div id="conv-list-container" class="conv-list-container col-sm-3">
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author conv-list-event">HowlOut møde</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
-                    </div>
+<!--                Right conversation list -->
+                <div id="conv-list-container" class="conv-list-container col-md-2 col-lg-2">
                     <div class="conv-list-item">
                         <div class="conv-list-circle col-sm-1"></div>
                         <div class="mess-header">
@@ -288,6 +100,7 @@ session_start();
             </div>
         </div>
     </div>
+
 
     <!-- MOBILE WARNING BOX -->
     <?php include_once "p_mobilewarning.html"; ?>
@@ -314,6 +127,103 @@ session_start();
         addSlimScroll($("#conv-messages"), "100%");
         addSlimScroll($("#conv-list-container"), "90%");
 
+        $(".chooseFriendsDiv").hide();
+        var token = $(".token").data("token");
+        getAllConversations();
+        
+        // Get conversations
+        function getAllConversations() {
+            var currentDate = new Date().toISOString();
+            var apiLink = "https://api.howlout.net/message/conversation/getall";
+            runAjax(apiLink, token).done(function(data) {
+                console.log(data);
+                // Populate the conversation list here
+            });
+        }
+
+
+        // Create conversation
+        function createConversation(idArray) {
+            var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
+            var apiData = "";
+            for (var i=0; i<idArray.length; i++) {
+                apiLink += "&profileIds="+idArray[i];
+            }
+            console.log(apiLink);
+            runAjaxJSON(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+            });
+        }
+
+        // Choose friends open or closed
+        var chooseOpen = false;
+        $(".btnNewConversation").click(function() {
+            if (chooseOpen) {
+                $(".btnNewConversation").text("New conversation");
+                $(".chooseFriendsDiv").hide(100);
+                chooseOpen = false;
+            } else {
+                $(".btnNewConversation").text("Cancel");
+                $(".chooseFriendsDiv").show(100);
+                chooseOpen = true;
+            }
+        });
+
+        var facebookId = "";
+        window.fbAsyncInit = function() {
+            // facebook functions in here
+            FB.init({
+                appId      : '651141215029165',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+
+
+            // Get friends for conversation picker
+            FB.getLoginStatus(function(response) {
+
+                FB.api('/me/friends', function(response) {
+                    $.each(response.data, function(i,ele) {
+                        var name = ele.name;
+                        var id = ele.id;
+                        var imgPath = "https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
+                        $(".chooseFriendsDiv").append('<div class="col-md-12"><div class="member-circle col-md-2 " style="background-image: url(\'' + imgPath + '\');background-size:100%;margin:10px 30px 0 30px;"></div><p style="text-align:center;">' + name + '</p><input data-id="' + id + '" type="checkbox" class="friendsCheckbox"></div>');
+                    });
+                });
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+
+        $("body").on("click", ".groupLink", function() {
+            var groupIdClicked = $(this).data("groupid");
+            window.location = "viewgroup.php?id="+groupIdClicked;
+        });
+
+        var idArray = [];
+        // Stat conversation button
+        $(".btnStartConvo").click(function() {
+            var noneChecked = true;
+            $(".friendsCheckbox").each(function(i, ele) {
+                if ($(this).is(':checked')) {
+                    noneChecked = false;
+                    idArray.push($(this).data("id"));
+                }
+            });
+            if (noneChecked) {
+                alert("You have to select at least one friend to converse with.");
+            } else {
+                createConversation(idArray);
+            }
+
+        });
 
     </script>
 
