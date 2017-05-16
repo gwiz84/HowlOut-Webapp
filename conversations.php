@@ -57,24 +57,7 @@ session_start();
                         </div>
                         <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>
                         <div id="conv-messages" class="conv-messages">
-                            <div class="conv-message">
-                                <div class="conv-circle col-sm-1"></div>
-                                <div class="mess-header col-sm-11">
-                                    <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:29</span>
-                                </div>
-                                <div class="mess-text col-sm-11">
-                                    Hundehoveder og hængerøve! Hvor bli'r I af?
-                                </div>
-                            </div>
-                            <div class="conv-message">
-                                <div class="conv-circle col-sm-1"></div>
-                                <div class="mess-header col-sm-11">
-                                    <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:31</span>
-                                </div>
-                                <div class="mess-text col-sm-11">
-                                    Jeg sku' lige have brændstof på. Vi er på vej, skidegodt!
-                                </div>
-                            </div>
+
                         </div>
                         <div class="conv-input-container col-xs-8">
                             <div class="col-sm-8">
@@ -125,18 +108,39 @@ session_start();
         var token = $(".token").data("token");
         getAllConversations();
 
+        var currentMsgAmount = 0;
         // Interval to continously update current conversation
         setInterval(function() {
             if (activeId>0) {
                 var apiLink = "https://api.howlout.net/message/conversation/getOne/"+activeId;
+//                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);
-                    $.each(jsonData.Messages, function(i,ele) {
-
-                    });
+                    if (jsonData.Messages.length>currentMsgAmount) {
+                        $(".conv-messages").empty();
+                        currentMsgAmount = jsonData.Messages.length;
+                        $.each(jsonData.Messages, function(i,ele) {
+                            console.log(JSON.stringify(ele));
+                            $(".conv-messages").append('<div class="conv-message">'+
+                            '<div class="conv-circle col-sm-1"></div>'+
+                            '<div class="mess-header col-sm-11">'+
+                            '<span class="mess-author">'+ele.SenderId+'</span><span class="mess-time">'+ele.DateAndTime+'</span>'+
+                            '</div>'+
+                            '<div class="mess-text col-sm-11">'+ele.Content+
+                                '</div>'+
+                                '</div>');
+                        });
+                    }
                 });
             }
         }, 1500);
+
+        // Keyboard enter click function for chatting
+        $(".mess-input").keypress(function(e) {
+            if(e.which == 13) {
+                sendMsg();
+            }
+        });
 
         // Get all conversations
         function getAllConversations() {
@@ -145,7 +149,6 @@ session_start();
             runAjax(apiLink, token).done(function(data) {
                 // Populate the conversation list here
                 var jsonData = JSON.parse(data);
-                console.log(data);
                 if (jsonData.length>0) {
                     activeId = jsonData[0].ConversationId;
                 }
@@ -182,7 +185,13 @@ session_start();
             activeId = $(this).data("conversationid");
         });
 
+        // Send button mouse click function
         $(".btnSendMsg").click(function() {
+            sendMsg();
+        });
+
+        // function to send message via chat
+        function sendMsg() {
             var message = $(".mess-input").val();
             var apiLink = "https://api.howlout.net/message/conversation/writeToConversation/"+activeId;
             var currentDate = new Date().toISOString();
@@ -191,10 +200,9 @@ session_start();
                 "DateAndTime" : currentDate
             });
             runAjaxPut(apiLink, apiData, token).done(function(data) {
-                console.log(data);
+                $(".mess-input").val("");
             });
-        });
-
+        }
         // Create conversation
         function createConversation(idArray) {
             var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
