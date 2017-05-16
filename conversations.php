@@ -45,58 +45,52 @@ session_start();
             <div class="col-sm-2 left-menu-container">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-9 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-sm-10 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
 
 <!--                Main conversation window -->
-                <div class="conv-container col-md-8 col-md-offset-2 col-lg-offset-0 col-lg-8">
-                    <button id="" class="btn btn-xs btn-ho btnNewConversation" style="margin-bottom:5px;">New conversation</button>
-                    <div class="col-xs-12 chooseFriendsDiv"><h1>Select friends</h1>
-                        <button id="" class=" btnStartConvo" style="margin-bottom:5px;">Start with selected</button>
+                <div class="row">
+                    <div class="conv-container col-md-8">
+                        <button id="" class="btn btn-xs btn-ho btnNewConversation" style="margin-bottom:5px;">New conversation</button>
+                        <div class="col-xs-12 chooseFriendsDiv"><h1>Select friends</h1>
+                            <button id="" class=" btnStartConvo" style="margin-bottom:5px;">Start with selected</button>
+                        </div>
+                        <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>
+                        <div id="conv-messages" class="conv-messages">
+                            <div class="conv-message">
+                                <div class="conv-circle col-sm-1"></div>
+                                <div class="mess-header col-sm-11">
+                                    <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:29</span>
+                                </div>
+                                <div class="mess-text col-sm-11">
+                                    Hundehoveder og hængerøve! Hvor bli'r I af?
+                                </div>
+                            </div>
+                            <div class="conv-message">
+                                <div class="conv-circle col-sm-1"></div>
+                                <div class="mess-header col-sm-11">
+                                    <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:31</span>
+                                </div>
+                                <div class="mess-text col-sm-11">
+                                    Jeg sku' lige have brændstof på. Vi er på vej, skidegodt!
+                                </div>
+                            </div>
+                        </div>
+                        <div class="conv-input-container col-xs-8">
+                            <div class="col-sm-8">
+                                <textarea class="mess-input form-control" placeholder="Type your message here"></textarea>
+                            </div>
+                            <div class="col-sm-4">
+                                <button id="" class="btn btn-xs btn-ho btnSendMsg">Send</button>
+                            </div>
+                        </div>
                     </div>
-                    <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>
-                    <div id="conv-messages" class="conv-messages">
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Egon</span><span class="mess-time">01-02-2017 14:29</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Hundehoveder og hængerøve! Hvor bli'r I af?
-                            </div>
-                        </div>
-                        <div class="conv-message">
-                            <div class="conv-circle col-sm-1"></div>
-                            <div class="mess-header col-sm-11">
-                                <span class="mess-author">Benny</span><span class="mess-time">01-02-2017 14:31</span>
-                            </div>
-                            <div class="mess-text col-sm-11">
-                                Jeg sku' lige have brændstof på. Vi er på vej, skidegodt!
-                            </div>
-                        </div>
-                    </div>
-                    <div class="conv-input-container">
-                        <div class="col-sm-9">
-                            <textarea class="mess-input form-control" placeholder="Type your message here"></textarea>
-                        </div>
-                        <div class="col-sm-2">
-                            <button id="" class="btn btn-xs btn-ho">Send</button>
-                        </div>
-                    </div>
-                </div>
-<!--                Right conversation list -->
-                <div id="conv-list-container" class="conv-list-container col-md-2 col-lg-2">
-                    <div class="conv-list-item">
-                        <div class="conv-list-circle col-sm-1"></div>
-                        <div class="mess-header">
-                            <span class="mess-author">Egon, Benny, Kjeld</span>
-                        </div>
-                        <div class="conv-list-text">
-                            Egon: Og skal vi SÅ komme i gang?
-                        </div>
-                        <!-- <span class="mess-time">01-02-2017 14:44</span> -->
+                    <!--                Right conversation list -->
+                    <div id="conv-list-container" class="conv-list-container ">
+
                     </div>
                 </div>
+
             </div>
         </div>
     </div>
@@ -130,28 +124,90 @@ session_start();
         $(".chooseFriendsDiv").hide();
         var token = $(".token").data("token");
         getAllConversations();
-        
-        // Get conversations
+
+        // Interval to continously update current conversation
+        setInterval(function() {
+            if (activeId>0) {
+                var apiLink = "https://api.howlout.net/message/conversation/getOne/"+activeId;
+                runAjax(apiLink, token).done(function(data) {
+                    var jsonData = JSON.parse(data);
+                    $.each(jsonData.Messages, function(i,ele) {
+
+                    });
+                });
+            }
+        }, 1500);
+
+        // Get all conversations
         function getAllConversations() {
             var currentDate = new Date().toISOString();
             var apiLink = "https://api.howlout.net/message/conversation/getall";
             runAjax(apiLink, token).done(function(data) {
-                console.log(data);
                 // Populate the conversation list here
+                var jsonData = JSON.parse(data);
+                console.log(data);
+                if (jsonData.length>0) {
+                    activeId = jsonData[0].ConversationId;
+                }
+                $.each(jsonData, function(i,ele) {
+                    var nameList = "";
+                    var nameCounter = 0;
+                    $.each(ele.Profiles, function(i,ele2) {
+                        if (nameCounter <3) {
+                            var words = ele2.Name.split(" ");
+                            nameList += words[0]+" ";
+                        } else {
+                            nameList += "..";
+                        }
+                        nameCounter++;
+                    });
+                    var lastMessage = (ele.LastMessage!=null) ? ele.LastMessage.Content : "...";
+                    $(".conv-list-container").append(
+                        '<div class="conv-list-item col-md-12" data-conversationid="'+ele.ConversationId+'">'
+                        +'<div class="conv-list-circle col-sm-1"></div>'
+                        +'<div class="mess-header">'
+                        +' <span class="mess-author">'+nameList+'</span>'
+                        +' </div>'
+                        +' <div class="conv-list-text">'
+                        +'    '+lastMessage+''
+                        +'</div>'
+                        +' </div>');
+                });
             });
         }
 
+        var activeId = -1;
+        // Conversation list item click function
+        $("body").on("click", ".conv-list-item", function() {
+            activeId = $(this).data("conversationid");
+        });
+
+        $(".btnSendMsg").click(function() {
+            var message = $(".mess-input").val();
+            var apiLink = "https://api.howlout.net/message/conversation/writeToConversation/"+activeId;
+            var currentDate = new Date().toISOString();
+            var apiData = JSON.stringify({
+                "Content" : message,
+                "DateAndTime" : currentDate
+            });
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+            });
+        });
 
         // Create conversation
         function createConversation(idArray) {
             var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
-            var apiData = "";
+
+            apiLink +=  "&profileIds="+facebookId;
+
             for (var i=0; i<idArray.length; i++) {
                 apiLink += "&profileIds="+idArray[i];
             }
-            console.log(apiLink);
+            var apiData = null;
+
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
-                console.log(data);
+
             });
         }
 
@@ -182,6 +238,10 @@ session_start();
 
             // Get friends for conversation picker
             FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response)
+                {
+                    facebookId = response.id;
+                });
 
                 FB.api('/me/friends', function(response) {
                     $.each(response.data, function(i,ele) {
@@ -222,14 +282,12 @@ session_start();
             } else {
                 createConversation(idArray);
             }
-
         });
 
     </script>
 
     <!-- Bootstrap Core JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
 
     <!-- Theme JavaScript -->
     <script src="scripts/clean-blog.min.js"></script>

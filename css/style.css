@@ -27,7 +27,6 @@ hr {
     background-image: linear-gradient(to right, rgba(93, 109, 126  , 0), rgba(93, 109, 126  , 0.75), rgba(11, 83, 69, 0));
 }
 
-<<<<<<< HEAD
 
 .chooseFriendsDiv {
 
@@ -46,8 +45,7 @@ textarea:focus, input:focus {
 }
 */
 
-=======
->>>>>>> 3093e10a02c93d5e1561ae38e286373d8eb0bdff
+
 .eventTopPart {
     padding:5px 5px 10px 5px;
     background-color:white;
@@ -253,6 +251,7 @@ a:hover {
     padding: 5px 10px 0 50px;
     position: relative;
     height: calc(100% - 220px);
+    margin-left: 150px;
 }
 
 .conv-messages {
@@ -286,12 +285,13 @@ a:hover {
 
 .conv-input-container {
     border-top: solid 1px lightgrey;
-    background-color: white;
+    background-color: transparent;
     padding: 10px 0 10px 0;
     margin-right: 12px;
-    /*overflow: auto;*/
-    /*bottom: 0;*/
-    /*position: fixed;*/
+    overflow: auto;
+    bottom: 0;
+    position: fixed;
+
     /*width: inherit;*/
 }
 
@@ -301,7 +301,6 @@ a:hover {
     border-left: solid 1px lightgrey;
     padding: 0;
     overflow-x: hidden;
-    width: 220px;
 }
 
 .conv-list-item {
@@ -309,8 +308,7 @@ a:hover {
     padding: 10px 10px 5px 10px;
     margin: 0 5px 0 3px;
     transition: 0.5s;
-    cursor: default;
-    width: 100%;
+    cursor: pointer;
     border-left: solid 2px white;
 }
 
