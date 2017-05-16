@@ -116,13 +116,13 @@ session_start();
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);
-                    if (jsonData.Messages.length>currentMsgAmount) {
+
                         $(".conv-messages").empty();
                         currentMsgAmount = jsonData.Messages.length;
                         $.each(jsonData.Messages, function(i,ele) {
                             console.log(JSON.stringify(ele));
                             $(".conv-messages").append('<div class="conv-message">'+
-                            '<div class="conv-circle col-sm-1"></div>'+
+                            '<div class="conv-circle col-sm-1" style="background-image: url(\''+ele.ImageSource+'\');"></div>'+
                             '<div class="mess-header col-sm-11">'+
                             '<span class="mess-author">'+ele.SenderId+'</span><span class="mess-time">'+ele.DateAndTime+'</span>'+
                             '</div>'+
@@ -130,7 +130,7 @@ session_start();
                                 '</div>'+
                                 '</div>');
                         });
-                    }
+                    
                 });
             }
         }, 1500);
@@ -183,6 +183,7 @@ session_start();
         // Conversation list item click function
         $("body").on("click", ".conv-list-item", function() {
             activeId = $(this).data("conversationid");
+            $(".conv-messages").empty();
         });
 
         // Send button mouse click function
