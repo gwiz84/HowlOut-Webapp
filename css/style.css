@@ -27,6 +27,12 @@ hr {
     background-image: linear-gradient(to right, rgba(93, 109, 126  , 0), rgba(93, 109, 126  , 0.75), rgba(11, 83, 69, 0));
 }
 
+.truncate {
+    width: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
 
 .chooseFriendsDiv {
 
@@ -36,6 +42,11 @@ hr {
 .member-box {
     width: 50px;
 
+}
+
+.friendsClickItem:hover {
+    transition: 0.5s;
+    background-color:lightgrey;
 }
 /*
 textarea:focus, input:focus {   
@@ -249,14 +260,18 @@ a:hover {
 
 .conv-container {
     padding: 5px 10px 0 50px;
-    position: relative;
-    height: calc(100% - 220px);
-    margin-left: 150px;
+
 }
 
 .conv-messages {
-    height: calc(100% - 0px);
-    overflow: auto;
+    /* Firefox */
+    height: -moz-calc(100% - 200px);
+    /* WebKit */
+    height: -webkit-calc(100% - 200px);
+    /* Standard */
+    height: calc(100% - 200px);
+    width:100%;
+    overflow-y: auto;
 }
 
 .conv-message {
@@ -613,6 +628,16 @@ a:hover {
         /*font-weight:bold;*/
         color: #E8F8F5;
         text-shadow: 2px 2px #000000;
+    }
+
+    .conv-container {
+        padding: 5px 10px 0 50px;
+        left:50px;
+    }
+
+    .conv-list-container {
+
+        left:50px;
     }
 
 }

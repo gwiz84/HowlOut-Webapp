@@ -42,21 +42,19 @@ session_start();
     <div class="container hidden-xs hidden-sm" style="padding-top: 120px;">
 
         <div class="row">
-            <div class="col-sm-2 left-menu-container">
+            <div class="col-sm-2 left-menu-container" style="position:fixed;">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-sm-10 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-md-offset-1 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
 
 <!--                Main conversation window -->
-                <div class="row">
+
                     <div class="conv-container col-md-8">
-                        <button id="" class="btn btn-xs btn-ho btnNewConversation" style="margin-bottom:5px;">New conversation</button>
-                        <div class="col-xs-12 chooseFriendsDiv"><h1>Select friends</h1>
-                            <button id="" class=" btnStartConvo" style="margin-bottom:5px;">Start with selected</button>
-                        </div>
-                        <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>
-                        <div id="conv-messages" class="conv-messages">
+                        <button id="" class="btn btn-ho" style="margin-bottom:5px;height:40px;padding:10px;" data-toggle="modal" data-target="#myModal" style="">New conversation</button>
+                        <hr>
+<!--                        <div class="conv-header"><i class="material-icons leftmenuitem icon_blue">chat</i>Conversation with Benny, Kjeld</div>-->
+                        <div id="conv-messages" class="conv-messages" style="">
 
                         </div>
                         <div class="conv-input-container col-xs-8">
@@ -69,15 +67,35 @@ session_start();
                         </div>
                     </div>
                     <!--                Right conversation list -->
-                    <div id="conv-list-container" class="conv-list-container ">
+                    <div class="conv-list-container col-md-3" id="conv-list-container " >
 
                     </div>
-                </div>
+
 
             </div>
         </div>
     </div>
+<!--    MODEL FOR STARTING A NEW CONVERSATION-->
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog">
 
+            <!-- Modal content-->
+            <div class="modal-content" style="">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Start new conversation</h4>
+                </div>
+                <div class="modal-body" style="padding:0px 0 0 0;">
+
+                </div>
+                <div class="modal-footer" style="">
+                    <br>
+                    <button id="" class="btn btn-default btnStartConvo" style="margin-bottom:5px;">Start with selected</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <!-- MOBILE WARNING BOX -->
     <?php include_once "p_mobilewarning.html"; ?>
@@ -89,60 +107,81 @@ session_start();
 
     <?php include_once "p_loadScripts.html"; ?>
 
-    <script src="js/jquery.slimscroll.min.js"></script>
+<!--    <script src="js/jquery.slimscroll.min.js"></script>-->
     <script>
-        function addSlimScroll(element, height) {
-            element.slimscroll({
-                height: height,
-                railVisible: false,
-                color: '#2ecc71',
-                // railColor: '#2ecc71',
-                wheelStep: 4,
-                size: '6px'
-            });
-        }
-        addSlimScroll($("#conv-messages"), "100%");
-        addSlimScroll($("#conv-list-container"), "90%");
+//        function addSlimScroll(element, height) {
+//            element.slimscroll({
+//                height: height,
+//                railVisible: false,
+//                color: '#2ecc71',
+//                // railColor: '#2ecc71',
+//                wheelStep: 4,
+//                size: '6px'
+//            });
+//        }
+//        addSlimScroll($("#conv-messages"), "100%");
+//        addSlimScroll($("#conv-list-container"), "90%");
+        var curHeight = $(window).height();
+        $(".conv-messages").height(curHeight-285);
+        $(".conv-list-container").height(curHeight-285);
+
+
+        $(window).on('resize', function(){
+            var curHeight = $(window).height();
+            $(".conv-messages").height(curHeight-285);
+            $(".conv-list-container").height(curHeight-285);
+        });
 
         $(".chooseFriendsDiv").hide();
         var token = $(".token").data("token");
         getAllConversations();
 
-        var currentMsgAmount = 0;
-        // Interval to continously update current conversation
+        var currentMsgAmount = -1;
+        // Interval to continously update current conversation if any new messages are sent/received
         setInterval(function() {
             if (activeId>0) {
                 var apiLink = "https://api.howlout.net/message/conversation/getOne/"+activeId;
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);
-
+                    if (jsonData.Messages.length>currentMsgAmount) {
                         $(".conv-messages").empty();
                         currentMsgAmount = jsonData.Messages.length;
-                        $.each(jsonData.Messages, function(i,ele) {
-                            console.log(JSON.stringify(ele));
-                            $(".conv-messages").append('<div class="conv-message">'+
-                            '<div class="conv-circle col-sm-1" style="background-image: url(\''+ele.ImageSource+'\');"></div>'+
-                            '<div class="mess-header col-sm-11">'+
-                            '<span class="mess-author">'+ele.SenderId+'</span><span class="mess-time">'+ele.DateAndTime+'</span>'+
-                            '</div>'+
-                            '<div class="mess-text col-sm-11">'+ele.Content+
-                                '</div>'+
+                        $.each(jsonData.Messages, function (i, ele) {
+//                            console.log(JSON.stringify(ele));
+                            $(".conv-messages").append('<div class="conv-message">' +
+                                '<div class="conv-circle col-sm-1" style="background-image: url(\'' + ele.ImageSource + '\');background-size:100%;"></div>' +
+                                '<div class="mess-header col-sm-11">' +
+                                '<span class="mess-author">' + ele.SenderId + '</span><span class="mess-time">' + ele.DateAndTime + '</span>' +
+                                '</div>' +
+                                '<div class="mess-text col-sm-11">' + ele.Content +
+                                '</div>' +
                                 '</div>');
+
+                            $("."+activeId).find(".lastMsg").text(shortenMsg(ele.Content));
                         });
-                    
+                        scrollDown();
+                    }
                 });
             }
-        }, 1500);
+        }, 800);
 
-        // Keyboard enter click function for chatting
+
+        // scrolls to the bottom of the msg div
+        function scrollDown() {
+            var wtf    = $('.conv-messages');
+            var height = wtf[0].scrollHeight;
+            wtf.scrollTop(height);
+        }
+
+        // Keyboard enter click function for sending chat messages
         $(".mess-input").keypress(function(e) {
             if(e.which == 13) {
                 sendMsg();
             }
         });
 
-        // Get all conversations
+        // Get all conversations for the current user
         function getAllConversations() {
             var currentDate = new Date().toISOString();
             var apiLink = "https://api.howlout.net/message/conversation/getall";
@@ -152,41 +191,64 @@ session_start();
                 if (jsonData.length>0) {
                     activeId = jsonData[0].ConversationId;
                 }
+                $(".conv-list-container").empty();
                 $.each(jsonData, function(i,ele) {
                     var nameList = "";
                     var nameCounter = 0;
+                    var isFirst = true;
+
                     $.each(ele.Profiles, function(i,ele2) {
                         if (nameCounter <3) {
                             var words = ele2.Name.split(" ");
-                            nameList += words[0]+" ";
+                            if (isFirst) {
+                                nameList += words[0];
+                            } else {
+                                nameList += ", "+words[0];
+                            }
                         } else {
                             nameList += "..";
                         }
                         nameCounter++;
+                        isFirst = false;
                     });
                     var lastMessage = (ele.LastMessage!=null) ? ele.LastMessage.Content : "...";
+                    lastMessage = shortenMsg(lastMessage);
                     $(".conv-list-container").append(
-                        '<div class="conv-list-item col-md-12" data-conversationid="'+ele.ConversationId+'">'
+                        '<div class="conv-list-item col-md-12 '+ele.ConversationId+'" data-conversationid="'+ele.ConversationId+'">'
                         +'<div class="conv-list-circle col-sm-1"></div>'
                         +'<div class="mess-header">'
                         +' <span class="mess-author">'+nameList+'</span>'
                         +' </div>'
-                        +' <div class="conv-list-text">'
-                        +'    '+lastMessage+''
+                        +' <div class="conv-list-text lastMsg">'
+                        +'   '+lastMessage+''
                         +'</div>'
                         +' </div>');
                 });
             });
         }
 
+        function shortenMsg(msg) {
+            var lastMessageFinal = "";
+            if (msg.length>30) {
+                for (var i=0; i<30; i++) {
+                    lastMessageFinal += msg[i];
+                }
+                lastMessageFinal += "...";
+            } else {
+                lastMessageFinal = msg;
+            }
+            return lastMessageFinal;
+        }
+
         var activeId = -1;
-        // Conversation list item click function
+        // Conversation list item click function (to select a conversation)
         $("body").on("click", ".conv-list-item", function() {
             activeId = $(this).data("conversationid");
             $(".conv-messages").empty();
+            currentMsgAmount = -1;
         });
 
-        // Send button mouse click function
+        // Chat send button mouse click function
         $(".btnSendMsg").click(function() {
             sendMsg();
         });
@@ -204,36 +266,10 @@ session_start();
                 $(".mess-input").val("");
             });
         }
-        // Create conversation
-        function createConversation(idArray) {
-            var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
 
-            apiLink +=  "&profileIds="+facebookId;
 
-            for (var i=0; i<idArray.length; i++) {
-                apiLink += "&profileIds="+idArray[i];
-            }
-            var apiData = null;
 
-            runAjaxJSON(apiLink, apiData, token).done(function(data) {
-
-            });
-        }
-
-        // Choose friends open or closed
-        var chooseOpen = false;
-        $(".btnNewConversation").click(function() {
-            if (chooseOpen) {
-                $(".btnNewConversation").text("New conversation");
-                $(".chooseFriendsDiv").hide(100);
-                chooseOpen = false;
-            } else {
-                $(".btnNewConversation").text("Cancel");
-                $(".chooseFriendsDiv").show(100);
-                chooseOpen = true;
-            }
-        });
-
+        // Gets friends using the app to populate the list of people you can start conversations with
         var facebookId = "";
         window.fbAsyncInit = function() {
             // facebook functions in here
@@ -257,7 +293,7 @@ session_start();
                         var name = ele.name;
                         var id = ele.id;
                         var imgPath = "https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
-                        $(".chooseFriendsDiv").append('<div class="col-md-12"><div class="member-circle col-md-2 " style="background-image: url(\'' + imgPath + '\');background-size:100%;margin:10px 30px 0 30px;"></div><p style="text-align:center;">' + name + '</p><input data-id="' + id + '" type="checkbox" class="friendsCheckbox"></div>');
+                        $(".modal-body").append('<div class="col-md-12 friendsClickItem" style="cursor:pointer;"><div class=" col-md-1 " style="background-image: url(\'' + imgPath + '\');width:40px;height:40px;background-size:100%;margin:10px 30px 0 30px;vertical-align: bottom;"></div><p style="text-align:left;margin-bottom:10px;">' + name + '<input data-id="' + id + '"  type="checkbox" class="friendsCheckbox" style="float:right;vertical-align: top;"></p></div>');
                     });
                 });
             });
@@ -276,6 +312,17 @@ session_start();
             window.location = "viewgroup.php?id="+groupIdClicked;
         });
 
+        // Click function for picking friends when starting a new conversation
+        $("body").on("click", ".friendsClickItem", function() {
+            var isChecked = $(this).find(".friendsCheckbox").is(':checked');
+            if (isChecked) {
+                $(this).find(".friendsCheckbox").prop('checked', false);
+            } else {
+                $(this).find(".friendsCheckbox").prop('checked', true);
+            }
+
+        });
+
         var idArray = [];
         // Stat conversation button
         $(".btnStartConvo").click(function() {
@@ -290,9 +337,28 @@ session_start();
                 alert("You have to select at least one friend to converse with.");
             } else {
                 createConversation(idArray);
+                getAllConversations();
             }
         });
 
+        // Create conversation function
+        function createConversation(idArray) {
+            var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
+
+            apiLink +=  "&profileIds="+facebookId;
+
+            for (var i=0; i<idArray.length; i++) {
+                apiLink += "&profileIds="+idArray[i];
+            }
+            var apiData = null;
+
+            runAjaxJSON(apiLink, apiData, token).done(function(data) {
+                var jsonData = JSON.parse(data);
+                activeId = jsonData.ConversationId;
+                currentMsgAmount = -1;
+                $('#myModal').modal('toggle');
+            });
+        }
     </script>
 
     <!-- Bootstrap Core JavaScript -->

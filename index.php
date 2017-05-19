@@ -188,6 +188,8 @@ session_start();
         window.location = "viewevent.php?id="+eventIdClicked;
     });
 
+
+
 </script>
 
 </body>
