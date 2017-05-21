@@ -87,7 +87,7 @@ session_start();
                 {
                     facebookId = response.id;
 
-                    var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                    var apiLink = '/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
                     var token = $(".token").data("token");
                     runAjax(apiLink, token).done(function(data) {
                         var jsonData = JSON.parse(data);
@@ -137,7 +137,7 @@ session_start();
                     yes: {
                         text: 'Yes',
                         action: function() {
-                            var apiLink = "https://api.howlout.net/event/"+eventIdClicked;
+                            var apiLink = "/event/"+eventIdClicked;
                             var token = $(".token").data("token");
                             runAjaxDeleteEvent(apiLink, token).done(function(data) {
                                 if (data) {

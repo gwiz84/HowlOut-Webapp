@@ -265,7 +265,7 @@ session_start();
         if ($(".editid").data("editid") != null) {
             addressSelected = true;
             var editid = $(".editid").data("editid");
-            var apiLink = "https://api.howlout.net/event/event?id="+editid;
+            var apiLink = "/event/event?id="+editid;
             runAjax(apiLink, token).done(function(data) {
                 var jsonData = JSON.parse(data);
                 var fbid = $(".fbid").data("fbid");
@@ -358,7 +358,7 @@ session_start();
             var maxSize = $(".inputAttendees").val();
             var isPrivate = ($(".radioPrivate").is(":checked")) ? 1 : 0;
             var profileId = $(".fbid").data("fbid");
-            var apiLink = "https://api.howlout.net/event";
+            var apiLink = "/event";
             var groupId = $(".groupid").data("groupid");
             var apiData;
             if (groupId > 0) {

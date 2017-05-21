@@ -92,7 +92,7 @@
                 {
                     facebookId = response.id;
 
-                    var apiLink = 'https://api.howlout.net/profile/'+facebookId;
+                    var apiLink = '/profile/'+facebookId;
                     var token = $(".token").data("token");
 
                     // ajax call to get groups via the api

@@ -130,7 +130,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         // Request the event from the server and fill out the fields
         $(function(){
             $("#textcounter").html(maxCommentLength + " remaining");
-            var apiLink = "https://api.howlout.net/event/event?id=<?php echo $eventId ?>";
+            var apiLink = "/event/event?id=<?php echo $eventId ?>";
+            // var apiLink = "http://howlout.dk/event/<?php echo $eventId ?>";
 
             runAjax(apiLink, token).done(function(data) {
                 if (Object.keys(data).length <= 0) {
@@ -213,7 +214,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             if (($("#commentfield").val().length) > 0) {
                 var commentToPost = $("#commentfield").val();
                 var currentDate = new Date().toISOString();
-                var apiLink = "https://api.howlout.net/message/comment/<?php echo $eventId; ?>?commentType=1";
+                var apiLink = "/message/comment/<?php echo $eventId; ?>?commentType=1";
                 var jsonData = JSON.stringify({
                     "Content" : commentToPost,
                     "DateAndTime" : currentDate

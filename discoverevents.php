@@ -170,7 +170,7 @@ session_start();
             var userLng = userPos.lng;
             var today = new Date();
             var isoString = today.toISOString();
-            var apiLink = "https://api.howlout.net/event/search?userLat=" + userLat + "&userLong=" + userLng + "&currentTime=" + isoString;
+            var apiLink = "/event/search?userLat=" + userLat + "&userLong=" + userLng + "&currentTime=" + isoString;
      
             var token = $(".token").data("token");
 
@@ -195,7 +195,7 @@ session_start();
         $("body").on("click", ".btn-followevent", function() {
             var thisButton = $(this);
             var eventId = $(this).parent().parent().parent().parent().data("eventid");
-            var apiLink = "https://api.howlout.net/event/joinOrTrack/"+eventId+"/"+facebookId+"?attend=true&join=true";
+            var apiLink = "/event/joinOrTrack/"+eventId+"/"+facebookId+"?attend=true&join=true";
             var apiData = JSON.stringify({
                 // "eventId": eventId,
                 // "profileId": facebookId,
