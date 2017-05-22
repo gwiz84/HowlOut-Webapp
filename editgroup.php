@@ -135,7 +135,7 @@ session_start();
     // i.e. has the right to edit it at all. Otherwise, return to index.php.
     if ($(".groupid").data("groupid") != null) {
         var editid = $(".groupid").data("groupid");
-        var apiLink = "https://api.howlout.net/group/"+editid;
+        var apiLink = "/group/"+editid;
         runAjax(apiLink, token).done(function(data) {
             var jsonData = JSON.parse(data);
             var fbid = $(".fbid").data("fbid");
@@ -199,7 +199,7 @@ session_start();
         var description = $(".inputDesc").val();
         var isPrivate = ($(".radioPrivate").is(":checked")) ? 2 : 0;
         var profileId = $(".fbid").data("fbid");
-        var apiLink = 'https://api.howlout.net/group';
+        var apiLink = '/group';
         var apiData = JSON.stringify({
             "GroupId": groupId,
             "ProfileOwners": [

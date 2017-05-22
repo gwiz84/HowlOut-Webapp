@@ -140,7 +140,7 @@ session_start();
         // Interval to continously update current conversation if any new messages are sent/received
         setInterval(function() {
             if (activeId>0) {
-                var apiLink = "https://api.howlout.net/message/conversation/getOne/"+activeId;
+                var apiLink = "/message/conversation/getOne/"+activeId;
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);
@@ -184,7 +184,7 @@ session_start();
         // Get all conversations for the current user
         function getAllConversations() {
             var currentDate = new Date().toISOString();
-            var apiLink = "https://api.howlout.net/message/conversation/getall";
+            var apiLink = "/message/conversation/getall";
             runAjax(apiLink, token).done(function(data) {
                 // Populate the conversation list here
                 var jsonData = JSON.parse(data);
@@ -197,8 +197,8 @@ session_start();
                     var nameCounter = 0;
                     var isFirst = true;
 
-                    $.each(ele.Profiles, function(i,ele2) {
-                        if (nameCounter <3) {
+                    $.each(ele.Profiles, function(i, ele2) {
+                        if (nameCounter < 3) {
                             var words = ele2.Name.split(" ");
                             if (isFirst) {
                                 nameList += words[0];
@@ -206,7 +206,7 @@ session_start();
                                 nameList += ", "+words[0];
                             }
                         } else {
-                            nameList += "..";
+                            nameList += "...";
                         }
                         nameCounter++;
                         isFirst = false;
@@ -229,8 +229,8 @@ session_start();
 
         function shortenMsg(msg) {
             var lastMessageFinal = "";
-            if (msg.length>30) {
-                for (var i=0; i<30; i++) {
+            if (msg.length > 30) {
+                for (var i = 0; i < 30; i++) {
                     lastMessageFinal += msg[i];
                 }
                 lastMessageFinal += "...";
@@ -256,7 +256,7 @@ session_start();
         // function to send message via chat
         function sendMsg() {
             var message = $(".mess-input").val();
-            var apiLink = "https://api.howlout.net/message/conversation/writeToConversation/"+activeId;
+            var apiLink = "/message/conversation/writeToConversation/"+activeId;
             var currentDate = new Date().toISOString();
             var apiData = JSON.stringify({
                 "Content" : message,
@@ -266,8 +266,6 @@ session_start();
                 $(".mess-input").val("");
             });
         }
-
-
 
         // Gets friends using the app to populate the list of people you can start conversations with
         var facebookId = "";
@@ -324,7 +322,7 @@ session_start();
         });
 
         var idArray = [];
-        // Stat conversation button
+        // Start conversation button
         $(".btnStartConvo").click(function() {
             var noneChecked = true;
             $(".friendsCheckbox").each(function(i, ele) {
@@ -343,11 +341,11 @@ session_start();
 
         // Create conversation function
         function createConversation(idArray) {
-            var apiLink = "https://api.howlout.net/message/conversation?modelType=2";
+            var apiLink = "/message/conversation?modelType=2";
 
             apiLink +=  "&profileIds="+facebookId;
 
-            for (var i=0; i<idArray.length; i++) {
+            for (var i = 0; i < idArray.length; i++) {
                 apiLink += "&profileIds="+idArray[i];
             }
             var apiData = null;

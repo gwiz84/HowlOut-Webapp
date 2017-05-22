@@ -130,7 +130,7 @@ session_start();
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
-                    var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
+                    var apiLink2 = '/profile/'+facebookId;
                     var apiData = JSON.stringify(
                         {
                             ProfileId : facebookId

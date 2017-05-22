@@ -112,7 +112,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 <script>
     var groupId = <?php echo $groupId; ?>;
 
-    var apiLink = "https://api.howlout.net/group/" + groupId;
+    var apiLink = "/group/" + groupId;
 
     var token = $(".token").data("token");
 
@@ -208,7 +208,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
     // NEXT UPCOMING EVENT
     var now = new Date();
-    apiLink = "https://api.howlout.net/event/eventsFromGroupIds?CurrentTime=" + now.toISOString() + "&groupIds=" + groupId;
+    apiLink = "/event/eventsFromGroupIds?CurrentTime=" + now.toISOString() + "&groupIds=" + groupId;
     runAjax(apiLink, token).done(function(data) {
         var jsonData = JSON.parse(data);
         var eventToShow = null;
@@ -257,7 +257,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         if (($("#commentfield").val().length) > 0) {
             var commentToPost = $("#commentfield").val();
             var currentDate = new Date().toISOString();
-            var apiLink = "https://api.howlout.net/message/comment/<?php echo $groupId; ?>?commentType=1";
+            var apiLink = "/message/comment/<?php echo $groupId; ?>?commentType=1";
             var jsonData = JSON.stringify({
                 "Content": commentToPost,
                 "DateAndTime": currentDate

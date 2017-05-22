@@ -109,8 +109,8 @@ session_start();
             FB.api('/me', function(response) {
                 facebookId = response.id;
 
-                var apiLink = 'https://api.howlout.net/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
-                var apiLink2 = 'https://api.howlout.net/profile/'+facebookId;
+                var apiLink = '/event/eventsFromProfileIds?joined=true&CurrentTime='+getFormattedDateTime()+'&profileIds='+facebookId;
+                var apiLink2 = '/profile/'+facebookId;
                 var token = $(".token").data("token");
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);

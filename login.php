@@ -105,7 +105,7 @@
                 FB.api('/me', function(response) {
                     var facebookId = response.id;
                     var facebookName = response.name;
-                    var apiLink = 'https://api.howlout.net/profile?create=true';
+                    var apiLink = '/profile?create=true';
                     var apiData = JSON.stringify(
                     {
                         "ProfileId": facebookId,
