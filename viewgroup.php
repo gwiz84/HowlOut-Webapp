@@ -137,7 +137,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         $(".txtMemberAmount").text(memberAmount);
         $(".txtDescription").text(desc);
 
-        // Check if user is groupowner and make Create Event button if is
+        // Check if user is groupowner and make Create Event button if user is an owner
         $.each(data.ProfileOwners, function (i, ele) {
             if (ele.ProfileId == facebookId) {
                 // Append button that goes to Create Event via this group

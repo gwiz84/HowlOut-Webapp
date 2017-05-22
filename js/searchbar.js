@@ -38,7 +38,7 @@ function searchEvent() {
                     $.each(jsonObject, function (i, ele) {
                         $(".searchContent").append(''+
                             '<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-eventid="' + ele.EventId + '" class="resultLink resultLinkHover">' +
-                            '<img src="' + ele.ImageSource + '" style="width:50px;">' +
+                            '<img src="' + ele.ImageSource + '" style="width:50px;height:40px;background-size:50px;">' +
                             '<span style="font-size:18px;margin-left: 10px;">' + ele.Title + '</span>' +
                             '</div>'
                         );
@@ -67,7 +67,7 @@ function searchEvent() {
                     $(".searchContent").append('<div style="width: 100%;height:50px;padding:5px 10px 10px 10px;" class="groupHeader"><h5 style="font-weight:bold;"><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Groups</h5></div>');
                     $.each(jsonObject, function (i, ele) {
                         $(".searchContent").append('<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-groupid="' + ele.GroupId + '" class="resultLinkGroup resultLinkHover">' +
-                            '<img src="' + ele.ImageSource + '" style="max-height:40px;">' +
+                            '<img src="' + ele.ImageSource + '" style="width:50px;height:40px;background-size:50px">' +
                             '<span style="font-size:18px;margin-left: 10px;">' + ele.Name + '</span>' +
                             '</div>'
                         );
