@@ -45,7 +45,7 @@ session_start();
             <div class="col-sm-2 left-menu-container" style="position:fixed;">
                 <?php include_once "p_leftmenu.php"; ?>
             </div>
-            <div class="col-md-offset-1 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
+            <div class="col-md-offset-1 col-md-9 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
 
 <!--                Main conversation window -->
@@ -154,7 +154,7 @@ session_start();
                             $(".conv-messages").append('<div class="conv-message">' +
                                 '<div class="conv-circle col-sm-1" style="background-image: url(\'' + ele.ImageSource + '\');background-size:100%;"></div>' +
                                 '<div class="mess-header col-sm-11">' +
-                                '<span class="mess-author">' + ele.SenderId + '</span><span class="mess-time">' + ele.DateAndTime + '</span>' +
+                                '<span class="mess-author">' + ele.SenderName + '</span><span class="mess-time">' + convertDateString(ele.DateAndTime).toString() + '</span>' +
                                 '</div>' +
                                 '<div class="mess-text col-sm-11">' + ele.Content +
                                 '</div>' +
@@ -357,6 +357,12 @@ session_start();
                 currentMsgAmount = -1;
                 $('#myModal').modal('toggle');
             });
+        }
+
+        // Converts the date-string 'date' to a format understandable by the datepicker plugin.
+        function convertDateString(date) {
+            convertedDate = date.replace("T", " ").substr(0, 16);
+            return convertedDate;
         }
     </script>
 

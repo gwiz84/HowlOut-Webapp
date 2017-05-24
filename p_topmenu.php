@@ -2,8 +2,8 @@
 
     <div class="col-sm-3">
         <a href="index.php" style="cursor:pointer;text-decoration:none;">
-           <img class="top-logo" src="img/howlout_icon3.png" style="cursor:pointer; padding-top: 7px;">&nbsp;
-           <span class="howloutLogoText" style="vertical-align: bottom;margin-left:-20px;">HowlOut</span>
+           <img class="top-logo" src="img/logo5.png" style="cursor:pointer; padding-top: 7px;width:90px;">&nbsp;
+           <span class="howloutLogoText" style="vertical-align: middle;margin-left:5px;">HowlOut</span>
        </a>
        </>
    </div>
