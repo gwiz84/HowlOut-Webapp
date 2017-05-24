@@ -144,7 +144,7 @@ session_start();
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
                     var jsonData = JSON.parse(data);
-                    if (jsonData.Messages.length>currentMsgAmount) {
+                    if (jsonData.Messages.length > currentMsgAmount) {
                         $(".conv-messages").empty();
                         currentMsgAmount = jsonData.Messages.length;
                         $.each(jsonData.Messages, function (i, ele) {
@@ -188,8 +188,8 @@ session_start();
             runAjax(apiLink, token).done(function(data) {
                 // Populate the conversation list here
                 var jsonData = JSON.parse(data);
-                if (jsonData.length>0) {
-                    activeId = jsonData[0].ConversationId;
+                if (jsonData.length > 0) {
+                    activeId = jsonData[0].Id;
                 }
                 $(".conv-list-container").empty();
                 $.each(jsonData, function(i,ele) {
@@ -214,7 +214,7 @@ session_start();
                     var lastMessage = (ele.LastMessage!=null) ? ele.LastMessage.Content : "...";
                     lastMessage = shortenMsg(lastMessage);
                     $(".conv-list-container").append(
-                        '<div class="conv-list-item col-md-12 '+ele.ConversationId+'" data-conversationid="'+ele.ConversationId+'">'
+                        '<div class="conv-list-item col-md-12 '+ele.Id+'" data-conversationid="'+ele.Id+'">'
                         +'<div class="conv-list-circle col-sm-1"></div>'
                         +'<div class="mess-header">'
                         +' <span class="mess-author">'+nameList+'</span>'
@@ -352,7 +352,7 @@ session_start();
 
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var jsonData = JSON.parse(data);
-                activeId = jsonData.ConversationId;
+                activeId = jsonData.Id;
                 currentMsgAmount = -1;
                 $('#myModal').modal('toggle');
             });
