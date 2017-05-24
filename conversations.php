@@ -109,6 +109,7 @@ session_start();
 
 <!--    <script src="js/jquery.slimscroll.min.js"></script>-->
     <script>
+        var activeId = -1;
 //        function addSlimScroll(element, height) {
 //            element.slimscroll({
 //                height: height,
@@ -139,10 +140,11 @@ session_start();
         var currentMsgAmount = -1;
         // Interval to continously update current conversation if any new messages are sent/received
         setInterval(function() {
-            if (activeId>0) {
+            if (activeId > 0) {
                 var apiLink = "/message/conversation/getOne/"+activeId;
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
+                    console.log(data);
                     var jsonData = JSON.parse(data);
                     if (jsonData.Messages.length > currentMsgAmount) {
                         $(".conv-messages").empty();
@@ -240,7 +242,6 @@ session_start();
             return lastMessageFinal;
         }
 
-        var activeId = -1;
         // Conversation list item click function (to select a conversation)
         $("body").on("click", ".conv-list-item", function() {
             activeId = $(this).data("conversationid");
