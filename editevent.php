@@ -342,8 +342,8 @@ session_start();
                         imgSrcS = data.imgPath_s;
                         imgSrcM = data.imgPath_m;
                         imgSrcL = data.imgPath_l;
-                        // console.log("imgSrcS: " + imgSrcS);
-                        saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
+                        console.log("UPLOAD imgSrcS: " + imgSrcS);
+                        // saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
                     } else {
                         $.alert({
                             type: "red",
@@ -354,7 +354,7 @@ session_start();
                 });
 
             } else {
-                saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
+                // saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
             }
         });
 

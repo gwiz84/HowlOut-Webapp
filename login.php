@@ -110,7 +110,6 @@
                         if (data == "success") {
                             window.location = "index.php";
                         }
-                        console.log(data);
                     });
                 });
             } else {

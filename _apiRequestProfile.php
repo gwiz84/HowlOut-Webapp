@@ -22,8 +22,8 @@ if ($token == $_SESSION['token']) {
         $_SESSION['apiKey'] = $token;
         $_SESSION['facebookId'] = $fbid;
         $_SESSION['loggedIn'] = true;
-        echo $token;
-        // echo "success";
+        // echo $token;
+        echo "success";
     } catch(Exception $e) {
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',
