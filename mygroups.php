@@ -98,7 +98,7 @@
                     // ajax call to get groups via the api
                     runAjax(apiLink, token).done(function(data) {
                         var jsonData = JSON.parse(data);
-                        if (jsonData.length<1) {
+                        if (jsonData.length < 1) {
                             $(".groupBox").append('<h5 style="font-style:italic;margin-left:20px;">No groups found</h5>');
                         } else {
                             $.each(jsonData.Groups, function(i,ele) {

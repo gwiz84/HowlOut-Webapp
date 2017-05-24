@@ -3,7 +3,7 @@
  */
 function makeGroupElement(ele) {
     var groupDiv = '' +
-        '<div class=" col-md-2 groupLink" style="text-align:center;" data-groupid="'+ele.GroupId+'">'+
+        '<div class=" col-md-2 groupLink" style="text-align:center;" data-groupid="'+ele.Id+'">'+
         '<img src="'+ele.SmallImageSource+'" class="member-circle"><br>'+
         '<p class="">'+ele.Name+'</p>'+
         '</div>';

@@ -37,7 +37,7 @@ function searchEvent() {
                     $(".searchContent").append('<div style="width: 100%;height:50px;padding:5px 10px 10px 10px;" class="eventHeader"><h5 style="font-weight:bold;"><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events</h5></div>');
                     $.each(jsonObject, function (i, ele) {
                         $(".searchContent").append(''+
-                            '<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-eventid="' + ele.EventId + '" class="resultLink resultLinkHover">' +
+                            '<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-eventid="' + ele.Id + '" class="resultLink resultLinkHover">' +
                             '<img src="' + ele.ImageSource + '" style="width:50px;height:40px;background-size:50px;">' +
                             '<span style="font-size:18px;margin-left: 10px;">' + ele.Title + '</span>' +
                             '</div>'
@@ -66,7 +66,7 @@ function searchEvent() {
                     var jsonObject = JSON.parse(data);
                     $(".searchContent").append('<div style="width: 100%;height:50px;padding:5px 10px 10px 10px;" class="groupHeader"><h5 style="font-weight:bold;"><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Groups</h5></div>');
                     $.each(jsonObject, function (i, ele) {
-                        $(".searchContent").append('<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-groupid="' + ele.GroupId + '" class="resultLinkGroup resultLinkHover">' +
+                        $(".searchContent").append('<div style="width: 100%;height:50px;padding:10px;cursor:pointer;" data-groupid="' + ele.Id + '" class="resultLinkGroup resultLinkHover">' +
                             '<img src="' + ele.ImageSource + '" style="width:50px;height:40px;background-size:50px">' +
                             '<span style="font-size:18px;margin-left: 10px;">' + ele.Name + '</span>' +
                             '</div>'

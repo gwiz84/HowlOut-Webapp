@@ -140,7 +140,6 @@ session_start();
                             var apiLink = "/event/"+eventIdClicked;
                             var token = $(".token").data("token");
                             runAjaxDeleteEvent(apiLink, token).done(function(data) {    
-                                console.log(data);
                                 if (data) {
                                     thisBox.remove();
                                     $.alert('Event deleted');
