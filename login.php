@@ -85,10 +85,8 @@
             } else {
                 $(".loggedOut").show(150);
                 $(".btnLogin").html("Log in");
-
             }
         });
-
     };
 
     (function(d, s, id){
@@ -101,27 +99,18 @@
 
     $(".btnLogin").click(function() {
         FB.getLoginStatus(function(response) {
+            var accessToken = response.authResponse.accessToken;
             if (response.status == "connected") {
                 FB.api('/me', function(response) {
                     var facebookId = response.id;
                     var facebookName = response.name;
-                    var apiLink = '/profile?create=true';
-                    var apiData = JSON.stringify(
-                    {
-                        "ProfileId": facebookId,
-                        "Name": facebookName,
-                        "ImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=100&width=100",
-                        "SmallImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=500&width=50",
-                        "LargeImageSource": "https://graph.facebook.com/v2.5/191571161232364/picture?height=300&width=300",
-                        "Description":"Test Description",
-                        "Age": 0
-                    }
-                    );
+                    var apiLink = '/authentication/token?facebookToken='+accessToken;
                     var token = $(".token").data("token");
-                    runAjaxRequestProfile(apiLink, apiData, token, facebookName).done(function(data) {
+                    runAjaxRequestProfile(apiLink, token, facebookName).done(function(data) {
                         if (data == "success") {
                             window.location = "index.php";
                         }
+                        console.log(data);
                     });
                 });
             } else {

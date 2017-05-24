@@ -139,26 +139,16 @@ session_start();
                         action: function() {
                             var apiLink = "/event/"+eventIdClicked;
                             var token = $(".token").data("token");
-                            runAjaxDeleteEvent(apiLink, token).done(function(data) {
+                            runAjaxDeleteEvent(apiLink, token).done(function(data) {    
+                                console.log(data);
                                 if (data) {
                                     thisBox.remove();
                                     $.alert('Event deleted');
                                 } else {
-                                    alert('An unexpected error occurred!');
+                                    console.log("ERROR: " + data);
+                                    // alert('An unexpected error occurred!');
                                 }
-                            });
-                            // $.ajax({
-                            //     type: 'POST',
-                            //     url: '_apiRequestDelete.php',
-                            //     async: false,
-                            //     data: {'apiLink' : apiLink, 'token' : token},
-                            //     success: function (data) {
-                            //     },
-                            //     error: function () {
-                            //         alert("ajax failed");
-                            //     }
-                            // });
-                            
+                            });                            
                         }
                     },
                     no: {

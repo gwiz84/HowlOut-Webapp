@@ -198,7 +198,9 @@ session_start();
         var eventLat = 55.675637;
         var eventLng = 12.569544;
         var addressSelected = false;
-        var orgImage = "";
+        var orgImageS = "";
+        var orgImageM = "";
+        var orgImageL = "";
         var imageCropped = null;
 
         // Activates the DAWA autocomplete feature on the ".inputLocation" field.
@@ -265,14 +267,15 @@ session_start();
         if ($(".editid").data("editid") != null) {
             addressSelected = true;
             var editid = $(".editid").data("editid");
-            var apiLink = "/event/event?id="+editid;
+            var apiLink = "/event/?id="+editid;
             runAjax(apiLink, token).done(function(data) {
                 var jsonData = JSON.parse(data);
+                console.log(jsonData);
                 var fbid = $(".fbid").data("fbid");
                 var ownersArray = jsonData.ProfileOwners;
                 var isOwner = false;
                 $.each(ownersArray, function(i, ele) {
-                    if (fbid == ele.ProfileId) {
+                    if (fbid == ele.Id) {
                         isOwner = true;
                     }
                 });
@@ -283,8 +286,11 @@ session_start();
                     var endDate = convertDateString(jsonData.EndDate);
                     chosenStart = startDate;
                     chosenEnd = endDate;
-                    orgImage = jsonData.ImageSource;
-                    $("#bannerImg").css("background-image", "url('" + orgImage + "')");
+                    orgImageS = jsonData.SmallImageSource;
+                    orgImageM = jsonData.ImageSource;
+                    orgImageL = jsonData.LargeImageSource;
+                    console.log("orgImageS: " + orgImageS);
+                    $("#bannerImg").css("background-image", "url('" + orgImageM + "')");
                     $(".inputTitle").val(jsonData.Title);
                     $(".inputDescription").val(jsonData.Description);
                     if (jsonData.Visibility == 0) {
@@ -324,14 +330,20 @@ session_start();
             // $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var fbid = $(".fbid").data("fbid");
-            var imgSrc = (eventId != null) ? orgImage : "img/building.jpg";
+            var imgSrcS = (eventId != null) ? orgImageS : "img/building.jpg";
+            var imgSrcM = (eventId != null) ? orgImageM : "img/building.jpg";
+            var imgSrcL = (eventId != null) ? orgImageL : "img/building.jpg";
+            console.log("imgSrcS: " + imgSrcS);
             var newImage = "";
             if (imageCropped != null) {
                 uploadImage(imageCropped, fbid).done(function (data) {
                     data = JSON.parse(data);
                     if (data.status == "OK") {
-                        imgSrc = data.imgPath_l;
-                        saveEvent(eventId, imgSrc);
+                        imgSrcS = data.imgPath_s;
+                        imgSrcM = data.imgPath_m;
+                        imgSrcL = data.imgPath_l;
+                        // console.log("imgSrcS: " + imgSrcS);
+                        saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
                     } else {
                         $.alert({
                             type: "red",
@@ -342,14 +354,14 @@ session_start();
                 });
 
             } else {
-                saveEvent(eventId, imgSrc);
+                saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
             }
         });
 
         // Saves the event. Puts the required data from the inputfields into variables, which are then stored as JSON in 'apiData'
         // Finally, the API calls the backend, sending 'apiData' and getting the ID of the saved event back. Then the user is redirected
         // to the viewevent page using the returned ID.
-        function saveEvent(eventId, imgSrc) {
+        function saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL) {
             var title = $(".inputTitle").val();
             var description = $(".inputDescription").val();
             var address = $(".inputLocation").val();
@@ -363,11 +375,13 @@ session_start();
             var apiData;
             if (groupId > 0) {
                 apiData = JSON.stringify({
-                    "EventId": eventId,
+                    "Id": eventId,
                     "GroupOwner": {
-                        "GroupId": groupId
+                        "Id": groupId
                     },
-                    "ImageSource": imgSrc,
+                    "SmallImageSource": imgSrcS,
+                    "ImageSource": imgSrcM,
+                    "LargeImageSource": imgSrcL,
                     "Title": title,
                     "Latitude": eventLat,
                     "Longitude": eventLng,
@@ -386,13 +400,15 @@ session_start();
                 });
             } else {
                 apiData = JSON.stringify({
-                    "EventId": eventId,
+                    "Id": eventId,
                     "ProfileOwners": [
                     {
-                        "ProfileId": profileId
+                        "Id": profileId
                     }
                     ],
-                    "ImageSource": imgSrc,
+                    "SmallImageSource": imgSrcS,
+                    "ImageSource": imgSrcM,
+                    "LargeImageSource": imgSrcL,
                     "Title": title,
                     "Latitude": eventLat,
                     "Longitude": eventLng,
@@ -412,8 +428,9 @@ session_start();
             }
 
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
-                var id = JSON.parse(data).EventId;
-                window.location = "viewevent.php?id="+id;
+                var id = JSON.parse(data).Id;
+                console.log(data);
+                // window.location = "viewevent.php?id="+id;
             });
         }
 

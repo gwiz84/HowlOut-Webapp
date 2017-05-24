@@ -89,14 +89,13 @@ session_start();
                     var token = $(".token").data("token");
                     runAjax(apiLink, token).done(function(data) {
                         var jsonData = JSON.parse(data);
-                        if (jsonData.length<1) {
+                        if (jsonData.length < 1) {
                             $(".eventContainer").append('<h5 style="font-style:italic;margin-left:20px;">No events found</h5>');
                         } else {
                             $.each(jsonData, function(i,ele) {
                                 $(".eventContainer").append(makeEventElement(ele) + "<br>");
                             });
-                        }
-                        
+                        }  
                     });
                 });
             });

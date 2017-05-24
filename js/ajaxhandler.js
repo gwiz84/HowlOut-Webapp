@@ -1,4 +1,4 @@
-var apiSite = "https://api.howlout.net";
+var apiSite = "http://api.howlout.dk";
 
 function runAjax(apiLink, token) {
     return $.ajax({
@@ -8,7 +8,6 @@ function runAjax(apiLink, token) {
         data: {'apiLink' : apiSite + apiLink, 'token' : token}
     });
 }
-
 
 function runAjaxJSON(apiLink, apiData, token) {
     return $.ajax({
@@ -37,11 +36,11 @@ function runAjaxPut(apiLink, apiData, token) {
     });
 }
 
-function runAjaxRequestProfile(apiLink, apiData, token, facebookName) {
+function runAjaxRequestProfile(apiLink, token, facebookName) {
     return $.ajax({
         type: "POST",
         url: "_apiRequestProfile.php",
         async: true,
-        data: {'apiLink' : apiSite + apiLink, 'apiData' : apiData, 'token' : token, 'name' : facebookName}
+        data: {'apiLink' : apiSite + apiLink, 'token' : token, 'name' : facebookName}
     });
 }

@@ -142,7 +142,7 @@ session_start();
             var ownersArray = jsonData.ProfileOwners;
             var isOwner = false;
             $.each(ownersArray, function(i, ele) {
-                if (fbid == ele.ProfileId) {
+                if (fbid == ele.Id) {
                     isOwner = true;
                 }
             });
@@ -201,10 +201,10 @@ session_start();
         var profileId = $(".fbid").data("fbid");
         var apiLink = '/group';
         var apiData = JSON.stringify({
-            "GroupId": groupId,
+            "Id": groupId,
             "ProfileOwners": [
                 {
-                    "ProfileId": profileId
+                    "Id": profileId
                 }
             ],
             "Name": title,
@@ -217,7 +217,7 @@ session_start();
         var token = $(".token").data("token");
 
         runAjaxJSON(apiLink, apiData, token).done(function(data) {
-            var id = JSON.parse(data).GroupId;
+            var id = JSON.parse(data).Id;
             window.location = "viewgroup.php?id="+id;
         });
     }

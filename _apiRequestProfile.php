@@ -2,31 +2,28 @@
 session_start();
 
 $apiLink = $_POST['apiLink'];
-$apiData = $_POST['apiData'];
 $token = $_POST['token'];
 $name = $_POST['name'];
-
 $_SESSION['name'] = $name;
-$_SESSION['facebookId'] = json_decode($apiData)->ProfileId;
 
 if ($token == $_SESSION['token']) {
     try {
         $curl = curl_init($apiLink);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
         curl_setopt($curl, CURLOPT_POST, true);
-        curl_setopt($curl, CURLOPT_POSTFIELDS, $apiData);
+        curl_setopt($curl, CURLOPT_POSTFIELDS, $apiLink);
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                'Content-Type: application/json',
-                'Content-Length: ' . strlen($apiData))
-        );
         $content = curl_exec($curl);
         if ($content === FALSE)
             throw new Exception(curl_error($curl), curl_errno($curl));
 
+        $token = json_decode($content)->token;
+        $fbid = json_decode($content)->id;
+        $_SESSION['apiKey'] = $token;
+        $_SESSION['facebookId'] = $fbid;
         $_SESSION['loggedIn'] = true;
-        $_SESSION['apiKey'] = $content;
-        echo "success";
+        echo $token;
+        // echo "success";
     } catch(Exception $e) {
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',

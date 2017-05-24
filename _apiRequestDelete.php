@@ -13,8 +13,8 @@ if ($token == $_SESSION['token']) {
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_CUSTOMREQUEST, "DELETE");
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-                "Content-Type: application/json",
-                "apiKey: ".$temp)
+            'Content-Type: application/json',
+            'Authorization: Bearer '.$_SESSION['apiKey'])
         );
         $content = curl_exec($curl);
         if ($content === FALSE)

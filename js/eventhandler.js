@@ -26,7 +26,7 @@ function makeEventElement(event) {
     
     var startDate = getDateFromISOString(new Date(Date.parse(event.StartDate)));
 
-    var eventDiv = '<div class="event-box" data-eventid="'+event.EventId+'">'+
+    var eventDiv = '<div class="event-box" data-eventid="'+event.Id+'">'+
         '<div class="innertop" style="background-image:url(\''+event.ImageSource+'\');background-size:100%;">'+
         '<span style="font-size:28px;color:white;" class="textstroke">'+event.Title+'</span>'+
     '</div>'+
@@ -83,7 +83,7 @@ function makeEditEventElement(event) {
                     '<i class="fa fa-map-marker icon_loc icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span class="eventLocation">'+event.AddressName+'</span><br>'+
                     '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+'</span>'+
                     '<br><br><br><br>'+
-                    '<div style="float:right;" data-eventid="'+event.EventId+'" data-eventtitle="'+event.Title+'">'+
+                    '<div style="float:right;" data-eventid="'+event.Id+'" data-eventtitle="'+event.Title+'">'+
                         '<button type="button" class="howlout-button btn-editevent"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>&nbsp;&nbsp;Edit</button>&nbsp;'+
                         '<button type="button" class="howlout-button btn-duplicateevent"><i class="fa fa-files-o" aria-hidden="true"></i>&nbsp;&nbsp;Duplicate</button>&nbsp;'+
                         '<button type="button" class="howlout-button btn-deleteevent"><i class="fa fa-times" aria-hidden="true"></i>&nbsp;&nbsp;Delete</span></button>&nbsp;'+
