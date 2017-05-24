@@ -217,7 +217,7 @@ session_start();
         // Initializes the map display, centered on Rådhuspladsen in Copenhagen by default.
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
-                center: { lat: 55.675637, lng: 12.569544 },
+                center: { lat: eventLat, lng: eventLng },
                 mapTypeControl: false,
                 zoom: 12,
             });
@@ -270,7 +270,6 @@ session_start();
             var apiLink = "/event/?id="+editid;
             runAjax(apiLink, token).done(function(data) {
                 var jsonData = JSON.parse(data);
-                console.log(jsonData);
                 var fbid = $(".fbid").data("fbid");
                 var ownersArray = jsonData.ProfileOwners;
                 var isOwner = false;
@@ -289,7 +288,8 @@ session_start();
                     orgImageS = jsonData.SmallImageSource;
                     orgImageM = jsonData.ImageSource;
                     orgImageL = jsonData.LargeImageSource;
-                    console.log("orgImageS: " + orgImageS);
+                    eventLat = jsonData.Latitude;
+                    eventLng = jsonData.Longitude;
                     $("#bannerImg").css("background-image", "url('" + orgImageM + "')");
                     $(".inputTitle").val(jsonData.Title);
                     $(".inputDescription").val(jsonData.Description);
@@ -300,6 +300,7 @@ session_start();
                     $(".inputEnd").val(endDate);
                     $(".inputLocation").val(jsonData.AddressName);
                     $(".inputAttendees").val(jsonData.MaxSize);
+                    initMap();
                 }
             });
         } else {
@@ -333,7 +334,6 @@ session_start();
             var imgSrcS = (eventId != null) ? orgImageS : "img/building.jpg";
             var imgSrcM = (eventId != null) ? orgImageM : "img/building.jpg";
             var imgSrcL = (eventId != null) ? orgImageL : "img/building.jpg";
-            console.log("imgSrcS: " + imgSrcS);
             var newImage = "";
             if (imageCropped != null) {
                 uploadImage(imageCropped, fbid).done(function (data) {
@@ -342,7 +342,6 @@ session_start();
                         imgSrcS = data.imgPath_s;
                         imgSrcM = data.imgPath_m;
                         imgSrcL = data.imgPath_l;
-                        console.log("UPLOAD imgSrcS: " + imgSrcS);
                         saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
                     } else {
                         $.alert({
@@ -426,11 +425,9 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-            console.log(apiData);
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var id = JSON.parse(data).Id;
-                console.log(data);
-                // window.location = "viewevent.php?id="+id;
+                window.location = "viewevent.php?id="+id;
             });
         }
 
