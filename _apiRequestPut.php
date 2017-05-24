@@ -5,7 +5,7 @@ $apiLink = $_POST['apiLink'];
 $apiData = $_POST['apiData'];
 $token = $_POST['token'];
 
-$temp = str_replace('"', '', $_SESSION['apiKey']);
+// $temp = str_replace('"', '', $_SESSION['apiKey']);
 
 if ($token == $_SESSION['token']) {
     try {
@@ -17,7 +17,7 @@ if ($token == $_SESSION['token']) {
         curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
         curl_setopt($curl, CURLOPT_HTTPHEADER, array(
                 'Content-Type: application/json',
-                'apiKey: '.$temp,
+                'Authorization: Bearer '.$_SESSION['apiKey']),
                 'Content-Length: ' . strlen($apiData))
         );
         $content = curl_exec($curl);

@@ -426,7 +426,7 @@ session_start();
                     "Visibility": isPrivate
                 });
             }
-
+            console.log(apiData);
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var id = JSON.parse(data).Id;
                 console.log(data);
