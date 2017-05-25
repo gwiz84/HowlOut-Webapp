@@ -55,7 +55,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     <img id="bannerImg" src="img/building.jpg" class="img-responsive darken" style="width:100%;height:300px;margin-bottom:5px;z-index:10;position:relative;opacity:0.9;">
 
                     <h2 id="eventTitle" style="margin: -60px 0 50px 30px;z-index:13;position:relative;font-weight:bold;" class="textstroke">Event title</h2>
-                    <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>
+<!--                    <i class="fa fa-share-alt textstroke"  style="float:right;font-size:28px;margin:-70px 20px 0 0;z-index:12;position:relative;cursor:pointer;"></i>-->
 
                     <div class="row">
                         <div class="col-md-6">
@@ -64,13 +64,13 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <i class="fa fa-paw btnTrackEvent eventpaw" style="float:right;font-size:42px;cursor:pointer;margin-right:20px;"></i>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:50px;"><i class="fa fa-link" style="font-size:20px;"></i></button>
+                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:50px;"><i class="fa fa-paw" style="font-size:20px;"></i></button>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
                         </div>
                     </div>
-
                 </div>
                 <br>
                 <h4>About this event</h4>
@@ -126,12 +126,39 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var token = $(".token").data("token");
         var descOpen = false;
         var attendees = "";
+        var currentEventId = <?php echo $eventId ?>;
+
+        var facebookId = "";
+        window.fbAsyncInit = function() {
+            // facebook functions in here
+            FB.init({
+                appId      : '651141215029165',
+                xfbml      : true,
+                version    : 'v2.8'
+            });
+            FB.AppEvents.logPageView();
+
+            FB.getLoginStatus(function(response) {
+                FB.api('/me', function(response)
+                {
+                    facebookId = response.id;
+                });
+            });
+        };
+
+        (function(d, s, id){
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) {return;}
+            js = d.createElement(s); js.id = id;
+            js.src = "//connect.facebook.net/en_US/sdk.js";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
 
         // Request the event from the server and fill out the fields
         $(function(){
             $("#textcounter").html(maxCommentLength + " remaining");
             var apiLink = "/event/event?id=<?php echo $eventId ?>";
-            // var apiLink = "http://howlout.dk/event/<?php echo $eventId ?>";
+
 
             runAjax(apiLink, token).done(function(data) {
                 if (Object.keys(data).length <= 0) {
@@ -264,6 +291,21 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 map: map
             });
         }
+
+        $("body").on("click", ".btn-joinevent", function() {
+            var thisButton = $(this);
+            var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=true";
+            var apiData = JSON.stringify({
+                "eventId": currentEventId,
+                "profileId": facebookId,
+                "attend": true,
+                "join": true
+            });
+            var token = $(".token").data("token");
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+            });
+        });
 
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
