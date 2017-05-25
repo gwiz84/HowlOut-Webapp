@@ -64,8 +64,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:50px;"><i class="fa fa-link" style="font-size:20px;"></i></button>
-                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:50px;"><i class="fa fa-paw" style="font-size:20px;"></i></button>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:50px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:green;"></i></button>
+                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:50px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:green;"></i></button>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
@@ -128,6 +128,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var attendees = "";
         var currentEventId = <?php echo $eventId ?>;
         var jsonDataEvent;
+        var userIsFollowing = false;
+        var userIsJoined = false;
 
         // Facebook call to get current users facebook id
         var facebookId = "";
@@ -147,13 +149,15 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     // check if current user is already attending and disable join button if he/she is
                     $.each(jsonDataEvent.Attendees, function(i,ele) {
                         if (facebookId==ele.Id) {
-                            $(".btn-joinevent").hide();
+                           $(".joinIcon").css("color", "red");
+                            userIsJoined = true;
                         }
                     });
                     // check if current user is already following and disable follow button if he/she is
                     $.each(jsonDataEvent.Followers, function(i,ele) {
                         if (facebookId==ele.Id) {
-                            $(".btn-followevent").hide();
+                            $(".followIcon").css("color", "red");
+                            userIsFollowing = true;
                         }
                     });
                 });
@@ -307,33 +311,64 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         }
 
         $("body").on("click", ".btn-joinevent", function() {
-            var thisButton = $(this);
-            var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=true";
-            var apiData = JSON.stringify({
-                "eventId": currentEventId,
-                "profileId": facebookId,
-                "attend": true,
-                "join": true
-            });
-            var token = $(".token").data("token");
-            runAjaxPut(apiLink, apiData, token).done(function(data) {
-                $(".btn-joinevent").hide();
-            });
+            if (userIsJoined) {
+                var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=false&join=true";
+                var apiData = JSON.stringify({
+                    "eventId": currentEventId,
+                    "profileId": facebookId,
+                    "attend": false,
+                    "join": true
+                });
+                var token = $(".token").data("token");
+                runAjaxPut(apiLink, apiData, token).done(function(data) {
+                    $(".joinIcon").css("color", "green");
+                    userIsJoined = false;
+                });
+            } else {
+                var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=true";
+                var apiData = JSON.stringify({
+                    "eventId": currentEventId,
+                    "profileId": facebookId,
+                    "attend": true,
+                    "join": true
+                });
+                var token = $(".token").data("token");
+                runAjaxPut(apiLink, apiData, token).done(function(data) {
+                    $(".joinIcon").css("color", "red");
+                    userIsJoined = true;
+                });
+            }
+
         });
 
         $("body").on("click", ".btn-followevent", function() {
-            var thisButton = $(this);
-            var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=false";
-            var apiData = JSON.stringify({
-                "eventId": currentEventId,
-                "profileId": facebookId,
-                "attend": true,
-                "join": false
-            });
-            var token = $(".token").data("token");
-            runAjaxPut(apiLink, apiData, token).done(function(data) {
-                $(".btn-followevent").hide();
-            });
+            if (userIsFollowing) {
+                var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=false&join=false";
+                var apiData = JSON.stringify({
+                    "eventId": currentEventId,
+                    "profileId": facebookId,
+                    "attend": false,
+                    "join": false
+                });
+                var token = $(".token").data("token");
+                runAjaxPut(apiLink, apiData, token).done(function(data) {
+                    $(".followIcon").css("color", "green");
+                    userIsJoined = false;
+                });
+            } else {
+                var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=false";
+                var apiData = JSON.stringify({
+                    "eventId": currentEventId,
+                    "profileId": facebookId,
+                    "attend": true,
+                    "join": false
+                });
+                var token = $(".token").data("token");
+                runAjaxPut(apiLink, apiData, token).done(function(data) {
+                    $(".followIcon").css("color", "red");
+                    userIsJoined = true;
+                });
+            }
         });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
