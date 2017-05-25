@@ -122,6 +122,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
         }
+        console.log(data);
         $(".main-content-container").removeClass("hidden");
         var data = JSON.parse(data);
         updateComments(JSON.stringify(data.Comments));
@@ -257,7 +258,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         if (($("#commentfield").val().length) > 0) {
             var commentToPost = $("#commentfield").val();
             var currentDate = new Date().toISOString();
-            var apiLink = "/message/comment/<?php echo $groupId; ?>?commentType=1";
+            var apiLink = "/message/comment/<?php echo $groupId; ?>?commentType=0";
             var jsonData = JSON.stringify({
                 "Content": commentToPost,
                 "DateAndTime": currentDate
