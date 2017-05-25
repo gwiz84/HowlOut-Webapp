@@ -139,7 +139,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
         // Check if user is groupowner and make Create Event button if user is an owner
         $.each(data.ProfileOwners, function (i, ele) {
-            if (ele.ProfileId == facebookId) {
+            if (ele.Id == facebookId) {
                 // Append button that goes to Create Event via this group
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
             }

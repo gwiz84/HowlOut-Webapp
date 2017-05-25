@@ -269,6 +269,7 @@ session_start();
             var editid = $(".editid").data("editid");
             var apiLink = "/event/?id="+editid;
             runAjax(apiLink, token).done(function(data) {
+                console.log(data);
                 var jsonData = JSON.parse(data);
                 var fbid = $(".fbid").data("fbid");
                 var ownersArray = jsonData.ProfileOwners;

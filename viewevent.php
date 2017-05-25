@@ -220,6 +220,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     "DateAndTime" : currentDate
                 });
                 runAjaxJSON(apiLink, jsonData, token).done(function(data) {
+                    console.log(data);
                     showComments(JSON.parse(data));
                 });
             }

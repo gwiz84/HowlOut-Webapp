@@ -5,8 +5,6 @@ $apiLink = $_POST['apiLink'];
 $apiData = $_POST['apiData'];
 $token = $_POST['token'];
 
-$temp = str_replace('"', '', $_SESSION['apiKey']);
-
 if ($token == $_SESSION['token']) {
     try {
         $curl = curl_init($apiLink);
@@ -24,7 +22,6 @@ if ($token == $_SESSION['token']) {
             throw new Exception(curl_error($curl), curl_errno($curl));
 
         echo $content;
-        // echo 'SUCCESS! Token: '.$token.', Session-token: '.$_SESSION['token'];
     } catch(Exception $e) {
         echo trigger_error(sprintf(
             'Curl failed with error #%d: %s',
