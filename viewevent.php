@@ -127,7 +127,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
         var descOpen = false;
         var attendees = "";
         var currentEventId = <?php echo $eventId ?>;
+        var jsonDataEvent;
 
+        // Facebook call to get current users facebook id
         var facebookId = "";
         window.fbAsyncInit = function() {
             // facebook functions in here
@@ -142,10 +144,21 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
+                    // check if current user is already attending and disable join button if he/she is
+                    $.each(jsonDataEvent.Attendees, function(i,ele) {
+                        if (facebookId==ele.Id) {
+                            $(".btn-joinevent").hide();
+                        }
+                    });
+                    // check if current user is already following and disable follow button if he/she is
+                    $.each(jsonDataEvent.Followers, function(i,ele) {
+                        if (facebookId==ele.Id) {
+                            $(".btn-followevent").hide();
+                        }
+                    });
                 });
             });
         };
-
         (function(d, s, id){
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) {return;}
@@ -164,7 +177,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 if (Object.keys(data).length <= 0) {
                     window.location = "index.php";
                 }
+                console.log(data);
                 var jsonData = JSON.parse(data);
+                jsonDataEvent = jsonData;
                 
                 var eventDate = new Date(Date.parse(jsonData.StartDate));
                 var eventOwner;
@@ -203,8 +218,13 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 updateMap();
                 showAttendees(jsonData.Attendees);
                 showComments(jsonData.Comments);
+
+
             });
 });
+
+
+
 
 $("body").on("click", ".btnShowHideDesc", function() {
     if (descOpen) {
@@ -304,10 +324,24 @@ $("body").on("click", ".btnShowHideDesc", function() {
             });
             var token = $(".token").data("token");
             runAjaxPut(apiLink, apiData, token).done(function(data) {
-                console.log(data);
+                $(".btn-joinevent").hide();
             });
         });
 
+        $("body").on("click", ".btn-followevent", function() {
+            var thisButton = $(this);
+            var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=false";
+            var apiData = JSON.stringify({
+                "eventId": currentEventId,
+                "profileId": facebookId,
+                "attend": true,
+                "join": false
+            });
+            var token = $(".token").data("token");
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                $(".btn-followevent").hide();
+            });
+        });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>
 
