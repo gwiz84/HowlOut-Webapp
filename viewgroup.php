@@ -122,7 +122,6 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
         }
-        console.log(data);
         $(".main-content-container").removeClass("hidden");
         var data = JSON.parse(data);
         updateComments(JSON.stringify(data.Comments));

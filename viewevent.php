@@ -172,12 +172,10 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             $("#textcounter").html(maxCommentLength + " remaining");
             var apiLink = "/event/event?id=<?php echo $eventId ?>";
 
-
             runAjax(apiLink, token).done(function(data) {
                 if (Object.keys(data).length <= 0) {
                     window.location = "index.php";
                 }
-                console.log(data);
                 var jsonData = JSON.parse(data);
                 jsonDataEvent = jsonData;
                 
@@ -218,27 +216,22 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 updateMap();
                 showAttendees(jsonData.Attendees);
                 showComments(jsonData.Comments);
-
-
             });
-});
+        });
 
-
-
-
-$("body").on("click", ".btnShowHideDesc", function() {
-    if (descOpen) {
-        $("#eventDescription").show(0);
-        $("#eventDescriptionLong").hide();
-        $(".btnShowHideDesc").text("Show description");
-        descOpen = false;
-    } else {
-        $("#eventDescription").hide();
-        $("#eventDescriptionLong").show(0);
-        $(".btnShowHideDesc").text("Hide description");
-        descOpen = true;
-    }
-});
+        $("body").on("click", ".btnShowHideDesc", function() {
+            if (descOpen) {
+                $("#eventDescription").show(0);
+                $("#eventDescriptionLong").hide();
+                $(".btnShowHideDesc").text("Show description");
+                descOpen = false;
+            } else {
+                $("#eventDescription").hide();
+                $("#eventDescriptionLong").show(0);
+                $(".btnShowHideDesc").text("Hide description");
+                descOpen = true;
+            }
+        });
 
         // Detect max character lenth etc. for comment field
         $("#commentfield").keyup(function() {

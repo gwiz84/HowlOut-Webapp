@@ -235,14 +235,15 @@ session_start();
             geocoder.geocode({'address': address}, function(results, status) {
                 if (status === 'OK') {
                     clearMarkers();
-                    resultsMap.setCenter(results[0].geometry.location);
+                    var eventLoc = results[0].geometry.location;
+                    resultsMap.setCenter(eventLoc);
                     var marker = new google.maps.Marker({
                         map: resultsMap,
-                        position: results[0].geometry.location
+                        position: eventLoc
                     });
                     markersArray.push(marker);
-                    eventLat = results[0].geometry.location.lat();
-                    eventLng = results[0].geometry.location.lng();
+                    eventLat = eventLoc.lat();
+                    eventLng = eventLoc.lng();
                 } else {
                     alert('Geocode was not successful for the following reason: ' + status);
                 }
@@ -269,7 +270,6 @@ session_start();
             var editid = $(".editid").data("editid");
             var apiLink = "/event/?id="+editid;
             runAjax(apiLink, token).done(function(data) {
-                console.log(data);
                 var jsonData = JSON.parse(data);
                 var fbid = $(".fbid").data("fbid");
                 var ownersArray = jsonData.ProfileOwners;
@@ -428,7 +428,8 @@ session_start();
             }
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var id = JSON.parse(data).Id;
-                window.location = "viewevent.php?id="+id;
+                console.log(data);
+                // window.location = "viewevent.php?id="+id;
             });
         }
 

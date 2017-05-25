@@ -32,7 +32,6 @@ function loadImageFromFile(imageToLoad, croppieElement) {
 	}
 }
 
-
 // Tries uploading picture file "newImage" using the Facebook ID "fbid"
 function uploadImage(newImage, fbid) {
 	if (newImage != null) {

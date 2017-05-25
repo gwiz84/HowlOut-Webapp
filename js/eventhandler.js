@@ -102,6 +102,7 @@ function makeAttendeeElement(element) {
 
 // Convert an ISO-formatted date/time string to a more easily readable format
 function getDateFromISOString(dateString) {
+    dateString = new Date(dateString + "Z");
     var months = [ "January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     var dDay = dateString.getDate();
     var dMonth = dateString.getMonth();
