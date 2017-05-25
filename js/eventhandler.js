@@ -40,8 +40,8 @@ function makeEventElement(event) {
     '<i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span class="eventSignedUp">'+event.NumberOfAttendees+' / '+event.MaxSize+' ('+numFollowers+' following)</span>'+
         '<br><br><br><br>'+
         '<div style="float:right;">'+
-        '<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:20px;"></i></button>&nbsp;'+
-        '<button type="button" class="howlout-button btn-followevent"><i class="fa fa-paw" style="font-size:20px;"></i></button>&nbsp;'+
+        //'<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:20px;"></i></button>&nbsp;'+
+        //'<button type="button" class="howlout-button btn-followevent"><i class="fa fa-paw" style="font-size:20px;"></i></button>&nbsp;'+
         '<button type="button" class="howlout-button btn-viewevent" ><span style="font-size:20px;"><i class="fa fa-eye" aria-hidden="true"></i></span></button>'+
         '</div>'+
         '</div>'+

@@ -76,7 +76,7 @@ function searchEvent() {
     } else {
         $(".searchContent").slideUp(150);
     }
-}
+}   
 
 // Function which closes the search result div when u click outside of it
 $(document).mouseup(function (e) {
