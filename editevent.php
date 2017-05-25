@@ -270,38 +270,42 @@ session_start();
             var editid = $(".editid").data("editid");
             var apiLink = "/event/?id="+editid;
             runAjax(apiLink, token).done(function(data) {
-                var jsonData = JSON.parse(data);
-                var fbid = $(".fbid").data("fbid");
-                var ownersArray = jsonData.ProfileOwners;
-                var isOwner = false;
-                $.each(ownersArray, function(i, ele) {
-                    if (fbid == ele.Id) {
-                        isOwner = true;
-                    }
-                });
-                if (!isOwner) {
+                if (data.length < 1) {
                     window.location = "index.php";
                 } else {
-                    var startDate = convertDateString(jsonData.StartDate);
-                    var endDate = convertDateString(jsonData.EndDate);
-                    chosenStart = startDate;
-                    chosenEnd = endDate;
-                    orgImageS = jsonData.SmallImageSource;
-                    orgImageM = jsonData.ImageSource;
-                    orgImageL = jsonData.LargeImageSource;
-                    eventLat = jsonData.Latitude;
-                    eventLng = jsonData.Longitude;
-                    $("#bannerImg").css("background-image", "url('" + orgImageM + "')");
-                    $(".inputTitle").val(jsonData.Title);
-                    $(".inputDescription").val(jsonData.Description);
-                    if (jsonData.Visibility == 0) {
-                        $(".radioPublic").prop("checked", true);
+                    var jsonData = JSON.parse(data);
+                    var fbid = $(".fbid").data("fbid");
+                    var ownersArray = (jsonData.ProfileOwners != null) ? jsonData.ProfileOwners : jsonData.GroupOwner.ProfileOwners;
+                    var isOwner = false;
+                    $.each(ownersArray, function(i, ele) {
+                        if (fbid == ele.Id) {
+                            isOwner = true;
+                        }
+                    });
+                    if (!isOwner) {
+                        window.location = "index.php";
+                    } else {
+                        var startDate = convertDateString(jsonData.StartDate);
+                        var endDate = convertDateString(jsonData.EndDate);
+                        chosenStart = startDate;
+                        chosenEnd = endDate;
+                        orgImageS = jsonData.SmallImageSource;
+                        orgImageM = jsonData.ImageSource;
+                        orgImageL = jsonData.LargeImageSource;
+                        eventLat = jsonData.Latitude;
+                        eventLng = jsonData.Longitude;
+                        $("#bannerImg").css("background-image", "url('" + orgImageM + "')");
+                        $(".inputTitle").val(jsonData.Title);
+                        $(".inputDescription").val(jsonData.Description);
+                        if (jsonData.Visibility == 0) {
+                            $(".radioPublic").prop("checked", true);
+                        }
+                        $(".inputStart").val(startDate);
+                        $(".inputEnd").val(endDate);
+                        $(".inputLocation").val(jsonData.AddressName);
+                        $(".inputAttendees").val(jsonData.MaxSize);
+                        initMap();
                     }
-                    $(".inputStart").val(startDate);
-                    $(".inputEnd").val(endDate);
-                    $(".inputLocation").val(jsonData.AddressName);
-                    $(".inputAttendees").val(jsonData.MaxSize);
-                    initMap();
                 }
             });
         } else {
