@@ -370,7 +370,7 @@ session_start();
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
     <!-- Theme JavaScript -->
-    <script src="scripts/clean-blog.min.js"></script>
+    <script src="js/clean-blog.min.js"></script>
 
 </body>
 

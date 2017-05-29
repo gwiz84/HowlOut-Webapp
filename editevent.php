@@ -37,7 +37,6 @@ session_start();
     <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <script src="js/timepicker.js"></script>
-    <script src="js/moment.js"></script>
     <script src="js/jquery-confirm.js"></script>
     <script>
         var chosenStart = "";
@@ -432,8 +431,7 @@ session_start();
             }
             runAjaxJSON(apiLink, apiData, token).done(function(data) {
                 var id = JSON.parse(data).Id;
-                console.log(data);
-                // window.location = "viewevent.php?id="+id;
+                window.location = "viewevent.php?id="+id;
             });
         }
 
