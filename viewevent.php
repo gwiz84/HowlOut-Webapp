@@ -64,8 +64,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtFollowing" style="position:absolute;bottom:-12px;right:120px;"></span>
-                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:50px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtJoined" style="position:absolute;bottom:-12px;right:20px;"></span>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtFollowing" style="position:absolute;bottom:-12px;right:95px;"></span>
+                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:20px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtJoined" style="position:absolute;bottom:-12px;right:30px;"></span>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
@@ -150,15 +150,15 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     $.each(jsonDataEvent.Attendees, function(i,ele) {
                         if (facebookId==ele.Id) {
                            $(".joinIcon").css("color", "#CD6155");
-                           $(".txtJoined").text("Join event");
                             userIsJoined = true;
+                            joinFade();
                         }
                     });
                     // check if current user is already following and disable follow button if he/she is
                     $.each(jsonDataEvent.Followers, function(i,ele) {
                         if (facebookId==ele.Id) {
                             $(".followIcon").css("color", "#CD6155");
-                            $(".txtFollowing").text("Follow event");
+                            followFade();
                             userIsFollowing = true;
                         }
                     });
@@ -224,7 +224,22 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 showComments(jsonData.Comments);
             });
         });
-
+        $(".txtJoined").hide();
+        // fade away effect for join text
+        function joinFade() {
+            $(".txtJoined").show(150);
+            setTimeout(function() {
+                $(".txtJoined").hide(300);
+            }, 2000);
+        }
+        $(".txtFollowing").hide(0);
+        // fade away effect for follow text
+        function followFade() {
+            $(".txtFollowing").show(150);
+            setTimeout(function() {
+                $(".txtFollowing").hide(300);
+            }, 2000);
+        }
         // Show hide description button click function
         $("body").on("click", ".btnShowHideDesc", function() {
             if (descOpen) {
@@ -325,7 +340,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
                     $(".joinIcon").css("color", "#45B39D");
-                    $(".txtJoined").text("Joined");
+                    $(".txtJoined").text("Joined event");
+                    joinFade();
                     userIsJoined = false;
                 });
             } else {
@@ -339,8 +355,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
                     $(".joinIcon").css("color", "#CD6155");
-                    $(".txtJoined").text("Join event");
+                    $(".txtJoined").text("Left event");
                     userIsJoined = true;
+                    joinFade();
                 });
             }
 
@@ -359,7 +376,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
                     $(".followIcon").css("color", "#45B39D");
                     $(".txtFollowing").text("Following");
-                    userIsJoined = false;
+                    userIsFollowing = false;
+                    followFade();
                 });
             } else {
                 var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=false";
@@ -372,8 +390,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
                     $(".followIcon").css("color", "#CD6155");
-                    $(".txtFollowing").text("Follow event");
-                    userIsJoined = true;
+                    $(".txtFollowing").text("Unfollowed");
+                    userIsFollowing = true;
+                    followFade();
                 });
             }
         });
