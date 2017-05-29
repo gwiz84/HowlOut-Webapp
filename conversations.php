@@ -122,15 +122,18 @@ session_start();
 //        }
 //        addSlimScroll($("#conv-messages"), "100%");
 //        addSlimScroll($("#conv-list-container"), "90%");
+
+
+
         var curHeight = $(window).height();
-        $(".conv-messages").height(curHeight-285);
-        $(".conv-list-container").height(curHeight-285);
+        $(".conv-messages").height(curHeight-295);
+        $(".conv-list-container").height(curHeight-200);
 
 
         $(window).on('resize', function(){
             var curHeight = $(window).height();
-            $(".conv-messages").height(curHeight-285);
-            $(".conv-list-container").height(curHeight-285);
+            $(".conv-messages").height(curHeight-295);
+            $(".conv-list-container").height(curHeight-200);
         });
 
         $(".chooseFriendsDiv").hide();
@@ -144,7 +147,6 @@ session_start();
                 var apiLink = "/message/conversation/getOne/"+activeId;
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
-                    console.log(data);
                     var jsonData = JSON.parse(data);
                     if (jsonData.Messages.length > currentMsgAmount) {
                         $(".conv-messages").empty();
@@ -166,7 +168,7 @@ session_start();
                     }
                 });
             }
-        }, 800);
+        }, 700);
 
 
         // scrolls to the bottom of the msg div
@@ -190,9 +192,6 @@ session_start();
             runAjax(apiLink, token).done(function(data) {
                 // Populate the conversation list here
                 var jsonData = JSON.parse(data);
-                if (jsonData.length > 0) {
-                    activeId = jsonData[0].Id;
-                }
                 $(".conv-list-container").empty();
                 $.each(jsonData, function(i,ele) {
                     var nameList = "";
@@ -229,6 +228,7 @@ session_start();
             });
         }
 
+        // Shortens a message to 30 characters and ellipsis effect
         function shortenMsg(msg) {
             var lastMessageFinal = "";
             if (msg.length > 30) {
@@ -266,6 +266,7 @@ session_start();
             runAjaxPut(apiLink, apiData, token).done(function(data) {
                 $(".mess-input").val("");
             });
+            localStorage.curconvid = activeId;
         }
 
         // Gets friends using the app to populate the list of people you can start conversations with
@@ -363,6 +364,11 @@ session_start();
         function convertDateString(date) {
             convertedDate = date.replace("T", " ").substr(0, 16);
             return convertedDate;
+        }
+
+        // get last conversation id from localstorage
+        if (localStorage.getItem("curconvid") != null){
+            activeId = localStorage.getItem("curconvid");
         }
     </script>
 

@@ -64,8 +64,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:50px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:green;"></i></button>
-                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:50px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:green;"></i></button>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtFollowing" style="position:absolute;bottom:-12px;right:120px;"></span>
+                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:50px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtJoined" style="position:absolute;bottom:-12px;right:20px;"></span>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
@@ -149,14 +149,16 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                     // check if current user is already attending and disable join button if he/she is
                     $.each(jsonDataEvent.Attendees, function(i,ele) {
                         if (facebookId==ele.Id) {
-                           $(".joinIcon").css("color", "red");
+                           $(".joinIcon").css("color", "#CD6155");
+                           $(".txtJoined").text("Join event");
                             userIsJoined = true;
                         }
                     });
                     // check if current user is already following and disable follow button if he/she is
                     $.each(jsonDataEvent.Followers, function(i,ele) {
                         if (facebookId==ele.Id) {
-                            $(".followIcon").css("color", "red");
+                            $(".followIcon").css("color", "#CD6155");
+                            $(".txtFollowing").text("Follow event");
                             userIsFollowing = true;
                         }
                     });
@@ -223,6 +225,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             });
         });
 
+        // Show hide description button click function
         $("body").on("click", ".btnShowHideDesc", function() {
             if (descOpen) {
                 $("#eventDescription").show(0);
@@ -321,7 +324,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".joinIcon").css("color", "green");
+                    $(".joinIcon").css("color", "#45B39D");
+                    $(".txtJoined").text("Joined");
                     userIsJoined = false;
                 });
             } else {
@@ -334,7 +338,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".joinIcon").css("color", "red");
+                    $(".joinIcon").css("color", "#CD6155");
+                    $(".txtJoined").text("Join event");
                     userIsJoined = true;
                 });
             }
@@ -352,7 +357,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".followIcon").css("color", "green");
+                    $(".followIcon").css("color", "#45B39D");
+                    $(".txtFollowing").text("Following");
                     userIsJoined = false;
                 });
             } else {
@@ -365,7 +371,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".followIcon").css("color", "red");
+                    $(".followIcon").css("color", "#CD6155");
+                    $(".txtFollowing").text("Follow event");
                     userIsJoined = true;
                 });
             }
