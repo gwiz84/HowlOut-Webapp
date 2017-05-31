@@ -40,7 +40,11 @@ function searchEvent() {
                     );
                 });
                 $(".searchContent").append('<hr class="groupHeader eventHeader">');
+                if ($(".resultLink").length <1) {
+                    $(".eventHeader").remove();
+                }
                 $(".searchContent").slideDown(150);
+
             } catch (e) {
                 $(".searchContent").slideUp(150);
             }
@@ -60,19 +64,19 @@ function searchEvent() {
                         '</div>'
                     );
                 });
+                if ($(".resultLinkGroup").length <1) {
+                    $(".groupHeader").remove();
+                }
                 $(".searchContent").slideDown(150);
+
             } catch (e) {
                 $(".searchContent").slideUp(150);
             }
         });
         console.log($(".resultLink").length);
         console.log($(".resultLinkGroup").length);
-        if ($(".resultLink").length <1) {
-            $(".eventHeader").remove();
-        }
-        if ($(".resultLinkGroup").length <1) {
-            $(".groupHeader").remove();
-        }
+
+
 
     } else {
         $(".searchContent").slideUp(150);
