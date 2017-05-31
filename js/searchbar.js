@@ -27,7 +27,7 @@ function searchEvent() {
         // ajax call to search for events
         runAjax(apiLink, token).done(function(data) {
             $(".searchContent").empty();
-            console.log(data);
+            //console.log(data);
             try {
                 var jsonObject = JSON.parse(data);
                 $(".searchContent").append('<div style="width: 100%;height:50px;padding:5px 10px 10px 10px;" class="eventHeader"><h5 style="font-weight:bold;"><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events</h5></div>');
@@ -65,7 +65,8 @@ function searchEvent() {
                 $(".searchContent").slideUp(150);
             }
         });
-
+        console.log($(".resultLink").length);
+        console.log($(".resultLinkGroup").length);
         if ($(".resultLink").length <1) {
             $(".eventHeader").remove();
         }
@@ -76,7 +77,7 @@ function searchEvent() {
     } else {
         $(".searchContent").slideUp(150);
     }
-}   
+}
 
 // Function which closes the search result div when u click outside of it
 $(document).mouseup(function (e) {
