@@ -64,8 +64,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;"><i class="fa fa-link joinIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtFollowing" style="position:absolute;bottom:-12px;right:95px;"></span>
-                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:20px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button><span class="txtJoined" style="position:absolute;bottom:-12px;right:30px;"></span>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;">Join event</button>
+                            <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:20px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>
                             <i class="fa fa-user icon_peep" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventSignedUp">Attendees</span>
@@ -146,10 +146,12 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
+                    console.log(JSON.stringify(jsonDataEvent.Attendees));
+                    console.log("\n\n"+JSON.stringify(jsonDataEvent.Followers));
                     // check if current user is already attending and disable join button if he/she is
                     $.each(jsonDataEvent.Attendees, function(i,ele) {
                         if (facebookId==ele.Id) {
-                           $(".joinIcon").css("color", "#CD6155");
+                            $(".btn-joinevent").text("Leave event");
                             userIsJoined = true;
                             joinFade();
                         }
@@ -172,6 +174,9 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             js.src = "//connect.facebook.net/en_US/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
+
+
 
         // Request the event from the server and fill out the fields
         $(function(){
@@ -339,10 +344,11 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".joinIcon").css("color", "#45B39D");
-                    $(".txtJoined").text("Joined event");
+                    $(".joinIcon").css("color", "#CD6155");
+                    $(".btn-joinevent").text("Join event");
                     joinFade();
                     userIsJoined = false;
+                    window.location.reload();
                 });
             } else {
                 var apiLink = "/event/joinOrTrack/"+currentEventId+"/123?attend=true&join=true";
@@ -354,10 +360,11 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
-                    $(".joinIcon").css("color", "#CD6155");
-                    $(".txtJoined").text("Left event");
+                    $(".joinIcon").css("color", "#45B39D");
+                    $(".btn-joinevent").text("Leave event");
                     userIsJoined = true;
                     joinFade();
+                    window.location.reload();
                 });
             }
 
@@ -375,7 +382,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
                     $(".followIcon").css("color", "#45B39D");
-                    $(".txtFollowing").text("Following");
+                    $(".txtFollowing").text("Unfollowed");
                     userIsFollowing = false;
                     followFade();
                 });
@@ -389,12 +396,14 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 });
                 var token = $(".token").data("token");
                 runAjaxPut(apiLink, apiData, token).done(function(data) {
+
                     $(".followIcon").css("color", "#CD6155");
-                    $(".txtFollowing").text("Unfollowed");
+                    $(".txtFollowing").text("Following");
                     userIsFollowing = true;
                     followFade();
                 });
             }
+
         });
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=updateMap"></script>

@@ -141,7 +141,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         $.each(data.ProfileOwners, function (i, ele) {
             if (ele.Id == facebookId) {
                 // Append button that goes to Create Event via this group
+                $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
+
             }
         });
         var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
@@ -205,6 +207,13 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         // Redirect to create event with group id instead of profile id
         window.location = "editevent.php?groupid=" + groupId;
     });
+
+    // Click function for editing event through group button
+    $("body").on("click", ".btnEditGroup", function () {
+        // Redirect to create event with group id instead of profile id
+        window.location = "editgroup.php?id=" + groupId;
+    });
+
 
     // NEXT UPCOMING EVENT
     var now = new Date();
