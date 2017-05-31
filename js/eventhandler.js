@@ -19,7 +19,7 @@ function makeEventElement(event) {
     }
     var event2 = JSON.stringify(event);
 
-    var numFollowers = 0;
+    var numFollowers = event.Followers.length;
     // $.each(followersArray, function(i, ele) {
     //     numFollowers++;
     // });
@@ -42,7 +42,7 @@ function makeEventElement(event) {
         '<div style="float:right;">'+
         //'<button type="button" class="howlout-button btn-shareevent"><i class="fa fa-share-alt-square" style="font-size:20px;"></i></button>&nbsp;'+
         //'<button type="button" class="howlout-button btn-followevent"><i class="fa fa-paw" style="font-size:20px;"></i></button>&nbsp;'+
-        '<button type="button" class="howlout-button btn-viewevent" ><span style="font-size:20px;"><i class="fa fa-eye" aria-hidden="true"></i></span></button>'+
+        '<button type="button" class="howlout-button btn-viewevent" ><span style="font-size:14px;font-weight:bold;">View event</span></button>'+
         '</div>'+
         '</div>'+
         '</div>'+
