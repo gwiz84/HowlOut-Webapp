@@ -94,7 +94,9 @@ $(document).mouseup(function (e) {
         && container.has(e.target).length === 0 ) // ... nor a descendant of the container
     {
         if (!container.is(searchBar)) {
-            container.hide();
+            if ( $('.searchContent:visible') ) {
+                $(".searchContent").hide();
+            }
             $(".inputSearchBar").val("");
         }
     }

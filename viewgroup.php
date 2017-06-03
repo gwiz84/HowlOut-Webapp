@@ -64,8 +64,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i
                 class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members
             <div class="createEventHolder" style="float:right;">
-                <button id="" class="btn btn-ho" style="margin-bottom:5px;height:40px;padding:10px;" data-toggle="modal" data-target="#myModal" style="">New conversation</button>
+
             </div>
+            <button id="" class="howlout-button" style="margin-bottom:5px;height:40px;padding:10px;font-weight:bold;" data-toggle="modal" data-target="#myModal" style="">Invite members</button>
             <br><br>
             <h4>About this group</h4>
             <p id="groupDescription">No Description</p>

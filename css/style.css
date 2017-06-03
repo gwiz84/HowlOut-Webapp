@@ -74,17 +74,17 @@ textarea:focus, input:focus {
 .eventTopPart {
     padding:5px 5px 10px 5px;
     background-color:white;
-    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         2px 2px 2px 0px rgba(50, 50, 50, 0.75);
 }
 
 .groupTopPart {
     padding:5px 5px 25px 5px;
     background-color:white;
-    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         2px 2px 2px 0px rgba(50, 50, 50, 0.75);
 }
 
 .darken {
@@ -163,15 +163,15 @@ a:hover {
     text-align: center;
     background-color: white;
     transition: 0.5s;
-    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         2px 2px 2px 0px rgba(50, 50, 50, 0.75);
 }
 
 .event-box:hover {
-    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
-    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -webkit-box-shadow: 2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    2px 2px 2px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         2px 2px 2px 0px rgba(50, 50, 50, 0.75);
 }
 
 .event-box > .innertop {
@@ -701,7 +701,7 @@ a:hover {
 }
 
 .howlout-button:active {
-
+    border: solid 0px white;
 }
 
 .btn-sm {
