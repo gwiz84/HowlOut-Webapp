@@ -47,6 +47,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+                <div class="loader"></div>
                 <h4><i class="material-icons leftmenuitem icon_blue" style="font-size:26px;vertical-align:middle;" >pageview</i>&nbsp;&nbsp;Discover events</h4>
                 <!-- <h4><i class="material-icons icon_yellow" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;Discover events</h4> -->
                 <hr>

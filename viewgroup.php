@@ -55,7 +55,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         </div>
         <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
-            
+            <div class="loader"></div>
             <img src="img/building.jpg" class="img-responsive image"
                  style="width:100%;height:300px;margin-bottom:5px;opacity:0.9;">
             <!-- <h2 style="margin-top:-70px;margin-left:30px;margin-bottom:30px;padding:10px;font-weight:bold;" class="txtTitle textstroke">Group name</h2> -->
@@ -63,7 +63,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 class="textstroke">Group title</h2>
             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i
                 class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members
-            <div class="createEventHolder" style="float:right;"></div>
+            <div class="createEventHolder" style="float:right;">
+                <button id="" class="btn btn-ho" style="margin-bottom:5px;height:40px;padding:10px;" data-toggle="modal" data-target="#myModal" style="">New conversation</button>
+            </div>
             <br><br>
             <h4>About this group</h4>
             <p id="groupDescription">No Description</p>
@@ -100,13 +102,32 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     </div>
 
 </div>
+<!--    MODEL FOR STARTING A NEW CONVERSATION-->
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content" style="">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Start new conversation</h4>
+            </div>
+            <div class="modal-body" style="padding:0px 0 0 0;">
+
+            </div>
+            <div class="modal-footer" style="">
+                <br>
+                <button id="" class="btn btn-default btnInviteFriends" style="margin-bottom:5px;">Start with selected</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 <!-- MOBILE WARNING BOX -->
 <?php include_once "p_mobilewarning.html"; ?>
-
 <!-- FOOTER -->
 <?php include_once "p_footer.html"; ?>
-
 <?php include_once "p_loadScripts.html"; ?>
 <script src="js/eventhandler.js"></script>
 <script>
@@ -117,7 +138,8 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     var token = $(".token").data("token");
 
     var facebookId = <?php echo $_SESSION['facebookId']; ?>;
-    
+
+    // Create
     runAjax(apiLink, token).done(function(data) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
@@ -140,7 +162,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         // Check if user is groupowner and make Create Event button if user is an owner
         $.each(data.ProfileOwners, function (i, ele) {
             if (ele.Id == facebookId) {
-                // Append button that goes to Create Event via this group
+                // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
 

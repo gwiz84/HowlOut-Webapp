@@ -45,6 +45,7 @@
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container groupContainer" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+                <div class="loader"></div>
                 <h4><i class="material-icons icon_peep" aria-hidden="true" style="font-size:26px;vertical-align:middle;">group</i>&nbsp;&nbsp;My groups</h4>
                 <hr>
                 <!--            GROUP CIRCLE THING START-->

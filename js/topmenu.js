@@ -22,3 +22,7 @@ $(".menuSettings").hover(function(){
     $(".menuSettings").slideUp(150);
     hovering = false;
 });
+
+$(window).on('load', function () {
+    $(".loader").fadeOut("slow");
+})

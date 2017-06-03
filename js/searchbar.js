@@ -1,5 +1,8 @@
 // hide the result div initially
-$(".searchContent").hide();
+if ( $('.searchContent:visible') ) {
+    $(".searchContent").hide();
+}
+
 
 var searchTerms = "";
 var timeoutID = null;

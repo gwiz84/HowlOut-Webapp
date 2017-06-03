@@ -47,7 +47,7 @@ session_start();
             </div>
             <div class="col-md-offset-1 col-md-9 main-content-container" style="height:100%;padding:0 20px 0 20px;position:fixed;">
                 <!--      PAGE CONTENT GOES HERE      -->
-
+                <div class="loader"></div>
 <!--                Main conversation window -->
 
                     <div class="conv-container col-md-8">

@@ -51,6 +51,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+                <div class="loader"></div>
                 <div class="eventTopPart">
                     <img id="bannerImg" src="img/building.jpg" class="img-responsive darken" style="width:100%;height:300px;margin-bottom:5px;z-index:10;position:relative;opacity:0.9;">
 
@@ -64,7 +65,7 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span id="eventVisibility">Visibility</span>
                         </div>
                         <div class="col-md-6">
-                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;">Join event</button>
+                            <button type="button" class="howlout-button btn-joinevent" style="float:right;margin-top:40px;margin-right:15px;font-weight:bold;">Join event</button>
                             <button type="button" class="howlout-button btn-followevent" style="float:right;margin-top:40px;margin-right:20px;"><i class="fa fa-paw followIcon" style="font-size:20px;color:#45B39D;"></i></button>
                             <i class="fa fa-clock-o icon_time" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;<span id="eventTime">Event time</span><br>
                             <i class="fa fa-map-marker icon_loc" aria-hidden="true" style="margin: 0 0 0 2px;"></i>&nbsp;&nbsp;&nbsp;<span id="eventLocation">Event location</span><br>

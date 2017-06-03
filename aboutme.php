@@ -47,6 +47,7 @@ session_start();
             </div>
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
+                <div class="loader"></div>
                 <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">account_circle</i>&nbsp;&nbsp;About me</h4>
                 <hr>
                 <div class="row">

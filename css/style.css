@@ -42,6 +42,17 @@ hr {
 
 }
 
+.loader {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: 50% 50% no-repeat #F2F4F4;
+
+}
+
 .member-box {
     width: 50px;
 
