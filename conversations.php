@@ -225,6 +225,7 @@ session_start();
                         +'</div>'
                         +' </div>');
                 });
+                checkSelectedConvo();
             });
         }
 
@@ -247,7 +248,20 @@ session_start();
             activeId = $(this).data("conversationid");
             $(".conv-messages").empty();
             currentMsgAmount = -1;
+            checkSelectedConvo();
         });
+
+
+        // function that changes background color on selected conversation based on which is active
+        function checkSelectedConvo() {
+            $(".conv-list-item").each(function(i,ele) {
+                if ($(this).data("conversationid") == activeId) {
+                    $(this).css("background-color","#D5D8DC");
+                } else {
+                    $(this).css("background-color","white");
+                }
+            });
+        }
 
         // Chat send button mouse click function
         $(".btnSendMsg").click(function() {
@@ -369,6 +383,7 @@ session_start();
         // get last conversation id from localstorage
         if (localStorage.getItem("curconvid") != null){
             activeId = localStorage.getItem("curconvid");
+            checkSelectedConvo();
         }
     </script>
 
