@@ -51,7 +51,7 @@
 
     <!-- FOOTER -->
     <?php include_once "p_footer.html"; ?>
-
+    <?php include_once "p_loadScripts.html"; ?>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="js/clean-blog.min.js"></script>
@@ -73,9 +73,10 @@
         FB.AppEvents.logPageView();
 
         FB.getLoginStatus(function(response) {
-            accesstoken = JSON.stringify(response.authResponse.accessToken);
+//
 
             if (response.status == "connected") {
+                accesstoken = JSON.stringify(response.authResponse.accessToken);
                 $(".loggedIn").show(150);
                 FB.api('/me', function(response) {
                    $(".userName").text(response.name);
@@ -99,12 +100,12 @@
 
     $(".btnLogin").click(function() {
         FB.getLoginStatus(function(response) {
-            var accessToken = response.authResponse.accessToken;
+//            accesstoken = response.authResponse.accessToken;
             if (response.status == "connected") {
                 FB.api('/me', function(response) {
                     var facebookId = response.id;
                     var facebookName = response.name;
-                    var apiLink = '/authentication/token?facebookToken='+accessToken;
+                    var apiLink = '/authentication/token?facebookToken='+accesstoken;
                     var token = $(".token").data("token");
                     runAjaxRequestProfile(apiLink, token, facebookName).done(function(data) {
                         if (data == "success") {
@@ -123,25 +124,9 @@
                 });
             }
         });
-
-        (function(d, s, id){
-            var js, fjs = d.getElementsByTagName(s)[0];
-            if (d.getElementById(id)) {return;}
-            js = d.createElement(s); js.id = id;
-            js.src = "//connect.facebook.net/en_US/sdk.js";
-            fjs.parentNode.insertBefore(js, fjs);
-        }(document, 'script', 'facebook-jssdk'));
     });
 
-//    $(".btnLogout").click(function() {
-//        FB.getLoginStatus(function(ret) {
-//            FB.Auth.setAuthResponse(null, 'unknown');
-//            window.location = "goback.html";
-//            FB.logout(function(response) {
-//            });
-//        });
-//
-//    });
+
 
 </script>
 

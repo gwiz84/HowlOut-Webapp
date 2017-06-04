@@ -55,6 +55,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         </div>
         <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container hidden" style="border:solid 0px black;height:100%;padding:20px 20px 0 20px;">
             <!--      PAGE CONTENT GOES HERE      -->
+
             <div class="loader"></div>
             <img src="img/building.jpg" class="img-responsive image"
                  style="width:100%;height:300px;margin-bottom:5px;opacity:0.9;">
@@ -63,10 +64,12 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 class="textstroke">Group title</h2>
             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i
                 class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members
+            <button id="" class="howlout-button" style="margin-bottom:5px;height:40px;padding:10px;font-weight:bold;" data-toggle="modal" data-target="#myModal" style="">Invite friends</button>
+
             <div class="createEventHolder" style="float:right;">
 
             </div>
-            <button id="" class="howlout-button" style="margin-bottom:5px;height:40px;padding:10px;font-weight:bold;" data-toggle="modal" data-target="#myModal" style="">Invite members</button>
+
             <br><br>
             <h4>About this group</h4>
             <p id="groupDescription">No Description</p>
@@ -103,6 +106,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     </div>
 
 </div>
+
 <!--    MODEL FOR STARTING A NEW CONVERSATION-->
 <div id="myModal" class="modal fade" role="dialog">
     <div class="modal-dialog">
@@ -111,14 +115,14 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         <div class="modal-content" style="">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Start new conversation</h4>
+                <h4 class="modal-title">Invite friends to this group</h4>
             </div>
             <div class="modal-body" style="padding:0px 0 0 0;">
 
             </div>
             <div class="modal-footer" style="">
                 <br>
-                <button id="" class="btn btn-default btnInviteFriends" style="margin-bottom:5px;">Start with selected</button>
+                <button id="" class="btn btn-default btnInviteSelected" style="margin-bottom:5px;">Invite selected</button>
             </div>
         </div>
 
@@ -140,7 +144,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 
     var facebookId = <?php echo $_SESSION['facebookId']; ?>;
 
-    // Create
+    // Get all relevant api data and populate page with elements
     runAjax(apiLink, token).done(function(data) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
@@ -205,6 +209,78 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                     '<img src="' + ele.SmallImageSource + '" class="member-circle"><br>' +
                     '<p class="">' + ele.Name + '</p>' +
                     '</div>');
+            });
+        }
+    });
+
+
+    // Gets friends using the app to populate the list of people you can start conversations with
+    var facebookId = "";
+    window.fbAsyncInit = function() {
+        // facebook functions in here
+        FB.init({
+            appId      : '651141215029165',
+            xfbml      : true,
+            version    : 'v2.8'
+        });
+        FB.AppEvents.logPageView();
+
+
+        // Get friends for conversation picker
+        FB.getLoginStatus(function(response) {
+            FB.api('/me', function(response)
+            {
+                facebookId = response.id;
+            });
+
+            FB.api('/me/friends', function(response) {
+                $.each(response.data, function(i,ele) {
+                    var name = ele.name;
+                    var id = ele.id;
+                    var imgPath = "https://graph.facebook.com/v2.5/" + ele.id + "/picture?height=300&width=300";
+                    $(".modal-body").append('<div class="col-md-12 friendsClickItem" style="cursor:pointer;"><div class=" col-md-1 " style="background-image: url(\'' + imgPath + '\');width:40px;height:40px;background-size:100%;margin:10px 30px 0 30px;vertical-align: bottom;"></div><p style="text-align:left;margin-bottom:10px;">' + name + '<input data-id="' + id + '"  type="checkbox" class="friendsCheckbox" style="float:right;vertical-align: top;"></p></div>');
+                });
+            });
+        });
+    };
+
+    // Click function for picking friends when starting a new conversation
+    $("body").on("click", ".friendsClickItem", function() {
+        var isChecked = $(this).find(".friendsCheckbox").is(':checked');
+        if (isChecked) {
+            $(this).find(".friendsCheckbox").prop('checked', false);
+        } else {
+            $(this).find(".friendsCheckbox").prop('checked', true);
+        }
+
+    });
+
+    var idArray = [];
+    // Invite selected button
+    $(".btnInviteSelected").click(function() {
+        var noneChecked = true;
+        $(".friendsCheckbox").each(function(i, ele) {
+            if ($(this).is(':checked')) {
+                noneChecked = false;
+                idArray.push($(this).data("id"));
+            }
+        });
+        if (noneChecked) {
+            alert("You have to select at least one friend to invite");
+        } else {
+            // Make call to invite friends
+            var apiLink = "/group/inviteToGroupAsOwner?groupId="+groupId+"&profileIds=";
+            for (var i=0;i<idArray.length;i++) {
+                if (i==idArray.length-1) {
+                    apiLink = apiLink + idArray[i];
+                } else {
+                    apiLink = apiLink + idArray[i] + "%";
+                }
+            }
+            var apiData = "";
+            runAjaxPut(apiLink, apiData, token).done(function(data) {
+                console.log(data);
+                $('#myModal').modal('toggle');
             });
         }
     });
