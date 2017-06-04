@@ -147,6 +147,7 @@ session_start();
                 var apiLink = "/message/conversation/getOne/"+activeId;
 //                console.log("Id:"+activeId+" MsgCount:"+currentMsgAmount);
                 runAjax(apiLink, token).done(function(data) {
+                    var usedActiveId = activeId;
                     var jsonData = JSON.parse(data);
                     if (jsonData.Messages.length > currentMsgAmount) {
                         $(".conv-messages").empty();
@@ -162,7 +163,7 @@ session_start();
                                 '</div>' +
                                 '</div>');
 
-                            $("."+activeId).find(".lastMsg").text(shortenMsg(ele.Content));
+                            $("."+usedActiveId).find(".lastMsg").text(shortenMsg(ele.Content));
                         });
                         scrollDown();
                     }

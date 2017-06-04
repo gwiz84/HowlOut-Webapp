@@ -1,7 +1,8 @@
 // hide the result div initially
-if ( $('.searchContent:visible') ) {
+
+
     $(".searchContent").hide();
-}
+
 
 
 var searchTerms = "";

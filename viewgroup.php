@@ -64,7 +64,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 class="textstroke">Group title</h2>
             <i class="fa fa-eye icon_loc"></i>&nbsp;&nbsp;<span class="txtVisibility">Private</span>&nbsp;&nbsp;&nbsp;<i
                 class="fa fa-user icon_orange"></i>&nbsp;&nbsp;<span class="txtMemberAmount"></span> members
-            <button id="" class="howlout-button" style="margin-bottom:5px;height:40px;padding:10px;font-weight:bold;" data-toggle="modal" data-target="#myModal" style="">Invite friends</button>
+            <div class="inviteButtonPlaceholder"></div>
 
             <div class="createEventHolder" style="float:right;">
 
@@ -134,6 +134,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
 <!-- FOOTER -->
 <?php include_once "p_footer.html"; ?>
 <?php include_once "p_loadScripts.html"; ?>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/eventhandler.js"></script>
 <script>
     var groupId = <?php echo $groupId; ?>;
@@ -143,13 +144,14 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
     var token = $(".token").data("token");
 
     var facebookId = <?php echo $_SESSION['facebookId']; ?>;
-
+    var prowners;
     // Get all relevant api data and populate page with elements
     runAjax(apiLink, token).done(function(data) {
         if (Object.keys(data).length <= 0) {
             window.location = "index.php";
         }
         $(".main-content-container").removeClass("hidden");
+
         var data = JSON.parse(data);
         updateComments(JSON.stringify(data.Comments));
         var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
@@ -165,12 +167,14 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         $(".txtDescription").text(desc);
 
         // Check if user is groupowner and make Create Event button if user is an owner
+        prowners = data.ProfileOwners;
         $.each(data.ProfileOwners, function (i, ele) {
+            console.log(ele.Id + " myid:"+facebookId);
             if (ele.Id == facebookId) {
                 // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
                 $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
-
+                $(".createEventHolder").append('<button id="" class="btn-sm btn-success" style="" data-toggle="modal" data-target="#myModal" style="">Invite friends</button>');
             }
         });
         var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
@@ -231,6 +235,15 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             FB.api('/me', function(response)
             {
                 facebookId = response.id;
+                $.each(prowners, function (i, ele) {
+                    console.log(ele.Id + " myid:"+facebookId);
+                    if (ele.Id == facebookId) {
+                        // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
+                        $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
+                        $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
+
+                }
+                });
             });
 
             FB.api('/me/friends', function(response) {
@@ -244,7 +257,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         });
     };
 
-    // Click function for picking friends when starting a new conversation
+    // Click function for picking friends
     $("body").on("click", ".friendsClickItem", function() {
         var isChecked = $(this).find(".friendsCheckbox").is(':checked');
         if (isChecked) {
@@ -269,7 +282,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             alert("You have to select at least one friend to invite");
         } else {
             // Make call to invite friends
-            var apiLink = "/group/inviteToGroupAsOwner?groupId="+groupId+"&profileIds=";
+            var apiLink = "/group/inviteDeclineToGroup?invite=true&groupId="+groupId+"&profileIds=";
             for (var i=0;i<idArray.length;i++) {
                 if (i==idArray.length-1) {
                     apiLink = apiLink + idArray[i];
