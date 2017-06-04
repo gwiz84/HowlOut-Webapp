@@ -100,8 +100,9 @@
 
     $(".btnLogin").click(function() {
         FB.getLoginStatus(function(response) {
-//            accesstoken = response.authResponse.accessToken;
+
             if (response.status == "connected") {
+                accesstoken = response.authResponse.accessToken;
                 FB.api('/me', function(response) {
                     var facebookId = response.id;
                     var facebookName = response.name;
