@@ -166,17 +166,9 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         $(".txtMemberAmount").text(memberAmount);
         $(".txtDescription").text(desc);
 
-        // Check if user is groupowner and make Create Event button if user is an owner
+        // pass data to variable to be used when facebook api calls are complete
         prowners = data.ProfileOwners;
-        $.each(data.ProfileOwners, function (i, ele) {
-            console.log(ele.Id + " myid:"+facebookId);
-            if (ele.Id == facebookId) {
-                // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
-                $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
-                $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
-                $(".createEventHolder").append('<button id="" class="btn-sm btn-success" style="" data-toggle="modal" data-target="#myModal" style="">Invite friends</button>');
-            }
-        });
+
         var isPrivate = (data.Visibility == 0) ? "Public" : "Private";
         var title = data.Name;
         var desc = data.Description;
@@ -235,13 +227,14 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
             FB.api('/me', function(response)
             {
                 facebookId = response.id;
+                // Check if user is groupowner and fix appropriate buttons if so
                 $.each(prowners, function (i, ele) {
                     console.log(ele.Id + " myid:"+facebookId);
                     if (ele.Id == facebookId) {
                         // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
+                        $(".createEventHolder").append('<button id="" class="btn-sm btn-success" style="margin-right:10px;" data-toggle="modal" data-target="#myModal">Invite friends</button>');
                         $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
                         $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
-
                 }
                 });
             });
