@@ -14,7 +14,7 @@
         <i class="material-icons" style="color: #ffffff;vertical-align: middle;">search</i>
         <input class="top-menu-searchbar inputSearchBar" type="text" placeholder="Quick search...">
     </div>
-    <div class="searchContent" style=""></div>
+    <div class="searchContent" style="" hidden></div>
 </div>
 <div class="col-sm-3" style="margin: 38px 0 0 0;">
     <i class="material-icons" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer;">notifications</i>

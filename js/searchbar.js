@@ -1,13 +1,9 @@
 // hide the result div initially
 
-
-    $(".searchContent").hide();
-
-
+// $(".searchContent").hide();
 
 var searchTerms = "";
 var timeoutID = null;
-
 
 // key up function for the search bar in the top
 $(".inputSearchBar").keyup(function (e) {
@@ -31,7 +27,6 @@ function searchEvent() {
         // ajax call to search for events
         runAjax(apiLink, token).done(function(data) {
             $(".searchContent").empty();
-            //console.log(data);
             try {
                 var jsonObject = JSON.parse(data);
                 $(".searchContent").append('<div style="width: 100%;height:50px;padding:5px 10px 10px 10px;" class="eventHeader"><h5 style="font-weight:bold;"><i class="material-icons icon_purple" style="font-size:28px;vertical-align:middle;">event_note</i>&nbsp;&nbsp;Events</h5></div>');
@@ -77,10 +72,8 @@ function searchEvent() {
                 $(".searchContent").slideUp(150);
             }
         });
-        console.log($(".resultLink").length);
-        console.log($(".resultLinkGroup").length);
-
-
+        // console.log($(".resultLink").length);
+        // console.log($(".resultLinkGroup").length);
 
     } else {
         $(".searchContent").slideUp(150);
@@ -120,5 +113,4 @@ $(".inputSearchBar").mouseup(function () {
     if (searchTerms.length>0) {
         $(".searchContent").slideDown(150);
     }
-
 });
