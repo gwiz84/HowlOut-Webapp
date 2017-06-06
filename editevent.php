@@ -326,10 +326,10 @@ session_start();
 
         // Clicking on the "Create event"/"Update event" button first checks if a new image has been selected (imageCropped != null)
         // If a new image has been selected, upload it to the server using the 'uploadImage' function (imagehandler.js). When the upload
-        // has finished, put the returned URL to the picture in the variable imgSrc and then run the 'saveEvent' function, saving or
-        // updating the event.
+        // has finished, put the returned URL for the images into the relevant imgSrc variables and then run the 'saveEvent' function,
+        // saving or updating the event.
         $(".btnCreate").click(function() {
-            // $(this).prop("disabled", "disabled");
+            $(this).prop("disabled", "disabled");
             var eventId = ($(".editid").data("editid") != null) ? parseInt($(".editid").data("editid")) : 0;
             var fbid = $(".fbid").data("fbid");
             var imgSrcS = (eventId != null) ? orgImageS : "img/building.jpg";
