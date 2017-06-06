@@ -5,7 +5,6 @@ session_start();
 <html lang="en">
 
 <head>
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -20,12 +19,15 @@ session_start();
     <!-- Theme CSS -->
     <link href="css/clean-blog.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
+    <link href="css/jquery-confirm.css" rel="stylesheet" type="text/css">
     <!-- Custom Fonts -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-    <link href="css/jquery-confirm.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=QuestriaL" rel="stylesheet">
-
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Alegreya+Sans|Nunito+Sans|Questrial" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 </head>
 
 <body>
@@ -49,28 +51,28 @@ session_start();
                 <h4><i class="material-icons leftmenuitem icon_darkpurple">event_available</i>&nbsp;&nbsp;Event manager</h4>
                 <hr>
 
-                </div>
-                <!--      THE EVENT EDIT BOX END -->
-
-                <!--      PAGE CONTENT GOES HERE      -->
             </div>
-        </div>
+            <!--      THE EVENT EDIT BOX END -->
 
+            <!--      PAGE CONTENT GOES HERE      -->
+        </div>
     </div>
 
-    <!-- MOBILE WARNING BOX -->
-    <?php include_once "p_mobilewarning.html"; ?>
+</div>
 
-    <!-- FOOTER -->
-    <?php include_once "p_footer.html"; ?>
+<!-- MOBILE WARNING BOX -->
+<?php include_once "p_mobilewarning.html"; ?>
 
-    <?php include_once "p_loadScripts.html"; ?>
+<!-- FOOTER -->
+<?php include_once "p_footer.html"; ?>
 
-    <script src="js/eventhandler.js"></script>
-    <script src="js/jquery-confirm.js"></script>
-    <script>
-        var facebookId = "";
-        window.fbAsyncInit = function() {
+<?php include_once "p_loadScripts.html"; ?>
+
+<script src="js/eventhandler.js"></script>
+<script src="js/jquery-confirm.js"></script>
+<script>
+    var facebookId = "";
+    window.fbAsyncInit = function() {
             // facebook functions in here
             FB.init({
                 appId      : '651141215029165',
@@ -118,7 +120,7 @@ session_start();
             alert("DUPLICATE!");
         });
 
-		$("body").on("click", ".btn-deleteevent", function() {
+        $("body").on("click", ".btn-deleteevent", function() {
             var eventIdClicked = $(this).parent().data("eventid");
             var eventTitle = $(this).parent().data("eventtitle");
             var thisBox = $(this).parent().parent().parent().parent();
@@ -152,12 +154,12 @@ session_start();
                     }
                 }
             });
-        });
+});
 
-        $("body").on("click", ".btn-viewevent", function() {
-            var eventIdClicked = $(this).parent().data("eventid");
-            window.location = "viewevent.php?id="+eventIdClicked;
-        });
+$("body").on("click", ".btn-viewevent", function() {
+    var eventIdClicked = $(this).parent().data("eventid");
+    window.location = "viewevent.php?id="+eventIdClicked;
+});
 
         // Gets the date and time in the format the api needs it in.
         function getFormattedDateTime() {
