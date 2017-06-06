@@ -1,5 +1,6 @@
 var apiSite = "http://api.howlout.dk";
 
+// Used on: aboutme.php, 
 function runAjax(apiLink, token) {
     return $.ajax({
         type: "POST",
@@ -9,6 +10,7 @@ function runAjax(apiLink, token) {
     });
 }
 
+// Used on:
 function runAjaxJSON(apiLink, apiData, token) {
     return $.ajax({
         type: "POST",
@@ -18,6 +20,7 @@ function runAjaxJSON(apiLink, apiData, token) {
     });
 }
 
+// Used on: eventmanager.php to delete events
 function runAjaxDeleteEvent(apiLink, token) {
     return $.ajax({
         type: "POST",
@@ -27,6 +30,7 @@ function runAjaxDeleteEvent(apiLink, token) {
     });
 }
 
+// Used on:
 function runAjaxPut(apiLink, apiData, token) {
     return $.ajax({
         type: "POST",
@@ -36,6 +40,7 @@ function runAjaxPut(apiLink, apiData, token) {
     });
 }
 
+// Used on:
 function runAjaxRequestProfile(apiLink, token, facebookName) {
     return $.ajax({
         type: "POST",

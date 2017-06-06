@@ -172,9 +172,6 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
 
-
-
-
         // Request the event from the server and fill out the fields
         $(function(){
             $("#textcounter").html(maxCommentLength + " remaining");

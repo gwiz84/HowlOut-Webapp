@@ -126,14 +126,14 @@ session_start();
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
-                    var apiLink2 = '/profile/'+facebookId;
+                    var apiLink = '/profile/'+facebookId;
                     var apiData = JSON.stringify(
                         {
                             ProfileId : facebookId
                         }
                     );
                     var token = $(".token").data("token");
-                    runAjax(apiLink2, token).done(function(data) {
+                    runAjax(apiLink, token).done(function(data) {
                         var jsonData = JSON.parse(data);
                         var counter = 1;
                         $.each(jsonData.Groups, function(i,ele) {
