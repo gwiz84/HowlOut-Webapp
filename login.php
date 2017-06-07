@@ -27,7 +27,7 @@
     <link href="https://fonts.googleapis.com/css?family=Paytone+One" rel="stylesheet">
 </head>
 
-<body>
+<body style="background-image:url('img/treeline02.jpg');background-size:cover;background-position:bottom bottom;">
     <?php include_once "_inserttoken.php"; ?>
     <!-- Main Content -->
 
@@ -35,11 +35,11 @@
 
         <div class="row">
            <div class="col-md-offset-2 col-md-8 login-box">
-               <img class="" src="img/howlout_icon_with_border.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext">Howlout</span>
-               <p style="margin-left:50px;font-size:16px;" class="loggedIn">Welcome, you have been detected as <span class="userName"></span>.<br> Continue with this profile?</p>
-               <p style="margin-left:50px;font-size:16px;" class="loggedOut">Welcome, click the login button and sign in with your facebook profile through the popup.</p>
+               <img class="" src="img/logo6.png" style="cursor:pointer;width:150px;" ><span class="top-menu-headertext textstroke">Howlout</span>
+               <p style="margin-left:50px;font-size:16px;color:white;" class="loggedIn">Welcome, you have been detected as <span class="userName"></span>.<br> Continue with this profile?</p>
+               <p style="color:white;margin-left:50px;font-size:16px;" class="loggedOut">Welcome, click the login button and sign in with your facebook profile through the popup.</p>
                <img class="" src="img/facebook-icon01.png" style="cursor:pointer;width:50px;float:right;margin-right:100px;" >
-               <button class="btn btn-default btnLogin" style="margin-right: 20px;float:right;"></button>
+               <button class="btn btn-ho btnLogin" style="margin-right: 20px;float:right;"></button>
            </div>
        </div>
 

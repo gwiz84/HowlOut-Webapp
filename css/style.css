@@ -146,8 +146,9 @@ a:hover {
 }
 
 .top-menu-headertext {
-    color: #148f77;
-    margin-left: -50px;
+    font-family: 'Questrial', sans-serif;
+    color: #E8F8F5;
+    margin-left: 20px;
     font-size: 36px;
     font-weight: bold;
 }
@@ -581,10 +582,13 @@ a:hover {
 
 .login-box {
     border-radius: 20px;
-    background-color: #e9f7ef;
-    border: solid 2px mediumaquamarine;
+    background-color:   #4F4F4F  ;
+    border: solid 1px black;
     height: 450px;
     padding: 30px;
+    -webkit-box-shadow: 4px 4px 4px 0px rgba(50, 50, 50, 0.75);
+    -moz-box-shadow:    4px 4px 4px 0px rgba(50, 50, 50, 0.75);
+    box-shadow:         4px 4px 4px 0px rgba(50, 50, 50, 0.75);
 }
 
 .menuSettings {
