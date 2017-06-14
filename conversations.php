@@ -258,7 +258,7 @@ session_start();
                 if ($(this).data("conversationid") == activeId) {
                     $(this).css("background-color","#D5D8DC");
                 } else {
-                    $(this).css("background-color","white");
+                    $(this).css("background-color","transparent");
                 }
             });
         }
