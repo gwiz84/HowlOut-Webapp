@@ -244,7 +244,7 @@ session_start();
                     eventLat = eventLoc.lat();
                     eventLng = eventLoc.lng();
                 } else {
-                    alert('Geocode was not successful for the following reason: ' + status);
+                    console.log('Geocode was not successful for the following reason: ' + status);
                 }
             });
         }
