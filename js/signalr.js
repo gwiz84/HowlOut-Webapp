@@ -11,7 +11,7 @@ $.connection.hub.start().done(function () {
 var fbId = $(".top-menu").data("grid");
 loadNotifications();
 
-
+// function which receives notifications via signalr
 yourHubProxy.client.sendNotification = function (message) {
     audio.play();
     $(".imgNotificationAlert").fadeIn(150);
@@ -22,10 +22,6 @@ yourHubProxy.client.sendNotification = function (message) {
         '</div>'
     );
 };
-
-
-
-
 
 // get all notifications and fill up notification window
 function loadNotifications() {
@@ -42,6 +38,7 @@ function loadNotifications() {
     });
 }
 
+// click function for notification items
 $("body").on("click", ".notificationItem", function() {
     var notificationType = $(this).data("notificationtype");
     var modelId = $(this).data("modelid");
