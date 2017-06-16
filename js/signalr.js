@@ -34,7 +34,7 @@ function loadNotifications() {
        var jsonData = JSON.parse(data);
        $.each(jsonData, function(i,ele) {
            $(".notificationContent").prepend('' +
-               ' <div class="notificationItem" data-notificationtype="'+jsonData.NotificationType+'" data-modelid="'+jsonData.ModelId+'"> '+
+               ' <div class="notificationItem" data-notificationtype="'+ele.NotificationType+'" data-modelid="'+ele.ModelId+'"> '+
                '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span style="font-size:12px;color:black;margin-left:10px;font-style:italic;">'+ele.ContentName+'</span>'+
                '</div>'
            );
