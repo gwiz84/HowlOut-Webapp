@@ -118,6 +118,9 @@ session_start();
     <script src="js/ajaxhandler.js"></script>
     <script src="js/imagehandler.js"></script>
     <script src="js/croppie.min.js"></script>
+<!--    <script src="https://ajax.aspnetcdn.com/ajax/signalr/jquery.signalr-2.1.0.min.js"></script>-->
+<!--    <script src="http://api.howlout.dk/signalr/hubs"></script>-->
+<!--    <script src="js/signalr.js"></script>-->
 
 <script>
     var token = $(".token").data("token");

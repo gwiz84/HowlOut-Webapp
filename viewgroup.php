@@ -62,7 +62,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 <div class="inviteButtonPlaceholder"></div>
 
                 <div class="createEventHolder" style="float:right;">
-
+                    <button class="howlout-button btnJoinGroup" style="font-weight:bold;">Join group</button>
                 </div>
 
                 <br><br>
@@ -222,16 +222,24 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
+                    var noIdMatches = true;
+                    console.log(noIdMatches);
                     // Check if user is groupowner and fix appropriate buttons if so
                     $.each(prowners, function (i, ele) {
                         console.log(ele.Id + " myid:"+facebookId);
                         if (ele.Id == facebookId) {
-                            // Append button that goes to Create Event via this group (the api will block all illegal attempts if this code is changed automatically)
+                            noIdMatches = false;
+                            $(".btnJoinGroup").hide();
+                            // Append buttons for owner functionality
                             $(".createEventHolder").append('<button id="" class="btn-sm btn-success" style="margin-right:10px;" data-toggle="modal" data-target="#myModal">Invite friends</button>');
                             $(".createEventHolder").append('<button class="btn-sm btn-success btnEditGroup" style="margin-right:10px;">Edit group</button>');
                             $(".createEventHolder").append('<button class="btn-sm btn-success btnCreateEvent">Create event</button>');
-                    }
+                        }
                     });
+                    console.log(noIdMatches);
+                    if (noIdMatches) {
+                      $(".btnJoinGroup").hide();
+                    }
                 });
 
                 FB.api('/me/friends', function(response) {
@@ -244,6 +252,11 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
                 });
             });
         };
+
+        // Click function Join group button
+        $("body").on("click", ".btnJoinGroup", function() {
+
+        });
 
         // Click function for picking friends
         $("body").on("click", ".friendsClickItem", function() {

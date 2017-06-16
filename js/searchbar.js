@@ -66,6 +66,7 @@ function searchEvent() {
                 if ($(".resultLinkGroup").length <1) {
                     $(".groupHeader").remove();
                 }
+                $(".topresultcontent").hide();
                 $(".searchContent").slideDown(150);
 
             } catch (e) {

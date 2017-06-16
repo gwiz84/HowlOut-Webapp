@@ -4,6 +4,8 @@ session_start();
 $apiLink = $_POST['apiLink'];
 $token = $_POST['token'];
 
+
+
 if ($token == $_SESSION['token']) {
     try {
         $curl = curl_init($apiLink);

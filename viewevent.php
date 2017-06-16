@@ -146,8 +146,8 @@ if (!isset($_GET['id']) || !is_numeric($eventId)) {
                 FB.api('/me', function(response)
                 {
                     facebookId = response.id;
-                    console.log(JSON.stringify(jsonDataEvent.Attendees));
-                    console.log("\n\n"+JSON.stringify(jsonDataEvent.Followers));
+//                    console.log(JSON.stringify(jsonDataEvent.Attendees));
+//                    console.log("\n\n"+JSON.stringify(jsonDataEvent.Followers));
                     // check if current user is already attending and disable join button if he/she is
                     $.each(jsonDataEvent.Attendees, function(i,ele) {
                         if (facebookId==ele.Id) {

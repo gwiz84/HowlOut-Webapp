@@ -30,6 +30,21 @@ hr {
     background-image: linear-gradient(to right, rgba(93, 109, 126  , 0), rgba(93, 109, 126  , 0.75), rgba(11, 83, 69, 0));
 }
 
+.notificationItem {
+    padding:5px;
+    height: 100%;
+    width:100%;
+    cursor:pointer;
+    background-color:white;
+}
+
+.notificationItem:hover {
+    height: 100%;
+    width:100%;
+    background-color:#EAECEE;
+    cursor:pointer;
+}
+
 .truncate {
     width: 30px;
     white-space: nowrap;
@@ -592,6 +607,25 @@ a:hover {
     box-shadow:         4px 4px 4px 0px rgba(50, 50, 50, 0.75);
 }
 
+.notificationContent {
+    width: 250px;
+    height: 100%;
+    max-height:700px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    margin-right: 160px;
+    padding: 10px;
+    border: solid 0px #4f4f4f;
+    /*border-radius: 5px;*/
+    background-color: whitesmoke;
+    color: white;
+    float: right;
+    z-index: 999;
+    -webkit-box-shadow: 3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    -moz-box-shadow:    3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+    box-shadow:         3px 3px 9px 0px rgba(50, 50, 50, 0.62);
+}
+
 .menuSettings {
     width: 120px;
     height: 65px;
@@ -630,7 +664,7 @@ a:hover {
     .searchContent {
         width: 450px;
         height:100%;
-        /*max-height: 500px;*/
+        max-height: 700px;
         overflow-x: hidden;
         overflow-y: auto;
         white-space: nowrap;
@@ -665,7 +699,7 @@ a:hover {
     .searchContent {
         width: 550px;
         height:100%;
-        /*max-height: 500px;*/
+        max-height: 700px;
         overflow-x: hidden;
         overflow-y: auto;
         white-space: nowrap;
