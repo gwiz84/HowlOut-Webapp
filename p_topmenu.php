@@ -18,7 +18,7 @@
 </div>
 <div class="col-sm-3" style="margin: 38px 0 0 0;">
     <i class="material-icons btnNotifications" style="color: #dddddd;vertical-align: middle;margin-left:10px;cursor:pointer;" >notifications</i>
-    <img src="img/noticon3.png" class="imgNotificationAlert btnNotifications" style="width:15px;margin-left:-15px;vertical-align:bottom;cursor:pointer;"></img>
+    <img src="img/noticon3.png" class="imgNotificationAlert btnNotifications" style="width:15px;margin-left:-17px;vertical-align:bottom;cursor:pointer;"></img>
 
     <span style="font-size:14px;margin-left:20px;color: #dddddd;"><?php echo $_SESSION['name']; ?></span>
     <i class="fa fa-cog btnMenuSettings menuSettingsHover" aria-hidden="true" style="font-size: 20px;"></i>

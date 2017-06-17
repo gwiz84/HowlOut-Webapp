@@ -36,35 +36,3 @@ $(window).on('load', function () {
 });
 
 
-
-var notiOpen = false;
-// notification btn click function
-$(".btnNotifications").click(function() {
-    if ($(".notificationItem").length>0) {
-        $(".imgNotificationAlert").fadeOut(150);
-        if (notiOpen) {
-            $(".notificationContent").fadeOut(150);
-            notiOpen = false;
-        } else {
-            $(".topresultcontent").hide();
-            $(".notificationContent").fadeIn(150);
-            notiOpen = true;
-        }
-    }
-});
-
-
-
-// Function which closes the notification content div when you click outside of it
-$(document).mouseup(function (e) {
-    var container = $(".notificationContent");
-
-    if (!container.is(e.target) // if the target of the click isn't the container...
-        && container.has(e.target).length === 0 ) // ... nor a descendant of the container
-    {
-        if ( $('.notificationContent:visible') ) {
-            notiOpen = false;
-            $(".notificationContent").hide();
-        }
-    }
-});
