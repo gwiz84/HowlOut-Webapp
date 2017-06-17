@@ -16,11 +16,12 @@ yourHubProxy.client.sendNotification = function (message) {
     audio.play();
     $(".imgNotificationAlert").fadeIn(150);
     // console.log(message);
-    $(".notificationContent").prepend('' +
-        ' <div class="notificationItem" data-notificationtype="'+message.NotificationType+'" data-modelid="'+message.ModelId+'" data-notificationid="'+message.Id+'"> '+
-        '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;font-weight:bold;">'+message.ContentName+'</span>'+
-        '</div>'
-    );
+    // $(".notificationContent").prepend('' +
+    //     ' <div class="notificationItem" data-notificationtype="'+message.NotificationType+'" data-modelid="'+message.ModelId+'" data-notificationid="'+message.Id+'"> '+
+    //     '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;font-weight:bold;">'+message.ContentName+'</span>'+
+    //     '</div>'
+    // );
+    loadNotifications();
 };
 
 // get all notifications and fill up notification window
@@ -32,7 +33,7 @@ function loadNotifications() {
        var totalCounter = 0;
        $.each(jsonData, function(i,ele) {
            totalCounter++;
-           if (totalCounter>=20) return false;
+           if (totalCounter>=14) return false;
            if (!ele.Seen) {
                unseenCounter++;
                $(".notificationContent").prepend('' +
