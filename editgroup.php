@@ -64,7 +64,7 @@ session_start();
             <div class="col-sm-10 col-lg-offset-1 col-lg-8 main-content-container" style="border:solid 0px black;height:100%;padding:0 20px 0 20px;">
                 <!--      PAGE CONTENT GOES HERE      -->
                 <div class="loader"></div>
-                <h4 style="position:relative;" class=""><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style="font-size:26px;"></i><span style="font-size:26px; margin-left:9px;"><?php echo $titleaction . ' group';?></span></h4>
+                <h4 style="position:relative;" class=""><i class="fa fa-calendar-plus-o icon_darkgreen" aria-hidden="true" style=""></i><span style="margin-left:9px;"><?php echo $titleaction . ' group';?></span></h4>
                 <hr>
 
                 <h4><i class="material-icons icon_blue" aria-hidden="true" style="font-size:26px;vertical-align:middle;">info_outline</i>&nbsp;&nbsp;Help</h4>
