@@ -33,7 +33,7 @@ function loadNotifications() {
        var totalCounter = 0;
        $.each(jsonData, function(i,ele) {
            totalCounter++;
-           if (totalCounter>=14) return false;
+           // if (totalCounter>=14) return false;
            if (!ele.Seen) {
                unseenCounter++;
                $(".notificationContent").prepend('' +
