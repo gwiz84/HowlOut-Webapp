@@ -205,7 +205,7 @@ if (!isset($_GET['id']) || !is_numeric($groupId)) {
         });
 
 
-        // Gets friends using the app to populate the list of people you can start conversations with
+        // Gets friends using the app to populate the list of people you can invite to the group
         var facebookId = "";
         window.fbAsyncInit = function() {
             // facebook functions in here
