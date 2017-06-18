@@ -72,8 +72,6 @@ $(".btnNotifications").click(function() {
     }
 });
 
-
-
 // Function which closes the notification content div when you click outside of it
 $(document).mouseup(function (e) {
     var container = $(".notificationContent");
@@ -150,5 +148,4 @@ $("body").on("click", ".notificationItem", function() {
                 break;
         }
     });
-
 });

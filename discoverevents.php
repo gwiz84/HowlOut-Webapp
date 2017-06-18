@@ -75,6 +75,11 @@ session_start();
         var userPos;
         var map;
         var facebookId = <?php echo $_SESSION['facebookId']; ?>;
+
+        // Initializes the map, sets a default location: Rådhuspladsen.
+        // Adds custom control "Center on my location" button to map and then tries to access the user's location using
+        // HTML geolocation. If allowed and succesful, stores the user's location in 'userPos', centers the map on this
+        // and retrieves nearby events using the function getNearbyEvents
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
                 center: { lat: 55.675291, lng: 12.570202 },
@@ -108,6 +113,7 @@ session_start();
             }
         }
 
+        // Handler for Google Geolocation errors. From Google.
         function handleLocationError(browserHasGeolocation, infoWindow, pos) {
             infoWindow.setPosition(pos);
             infoWindow.setContent(browserHasGeolocation ?
@@ -115,8 +121,9 @@ session_start();
               'Error: Your browser doesn\'t support geolocation.');
         }
 
+        // Function for added the "Center on my location" button to the map
+        // Modified from example on https://developers.google.com/maps/documentation/javascript/examples/control-custom
         function CenterControl(controlDiv, map) {
-
             // Set CSS for the control border.
             var controlUI = document.createElement('div');
             controlUI.style.backgroundColor = '#fff';
@@ -140,14 +147,13 @@ session_start();
             controlText.innerHTML = 'Center on my location';
             controlUI.appendChild(controlText);
 
-            // Setup the click event listeners: simply set the map to Chicago.
+            // Setup the click event listeners: Center on the users position stored in the variable 'userPos'
             controlUI.addEventListener('click', function() {
                 map.setCenter(userPos);
             });
         }
 
-
-        // Adds a marker to the map.
+        // Adds a marker to the map 'map' at the specified 'location' with the name 'label'
         function addMarker(location, map, label) {
             var marker = new google.maps.Marker({
                 position: location,
@@ -156,15 +162,17 @@ session_start();
                 map: map
             });
 
-            // When event pin is clicked
+            // What to do when an event pin is clicked
             marker.addListener('click', function() {
                 // map.setZoom(16);
                 map.setCenter(marker.getPosition());
             });
+            // Defines which animation to use when placing pins
             marker.setAnimation(google.maps.Animation.DROP);
-
         }
 
+        // Function to get events close to the users position via the API
+        // For each returned event, an eventbox is added to the page, and a marker placed on the map
         function getNearbyEvents() {
             var userLat = userPos.lat;
             var userLng = userPos.lng;
@@ -187,11 +195,15 @@ session_start();
             });
         }
 
+        // Handler for clicking on the "View event" button. Extracts the event ID from the data-attribute "eventid"
+        // and takes the user to the relevant page
         $("body").on("click", ".btn-viewevent", function() {
             var eventIdClicked = $(this).parent().parent().parent().parent().data("eventid");
             window.location = "viewevent.php?id="+eventIdClicked;
         });
 
+        // Handler for clicking on "Follow" button, to follow/unfollow an event
+        // !!! Button presently disabled on this page !!!
         $("body").on("click", ".btn-followevent", function() {
             var thisButton = $(this);
             var eventId = $(this).parent().parent().parent().parent().data("eventid");

@@ -139,6 +139,7 @@ session_start();
         var token = $(".token").data("token");
         getAllConversations();
 
+
         var currentMsgAmount = -1;
         // Interval to continously update current conversation if any new messages are sent/received
         setInterval(function() {

@@ -40,7 +40,6 @@ session_start();
     <script>
         var chosenStart = "";
         var chosenEnd = "";
-
         var dateToday = new Date();
         $(function() {
             var firstPick = true;
@@ -204,7 +203,6 @@ session_start();
         var orgImageM = "";
         var orgImageL = "";
         var imageCropped = null;
-
         // Activates the DAWA autocomplete feature on the ".inputLocation" field.
         $(function() {
             $(".inputLocation").dawaautocomplete({
@@ -215,7 +213,6 @@ session_start();
                 },
             });
         });
-
         // Initializes the map display, centered on Rådhuspladsen in Copenhagen by default.
         function initMap() {
             map = new google.maps.Map(document.getElementById('map'), {
@@ -251,7 +248,6 @@ session_start();
                 }
             });
         }
-
         // Deletes all markers in the array by removing references to them.
         function clearMarkers() {
             if (markersArray) {
@@ -261,7 +257,6 @@ session_start();
                 markersArray.length = 0;
             }
         }
-
         // If the 'editid' data variable is set on the ".editid" div, an event id has been passed
         // using the "?id=" GET parameter. Try getting the event from the API. If no event is found with
         // the provided id, return to index.php.
@@ -313,13 +308,11 @@ session_start();
         } else {
             $("#bannerImg").css("background-image", "url('img/building.jpg')"); 
         }
-
         // Converts the date-string 'date' to a format understandable by the datepicker plugin.
         function convertDateString(date) {
             convertedDate = date.replace("T", " ").substr(0, 16);
             return convertedDate;
         }
-
         // When the user enters number for Maxinum number of attendees, change it if it falls below 1 or above 1000.
         $(".inputAttendees").keyup(function() {
             var attendees = $(".inputAttendees").val();
@@ -329,7 +322,6 @@ session_start();
                 $(".inputAttendees").val(1);
             }
         });
-
         // Clicking on the "Create event"/"Update event" button first checks if a new image has been selected (imageCropped != null)
         // If a new image has been selected, upload it to the server using the 'uploadImage' function (imagehandler.js). When the upload
         // has finished, put the returned URL for the images into the relevant imgSrc variables and then run the 'saveEvent' function,
@@ -358,12 +350,10 @@ session_start();
                         });
                     }
                 });
-
             } else {
                 saveEvent(eventId, imgSrcS, imgSrcM, imgSrcL);
             }
         });
-
         // Saves the event. Puts the required data from the inputfields into variables, which are then stored as JSON in 'apiData'
         // Finally, the API calls the backend, sending 'apiData' and getting the ID of the saved event back. Then the user is redirected
         // to the viewevent page using the returned ID.
@@ -437,13 +427,11 @@ session_start();
                 window.location = "viewevent.php?id="+id;
             });
         }
-
         // When the user clicks the "Choose banner image" button, the picture upload modal is displayed using the 'createUploadModal'
         // function (imagehandler.js) and passing the ID of the div where the returned cropped image should be displayed.
         $("#selectImageBtn").click(function() {
             createUploadModal($("#bannerImg"));
         });
-
     </script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAfCFzcx7k1DMkf_GCasNXbVtGA6-QtSfE&callback=initMap"></script>
 
