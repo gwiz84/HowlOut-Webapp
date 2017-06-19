@@ -358,16 +358,16 @@ session_start();
 
         // Create conversation function
         function createConversation(idArray) {
-            var apiLink = "/message/conversation?modelType=2";
+            var apiLink2 = "/message/conversation?modelType=2";
 
-            apiLink +=  "&profileIds="+facebookId;
+            apiLink2 +=  "&profileIds="+facebookId;
 
             for (var i = 0; i < idArray.length; i++) {
-                apiLink += "&profileIds="+idArray[i];
+                apiLink2 += "&profileIds="+idArray[i];
             }
             var apiData = null;
 
-            runAjaxJSON(apiLink, apiData, token).done(function(data) {
+            runAjaxJSON(apiLink2, apiData, token).done(function(data) {
                 var jsonData = JSON.parse(data);
                 activeId = jsonData.Id;
                 currentMsgAmount = -1;
