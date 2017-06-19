@@ -32,23 +32,29 @@ function loadNotifications() {
        var unseenCounter = 0;
        var totalCounter = 0;
        $.each(jsonData, function(i,ele) {
-           totalCounter++;
-           // if (totalCounter>=14) return false;
-           if (!ele.Seen) {
-               unseenCounter++;
-               $(".notificationContent").prepend('' +
-                   ' <div class="notificationItem" data-notificationtype="'+ele.NotificationType+'" data-modelid="'+ele.ModelId+'" data-notificationid="'+ele.Id+'"> '+
-                   '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;font-weight:bold;">'+ele.ContentName+'</span>'+
-                   '</div>'
-               );
-           } else {
-               $(".notificationContent").prepend('' +
-                   ' <div class="notificationItem" data-notificationtype="'+ele.NotificationType+'" data-modelid="'+ele.ModelId+'" data-notificationid="'+ele.Id+'"> '+
-                   '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;">'+ele.ContentName+'</span>'+
-                   '</div>'
-               );
-           }
+
+            // if (totalCounter>=14) return false;
+            if (ele.Seen) {
+                totalCounter++;
+                $(".notificationContent").prepend('' +
+                    ' <div class="notificationItem" data-notificationtype="'+ele.NotificationType+'" data-modelid="'+ele.ModelId+'" data-notificationid="'+ele.Id+'"> '+
+                    '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;">'+ele.ContentName+'</span>'+
+                    '</div>'
+                );
+            }
        });
+        $.each(jsonData, function(i,ele) {
+            // if (totalCounter>=14) return false;
+            if (!ele.Seen) {
+                totalCounter++;
+                unseenCounter++;
+                $(".notificationContent").prepend('' +
+                    ' <div class="notificationItem" data-notificationtype="'+ele.NotificationType+'" data-modelid="'+ele.ModelId+'" data-notificationid="'+ele.Id+'"> '+
+                    '<img src="img/noticon.png" style="width:30px;background-size:contain;"><span class="contName" style="font-size:12px;color:black;margin-left:10px;font-style:italic;font-weight:bold;">'+ele.ContentName+'</span>'+
+                    '</div>'
+                );
+            }
+        });
        if (unseenCounter>0) {
            $(".imgNotificationAlert").fadeIn(150);
        } else {
